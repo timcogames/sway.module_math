@@ -6,3 +6,9 @@
 ```console
 git clone --recursive https://github.com/timcogames/sway.module_math.git
 ```
+
+```console
+mkdir build && cd ./build
+cmake -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Debug ../
+make
+```
