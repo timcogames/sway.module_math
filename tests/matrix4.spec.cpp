@@ -21,7 +21,8 @@ static const s32_t RAND_MAT4[4][4] = {
 BOOST_AUTO_TEST_SUITE(TMatrix4TestSuite)
 
 /*!
- * Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
+ * \brief
+ *    Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
  */
 BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
 	const math::TMatrix4<s32_t> mat4;
@@ -48,7 +49,8 @@ BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
 }
 
 /*!
- * Убеждаемся, что установка всех компонентов матрицы проходит правильно.
+ * \brief
+ *    Убеждаемся, что установка всех компонентов матрицы проходит правильно.
  */
 BOOST_AUTO_TEST_CASE(TMatrix4TestCase_Set) {
 	math::TMatrix4<s32_t> mat4;

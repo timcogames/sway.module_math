@@ -1,6 +1,10 @@
 # Устанавливаем имя проекта
 project(module_math_tests)
 
+set(CMAKE_CXX_FLAGS "-Wall -Wpedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+add_definitions(-std=c++17)
+
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
