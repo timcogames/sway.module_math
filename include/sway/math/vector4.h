@@ -134,26 +134,26 @@ typedef TVector4<s32_t> vec4i_t;
 typedef TVector4<f32_t> vec4f_t;
 typedef TVector4<f64_t> vec4d_t;
 
-static const vec4i_t kVec4i_Zero(0, 0, 0, 0);
-static const vec4i_t kVec4i_One(1, 1, 1 ,1);
-static const vec4i_t kVec4i_UnitX(1, 0, 0, 0);
-static const vec4i_t kVec4i_UnitY(0, 1, 0, 0);
-static const vec4i_t kVec4i_UnitZ(0, 0, 1, 0);
-static const vec4i_t kVec4i_UnitW(0, 0, 0, 1);
+static const vec4i_t vec4i_zero(0, 0, 0, 0);
+static const vec4i_t vec4i_one(1, 1, 1 ,1);
+static const vec4i_t vec4i_unitX(1, 0, 0, 0);
+static const vec4i_t vec4i_unitY(0, 1, 0, 0);
+static const vec4i_t vec4i_unitZ(0, 0, 1, 0);
+static const vec4i_t vec4i_unitW(0, 0, 0, 1);
 
-static const vec4f_t kVec4f_Zero(0.0f, 0.0f, 0.0f, 0.0f);
-static const vec4f_t kVec4f_One(1.0f, 1.0f, 1.0f, 1.0f);
-static const vec4f_t kVec4f_UnitX(1.0f, 0.0f, 0.0f, 0.0f);
-static const vec4f_t kVec4f_UnitY(0.0f, 1.0f, 0.0f, 0.0f);
-static const vec4f_t kVec4f_UnitZ(0.0f, 0.0f, 1.0f, 0.0f);
-static const vec4f_t kVec4f_UnitW(0.0f, 0.0f, 0.0f, 1.0f);
+static const vec4f_t vec4f_zero(0.0f, 0.0f, 0.0f, 0.0f);
+static const vec4f_t vec4f_one(1.0f, 1.0f, 1.0f, 1.0f);
+static const vec4f_t vec4f_unitX(1.0f, 0.0f, 0.0f, 0.0f);
+static const vec4f_t vec4f_unitY(0.0f, 1.0f, 0.0f, 0.0f);
+static const vec4f_t vec4f_unitZ(0.0f, 0.0f, 1.0f, 0.0f);
+static const vec4f_t vec4f_unitW(0.0f, 0.0f, 0.0f, 1.0f);
 
-static const vec4d_t kVec4d_Zero(0.0, 0.0, 0.0, 0.0);
-static const vec4d_t kVec4d_One(1.0, 1.0, 1.0, 1.0);
-static const vec4d_t kVec4d_UnitX(1.0, 0.0, 0.0, 0.0);
-static const vec4d_t kVec4d_UnitY(0.0, 1.0, 0.0, 0.0);
-static const vec4d_t kVec4d_UnitZ(0.0, 0.0, 1.0, 0.0);
-static const vec4d_t kVec4d_UnitW(0.0, 0.0, 0.0, 1.0);
+static const vec4d_t vec4d_zero(0.0, 0.0, 0.0, 0.0);
+static const vec4d_t vec4d_one(1.0, 1.0, 1.0, 1.0);
+static const vec4d_t vec4d_unitX(1.0, 0.0, 0.0, 0.0);
+static const vec4d_t vec4d_unitY(0.0, 1.0, 0.0, 0.0);
+static const vec4d_t vec4d_unitZ(0.0, 0.0, 1.0, 0.0);
+static const vec4d_t vec4d_unitW(0.0, 0.0, 0.0, 1.0);
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

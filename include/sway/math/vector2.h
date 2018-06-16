@@ -93,20 +93,20 @@ typedef TVector2<s32_t> vec2i_t;
 typedef TVector2<f32_t> vec2f_t;
 typedef TVector2<f64_t> vec2d_t;
 
-static const vec2i_t kVec2i_Zero(0, 0);
-static const vec2i_t kVec2i_One(1, 1);
-static const vec2i_t kVec2i_UnitX(1, 0);
-static const vec2i_t kVec2i_UnitY(0, 1);
+static const vec2i_t vec2i_zero(0, 0);
+static const vec2i_t vec2i_one(1, 1);
+static const vec2i_t vec2i_unitX(1, 0);
+static const vec2i_t vec2i_unitY(0, 1);
 
-static const vec2f_t kVec2f_Zero(0.0f, 0.0f);
-static const vec2f_t kVec2f_One(1.0f, 1.0f);
-static const vec2f_t kVec2f_UnitX(1.0f, 0.0f);
-static const vec2f_t kVec2f_UnitY(0.0f, 1.0f);
+static const vec2f_t vec2f_zero(0.0f, 0.0f);
+static const vec2f_t vec2f_one(1.0f, 1.0f);
+static const vec2f_t vec2f_unitX(1.0f, 0.0f);
+static const vec2f_t vec2f_unitY(0.0f, 1.0f);
 
-static const vec2d_t kVec2d_Zero(0.0, 0.0);
-static const vec2d_t kVec2d_One(1.0, 1.0);
-static const vec2d_t kVec2d_UnitX(1.0, 0.0);
-static const vec2d_t kVec2d_UnitY(0.0, 1.0);
+static const vec2d_t vec2d_zero(0.0, 0.0);
+static const vec2d_t vec2d_one(1.0, 1.0);
+static const vec2d_t vec2d_unitX(1.0, 0.0);
+static const vec2d_t vec2d_unitY(0.0, 1.0);
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

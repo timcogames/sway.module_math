@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(TColorTestSuite)
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 BOOST_AUTO_TEST_CASE(TColorTestCase_DefaultConstructor) {
-	math::TColor<f32_t> color;
+	const math::col4f_t color;
 
 	BOOST_CHECK_EQUAL(color.getR(), 0.0f);
 	BOOST_CHECK_EQUAL(color.getG(), 0.0f);
@@ -26,8 +26,7 @@ BOOST_AUTO_TEST_CASE(TColorTestCase_DefaultConstructor) {
  */
 BOOST_AUTO_TEST_CASE(TColorTestCase_ComponentConstructor) {
 	const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;
-	
-	math::TColor<f32_t> color = math::TColor<f32_t>(r, g, b, a);
+	const math::col4f_t color(r, g, b, a);
 
 	BOOST_CHECK_EQUAL(color.getR(), r);
 	BOOST_CHECK_EQUAL(color.getG(), g);
@@ -42,8 +41,8 @@ BOOST_AUTO_TEST_CASE(TColorTestCase_ComponentConstructor) {
 BOOST_AUTO_TEST_CASE(TColorTestCase_ConvertToVector4) {
 	const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;
 
-	math::TColor<f32_t> color = math::TColor<f32_t>(r, g, b, a);
-	math::TVector4<f32_t> vec4 = color.toVec4();
+	math::col4f_t color(r, g, b, a);
+	math::vec4f_t vec4 = color.toVec4();
 
 	BOOST_CHECK_EQUAL(vec4.getX(), r);
 	BOOST_CHECK_EQUAL(vec4.getY(), g);

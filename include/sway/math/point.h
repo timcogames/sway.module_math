@@ -155,6 +155,15 @@ typedef TPoint<s32_t> point2i_t;
 typedef TPoint<f32_t> point2f_t;
 typedef TPoint<f64_t> point2d_t;
 
+static const point2i_t point2i_zero(0, 0);
+static const point2i_t point2i_one(1, 1);
+
+static const point2f_t point2f_zero(0.0f, 0.0f);
+static const point2f_t point2f_one(1.0f, 1.0f);
+
+static const point2d_t point2d_zero(0.0, 0.0);
+static const point2d_t point2d_one(1.0, 1.0);
+
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 

@@ -167,6 +167,15 @@ typedef TSize<s32_t> size2i_t;
 typedef TSize<f32_t> size2f_t;
 typedef TSize<f64_t> size2d_t;
 
+static const size2i_t size2i_zero(0, 0);
+static const size2i_t size2i_one(1, 1);
+
+static const size2f_t size2f_zero(0.0f, 0.0f);
+static const size2f_t size2f_one(1.0f, 1.0f);
+
+static const size2d_t size2d_zero(0.0, 0.0);
+static const size2d_t size2d_one(1.0, 1.0);
+
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 

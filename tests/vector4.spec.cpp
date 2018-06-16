@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(TVector4TestSuite)
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 BOOST_AUTO_TEST_CASE(TVector4TestCase_DefaultConstructor) {
-	const math::TVector4<s32_t> vec4;
+	const math::vec4i_t vec4;
 
 	BOOST_CHECK_EQUAL(vec4.getX(), 0);
 	BOOST_CHECK_EQUAL(vec4.getY(), 0);
@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE(TVector4TestCase_DefaultConstructor) {
  */
 BOOST_AUTO_TEST_CASE(TVector4TestCase_ComponentConstructor) {
 	const s32_t x = 1, y = 2, z = 3, w = 4;
-	const math::TVector4<s32_t> vec4(x, y, z, w);
+	const math::vec4i_t vec4(x, y, z, w);
 
 	BOOST_CHECK_EQUAL(vec4.getX(), x);
 	BOOST_CHECK_EQUAL(vec4.getY(), y);

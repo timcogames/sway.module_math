@@ -111,23 +111,23 @@ typedef TVector3<s32_t> vec3i_t;
 typedef TVector3<f32_t> vec3f_t;
 typedef TVector3<f64_t> vec3d_t;
 
-static const vec3i_t kVec3i_Zero(0, 0, 0);
-static const vec3i_t kVec3i_One(1, 1, 1);
-static const vec3i_t kVec3i_UnitX(1, 0, 0);
-static const vec3i_t kVec3i_UnitY(0, 1, 0);
-static const vec3i_t kVec3i_UnitZ(0, 0, 1);
+static const vec3i_t vec3i_zero(0, 0, 0);
+static const vec3i_t vec3i_one(1, 1, 1);
+static const vec3i_t vec3i_unitX(1, 0, 0);
+static const vec3i_t vec3i_unitY(0, 1, 0);
+static const vec3i_t vec3i_unitZ(0, 0, 1);
 
-static const vec3f_t kVec3f_Zero(0.0f, 0.0f, 0.0f);
-static const vec3f_t kVec3f_One(1.0f, 1.0f, 1.0f);
-static const vec3f_t kVec3f_UnitX(1.0f, 0.0f, 0.0f);
-static const vec3f_t kVec3f_UnitY(0.0f, 1.0f, 0.0f);
-static const vec3f_t kVec3f_UnitZ(0.0f, 0.0f, 1.0f);
+static const vec3f_t vec3f_zero(0.0f, 0.0f, 0.0f);
+static const vec3f_t vec3f_one(1.0f, 1.0f, 1.0f);
+static const vec3f_t vec3f_unitX(1.0f, 0.0f, 0.0f);
+static const vec3f_t vec3f_unitY(0.0f, 1.0f, 0.0f);
+static const vec3f_t vec3f_unitZ(0.0f, 0.0f, 1.0f);
 
-static const vec3d_t kVec3d_Zero(0.0, 0.0, 0.0);
-static const vec3d_t kVec3d_One(1.0, 1.0, 1.0);
-static const vec3d_t kVec3d_UnitX(1.0, 0.0, 0.0);
-static const vec3d_t kVec3d_UnitY(0.0, 1.0, 0.0);
-static const vec3d_t kVec3d_UnitZ(0.0, 0.0, 1.0);
+static const vec3d_t vec3d_zero(0.0, 0.0, 0.0);
+static const vec3d_t vec3d_one(1.0, 1.0, 1.0);
+static const vec3d_t vec3d_unitX(1.0, 0.0, 0.0);
+static const vec3d_t vec3d_unitY(0.0, 1.0, 0.0);
+static const vec3d_t vec3d_unitZ(0.0, 0.0, 1.0);
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

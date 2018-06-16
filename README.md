@@ -3,21 +3,35 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/timcogames/sway.module_math?branch=master)](https://bettercodehub.com/)
 [![Documentation](https://codedocs.xyz/timcogames/sway.module_math.svg)](https://codedocs.xyz/timcogames/sway.module_math/)
 
-#### Клонирование проекта
+### Клонирование проекта
 
 ```console
 git clone --recursive https://github.com/timcogames/sway.module_math.git
 ```
 
-#### Сборка проекта
+### Сборка проекта
+
+Создаем директорию build и переходим в неё
 
 ```console
 mkdir build && cd ./build
-cmake -DCMAKE_BUILD_TYPE=Release ../
-make
 ```
 
-#### Опции сборки
+Конфигурируем проект для сборки
 
-* `-DCMAKE_BUILD_TYPE=Debug`
-* `-DBUILD_TESTS=ON`
+```console
+cmake -DCMAKE_BUILD_TYPE=Release ../
+```
+
+Запускаем сборку
+
+```console
+cmake --build .
+```
+
+#### Флаги сборки
+
+Опция | Описание | По умолчанию
+:---|:---|:---:
+`ENABLE_EXAMPLES` | Enable example builds | `OFF`
+`ENABLE_TESTS` | Enable test builds | `OFF`

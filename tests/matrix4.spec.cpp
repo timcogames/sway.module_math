@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_SUITE(TMatrix4TestSuite)
  *    Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
  */
 BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
-	const math::TMatrix4<s32_t> mat4;
+	const math::mat4i_t mat4;
 
 	BOOST_CHECK_EQUAL(mat4.get(0, 0), 1);
 	BOOST_CHECK_EQUAL(mat4.get(0, 1), 0);
@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
  *    Убеждаемся, что установка всех компонентов матрицы проходит правильно.
  */
 BOOST_AUTO_TEST_CASE(TMatrix4TestCase_Set) {
-	math::TMatrix4<s32_t> mat4;
+	math::mat4i_t mat4;
 
 	mat4.set(0, 0, RAND_MAT4[0][0]);
 	mat4.set(0, 1, RAND_MAT4[0][1]);
