@@ -23,15 +23,12 @@ mkdir build && cd ./build
 cmake -DCMAKE_BUILD_TYPE=Release ../
 ```
 
+Опция сборки | Описание | По умолчанию
+:---|:---|:---:
+`ENABLE_TESTS` | Enable test builds | `OFF`
+
 Запускаем сборку
 
 ```console
 cmake --build .
 ```
-
-#### Флаги сборки
-
-Опция | Описание | По умолчанию
-:---|:---|:---:
-`ENABLE_EXAMPLES` | Enable example builds | `OFF`
-`ENABLE_TESTS` | Enable test builds | `OFF`
