@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 set(META_PROJECT_NAME module_math)
 set(META_VERSION_MAJOR 0)
 set(META_VERSION_MINOR 2)
-set(META_VERSION_PATCH 4)
+set(META_VERSION_PATCH 5)
 set(META_VERSION ${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH})
 
 # Опции сборки
@@ -16,6 +16,7 @@ project(${META_PROJECT_NAME} C CXX)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Добавляем пути для поиска хедеров
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/modules/sway.module_core/include")
 

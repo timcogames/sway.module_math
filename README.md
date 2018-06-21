@@ -1,4 +1,4 @@
-# sway.module_math [![Discord](https://discordapp.com/api/guilds/402238411639095297/widget.png)](https://discord.gg/vCMcgwQ)
+# sway.module_math
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/timcogames/sway.module_math?branch=master)](https://bettercodehub.com/)
 [![Documentation](https://codedocs.xyz/timcogames/sway.module_math.svg)](https://codedocs.xyz/timcogames/sway.module_math/)
@@ -25,7 +25,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ../
 
 Опция сборки | Описание | По умолчанию
 :---|:---|:---:
-`ENABLE_TESTS` | Enable test builds | `OFF`
+`ENABLE_TESTS` | Включает построение тестов | `OFF`
 
 Запускаем сборку
 
