@@ -7,13 +7,13 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename type_t> class TVector4;
+template<typename TYPE> class TVector4;
 
 /*!
  * \brief
  *    Шаблонный класс представления матрицы.
  */
-template <typename type_t>
+template<typename TYPE>
 class TMatrix4 final {
 public:
 	/*!
@@ -39,7 +39,7 @@ public:
 	 * \param[in] value
 	 *    Значения для установки.
 	 */
-	void set(u32_t row, u32_t col, type_t value) {
+	void set(u32_t row, u32_t col, TYPE value) {
 		_values[row * 4 + col] = value;
 	}
 
@@ -56,7 +56,7 @@ public:
 	 * \return
 	 *    Значения элемента.
 	 */
-	type_t get(u32_t row, u32_t col) const {
+	TYPE get(u32_t row, u32_t col) const {
 		return _values[row * 4 + col];
 	}
 
@@ -71,9 +71,9 @@ public:
 	 *    Значения для установки.
 	 * 
 	 * \sa
-	 *    setCol(u32_t, const TVector4<type_t> &)
+	 *    setCol(u32_t, const TVector4<TYPE> &)
 	 */
-	void setRow(u32_t i, const TVector4<type_t> & value) {
+	void setRow(u32_t i, const TVector4<TYPE> & value) {
 		set(i, 0, value.getX());
 		set(i, 1, value.getY());
 		set(i, 2, value.getZ());
@@ -91,10 +91,10 @@ public:
 	 *    Значения элементов.
 	 * 
 	 * \sa
-	 *    TVector4<type_t> getCol(u32_t) const
+	 *    TVector4<TYPE> getCol(u32_t) const
 	 */
-	TVector4<type_t> getRow(u32_t i) const {
-		return TVector4<type_t>(get(i, 0), get(i, 1), get(i, 2), get(i, 3));
+	TVector4<TYPE> getRow(u32_t i) const {
+		return TVector4<TYPE>(get(i, 0), get(i, 1), get(i, 2), get(i, 3));
 	}
 
 	/*!
@@ -108,9 +108,9 @@ public:
 	 *    Значения для установки.
 	 * 
 	 * \sa
-	 *    setRow(u32_t, const TVector4<type_t> &)
+	 *    setRow(u32_t, const TVector4<TYPE> &)
 	 */
-	void setCol(u32_t i, const TVector4<type_t> & value) {
+	void setCol(u32_t i, const TVector4<TYPE> & value) {
 		set(0, i, value.getX());
 		set(1, i, value.getY());
 		set(2, i, value.getZ());
@@ -128,18 +128,18 @@ public:
 	 *    Значения элементов.
 	 * 
 	 * \sa
-	 *    TVector4<type_t> getRow(u32_t) const
+	 *    TVector4<TYPE> getRow(u32_t) const
 	 */
-	TVector4<type_t> getCol(u32_t i) const {
-		return TVector4<type_t>(get(0, i), get(1, i), get(2, i), get(3, i));
+	TVector4<TYPE> getCol(u32_t i) const {
+		return TVector4<TYPE>(get(0, i), get(1, i), get(2, i), get(3, i));
 	}
 
 	/*!
 	 * \brief 
 	 *    Обнуляет все элементы матрицы.
 	 */
-	TMatrix4<type_t> & makeZero() {
-		memset(_values, 0, sizeof(type_t) * 16);
+	TMatrix4<TYPE> & makeZero() {
+		memset(_values, 0, sizeof(TYPE) * 16);
 		
 		return *this;
 	}
@@ -148,26 +148,26 @@ public:
 	 * \brief 
 	 *    Приводит к единичной матрице.
 	 */
-	TMatrix4<type_t> & makeIdentity() {
+	TMatrix4<TYPE> & makeIdentity() {
 		makeZero();
-		set(0, 0, (type_t) 1);
-		set(1, 1, (type_t) 1);
-		set(2, 2, (type_t) 1);
-		set(3, 3, (type_t) 1);
+		set(0, 0, (TYPE) 1);
+		set(1, 1, (TYPE) 1);
+		set(2, 2, (TYPE) 1);
+		set(3, 3, (TYPE) 1);
 
 		return *this;
 	}
 
-	type_t * get() {
+	TYPE * get() {
 		return _values;
 	}
 	
-	const type_t * get() const {
+	const TYPE * get() const {
 		return _values;
 	}
 
 private:
-	type_t _values[16]; /*!< Элементы матрицы. */
+	TYPE _values[16]; /*!< Элементы матрицы. */
 };
 
 typedef TMatrix4<s32_t> mat4i_t;

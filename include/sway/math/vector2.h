@@ -13,9 +13,11 @@ NAMESPACE_BEGIN(math)
  *    Класс, который хранит позицию в 2D-координатах, 
  *    позволяет манипулировать ими, а также выполнять векторные операции.
  */
-template <typename type_t>
+template<typename TYPE>
 class TVector2 final {
 public:
+	typedef TYPE rawtype_t;
+
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
@@ -23,10 +25,10 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
-	 *    TVector2(type_t, type_t)
+	 *    TVector2(TYPE, TYPE)
 	 */
 	TVector2() {
-		_x = _y = (type_t) 0;
+		_x = _y = (TYPE) 0;
 	}
 
 	/*!
@@ -44,7 +46,7 @@ public:
 	 * \sa
 	 *    TVector2()
 	 */
-	TVector2(type_t x, type_t y) {
+	TVector2(TYPE x, TYPE y) {
 		set(x, y);
 	}
 
@@ -58,7 +60,7 @@ public:
 	 * \param[in] y
 	 *    Значение Y компонента.
 	 */
-	void set(type_t x, type_t y) {
+	void set(TYPE x, TYPE y) {
 		_x = x;
 		_y = y;
 	}
@@ -70,7 +72,7 @@ public:
 	 * \sa
 	 *    getY() const
 	 */
-	type_t getX() const {
+	TYPE getX() const {
 		return _x;
 	}
 
@@ -81,12 +83,20 @@ public:
 	 * \sa
 	 *    getX() const
 	 */
-	type_t getY() const {
+	TYPE getY() const {
 		return _y;
 	}
 
+	/*!
+	 * \brief
+	 *    Возвращает количество компонентов.
+	 */
+	s32_t size() const {
+		return 2;
+	}
+
 private:
-	type_t _x, _y;
+	TYPE _x, _y;
 };
 
 typedef TVector2<s32_t> vec2i_t;

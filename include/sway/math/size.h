@@ -7,13 +7,13 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename type_t> class TRect;
+template<typename TYPE> class TRect;
 
 /*!
  * \brief
  *    Шаблонный класс представления размера.
  */
-template <typename type_t>
+template<typename TYPE>
 class TSize final {
 public:
 	/*!
@@ -23,11 +23,11 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
 	 * 
 	 * \sa
-	 *    TSize(type_t)
-	 *    TSize(type_t, type_t)
+	 *    TSize(TYPE)
+	 *    TSize(TYPE, TYPE)
 	 */
 	TSize() {
-		_w = _h = (type_t) 0;
+		_w = _h = (TYPE) 0;
 	}
 
 	/*!
@@ -41,10 +41,10 @@ public:
 	 * 
 	 * \sa
 	 *    TSize()
-	 *    TSize(type_t, type_t)
+	 *    TSize(TYPE, TYPE)
 	 */
 
-	TSize(type_t scalar) {
+	TSize(TYPE scalar) {
 		set(scalar, scalar);
 	}
 
@@ -62,9 +62,9 @@ public:
 	 * 
 	 * \sa
 	 *    TSize()
-	 *    TSize(type_t)
+	 *    TSize(TYPE)
 	 */
-	TSize(type_t w, type_t h) {
+	TSize(TYPE w, TYPE h) {
 		set(w, h);
 	}
 
@@ -78,7 +78,7 @@ public:
 	 * \param[in] h
 	 *    Значение высоты.
 	 */
-	void set(type_t w, type_t h) {
+	void set(TYPE w, TYPE h) {
 		_w = w;
 		_h = h;
 	}
@@ -91,9 +91,9 @@ public:
 	 *    Новое значение ширины.
 	 *
 	 * \sa
-	 *    setH(type_t)
+	 *    setH(TYPE)
 	 */
-	void setW(type_t w) {
+	void setW(TYPE w) {
 		_w = w;
 	}
 
@@ -104,7 +104,7 @@ public:
 	 * \sa
 	 *    getH()
 	 */
-	type_t getW() const {
+	TYPE getW() const {
 		return _w;
 	}
 
@@ -116,9 +116,9 @@ public:
 	 *    Новое значение высоты.
 	 *
 	 * \sa
-	 *    setW(type_t)
+	 *    setW(TYPE)
 	 */
-	void setH(type_t h) {
+	void setH(TYPE h) {
 		_h = h;
 	}
 
@@ -129,24 +129,24 @@ public:
 	 * \sa
 	 *    getW()
 	 */
-	type_t getH() const {
+	TYPE getH() const {
 		return _h;
 	}
 
 	/*!
 	 * \brief
-	 *    Преобразовывает в TRect<type_t> класс.
+	 *    Преобразовывает в TRect<TYPE> класс.
 	 */
-	TRect<type_t> toRect() const {
-		return TRect<type_t>((type_t) 0, (type_t) 0, _w, _h);
+	TRect<TYPE> toRect() const {
+		return TRect<TYPE>((TYPE) 0, (TYPE) 0, _w, _h);
 	}
 
 	/*!
 	 * \brief 
 	 *    Оператор равенства. 
 	 */
-	template <typename other>
-	bool operator==(const TSize<other> & compare) const {
+	template<typename OTHER>
+	bool operator==(const TSize<OTHER> & compare) const {
 		return _w == compare.getW() && _h == compare.getH();
 	}
 
@@ -154,13 +154,13 @@ public:
 	 * \brief 
 	 *    Оператор неравенства. 
 	 */
-	template <typename other>
-	bool operator!=(const TSize<other> & compare) const {
+	template<typename OTHER>
+	bool operator!=(const TSize<OTHER> & compare) const {
 		return !operator==(compare);
 	}
 
 private:
-	type_t _w, _h;
+	TYPE _w, _h;
 };
 
 typedef TSize<s32_t> size2i_t;

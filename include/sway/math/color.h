@@ -7,13 +7,13 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename type_t> class TVector4;
+template<typename TYPE> class TVector4;
 
 /*!
  * \brief
  *    Шаблонный класс представления цвета.
  */
-template <typename type_t>
+template<typename TYPE>
 class TColor final {
 public:
 	/*!
@@ -23,11 +23,11 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
-	 *    TColor(type_t, type_t, type_t, type_t)
+	 *    TColor(TYPE, TYPE, TYPE, TYPE)
 	 */
 	TColor() {
-		_r = _g = _b = (type_t) 0;
-		_a = (type_t) 1;
+		_r = _g = _b = (TYPE) 0;
+		_a = (TYPE) 1;
 	}
 
 	/*!
@@ -51,7 +51,7 @@ public:
 	 * \sa
 	 *    TColor()
 	 */
-	TColor(type_t r, type_t g, type_t b, type_t a = (type_t) 1) {
+	TColor(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE) 1) {
 		set(r, g, b, a);
 	}
 
@@ -71,7 +71,7 @@ public:
 	 * \param[in] a
 	 *    Значение альфа-канала.
 	 */
-	void set(type_t r, type_t g, type_t b, type_t a = (type_t) 1) {
+	void set(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE) 1) {
 		_r = r;
 		_g = g;
 		_b = b;
@@ -87,7 +87,7 @@ public:
 	 *    getB() const
 	 *    getA() const
 	 */
-	type_t getR() const {
+	TYPE getR() const {
 		return _r;
 	}
 
@@ -100,7 +100,7 @@ public:
 	 *    getB() const
 	 *    getA() const
 	 */
-	type_t getG() const {
+	TYPE getG() const {
 		return _g;
 	}
 
@@ -113,7 +113,7 @@ public:
 	 *    getG() const
 	 *    getA() const
 	 */
-	type_t getB() const {
+	TYPE getB() const {
 		return _b;
 	}
 
@@ -126,20 +126,20 @@ public:
 	 *    getG() const
 	 *    getB() const
 	 */
-	type_t getA() const {
+	TYPE getA() const {
 		return _a;
 	}
 
 	/*!
 	 * \brief
-	 *    Преобразовывает в TVector4<type_t> класс.
+	 *    Преобразовывает в TVector4<TYPE> класс.
 	 */
-	TVector4<type_t> toVec4() const {
-		return TVector4<type_t>(_r, _g, _b, _a);
+	TVector4<TYPE> toVec4() const {
+		return TVector4<TYPE>(_r, _g, _b, _a);
 	}
 
 private:
-	type_t _r, _g, _b, _a;
+	TYPE _r, _g, _b, _a;
 };
 
 typedef TColor<s32_t> col4i_t;

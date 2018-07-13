@@ -10,9 +10,11 @@ NAMESPACE_BEGIN(math)
  * \brief
  *    Шаблонный класс представления вектора из трех компонентов.
  */
-template <typename type_t>
+template<typename TYPE>
 class TVector3 final {
 public:
+	typedef TYPE rawtype_t;
+
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
@@ -20,10 +22,10 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
-	 *    TVector3(type_t, type_t, type_t)
+	 *    TVector3(TYPE, TYPE, TYPE)
 	 */
 	TVector3() {
-		_x = _y = _z = (type_t) 0;
+		_x = _y = _z = (TYPE) 0;
 	}
 
 	/*!
@@ -44,7 +46,7 @@ public:
 	 * \sa
 	 *    TVector3()
 	 */
-	TVector3(type_t x, type_t y, type_t z) {
+	TVector3(TYPE x, TYPE y, TYPE z) {
 		set(x, y, z);
 	}
 
@@ -61,7 +63,7 @@ public:
 	 * \param[in] z
 	 *    Значение Z компонента.
 	 */
-	void set(type_t x, type_t y, type_t z) {
+	void set(TYPE x, TYPE y, TYPE z) {
 		_x = x;
 		_y = y;
 		_z = z;
@@ -75,7 +77,7 @@ public:
 	 *    getY() const
 	 *    getZ() const
 	 */
-	type_t getX() const {
+	TYPE getX() const {
 		return _x;
 	}
 
@@ -87,7 +89,7 @@ public:
 	 *    getX() const
 	 *    getZ() const
 	 */
-	type_t getY() const {
+	TYPE getY() const {
 		return _y;
 	}
 
@@ -99,12 +101,20 @@ public:
 	 *    getX() const
 	 *    getY() const
 	 */
-	type_t getZ() const {
+	TYPE getZ() const {
 		return _z;
 	}
 
+	/*!
+	 * \brief
+	 *    Возвращает количество компонентов.
+	 */
+	s32_t size() const {
+		return 3;
+	}
+
 private:
-	type_t _x, _y, _z;
+	TYPE _x, _y, _z;
 };
 
 typedef TVector3<s32_t> vec3i_t;

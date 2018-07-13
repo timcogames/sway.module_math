@@ -7,13 +7,13 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename type_t> class TSize;
+template<typename TYPE> class TSize;
 
 /*!
  * \brief
  *    Шаблонный класс представления прямоугольной области.
  */
-template <typename type_t>
+template<typename TYPE>
 class TRect final {
 public:
 	/*!
@@ -23,10 +23,10 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
-	 *    TRect(type_t, type_t, type_t, type_t)
+	 *    TRect(TYPE, TYPE, TYPE, TYPE)
 	 */
 	TRect() {
-		_l = _t = _r = _b = (type_t) 0;
+		_l = _t = _r = _b = (TYPE) 0;
 	}
 
 	/*!
@@ -50,7 +50,7 @@ public:
 	 * \sa
 	 *    TRect()
 	 */
-	TRect(type_t x, type_t y, type_t w, type_t h) {
+	TRect(TYPE x, TYPE y, TYPE w, TYPE h) {
 		set(x, y, w, h);
 	}
 
@@ -70,7 +70,7 @@ public:
 	 * \param[in] h
 	 *    Значение высоты.
 	 */
-	void set(type_t x, type_t y, type_t w, type_t h) {
+	void set(TYPE x, TYPE y, TYPE w, TYPE h) {
 		_l = x;
 		_t = y;
 		_r = x + w;
@@ -87,7 +87,7 @@ public:
 	 * \param[in] y
 	 *    Значение координаты по оси Y.
 	 */
-	void offset(type_t x, type_t y) {
+	void offset(TYPE x, TYPE y) {
 		_l += x;
 		_t += y;
 		_r += x;
@@ -108,11 +108,11 @@ public:
 	 *    setW() const
 	 *    setH() const
 	 */
-	void setL(type_t x) {
+	void setL(TYPE x) {
 		_l = x;
 	}
 
-	type_t getL() const {
+	TYPE getL() const {
 		return _l;
 	}
 
@@ -130,27 +130,27 @@ public:
 	 *    setW() const
 	 *    setH() const
 	 */
-	void setT(type_t y) {
+	void setT(TYPE y) {
 		_t = y;
 	}
 
-	type_t getT() const {
+	TYPE getT() const {
 		return _t;
 	}
 
-	void setR(type_t w) {
+	void setR(TYPE w) {
 		_r = w;
 	}
 
-	type_t getR() const {
+	TYPE getR() const {
 		return _r;
 	}
 
-	void setB(type_t h) {
+	void setB(TYPE h) {
 		_b = h;
 	}
 
-	type_t getB() const {
+	TYPE getB() const {
 		return _b;
 	}
 
@@ -165,7 +165,7 @@ public:
 	 *    getB() const
 	 *    getH() const
 	 */
-	type_t getW() const {
+	TYPE getW() const {
 		return _r - _l;
 	}
 
@@ -180,20 +180,20 @@ public:
 	 *    getB() const
 	 *    getW() const
 	 */
-	type_t getH() const {
+	TYPE getH() const {
 		return _b - _t;
 	}
 
 	/*!
 	 * \brief
-	 *    Преобразовывает в TSize<type_t> класс.
+	 *    Преобразовывает в TSize<TYPE> класс.
 	 */
-	TSize<type_t> toSize() const {
-		return TSize<type_t>(getW(), getH());
+	TSize<TYPE> toSize() const {
+		return TSize<TYPE>(getW(), getH());
 	}
 
 	bool isEmpty() const {
-		return ((getW() <= (type_t) 0) || (getH() <= (type_t) 0));
+		return ((getW() <= (TYPE) 0) || (getH() <= (TYPE) 0));
 	}
 
 	bool isValid() const {
@@ -201,7 +201,7 @@ public:
 	}
 
 private:
-	type_t _l, _t, _r, _b;
+	TYPE _l, _t, _r, _b;
 };
 
 typedef TRect<s32_t> rect4i_t;

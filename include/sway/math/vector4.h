@@ -10,9 +10,11 @@ NAMESPACE_BEGIN(math)
  * \brief
  *    Шаблонный класс представления вектора из четырех компонентов.
  */
-template <typename type_t>
+template<typename TYPE>
 class TVector4 final {
 public:
+	typedef TYPE rawtype_t;
+	
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
@@ -20,10 +22,10 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
-	 *    TVector4(type_t, type_t, type_t, type_t)
+	 *    TVector4(TYPE, TYPE, TYPE, TYPE)
 	 */
 	TVector4() {
-		_x = _y = _z = _w = (type_t) 0;
+		_x = _y = _z = _w = (TYPE) 0;
 	}
 
 	/*!
@@ -47,7 +49,7 @@ public:
 	 * \sa
 	 *    TVector4()
 	 */
-	TVector4(type_t x, type_t y, type_t z, type_t w) {
+	TVector4(TYPE x, TYPE y, TYPE z, TYPE w) {
 		set(x, y, z, w);
 	}
 
@@ -67,7 +69,7 @@ public:
 	 * \param[in] w
 	 *    Значение W компонента.
 	 */
-	void set(type_t x, type_t y, type_t z, type_t w) {
+	void set(TYPE x, TYPE y, TYPE z, TYPE w) {
 		_x = x;
 		_y = y;
 		_z = z;
@@ -83,7 +85,7 @@ public:
 	 *    getZ() const
 	 *    getW() const
 	 */
-	type_t getX() const {
+	TYPE getX() const {
 		return _x;
 	}
 
@@ -96,7 +98,7 @@ public:
 	 *    getZ() const
 	 *    getW() const
 	 */
-	type_t getY() const {
+	TYPE getY() const {
 		return _y;
 	}
 
@@ -109,7 +111,7 @@ public:
 	 *    getY() const
 	 *    getW() const
 	 */
-	type_t getZ() const {
+	TYPE getZ() const {
 		return _z;
 	}
 
@@ -122,12 +124,20 @@ public:
 	 *    getY() const
 	 *    getZ() const
 	 */
-	type_t getW() const {
+	TYPE getW() const {
 		return _w;
 	}
 
+	/*!
+	 * \brief
+	 *    Возвращает количество компонентов.
+	 */
+	s32_t size() const {
+		return 4;
+	}
+
 private:
-	type_t _x, _y, _z, _w;
+	TYPE _x, _y, _z, _w;
 };
 
 typedef TVector4<s32_t> vec4i_t;

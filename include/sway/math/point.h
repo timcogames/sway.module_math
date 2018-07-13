@@ -10,7 +10,7 @@ NAMESPACE_BEGIN(math)
  * \brief
  *    Шаблонный класс представления точки.
  */
-template <typename type_t>
+template <typename TYPE>
 class TPoint {
 public:
 	/*!
@@ -20,11 +20,11 @@ public:
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
-	 *    TPoint(type_t)
-	 *    TPoint(type_t, type_t)
+	 *    TPoint(TYPE)
+	 *    TPoint(TYPE, TYPE)
 	 */
 	TPoint() {
-		set((type_t) 0, (type_t) 0);
+		set((TYPE) 0, (TYPE) 0);
 	}
 
 	/*!
@@ -38,9 +38,9 @@ public:
 	 * 
 	 * \sa
 	 *    TPoint()
-	 *    TPoint(type_t, type_t)
+	 *    TPoint(TYPE, TYPE)
 	 */
-	TPoint(type_t scalar) {
+	TPoint(TYPE scalar) {
 		set(scalar, scalar);
 	}
 
@@ -58,9 +58,9 @@ public:
 	 * 
 	 * \sa
 	 *    TPoint()
-	 *    TPoint(type_t)
+	 *    TPoint(TYPE)
 	 */
-	TPoint(type_t x, type_t y) {
+	TPoint(TYPE x, TYPE y) {
 		set(x, y);
 	}
 
@@ -74,7 +74,7 @@ public:
 	 * \param[in] y 
 	 *    Значение координаты по оси Y.
 	 */
-	void set(type_t x, type_t y) {
+	void set(TYPE x, TYPE y) {
 		_x = x;
 		_y = y;
 	}
@@ -89,7 +89,7 @@ public:
 	 * \sa 
 	 *    setY() const
 	 */
-	void setX(type_t x) {
+	void setX(TYPE x) {
 		_x = x;
 	}
 
@@ -100,7 +100,7 @@ public:
 	 * \sa 
 	 *    getY() const
 	 */
-	type_t getX() const {
+	TYPE getX() const {
 		return _x;
 	}
 
@@ -114,7 +114,7 @@ public:
 	 * \sa 
 	 *    setX() const
 	 */
-	void setY(type_t y) {
+	void setY(TYPE y) {
 		_y = y;
 	}
 
@@ -125,7 +125,7 @@ public:
 	 * \sa 
 	 *    getX() const
 	 */
-	type_t getY() const {
+	TYPE getY() const {
 		return _y;
 	}
 
@@ -133,8 +133,8 @@ public:
 	 * \brief 
 	 *    Оператор равенства. 
 	 */
-	template <typename other>
-	bool operator==(const TPoint<other> & compare) const {
+	template<typename OTHER>
+	bool operator==(const TPoint<OTHER> & compare) const {
 		return _x == compare.getX() && _y == compare.getY();
 	}
 
@@ -142,13 +142,13 @@ public:
 	 * \brief 
 	 *    Оператор неравенства. 
 	 */
-	template <typename other>
-	bool operator!=(const TPoint<other> & compare) const {
+	template<typename OTHER>
+	bool operator!=(const TPoint<OTHER> & compare) const {
 		return !operator==(compare);
 	}
 
 protected:
-	type_t _x, _y;
+	TYPE _x, _y;
 };
 
 typedef TPoint<s32_t> point2i_t;
