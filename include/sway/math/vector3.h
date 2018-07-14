@@ -105,13 +105,17 @@ public:
 		return _z;
 	}
 
+#pragma region "Статические методы класса"
+
 	/*!
 	 * \brief
 	 *    Возвращает количество компонентов.
 	 */
-	static s32_t size() const {
+	static s32_t size() {
 		return 3;
 	}
+
+#pragma endregion
 
 private:
 	TYPE _x, _y, _z;

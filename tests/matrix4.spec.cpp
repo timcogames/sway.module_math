@@ -1,5 +1,4 @@
 #include <boost/test/unit_test.hpp>
-
 #include <sway/math.h>
 
 using namespace sway;
@@ -18,13 +17,13 @@ static const s32_t RAND_MAT4[4][4] = {
 	1, 1, 5, 3
 };
 
-BOOST_AUTO_TEST_SUITE(TMatrix4TestSuite)
+BOOST_AUTO_TEST_SUITE(TMatrix4_TestSuite)
 
 /*!
  * \brief
  *    Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
  */
-BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
+BOOST_AUTO_TEST_CASE(TMatrix4_TestCase_DefaultConstructor) {
 	const math::mat4i_t mat4;
 
 	BOOST_CHECK_EQUAL(mat4.get(0, 0), 1);
@@ -52,7 +51,7 @@ BOOST_AUTO_TEST_CASE(TMatrix4TestCase_DefaultConstructor) {
  * \brief
  *    Убеждаемся, что установка всех компонентов матрицы проходит правильно.
  */
-BOOST_AUTO_TEST_CASE(TMatrix4TestCase_Set) {
+BOOST_AUTO_TEST_CASE(TMatrix4_TestCase_Set) {
 	math::mat4i_t mat4;
 
 	mat4.set(0, 0, RAND_MAT4[0][0]);

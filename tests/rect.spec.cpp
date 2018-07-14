@@ -1,16 +1,15 @@
 #include <boost/test/unit_test.hpp>
-
 #include <sway/math.h>
 
 using namespace sway;
 
-BOOST_AUTO_TEST_SUITE(TRectTestSuite)
+BOOST_AUTO_TEST_SUITE(TRect_TestSuite)
 
 /*!
  * \brief
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-BOOST_AUTO_TEST_CASE(TRectTestCase_DefaultConstructor) {
+BOOST_AUTO_TEST_CASE(TRect_TestCase_DefaultConstructor) {
 	const math::rect4i_t rect;
 
 	BOOST_CHECK_EQUAL(rect.getL(), 0);
@@ -24,7 +23,7 @@ BOOST_AUTO_TEST_CASE(TRectTestCase_DefaultConstructor) {
  *    Убеждаемся, что конструктор устанавливает все значения компонентов в те, 
  *    которые были заданы.
  */
-BOOST_AUTO_TEST_CASE(TRectTestCase_ComponentConstructor) {
+BOOST_AUTO_TEST_CASE(TRect_TestCase_ComponentConstructor) {
 	const s32_t x = 8, y = 16, w = 32, h = 64;
 	const math::rect4i_t rect(x, y, w, h);
 
@@ -36,7 +35,7 @@ BOOST_AUTO_TEST_CASE(TRectTestCase_ComponentConstructor) {
 	BOOST_CHECK_EQUAL(rect.getH(), h);
 }
 
-BOOST_AUTO_TEST_CASE(TRectTestCase_Offset) {
+BOOST_AUTO_TEST_CASE(TRect_TestCase_Offset) {
 	const s32_t x = 8, y = 16, w = 32, h = 64;
 	const s32_t xoffset = 2, yoffset = 4;
 
@@ -55,7 +54,7 @@ BOOST_AUTO_TEST_CASE(TRectTestCase_Offset) {
  * \brief
  *    Убеждаемся, что преобразование в TSize<type> проходит правильно.
  */
-BOOST_AUTO_TEST_CASE(TRectTestCase_ConvertToSize) {
+BOOST_AUTO_TEST_CASE(TRect_TestCase_ConvertToSize) {
 	const s32_t x = 8, y = 16, w = 32, h = 64;
 
 	math::rect4i_t rect(x, y, w, h);
@@ -65,7 +64,7 @@ BOOST_AUTO_TEST_CASE(TRectTestCase_ConvertToSize) {
 	BOOST_CHECK_EQUAL(size.getH(), h);
 }
 
-BOOST_AUTO_TEST_CASE(TRectTestCase_IsEmpty) {
+BOOST_AUTO_TEST_CASE(TRect_TestCase_IsEmpty) {
 	BOOST_CHECK(math::TRect<s32_t>(0, 0, 0, 32).isEmpty());
 	BOOST_CHECK(math::TRect<s32_t>(0, 0, 32, 0).isEmpty());
 	BOOST_CHECK_EQUAL(math::TRect<s32_t>(0, 0, 32, 32).isEmpty(), false);

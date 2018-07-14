@@ -1,16 +1,15 @@
 #include <boost/test/unit_test.hpp>
-
 #include <sway/math.h>
 
 using namespace sway;
 
-BOOST_AUTO_TEST_SUITE(VertexTestSuite)
+BOOST_AUTO_TEST_SUITE(Vertex_TestSuite)
 
 /*!
  * \brief
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-BOOST_AUTO_TEST_CASE(VertexPositionTestCase_DefaultConstructor) {
+BOOST_AUTO_TEST_CASE(VertexPosition_TestCase_DefaultConstructor) {
 	const math::VertexPosition vertex;
 
 	BOOST_CHECK_EQUAL(vertex.x, 0.0f);
@@ -23,7 +22,7 @@ BOOST_AUTO_TEST_CASE(VertexPositionTestCase_DefaultConstructor) {
  *    Убеждаемся, что конструктор устанавливает все значения компонентов в те, 
  *    которые были заданы.
  */
-BOOST_AUTO_TEST_CASE(VertexPositionTestCase_ComponentConstructor) {
+BOOST_AUTO_TEST_CASE(VertexPosition_TestCase_ComponentConstructor) {
 	const math::VertexPosition vertex(math::vec3f_t(1.0f, 2.0f, 3.0f));
 	const math::vec3f_t position = vertex.getPosition();
 
@@ -36,7 +35,7 @@ BOOST_AUTO_TEST_CASE(VertexPositionTestCase_ComponentConstructor) {
  * \brief
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-BOOST_AUTO_TEST_CASE(VertexColorTestCase_DefaultConstructor) {
+BOOST_AUTO_TEST_CASE(VertexColor_TestCase_DefaultConstructor) {
 	const math::VertexColor vertex;
 	
 	BOOST_CHECK_EQUAL(vertex.x, 0.0f);
@@ -54,7 +53,7 @@ BOOST_AUTO_TEST_CASE(VertexColorTestCase_DefaultConstructor) {
  *    Убеждаемся, что конструктор устанавливает все значения компонентов в те, 
  *    которые были заданы.
  */
-BOOST_AUTO_TEST_CASE(VertexColorTestCase_ComponentConstructor) {
+BOOST_AUTO_TEST_CASE(VertexColor_TestCase_ComponentConstructor) {
 	const math::VertexColor vertex(math::vec3f_t(1.0f, 2.0f, 3.0f), math::col4f_t(0.1f, 0.2f, 0.3f));
 	const math::vec3f_t position = vertex.getPosition();
 	const math::col4f_t color = vertex.getColor();
@@ -73,7 +72,7 @@ BOOST_AUTO_TEST_CASE(VertexColorTestCase_ComponentConstructor) {
  * \brief
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-BOOST_AUTO_TEST_CASE(VertexTexCoordTestCase_DefaultConstructor) {
+BOOST_AUTO_TEST_CASE(VertexTexCoord_TestCase_DefaultConstructor) {
 	const math::VertexTexCoord vertex;
 	
 	BOOST_CHECK_EQUAL(vertex.x, 0.0f);
@@ -89,7 +88,7 @@ BOOST_AUTO_TEST_CASE(VertexTexCoordTestCase_DefaultConstructor) {
  *    Убеждаемся, что конструктор устанавливает все значения компонентов в те, 
  *    которые были заданы.
  */
-BOOST_AUTO_TEST_CASE(VertexTexCoordTestCase_ComponentConstructor) {
+BOOST_AUTO_TEST_CASE(VertexTexCoord_TestCase_ComponentConstructor) {
 	const math::VertexTexCoord vertex(math::vec3f_t(1.0f, 2.0f, 3.0f), math::vec2f_t(0.1f, 0.2f));
 	const math::vec3f_t position = vertex.getPosition();
 	const math::vec2f_t texcoord = vertex.getTexCoord();
