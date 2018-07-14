@@ -109,7 +109,7 @@ public:
 	 * \brief
 	 *    Возвращает количество компонентов.
 	 */
-	s32_t size() const {
+	static s32_t size() const {
 		return 3;
 	}
 
