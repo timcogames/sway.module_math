@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_SUITE(TVector3_TestSuite)
  *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 BOOST_AUTO_TEST_CASE(TVector3_TestCase_DefaultConstructor) {
-	math::vec4i_t vec3;
+	math::vec3i_t vec3;
 
 	BOOST_CHECK_EQUAL(vec3.getX(), 0);
 	BOOST_CHECK_EQUAL(vec3.getY(), 0);
@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(TVector3_TestCase_ComponentConstructor) {
 }
 
 BOOST_AUTO_TEST_CASE(TVector3_TestCase_Size) {
-	BOOST_CHECK_EQUAL(math::vec3i_t::size(), 3);
+	BOOST_CHECK_EQUAL(math::vec3i_t::size, 3);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

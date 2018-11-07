@@ -1,6 +1,7 @@
 #ifndef SWAY_MATH_VECTOR3_H
 #define SWAY_MATH_VECTOR3_H
 
+#include <sway/math/vector.h>
 #include <sway/core.h>
 
 NAMESPACE_BEGIN(sway)
@@ -11,27 +12,23 @@ NAMESPACE_BEGIN(math)
  *    Шаблонный класс представления вектора из трех компонентов.
  */
 template<typename TYPE>
-class TVector3 final {
+class TVector3 final : public TVector<TYPE, 3> {
 public:
-	typedef TYPE rawtype_t;
-
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
 	 *    TVector3(TYPE, TYPE, TYPE)
 	 */
-	TVector3() {
-		_x = _y = _z = (TYPE) 0;
+	TVector3() : TVector<TYPE, 3>() {
+		// Empty
 	}
 
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
 	 *
 	 * \param[in] x
@@ -64,9 +61,9 @@ public:
 	 *    Значение Z компонента.
 	 */
 	void set(TYPE x, TYPE y, TYPE z) {
-		_x = x;
-		_y = y;
-		_z = z;
+		this->_data[0] = x;
+		this->_data[1] = y;
+		this->_data[2] = z;
 	}
 
 	/*!
@@ -78,7 +75,7 @@ public:
 	 *    getZ() const
 	 */
 	TYPE getX() const {
-		return _x;
+		return this->_data[0];
 	}
 
 	/*!
@@ -90,7 +87,7 @@ public:
 	 *    getZ() const
 	 */
 	TYPE getY() const {
-		return _y;
+		return this->_data[1];
 	}
 
 	/*!
@@ -102,23 +99,12 @@ public:
 	 *    getY() const
 	 */
 	TYPE getZ() const {
-		return _z;
+		return this->_data[2];
 	}
 
 #pragma region "Статические методы класса"
 
-	/*!
-	 * \brief
-	 *    Возвращает количество компонентов.
-	 */
-	static s32_t size() {
-		return 3;
-	}
-
 #pragma endregion
-
-private:
-	TYPE _x, _y, _z;
 };
 
 typedef TVector3<s32_t> vec3i_t;

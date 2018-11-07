@@ -1,6 +1,7 @@
 #ifndef SWAY_MATH_VECTOR4_H
 #define SWAY_MATH_VECTOR4_H
 
+#include <sway/math/vector.h>
 #include <sway/core.h>
 
 NAMESPACE_BEGIN(sway)
@@ -11,27 +12,23 @@ NAMESPACE_BEGIN(math)
  *    Шаблонный класс представления вектора из четырех компонентов.
  */
 template<typename TYPE>
-class TVector4 final {
+class TVector4 final : public TVector<TYPE, 4> {
 public:
-	typedef TYPE rawtype_t;
-	
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
 	 *    TVector4(TYPE, TYPE, TYPE, TYPE)
 	 */
-	TVector4() {
-		_x = _y = _z = _w = (TYPE) 0;
+	TVector4() : TVector<TYPE, 4>() {
+		// Empty
 	}
 
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
 	 *
 	 * \param[in] x
@@ -70,10 +67,10 @@ public:
 	 *    Значение W компонента.
 	 */
 	void set(TYPE x, TYPE y, TYPE z, TYPE w) {
-		_x = x;
-		_y = y;
-		_z = z;
-		_w = w;
+		this->_data[0] = x;
+		this->_data[1] = y;
+		this->_data[2] = z;
+		this->_data[3] = w;
 	}
 
 	/*!
@@ -86,7 +83,7 @@ public:
 	 *    getW() const
 	 */
 	TYPE getX() const {
-		return _x;
+		return this->_data[0];
 	}
 
 	/*!
@@ -99,7 +96,7 @@ public:
 	 *    getW() const
 	 */
 	TYPE getY() const {
-		return _y;
+		return this->_data[1];
 	}
 
 	/*!
@@ -112,7 +109,7 @@ public:
 	 *    getW() const
 	 */
 	TYPE getZ() const {
-		return _z;
+		return this->_data[2];
 	}
 
 	/*!
@@ -125,23 +122,12 @@ public:
 	 *    getZ() const
 	 */
 	TYPE getW() const {
-		return _w;
+		return this->_data[3];
 	}
 
 #pragma region "Статические методы класса"
 
-	/*!
-	 * \brief
-	 *    Возвращает количество компонентов.
-	 */
-	static s32_t size() {
-		return 4;
-	}
-
 #pragma endregion
-
-private:
-	TYPE _x, _y, _z, _w;
 };
 
 typedef TVector4<s32_t> vec4i_t;

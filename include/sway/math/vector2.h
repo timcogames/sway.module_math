@@ -1,6 +1,7 @@
 #ifndef SWAY_MATH_VECTOR2_H
 #define SWAY_MATH_VECTOR2_H
 
+#include <sway/math/vector.h>
 #include <sway/core.h>
 
 NAMESPACE_BEGIN(sway)
@@ -14,27 +15,23 @@ NAMESPACE_BEGIN(math)
  *    позволяет манипулировать ими, а также выполнять векторные операции.
  */
 template<typename TYPE>
-class TVector2 final {
+class TVector2 final : public TVector<TYPE, 2> {
 public:
-	typedef TYPE rawtype_t;
-
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
 	 * 
 	 * \sa
 	 *    TVector2(TYPE, TYPE)
 	 */
-	TVector2() {
-		_x = _y = (TYPE) 0;
+	TVector2() : TVector<TYPE, 2>() {
+		// Empty
 	}
 
 	/*!
 	 * \brief 
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
 	 *
 	 * \param[in] x
@@ -61,8 +58,8 @@ public:
 	 *    Значение Y компонента.
 	 */
 	void set(TYPE x, TYPE y) {
-		_x = x;
-		_y = y;
+		this->_data[0] = x;
+		this->_data[1] = y;
 	}
 
 	/*!
@@ -73,7 +70,7 @@ public:
 	 *    getY() const
 	 */
 	TYPE getX() const {
-		return _x;
+		return this->_data[0];
 	}
 
 	/*!
@@ -84,23 +81,12 @@ public:
 	 *    getX() const
 	 */
 	TYPE getY() const {
-		return _y;
+		return this->_data[1];
 	}
 
 #pragma region "Статические методы класса"
 
-	/*!
-	 * \brief
-	 *    Возвращает количество компонентов.
-	 */
-	static s32_t size() {
-		return 2;
-	}
-
 #pragma endregion
-
-private:
-	TYPE _x, _y;
 };
 
 typedef TVector2<s32_t> vec2i_t;

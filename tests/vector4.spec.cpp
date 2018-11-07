@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(TVector4_TestCase_ComponentConstructor) {
 }
 
 BOOST_AUTO_TEST_CASE(TVector4_TestCase_Size) {
-	BOOST_CHECK_EQUAL(math::vec4i_t::size(), 4);
+	BOOST_CHECK_EQUAL(math::vec4i_t::size, 4);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

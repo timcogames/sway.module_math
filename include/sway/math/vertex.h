@@ -22,11 +22,10 @@ struct VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
-	 *    VertexPosition(const TVector3<f32_t> &)
+	 *    VertexPosition(const vec3f_t &)
 	 */
 	VertexPosition() {
 		x = y = z = 0.0f;
@@ -35,13 +34,12 @@ struct VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
 	 *    VertexPosition()
 	 */
-	VertexPosition(const TVector3<f32_t> & position) {
+	VertexPosition(const vec3f_t & position) {
 		setPosition(position);
 	}
 
@@ -52,7 +50,7 @@ struct VertexPosition {
 	 * \param[in] position 
 	 *    Значение позиции вершины.
 	 */
-	void setPosition(const TVector3<f32_t> & position) {
+	void setPosition(const vec3f_t & position) {
 		x = position.getX();
 		y = position.getY();
 		z = position.getZ();
@@ -60,9 +58,9 @@ struct VertexPosition {
 
 	/*!
 	 * \brief
-	 *    Получает позицию вершины.
+	 *    Возвращает позицию вершины.
 	 */
-	TVector3<f32_t> getPosition() const {
+	vec3f_t getPosition() const {
 		return TVector3<f32_t>(x, y, z);
 	}
 };
@@ -80,11 +78,10 @@ struct VertexColor : public VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
-	 *    VertexColor(const TVector3<f32_t> &, const TColor<f32_t> &)
+	 *    VertexColor(const vec3f_t &, const col4f_t &)
 	 */
 	VertexColor() {
 		r = g = b = a = 0.0f;
@@ -93,13 +90,12 @@ struct VertexColor : public VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
 	 *    VertexColor()
 	 */
-	VertexColor(const TVector3<f32_t> & position, const TColor<f32_t> & color)
+	VertexColor(const vec3f_t & position, const col4f_t & color)
 		: VertexPosition(position) {
 		setColor(color);
 	}
@@ -111,7 +107,7 @@ struct VertexColor : public VertexPosition {
 	 * \param[in] color 
 	 *    Значение цвета вершины.
 	 */
-	void setColor(const TColor<f32_t> & color) {
+	void setColor(const col4f_t & color) {
 		r = color.getR();
 		g = color.getG();
 		b = color.getB();
@@ -120,9 +116,9 @@ struct VertexColor : public VertexPosition {
 
 	/*!
 	 * \brief
-	 *    Получает цвет вершины.
+	 *    Возвращает цвет вершины.
 	 */
-	TColor<f32_t> getColor() const {
+	col4f_t getColor() const {
 		return TColor<f32_t>(r, g, b, a);
 	}
 };
@@ -140,11 +136,10 @@ struct VertexTexCoord : public VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
-	 *    VertexTexCoord(const TVector3<f32_t> &, const TVector2<f32_t> &)
+	 *    VertexTexCoord(const vec3f_t &, const vec2f_t &)
 	 */
 	VertexTexCoord() {
 		u = v = 0.0f;
@@ -153,13 +148,12 @@ struct VertexTexCoord : public VertexPosition {
 	/*!
 	 * \brief
 	 *    Конструктор класса.
-	 *
 	 *    Выполняет инициализацию нового экземпляра класса.
 	 * 
 	 * \sa
 	 *    VertexTexCoord()
 	 */
-	VertexTexCoord(const TVector3<f32_t> & position, const TVector2<f32_t> & texCoord)
+	VertexTexCoord(const vec3f_t & position, const vec2f_t & texCoord)
 		: VertexPosition(position) {
 		setTexCoord(texCoord);
 	}
@@ -171,16 +165,16 @@ struct VertexTexCoord : public VertexPosition {
 	 * \param[in] texCoord 
 	 *    Значение текстурных координат.
 	 */
-	void setTexCoord(const TVector2<f32_t> & texCoord) {
+	void setTexCoord(const vec2f_t & texCoord) {
 		u = texCoord.getX();
 		v = texCoord.getY();
 	}
 
 	/*!
 	 * \brief
-	 *    Получает текстурные координаты.
+	 *    Возвращает текстурные координаты.
 	 */
-	TVector2<f32_t> getTexCoord() const {
+	vec2f_t getTexCoord() const {
 		return TVector2<f32_t>(u, v);
 	}
 };
