@@ -1,11 +1,11 @@
 # Проверяем версию CMake
-cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14.3 FATAL_ERROR)
 
 # Мета-информация о проекте
 set(META_PROJECT_NAME module_math)
 set(META_VERSION_MAJOR 0)
 set(META_VERSION_MINOR 2)
-set(META_VERSION_PATCH 10)
+set(META_VERSION_PATCH 11)
 set(META_VERSION ${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH})
 
 # Опции сборки
