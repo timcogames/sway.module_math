@@ -2,6 +2,7 @@
 #define SWAY_MATH_VECTOR_H
 
 #include <sway/core.h>
+#include <assert.h>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
