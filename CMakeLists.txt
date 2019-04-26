@@ -9,7 +9,7 @@ set(META_VERSION_PATCH 13)
 set(META_VERSION ${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH})
 
 # Опции сборки
-option(ENABLE_TESTS "Enable test builds" OFF)
+option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 
 project(${META_PROJECT_NAME} C CXX)
 
@@ -21,7 +21,7 @@ include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/modules/sway.module_core/include")
 
 # Добавляем построение тестов
-if(ENABLE_TESTS)
+if(MODULE_MATH_ENABLE_TESTS)
 	message(STATUS "Tests have been enabled")
 	add_subdirectory(tests)
 endif()

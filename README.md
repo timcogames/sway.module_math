@@ -20,12 +20,13 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DCMAKE_BUILD_TYPE=Release ../
+cmake -DBOOST_ROOT=/usr/local -DCMAKE_BUILD_TYPE=Release -DMODULE_MATH_ENABLE_TESTS=ON ../
 ```
 
-Опция сборки | Описание | По умолчанию
-:---|:---|:---:
-`ENABLE_TESTS` | Включает построение тестов | `OFF`
+Опция сборки | Тип | Описание | По умолчанию
+:---|:---|:---|:---:
+`BOOST_ROOT` | PATH | Путь до корневой директории Boost библиотеки | `-`
+`MODULE_MATH_ENABLE_TESTS` | BOOL | Включает построение тестов | `OFF`
 
 Запускаем сборку
 
