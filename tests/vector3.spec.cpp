@@ -35,4 +35,11 @@ BOOST_AUTO_TEST_CASE(TVector3_TestCase_Size) {
 	BOOST_CHECK_EQUAL(math::vec3i_t::size, 3);
 }
 
+BOOST_AUTO_TEST_CASE(TVector3_TestCase_Divide) {
+	math::vec3i_t vec3(4, 6, 8);
+	vec3.divide(2);
+
+	BOOST_CHECK_EQUAL(vec3.equals(math::vec3i_t(2, 3, 4)), true);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

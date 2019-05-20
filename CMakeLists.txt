@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.14.3 FATAL_ERROR)
 # Мета-информация о проекте
 set(META_PROJECT_NAME module_math)
 set(META_VERSION_MAJOR 0)
-set(META_VERSION_MINOR 2)
-set(META_VERSION_PATCH 13)
+set(META_VERSION_MINOR 3)
+set(META_VERSION_PATCH 16)
 set(META_VERSION ${META_VERSION_MAJOR}.${META_VERSION_MINOR}.${META_VERSION_PATCH})
 
 # Опции сборки
