@@ -19,12 +19,12 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DBOOST_ROOT=/usr/local -DCMAKE_BUILD_TYPE=Release -DMODULE_MATH_ENABLE_TESTS=ON ../
+cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DMODULE_MATH_ENABLE_TESTS=ON ../
 ```
 
 Опция сборки | Тип | Описание | По умолчанию
 :---|:---|:---|:---:
-`BOOST_ROOT` | `PATH` | Путь до корневой директории Boost библиотеки | `-`
+`CUSTOM_GTEST_ROOT_DIR` | `PATH` | Путь до корневой директории Google библиотеки | `-`
 `MODULE_MATH_ENABLE_TESTS` | `BOOL` | Включает построение тестов | `OFF`
 
 Запускаем сборку
