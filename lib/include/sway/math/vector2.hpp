@@ -106,4 +106,4 @@ static const vec2d_t vec2d_unitY(0.0, 1.0);
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 
-#endif
+#endif  // SWAY_MATH_VECTOR2_HPP

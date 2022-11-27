@@ -125,4 +125,4 @@ static const vec3d_t vec3d_unitZ(0.0, 0.0, 1.0);
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 
-#endif
+#endif  // SWAY_MATH_VECTOR3_HPP

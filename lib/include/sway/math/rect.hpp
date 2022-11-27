@@ -1,11 +1,11 @@
-#ifndef SWAY_MATHR_RECT_HPP
-#define SWAY_MATHR_RECT_HPP
+#ifndef SWAY_MATH_RECT_HPP
+#define SWAY_MATH_RECT_HPP
 
 #include <sway/core.hpp>
 #include <sway/math/size.hpp>
 
-NAMESPACEB_EGIN(sway)
-NAMESPACEB_EGIN(math)
+NAMESPACE_BEGIN(sway)
+NAMESPACE_BEGIN(math)
 
 template <typename TYPE>
 class TSize;

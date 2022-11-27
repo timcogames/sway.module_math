@@ -19,10 +19,10 @@ public:
     size = SIZE /*!< Размер вектора. */
   };
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с нулевыми значениями.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с нулевыми значениями.
+   *
    */
   TVector() {
     for (std::size_t i = 0; i != size; ++i) {
@@ -31,34 +31,30 @@ public:
   }
 
   /**
-   * \brief
-   *    Возвращает необработанные данные.
+   * @brief Возвращает необработанные данные.
    *
-   * \sa
-   *    data() const
+   * @sa data() const
+   *
    */
-  TYPE *data() { return _data; }
+  auto data() -> TYPE * { return _data; }
 
   /**
-   * \brief
-   *    Возвращает необработанные данные.
+   * @brief Возвращает необработанные данные.
    *
-   * \sa
-   *    data()
+   * @sa data()
+   *
    */
-  const TYPE *data() const { return _data; }
+  auto data() const -> const TYPE * { return _data; }
 
 #pragma region "Доступ к массиву"
 
   /**
-   * \brief
-   *    Возвращает значение в заданной позиции.
+   * @brief Возвращает значение в заданной позиции.
    *
-   * \param[in] position
-   *    Позиция значения.
+   * @param[in] position Позиция значения.
    *
-   * \sa
-   *    operator[](std::size_t) const
+   * @sa operator[](std::size_t) const
+   *
    */
   TYPE &operator[](std::size_t position) {
     assert(position >= 0 && position <= SIZE);
@@ -66,14 +62,12 @@ public:
   }
 
   /**
-   * \brief
-   *    Возвращает значение в заданной позиции.
+   * @brief Возвращает значение в заданной позиции.
    *
-   * \param[in] position
-   *    Позиция значения.
+   * @param[in] position Позиция значения.
    *
-   * \sa
-   *    operator[](std::size_t)
+   * @sa operator[](std::size_t)
+   *
    */
   const TYPE operator[](std::size_t position) const {
     assert(position >= 0 && position <= SIZE);
@@ -85,15 +79,13 @@ public:
 #pragma region "Равенство"
 
   /**
-   * \brief
-   *    Сравнивает два вектора на наличие равенства.
+   * @brief Сравнивает два вектора на наличие равенства.
    *
-   * \param[in] vector
-   *    Вектор с которым следует сравнить.
+   * @param[in] vector Вектор с которым следует сравнить.
    *
-   * \sa
-   *    operator==(const TVector<TYPE, SIZE> &) const
-   *    operator!=(const TVector<TYPE, SIZE> &) const
+   * @sa operator==(const TVector<TYPE, SIZE> &) const,
+   *     operator!=(const TVector<TYPE, SIZE> &) const
+   *
    */
   int equals(const TVector<TYPE, SIZE> &vector) const {
     for (int i = 0; i < SIZE; ++i) {
@@ -114,14 +106,12 @@ public:
 #pragma region "Арифметические операции"
 
   /**
-   * \brief
-   *    Делит указанный вектор на заданный вектор.
+   * @brief Делит указанный вектор на заданный вектор.
    *
-   * \param[in] vector
-   *    Вектор на который следует разделит.
+   * @param[in] vector Вектор на который следует разделит.
    *
-   * \sa
-   *    operator/(const TVector<TYPE, SIZE> &) const
+   * @sa operator/(const TVector<TYPE, SIZE> &) const
+   *
    */
   const TVector<TYPE, SIZE> &divide(const TVector<TYPE, SIZE> &vector) {
     for (std::size_t i = 0; i < SIZE; ++i)
@@ -133,14 +123,12 @@ public:
   const TVector<TYPE, SIZE> operator/(const TVector<TYPE, SIZE> &vector) const { return divide(vector); }
 
   /**
-   * \brief
-   *    Делит указанный вектор на заданный скаляр.
+   * @brief Делит указанный вектор на заданный скаляр.
    *
-   * \param[in] scalar
-   *    Скаляр на который следует разделит.
+   * @param[in] scalar Скаляр на который следует разделит.
    *
-   * \sa
-   *    operator/(TYPE) const
+   * @sa operator/(TYPE) const
+   *
    */
   const TVector<TYPE, SIZE> &divide(TYPE scalar) {
     for (std::size_t i = 0; i < SIZE; ++i)
@@ -160,4 +148,4 @@ protected:
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 
-#endif
+#endif  // SWAY_MATH_VECTOR_HPP

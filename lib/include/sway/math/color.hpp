@@ -3,9 +3,10 @@
 
 #include <sway/core.hpp>
 #include <sway/math/vector4.hpp>
+#include <sway/namespacemacros.hpp>
 
-NAMESPACEB_EGIN(sway)
-NAMESPACEB_EGIN(math)
+NAMESPACE_BEGIN(sway)
+NAMESPACE_BEGIN(math)
 
 template <typename TYPE>
 class TVector4;

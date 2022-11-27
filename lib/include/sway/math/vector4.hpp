@@ -145,4 +145,4 @@ static const vec4d_t vec4d_unitW(0.0, 0.0, 0.0, 1.0);
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 
-#endif
+#endif  // SWAY_MATH_VECTOR4_HPP
