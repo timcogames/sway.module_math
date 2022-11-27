@@ -8,6 +8,7 @@ NAMESPACE_BEGIN(math)
 
 /**
  * @brief Шаблонный класс представления точки.
+ *
  */
 template <typename TYPE>
 class TPoint {

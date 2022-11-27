@@ -11,8 +11,8 @@ template <typename TYPE>
 class TSize;
 
 /**
- * @brief
- *    Шаблонный класс представления прямоугольной области.
+ * @brief Шаблонный класс представления прямоугольной области.
+ *
  */
 template <typename TYPE>
 class TRect final {
@@ -73,11 +73,7 @@ public:
    *
    * @param[in] x Значение координаты позиции по оси X.
    *
-   * @sa setT() const
-   *     setR() const
-   *     setB() const
-   *     setW() const
-   *     setH() const
+   * @sa setT() const, setR() const, setB() const, setW() const, setH() const
    *
    */
   void setL(TYPE x) { l_ = x; }
@@ -89,11 +85,7 @@ public:
    *
    * @param[in] x Значение координаты позиции по оси Y.
    *
-   * @sa setL() const
-   *     setR() const
-   *     setB() const
-   *     setW() const
-   *     setH() const
+   * @sa setL() const, setR() const, setB() const, setW() const, setH() const
    *
    */
   void setT(TYPE y) { t_ = y; }
@@ -111,11 +103,7 @@ public:
   /**
    * @brief Получает ширину прямоугольной области.
    *
-   * @sa getL() const
-   *     getT() const
-   *     getR() const
-   *     getB() const
-   *     getH() const
+   * @sa getL() const, getT() const, getR() const, getB() const, getH() const
    *
    */
   auto getW() const -> TYPE { return r_ - l_; }
@@ -123,11 +111,7 @@ public:
   /**
    * @brief Получает высоту прямоугольной области.
    *
-   * @sa getL() const
-   *     getT() const
-   *     getR() const
-   *     getB() const
-   *     getW() const
+   * @sa getL() const, getT() const, getR() const, getB() const, getW() const
    *
    */
   auto getH() const -> TYPE { return b_ - t_; }

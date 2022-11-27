@@ -10,131 +10,111 @@ NAMESPACE_BEGIN(math)
 template <typename TYPE>
 class TRect;
 
-/*!
- * \brief
- *    Шаблонный класс представления размера.
+/**
+ * @brief Шаблонный класс представления размера.
+ *
  */
 template <typename TYPE>
 class TSize final {
 public:
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
    *
-   * \sa
-   *    TSize(TYPE)
-   *    TSize(TYPE, TYPE)
+   * @sa TSize(TYPE), TSize(TYPE, TYPE)
+   *
    */
-  TSize() { _w = _h = (TYPE)0; }
+  TSize() { w_ = h_ = (TYPE)0; }
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными размерами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с заданными размерами.
    *
-   * \param[in] scalar
-   *    Значение для ширины и высоты.
+   * @param[in] scalar Значение для ширины и высоты.
    *
-   * \sa
-   *    TSize()
-   *    TSize(TYPE, TYPE)
+   * @sa TSize(), TSize(TYPE, TYPE)
+   *
    */
-
   TSize(TYPE scalar) { set(scalar, scalar); }
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными размерами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с заданными размерами.
    *
-   * \param[in] w
-   *    Значение ширины.
+   * @param[in] w Значение ширины.
+   * @param[in] h Значение высоты.
    *
-   * \param[in] h
-   *    Значение высоты.
+   * @sa TSize(), TSize(TYPE)
    *
-   * \sa
-   *    TSize()
-   *    TSize(TYPE)
    */
   TSize(TYPE w, TYPE h) { set(w, h); }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения.
+  /**
+   * @brief Устанавливает новые значения.
    *
-   * \param[in] w
-   *    Значение ширины.
+   * @param[in] w Значение ширины.
+   * @param[in] h Значение высоты.
    *
-   * \param[in] h
-   *    Значение высоты.
    */
   void set(TYPE w, TYPE h) {
-    _w = w;
-    _h = h;
+    w_ = w;
+    h_ = h;
   }
 
-  /*!
-   * \brief
-   *    Устанавливает значение ширины.
+  /**
+   * @brief Устанавливает значение ширины.
    *
-   * \param[in] w
-   *    Новое значение ширины.
+   * @param[in] w Новое значение ширины.
    *
-   * \sa
-   *    setH(TYPE)
+   * @sa setH(TYPE)
+   *
    */
-  void setW(TYPE w) { _w = w; }
+  void setW(TYPE w) { w_ = w; }
 
-  /*!
-   * \brief
-   *    Получает значение ширины.
+  /**
+   * @brief Получает значение ширины.
    *
-   * \sa
-   *    getH()
-   */
-  TYPE getW() const { return _w; }
-
-  /*!
-   * \brief
-   *    Устанавливает значение высоты.
+   * @sa getH()
    *
-   * \param[in] h
-   *    Новое значение высоты.
+   */
+  auto getW() const -> TYPE { return w_; }
+
+  /**
+   * @brief Устанавливает значение высоты.
    *
-   * \sa
-   *    setW(TYPE)
-   */
-  void setH(TYPE h) { _h = h; }
-
-  /*!
-   * \brief
-   *    Получает значение высоты.
+   * @param[in] h Новое значение высоты.
    *
-   * \sa
-   *    getW()
+   * @sa setW(TYPE)
+   *
    */
-  TYPE getH() const { return _h; }
+  void setH(TYPE h) { h_ = h; }
 
-  /*!
-   * \brief
-   *    Преобразовывает в TRect<TYPE> класс.
+  /**
+   * @brief Получает значение высоты.
+   *
+   * @sa getW()
+   *
    */
-  TRect<TYPE> toRect() const { return TRect<TYPE>((TYPE)0, (TYPE)0, _w, _h); }
+  auto getH() const -> TYPE { return h_; }
 
-  /*!
-   * \brief
-   *    Оператор равенства.
+  /**
+   * @brief Преобразовывает в TRect<TYPE> класс.
+   *
+   */
+  auto toRect() const -> TRect<TYPE> { return TRect<TYPE>((TYPE)0, (TYPE)0, w_, h_); }
+
+  /**
+   * @brief Оператор равенства.
+   *
    */
   template <typename OTHER>
   bool operator==(const TSize<OTHER> &compare) const {
-    return _w == compare.getW() && _h == compare.getH();
+    return w_ == compare.getW() && h_ == compare.getH();
   }
 
-  /*!
-   * \brief
-   *    Оператор неравенства.
+  /**
+   * @brief Оператор неравенства.
+   *
    */
   template <typename OTHER>
   bool operator!=(const TSize<OTHER> &compare) const {
@@ -142,7 +122,7 @@ public:
   }
 
 private:
-  TYPE _w, _h;
+  TYPE w_, h_;
 };
 
 using size2i_t = TSize<s32_t>;
@@ -163,4 +143,4 @@ NAMESPACE_END(sway)
 
 #include <sway/math/size.inl>
 
-#endif  // SWAY_MATH_SIZE_H
+#endif  // SWAY_MATH_SIZE_HPP

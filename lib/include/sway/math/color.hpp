@@ -60,9 +60,7 @@ public:
   /**
    * @brief Получает значение канала красного цвета.
    *
-   * @sa getG() const
-   *     getB() const
-   *     getA() const
+   * @sa getG() const, getB() const, getA() const
    *
    */
   auto getR() const -> TYPE { return r_; }
@@ -70,9 +68,7 @@ public:
   /**
    * @brief Получает значение канала зеленого цвета.
    *
-   * @sa getR() const
-   *     getB() const
-   *     getA() const
+   * @sa getR() const, getB() const, getA() const
    *
    */
   auto getG() const -> TYPE { return g_; }
@@ -80,9 +76,7 @@ public:
   /**
    * @brief Получает значение канала синего цвета.
    *
-   * @sa getR() const
-   *     getG() const
-   *     getA() const
+   * @sa getR() const, getG() const, getA() const
    *
    */
   auto getB() const -> TYPE { return b_; }
@@ -90,9 +84,7 @@ public:
   /**
    * @brief Получает значение альфа-канала.
    *
-   * @sa getR() const
-   *     getG() const
-   *     getB() const
+   * @sa getR() const, getG() const, getB() const
    *
    */
   auto getA() const -> TYPE { return a_; }
