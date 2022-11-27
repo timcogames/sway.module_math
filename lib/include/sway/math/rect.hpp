@@ -1,176 +1,149 @@
-#ifndef SWAY_MATH_RECT_HPP
-#define SWAY_MATH_RECT_HPP
+#ifndef SWAY_MATHR_RECT_HPP
+#define SWAY_MATHR_RECT_HPP
 
 #include <sway/core.hpp>
 #include <sway/math/size.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NAMESPACEB_EGIN(sway)
+NAMESPACEB_EGIN(math)
 
 template <typename TYPE>
 class TSize;
 
-/*!
- * \brief
+/**
+ * @brief
  *    Шаблонный класс представления прямоугольной области.
  */
 template <typename TYPE>
 class TRect final {
 public:
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+  /**
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * \sa
-   *    TRect(TYPE, TYPE, TYPE, TYPE)
+   * @sa TRect(TYPE, TYPE, TYPE, TYPE)
+   *
    */
-  TRect() { _l = _t = _r = _b = (TYPE)0; }
+  TRect() { l_ = t_ = r_ = b_ = (TYPE)0; }
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
+  /**
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
+   * @param[in] y Значение координаты по оси Y.
+   * @param[in] w Значение ширины.
+   * @param[in] h Значение высоты.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
+   * @sa TRect()
    *
-   * \param[in] w
-   *    Значение ширины.
-   *
-   * \param[in] h
-   *    Значение высоты.
-   *
-   * \sa
-   *    TRect()
    */
   TRect(TYPE x, TYPE y, TYPE w, TYPE h) { set(x, y, w, h); }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения.
+  /**
+   * @brief Устанавливает новые значения.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
+   * @param[in] y Значение координаты по оси Y.
+   * @param[in] w Значение ширины.
+   * @param[in] h Значение высоты.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
-   *
-   * \param[in] w
-   *    Значение ширины.
-   *
-   * \param[in] h
-   *    Значение высоты.
    */
   void set(TYPE x, TYPE y, TYPE w, TYPE h) {
-    _l = x;
-    _t = y;
-    _r = x + w;
-    _b = y + h;
+    l_ = x;
+    t_ = y;
+    r_ = x + w;
+    b_ = y + h;
   }
 
-  /*!
-   * \brief
-   *    Устанавливает смещение прямоугольной области.
+  /**
+   * @brief Устанавливает смещение прямоугольной области.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
+   * @param[in] y Значение координаты по оси Y.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
    */
   void offset(TYPE x, TYPE y) {
-    _l += x;
-    _t += y;
-    _r += x;
-    _b += y;
+    l_ += x;
+    t_ += y;
+    r_ += x;
+    b_ += y;
   }
 
-  /*!
-   * \brief
-   *    Устанавливает новое значение позиции прямоугольной области по оси X.
+  /**
+   * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
    *
-   * \param[in] x
-   *    Значение координаты позиции по оси X.
+   * @param[in] x Значение координаты позиции по оси X.
    *
-   * \sa
-   *    setT() const
-   *    setR() const
-   *    setB() const
-   *    setW() const
-   *    setH() const
+   * @sa setT() const
+   *     setR() const
+   *     setB() const
+   *     setW() const
+   *     setH() const
+   *
    */
-  void setL(TYPE x) { _l = x; }
+  void setL(TYPE x) { l_ = x; }
 
-  TYPE getL() const { return _l; }
+  auto getL() const -> TYPE { return l_; }
 
-  /*!
-   * \brief
-   *    Устанавливает новое значение позиции прямоугольной области по оси Y.
+  /**
+   * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
    *
-   * \param[in] x
-   *    Значение координаты позиции по оси Y.
+   * @param[in] x Значение координаты позиции по оси Y.
    *
-   * \sa
-   *    setL() const
-   *    setR() const
-   *    setB() const
-   *    setW() const
-   *    setH() const
-   */
-  void setT(TYPE y) { _t = y; }
-
-  TYPE getT() const { return _t; }
-
-  void setR(TYPE w) { _r = w; }
-
-  TYPE getR() const { return _r; }
-
-  void setB(TYPE h) { _b = h; }
-
-  TYPE getB() const { return _b; }
-
-  /*!
-   * \brief
-   *    Получает ширину прямоугольной области.
+   * @sa setL() const
+   *     setR() const
+   *     setB() const
+   *     setW() const
+   *     setH() const
    *
-   * \sa
-   *    getL() const
-   *    getT() const
-   *    getR() const
-   *    getB() const
-   *    getH() const
    */
-  TYPE getW() const { return _r - _l; }
+  void setT(TYPE y) { t_ = y; }
 
-  /*!
-   * \brief
-   *    Получает высоту прямоугольной области.
+  auto getT() const -> TYPE { return t_; }
+
+  void setR(TYPE w) { r_ = w; }
+
+  auto getR() const -> TYPE { return r_; }
+
+  void setB(TYPE h) { b_ = h; }
+
+  auto getB() const -> TYPE { return b_; }
+
+  /**
+   * @brief Получает ширину прямоугольной области.
    *
-   * \sa
-   *    getL() const
-   *    getT() const
-   *    getR() const
-   *    getB() const
-   *    getW() const
+   * @sa getL() const
+   *     getT() const
+   *     getR() const
+   *     getB() const
+   *     getH() const
+   *
    */
-  TYPE getH() const { return _b - _t; }
+  auto getW() const -> TYPE { return r_ - l_; }
 
-  /*!
-   * \brief
-   *    Преобразовывает в TSize<TYPE> класс.
+  /**
+   * @brief Получает высоту прямоугольной области.
+   *
+   * @sa getL() const
+   *     getT() const
+   *     getR() const
+   *     getB() const
+   *     getW() const
+   *
    */
-  TSize<TYPE> toSize() const { return TSize<TYPE>(getW(), getH()); }
+  auto getH() const -> TYPE { return b_ - t_; }
+
+  /**
+   * @brief Преобразовывает в TSize<TYPE> класс.
+   *
+   */
+  auto toSize() const -> TSize<TYPE> { return TSize<TYPE>(getW(), getH()); }
 
   bool isEmpty() const { return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0)); }
 
-  bool isValid() const { return ((_t > _b) || (_l > _r)) ? false : false; }
+  bool isValid() const { return ((t_ > b_) || (l_ > r_)) ? false : false; }
 
 private:
-  TYPE _l, _t, _r, _b;
+  TYPE l_, t_, r_, b_;
 };
 
 using rect4i_t = TRect<s32_t>;

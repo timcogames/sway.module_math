@@ -14,62 +14,48 @@ NAMESPACE_BEGIN(math)
 template <typename TYPE>
 class TVector4;
 
-/*!
- * \brief
- *    Шаблонный класс представления матрицы.
+/**
+ * @brief Шаблонный класс представления матрицы.
+ *
  */
 template <typename TYPE>
 class TMatrix4 final {
 public:
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса.
+  /**
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
+   *
    */
   TMatrix4() { makeIdentity(); }
 
-  /*!
-   * \brief
-   *    Устанавливает новое значение элемента матрицы.
+  /**
+   * @brief Устанавливает новое значение элемента матрицы.
    *
-   * \param[in] row
-   *    Номер ряда.
+   * @param[in] row Номер ряда.
+   * @param[in] col Номер колонки.
+   * @param[in] value Значения для установки.
    *
-   * \param[in] col
-   *    Номер колонки.
-   *
-   * \param[in] value
-   *    Значения для установки.
    */
   void set(u32_t row, u32_t col, TYPE value) { values_[row * 4 + col] = value; }
 
-  /*!
-   * \brief
-   *    Получает значение элемента матрицы.
+  /**
+   * @brief Получает значение элемента матрицы.
    *
-   * \param[in] row
-   *    Номер ряда.
+   * @param[in] row Номер ряда.
+   * @param[in] col Номер колонки.
    *
-   * \param[in] col
-   *    Номер колонки.
+   * @return Значения элемента.
    *
-   * \return
-   *    Значения элемента.
    */
-  TYPE get(u32_t row, u32_t col) const { return values_[row * 4 + col]; }
+  auto get(u32_t row, u32_t col) const -> TYPE { return values_[row * 4 + col]; }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения элементов матрицы в указанном ряду.
+  /**
+   * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
    *
-   * \param[in] nbr
-   *    Номер ряда.
+   * @param[in] nbr Номер ряда.
+   * @param[in] value Значения для установки.
    *
-   * \param[in] value
-   *    Значения для установки.
+   * @sa setCol(u32_t, const TVector4<TYPE> &)
    *
-   * \sa
-   *    setCol(u32_t, const TVector4<TYPE> &)
    */
   void setRow(u32_t nbr, const TVector4<TYPE> &value) {
     set(nbr, 0, value.getX());
@@ -78,33 +64,28 @@ public:
     set(nbr, 3, value.getW());
   }
 
-  /*!
-   * \brief
-   *    Получает значения элементов матрицы в указанном ряду.
+  /**
+   * @brief Получает значения элементов матрицы в указанном ряду.
    *
-   * \param[in] nbr
-   *    Номер ряда.
+   * @param[in] nbr Номер ряда.
    *
-   * \return
-   *    Значения элементов.
+   * @return Значения элементов.
    *
-   * \sa
-   *    TVector4<TYPE> getCol(u32_t) const
+   * @sa TVector4<TYPE> getCol(u32_t) const
+   *
    */
-  TVector4<TYPE> getRow(u32_t nbr) const { return TVector4<TYPE>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3)); }
+  auto getRow(u32_t nbr) const -> TVector4<TYPE> {
+    return TVector4<TYPE>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
+  }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения элементов матрицы в указанной колонке.
+  /**
+   * @brief Устанавливает новые значения элементов матрицы в указанной колонке.
    *
-   * \param[in] nbr
-   *    Номер колонки.
+   * @param[in] nbr Номер колонки.
+   * @param[in] value Значения для установки.
    *
-   * \param[in] value
-   *    Значения для установки.
+   * @sa setRow(u32_t, const TVector4<TYPE> &)
    *
-   * \sa
-   *    setRow(u32_t, const TVector4<TYPE> &)
    */
   void setCol(u32_t nbr, const TVector4<TYPE> &value) {
     set(0, nbr, value.getX());
@@ -113,35 +94,34 @@ public:
     set(3, nbr, value.getW());
   }
 
-  /*!
-   * \brief
-   *    Получает значения элементов матрицы в указанной колонке.
+  /**
+   * @brief Получает значения элементов матрицы в указанной колонке.
    *
-   * \param[in] nbr
-   *    Номер колонки.
+   * @param[in] nbr Номер колонки.
    *
-   * \return
-   *    Значения элементов.
+   * @return Значения элементов.
    *
-   * \sa
-   *    TVector4<TYPE> getRow(u32_t) const
+   * @sa TVector4<TYPE> getRow(u32_t) const
+   *
    */
-  TVector4<TYPE> getCol(u32_t nbr) const { return TVector4<TYPE>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr)); }
+  auto getCol(u32_t nbr) const -> TVector4<TYPE> {
+    return TVector4<TYPE>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
+  }
 
-  /*!
-   * \brief
-   *    Обнуляет все элементы матрицы.
+  /**
+   * @brief Обнуляет все элементы матрицы.
+   *
    */
-  TMatrix4<TYPE> &makeZero() {
+  auto makeZero() -> TMatrix4<TYPE> & {
     values_.fill(0);
     return *this;
   }
 
-  /*!
-   * \brief
-   *    Приводит к единичной матрице.
+  /**
+   * @brief Приводит к единичной матрице.
+   *
    */
-  TMatrix4<TYPE> &makeIdentity() {
+  auto makeIdentity() -> TMatrix4<TYPE> & {
     makeZero();
     set(0, 0, (TYPE)1);
     set(1, 1, (TYPE)1);
@@ -151,7 +131,7 @@ public:
     return *this;
   }
 
-  std::array<TYPE, MAXTRIX_SIZE> get() { return values_; }
+  auto get() -> std::array<TYPE, MAXTRIX_SIZE> { return values_; }
 
 private:
   std::array<TYPE, MAXTRIX_SIZE> values_; /*!< Элементы матрицы. */

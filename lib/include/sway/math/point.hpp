@@ -6,124 +6,104 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-/*!
- * \brief
- *    Шаблонный класс представления точки.
+/**
+ * @brief Шаблонный класс представления точки.
  */
 template <typename TYPE>
 class TPoint {
 public:
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * \sa
-   *    TPoint(TYPE)
-   *    TPoint(TYPE, TYPE)
+   * @sa TPoint(TYPE), TPoint(TYPE, TYPE)
+   *
    */
   TPoint() { set((TYPE)0, (TYPE)0); }
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с заданными координатами.
    *
-   * \param[in] scalar
-   *    Значение для координат по оси X и Y.
+   * @param[in] scalar Значение для координат по оси X и Y.
    *
-   * \sa
-   *    TPoint()
-   *    TPoint(TYPE, TYPE)
+   * @sa TPoint(), TPoint(TYPE, TYPE)
+   *
    */
   TPoint(TYPE scalar) { set(scalar, scalar); }
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
+  /**
+   * @brief Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с заданными координатами.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
+   * @param[in] y Значение координаты по оси Y.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
+   * @sa TPoint(), TPoint(TYPE)
    *
-   * \sa
-   *    TPoint()
-   *    TPoint(TYPE)
    */
   TPoint(TYPE x, TYPE y) { set(x, y); }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения.
+  /**
+   * @brief Устанавливает новые значения.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
+   * @param[in] y Значение координаты по оси Y.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
    */
   void set(TYPE x, TYPE y) {
-    _x = x;
-    _y = y;
+    x_ = x;
+    y_ = y;
   }
 
-  /*!
-   * \brief
-   *    Устанавливает новое значение координаты по оси X.
+  /**
+   * @brief Устанавливает новое значение координаты по оси X.
    *
-   * \param[in] x
-   *    Значение координаты по оси X.
+   * @param[in] x Значение координаты по оси X.
    *
-   * \sa
-   *    setY() const
+   * @sa setY() const
+   *
    */
-  void setX(TYPE x) { _x = x; }
+  void setX(TYPE x) { x_ = x; }
 
-  /*!
-   * \brief
-   *    Получает значение координаты по оси X.
+  /**
+   * @brief Получает значение координаты по оси X.
    *
-   * \sa
-   *    getY() const
+   * @sa getY() const
+   *
    */
-  TYPE getX() const { return _x; }
+  auto getX() const -> TYPE { return x_; }
 
-  /*!
-   * \brief
-   *    Устанавливает новое значение координаты по оси Y.
+  /**
+   * @brief Устанавливает новое значение координаты по оси Y.
    *
-   * \param[in] y
-   *    Значение координаты по оси Y.
+   * @param[in] y Значение координаты по оси Y.
    *
-   * \sa
-   *    setX() const
+   * @sa setX() const
+   *
    */
-  void setY(TYPE y) { _y = y; }
+  void setY(TYPE y) { y_ = y; }
 
-  /*!
-   * \brief
-   *    Получает значение координаты по оси Y.
+  /**
+   * @brief Получает значение координаты по оси Y.
    *
-   * \sa
-   *    getX() const
+   * @sa getX() const
+   *
    */
-  TYPE getY() const { return _y; }
+  auto getY() const -> TYPE { return y_; }
 
-  /*!
-   * \brief
-   *    Оператор равенства.
+  /**
+   * @brief Оператор равенства.
+   *
    */
   template <typename OTHER>
   bool operator==(const TPoint<OTHER> &compare) const {
-    return _x == compare.getX() && _y == compare.getY();
+    return x_ == compare.getX() && y_ == compare.getY();
   }
 
-  /*!
-   * \brief
-   *    Оператор неравенства.
+  /**
+   * @brief Оператор неравенства.
+   *
    */
   template <typename OTHER>
   bool operator!=(const TPoint<OTHER> &compare) const {
@@ -131,7 +111,7 @@ public:
   }
 
 protected:
-  TYPE _x, _y;
+  TYPE x_, y_;
 };
 
 using point2i_t = TPoint<s32_t>;
