@@ -12,40 +12,34 @@ class TSize;
 
 /**
  * @brief Шаблонный класс представления прямоугольной области.
- *
  */
 template <typename TYPE>
 class TRect final {
 public:
   /**
-   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
-   *
+   * @brief Конструктор класса.
+   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    * @sa TRect(TYPE, TYPE, TYPE, TYPE)
-   *
    */
   TRect() { l_ = t_ = r_ = b_ = (TYPE)0; }
 
   /**
-   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
-   *
+   * @brief Конструктор класса.
+   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
-   *
    * @sa TRect()
-   *
    */
   TRect(TYPE x, TYPE y, TYPE w, TYPE h) { set(x, y, w, h); }
 
   /**
    * @brief Устанавливает новые значения.
-   *
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
-   *
    */
   void set(TYPE x, TYPE y, TYPE w, TYPE h) {
     l_ = x;
@@ -56,10 +50,8 @@ public:
 
   /**
    * @brief Устанавливает смещение прямоугольной области.
-   *
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
-   *
    */
   void offset(TYPE x, TYPE y) {
     l_ += x;
@@ -70,11 +62,12 @@ public:
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
-   *
    * @param[in] x Значение координаты позиции по оси X.
-   *
-   * @sa setT() const, setR() const, setB() const, setW() const, setH() const
-   *
+   * @sa setT() const,
+   *     setR() const,
+   *     setB() const,
+   *     setW() const,
+   *     setH() const
    */
   void setL(TYPE x) { l_ = x; }
 
@@ -82,11 +75,12 @@ public:
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
-   *
    * @param[in] x Значение координаты позиции по оси Y.
-   *
-   * @sa setL() const, setR() const, setB() const, setW() const, setH() const
-   *
+   * @sa setL() const,
+   *     setR() const,
+   *     setB() const,
+   *     setW() const,
+   *     setH() const
    */
   void setT(TYPE y) { t_ = y; }
 
@@ -102,23 +96,26 @@ public:
 
   /**
    * @brief Получает ширину прямоугольной области.
-   *
-   * @sa getL() const, getT() const, getR() const, getB() const, getH() const
-   *
+   * @sa getL() const,
+   *     getT() const,
+   *     getR() const,
+   *     getB() const,
+   *     getH() const
    */
   auto getW() const -> TYPE { return r_ - l_; }
 
   /**
    * @brief Получает высоту прямоугольной области.
-   *
-   * @sa getL() const, getT() const, getR() const, getB() const, getW() const
-   *
+   * @sa getL() const,
+   *     getT() const,
+   *     getR() const,
+   *     getB() const,
+   *     getW() const
    */
   auto getH() const -> TYPE { return b_ - t_; }
 
   /**
    * @brief Преобразовывает в TSize<TYPE> класс.
-   *
    */
   auto toSize() const -> TSize<TYPE> { return TSize<TYPE>(getW(), getH()); }
 
@@ -137,4 +134,4 @@ using rect4d_t = TRect<f64_t>;
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 
-#endif
+#endif  // SWAY_MATH_RECT_HPP

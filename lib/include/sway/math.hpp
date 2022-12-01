@@ -12,4 +12,4 @@
 #include <sway/math/vector4.hpp>
 #include <sway/math/vertex.hpp>
 
-#endif
+#endif  // SWAY_MATH_HPP

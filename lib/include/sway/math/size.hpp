@@ -12,49 +12,41 @@ class TRect;
 
 /**
  * @brief Шаблонный класс представления размера.
- *
  */
 template <typename TYPE>
 class TSize final {
 public:
   /**
    * @brief Конструктор класса.
-   * Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
-   *
-   * @sa TSize(TYPE), TSize(TYPE, TYPE)
-   *
+   *        Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
+   * @sa TSize(TYPE),
+   *     TSize(TYPE, TYPE)
    */
   TSize() { w_ = h_ = (TYPE)0; }
 
   /**
    * @brief Конструктор класса.
-   * Выполняет инициализацию нового экземпляра класса с заданными размерами.
-   *
+   *        Выполняет инициализацию нового экземпляра класса с заданными размерами.
    * @param[in] scalar Значение для ширины и высоты.
-   *
-   * @sa TSize(), TSize(TYPE, TYPE)
-   *
+   * @sa TSize(),
+   *     TSize(TYPE, TYPE)
    */
   TSize(TYPE scalar) { set(scalar, scalar); }
 
   /**
    * @brief Конструктор класса.
-   * Выполняет инициализацию нового экземпляра класса с заданными размерами.
-   *
+   *        Выполняет инициализацию нового экземпляра класса с заданными размерами.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
-   *
-   * @sa TSize(), TSize(TYPE)
-   *
+   * @sa TSize(),
+   *     TSize(TYPE)
    */
   TSize(TYPE w, TYPE h) { set(w, h); }
 
   /**
    * @brief Устанавливает новые значения.
-   *
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
-   *
    */
   void set(TYPE w, TYPE h) {
     w_ = w;
@@ -63,49 +55,37 @@ public:
 
   /**
    * @brief Устанавливает значение ширины.
-   *
    * @param[in] w Новое значение ширины.
-   *
    * @sa setH(TYPE)
-   *
    */
   void setW(TYPE w) { w_ = w; }
 
   /**
    * @brief Получает значение ширины.
-   *
    * @sa getH()
-   *
    */
   auto getW() const -> TYPE { return w_; }
 
   /**
    * @brief Устанавливает значение высоты.
-   *
    * @param[in] h Новое значение высоты.
-   *
    * @sa setW(TYPE)
-   *
    */
   void setH(TYPE h) { h_ = h; }
 
   /**
    * @brief Получает значение высоты.
-   *
    * @sa getW()
-   *
    */
   auto getH() const -> TYPE { return h_; }
 
   /**
    * @brief Преобразовывает в TRect<TYPE> класс.
-   *
    */
   auto toRect() const -> TRect<TYPE> { return TRect<TYPE>((TYPE)0, (TYPE)0, w_, h_); }
 
   /**
    * @brief Оператор равенства.
-   *
    */
   template <typename OTHER>
   bool operator==(const TSize<OTHER> &compare) const {
@@ -114,7 +94,6 @@ public:
 
   /**
    * @brief Оператор неравенства.
-   *
    */
   template <typename OTHER>
   bool operator!=(const TSize<OTHER> &compare) const {

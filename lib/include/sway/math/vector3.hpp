@@ -7,57 +7,35 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-/*!
- * \brief
- *    Шаблонный класс представления вектора из трех компонентов.
+/**
+ * @brief Шаблонный класс представления вектора из трех компонентов.
  */
 template <typename TYPE>
 class TVector3 final : public TVector<TYPE, 3> {
 public:
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
-   *
-   * \sa
-   *    TVector3(TYPE, TYPE, TYPE)
+  /**
+   * @brief Конструктор класса.
+   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   * @sa TVector3(TYPE, TYPE, TYPE)
    */
   TVector3()
-      : TVector<TYPE, 3>() {
-    // Empty
-  }
+      : TVector<TYPE, 3>() {}
 
-  /*!
-   * \brief
-   *    Конструктор класса.
-   *    Выполняет инициализацию нового экземпляра класса с заданными координатами.
-   *
-   * \param[in] x
-   *    Компонент X вектора.
-   *
-   * \param[in] y
-   *    Компонент Y вектора.
-   *
-   * \param[in] z
-   *    Компонент Z вектора.
-   *
-   * \sa
-   *    TVector3()
+  /**
+   * @brief Конструктор класса.
+   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * @param[in] x Компонент X вектора.
+   * @param[in] y Компонент Y вектора.
+   * @param[in] z Компонент Z вектора.
+   * @sa TVector3()
    */
   TVector3(TYPE x, TYPE y, TYPE z) { set(x, y, z); }
 
-  /*!
-   * \brief
-   *    Устанавливает новые значения.
-   *
-   * \param[in] x
-   *    Значение X компонента.
-   *
-   * \param[in] y
-   *    Значение Y компонента.
-   *
-   * \param[in] z
-   *    Значение Z компонента.
+  /**
+   * @brief Устанавливает новые значения.
+   * @param[in] x Значение X компонента.
+   * @param[in] y Значение Y компонента.
+   * @param[in] z Значение Z компонента.
    */
   void set(TYPE x, TYPE y, TYPE z) {
     this->_data[0] = x;
@@ -65,33 +43,24 @@ public:
     this->_data[2] = z;
   }
 
-  /*!
-   * \brief
-   *    Получает значение X компонента.
-   *
-   * \sa
-   *    getY() const
-   *    getZ() const
+  /**
+   * @brief Получает значение X компонента.
+   * @sa getY() const
+   *     getZ() const
    */
   TYPE getX() const { return this->_data[0]; }
 
-  /*!
-   * \brief
-   *    Получает значение Y компонента.
-   *
-   * \sa
-   *    getX() const
-   *    getZ() const
+  /**
+   * @brief Получает значение Y компонента.
+   * @sa getX() const
+   *     getZ() const
    */
   TYPE getY() const { return this->_data[1]; }
 
-  /*!
-   * \brief
-   *    Получает значение Z компонента.
-   *
-   * \sa
-   *    getX() const
-   *    getY() const
+  /**
+   * @brief Получает значение Z компонента.
+   * @sa getX() const
+   *     getY() const
    */
   TYPE getZ() const { return this->_data[2]; }
 
