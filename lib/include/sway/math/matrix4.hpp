@@ -11,43 +11,47 @@ constexpr int MAXTRIX_SIZE = 16;
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TYPE>
+template <typename TValueType>
 class TVector4;
 
 /**
  * @brief Шаблонный класс представления матрицы.
  */
-template <typename TYPE>
-class TMatrix4 final {
+template <typename TValueType>
+class Matrix4 final {
 public:
   /**
-   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
+   * @brief Конструктор класса.
+   *        Выполняет инициализацию нового экземпляра класса.
    */
-  TMatrix4() { makeIdentity(); }
+  Matrix4() { makeIdentity(); }
 
   /**
    * @brief Устанавливает новое значение элемента матрицы.
+   *
    * @param[in] row Номер ряда.
    * @param[in] col Номер колонки.
-   * @param[in] value Значения для установки.
+   * @param[in] val Значения элемента матрицы.
    */
-  void set(u32_t row, u32_t col, TYPE value) { values_[row * 4 + col] = value; }
+  void set(u32_t row, u32_t col, TValueType val) { values_[row * 4 + col] = val; }
 
   /**
    * @brief Получает значение элемента матрицы.
+   *
    * @param[in] row Номер ряда.
    * @param[in] col Номер колонки.
    * @return Значения элемента.
    */
-  auto get(u32_t row, u32_t col) const -> TYPE { return values_[row * 4 + col]; }
+  auto get(u32_t row, u32_t col) const -> TValueType { return values_[row * 4 + col]; }
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
+   *
    * @param[in] nbr Номер ряда.
-   * @param[in] value Значения для установки.
-   * @sa setCol(u32_t, const TVector4<TYPE> &)
+   * @param[in] val Значения для установки.
+   * @sa setCol(u32_t, const TVector4<TValueType> &)
    */
-  void setRow(u32_t nbr, const TVector4<TYPE> &value) {
+  void setRow(u32_t nbr, const TVector4<TValueType> &val) {
     set(nbr, 0, value.getX());
     set(nbr, 1, value.getY());
     set(nbr, 2, value.getZ());
@@ -56,21 +60,23 @@ public:
 
   /**
    * @brief Получает значения элементов матрицы в указанном ряду.
+   *
    * @param[in] nbr Номер ряда.
    * @return Значения элементов.
-   * @sa TVector4<TYPE> getCol(u32_t) const
+   * @sa getCol(u32_t) const
    */
-  auto getRow(u32_t nbr) const -> TVector4<TYPE> {
-    return TVector4<TYPE>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
+  auto getRow(u32_t nbr) const -> TVector4<TValueType> {
+    return TVector4<TValueType>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
   }
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанной колонке.
+   *
    * @param[in] nbr Номер колонки.
-   * @param[in] value Значения для установки.
-   * @sa setRow(u32_t, const TVector4<TYPE> &)
+   * @param[in] val Значения для установки.
+   * @sa setRow(u32_t, const TVector4<TValueType> &)
    */
-  void setCol(u32_t nbr, const TVector4<TYPE> &value) {
+  void setCol(u32_t nbr, const TVector4<TValueType> &val) {
     set(0, nbr, value.getX());
     set(1, nbr, value.getY());
     set(2, nbr, value.getZ());
@@ -79,18 +85,19 @@ public:
 
   /**
    * @brief Получает значения элементов матрицы в указанной колонке.
+   *
    * @param[in] nbr Номер колонки.
    * @return Значения элементов.
-   * @sa TVector4<TYPE> getRow(u32_t) const
+   * @sa getRow(u32_t) const
    */
-  auto getCol(u32_t nbr) const -> TVector4<TYPE> {
-    return TVector4<TYPE>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
+  auto getCol(u32_t nbr) const -> TVector4<TValueType> {
+    return TVector4<TValueType>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
   }
 
   /**
    * @brief Обнуляет все элементы матрицы.
    */
-  auto makeZero() -> TMatrix4<TYPE> & {
+  auto makeZero() -> Matrix4<TValueType> & {
     values_.fill(0);
     return *this;
   }
@@ -98,25 +105,25 @@ public:
   /**
    * @brief Приводит к единичной матрице.
    */
-  auto makeIdentity() -> TMatrix4<TYPE> & {
+  auto makeIdentity() -> Matrix4<TValueType> & {
     makeZero();
-    set(0, 0, (TYPE)1);
-    set(1, 1, (TYPE)1);
-    set(2, 2, (TYPE)1);
-    set(3, 3, (TYPE)1);
+    set(0, 0, (TValueType)1);
+    set(1, 1, (TValueType)1);
+    set(2, 2, (TValueType)1);
+    set(3, 3, (TValueType)1);
 
     return *this;
   }
 
-  auto get() -> std::array<TYPE, MAXTRIX_SIZE> { return values_; }
+  auto get() -> std::array<TValueType, MAXTRIX_SIZE> { return values_; }
 
 private:
-  std::array<TYPE, MAXTRIX_SIZE> values_; /*!< Элементы матрицы. */
+  std::array<TValueType, MAXTRIX_SIZE> values_;  // Элементы матрицы.
 };
 
-using mat4i_t = TMatrix4<s32_t>;
-using mat4f_t = TMatrix4<f32_t>;
-using mat4d_t = TMatrix4<f64_t>;
+using mat4i_t = Matrix4<s32_t>;
+using mat4f_t = Matrix4<f32_t>;
+using mat4d_t = Matrix4<f64_t>;
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

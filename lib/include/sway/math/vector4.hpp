@@ -16,6 +16,7 @@ public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   *
    * @sa TVector4(TYPE, TYPE, TYPE, TYPE)
    */
   TVector4()
@@ -24,6 +25,7 @@ public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   *
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
    * @param[in] z Компонент Z вектора.
@@ -34,6 +36,7 @@ public:
 
   /**
    * @brief Устанавливает новые значения.
+   *
    * @param[in] x Значение X компонента.
    * @param[in] y Значение Y компонента.
    * @param[in] z Значение Z компонента.
@@ -48,32 +51,36 @@ public:
 
   /**
    * @brief Получает значение X компонента.
-   * @sa getY() const
-   *     getZ() const
+   *
+   * @sa getY() const,
+   *     getZ() const,
    *     getW() const
    */
   TYPE getX() const { return this->_data[0]; }
 
   /**
    * @brief Получает значение Y компонента.
-   * @sa getX() const
-   *     getZ() const
+   *
+   * @sa getX() const,
+   *     getZ() const,
    *     getW() const
    */
   TYPE getY() const { return this->_data[1]; }
 
   /**
    * @brief Получает значение Z компонента.
-   * @sa getX() const
-   *     getY() const
+   *
+   * @sa getX() const,
+   *     getY() const,
    *     getW() const
    */
   TYPE getZ() const { return this->_data[2]; }
 
   /**
    * @brief Получает значение W компонента.
-   * @sa getX() const
-   *     getY() const
+   *
+   * @sa getX() const,
+   *     getY() const,
    *     getZ() const
    */
   TYPE getW() const { return this->_data[3]; }

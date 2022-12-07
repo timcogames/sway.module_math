@@ -7,61 +7,66 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TYPE>
+template <typename TValueType>
 class TSize;
 
 /**
  * @brief Шаблонный класс представления прямоугольной области.
  */
-template <typename TYPE>
+template <typename TValueType>
 class TRect final {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
-   * @sa TRect(TYPE, TYPE, TYPE, TYPE)
+   *
+   * @sa TRect(TValueType, TValueType, TValueType, TValueType)
    */
-  TRect() { l_ = t_ = r_ = b_ = (TYPE)0; }
+  TRect() { left_ = top_ = right_ = bottom_ = (TValueType)0; }
 
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   *
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
    * @sa TRect()
    */
-  TRect(TYPE x, TYPE y, TYPE w, TYPE h) { set(x, y, w, h); }
+  TRect(TValueType x, TValueType y, TValueType w, TValueType h) { set(x, y, w, h); }
 
   /**
    * @brief Устанавливает новые значения.
+   *
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
    */
-  void set(TYPE x, TYPE y, TYPE w, TYPE h) {
-    l_ = x;
-    t_ = y;
-    r_ = x + w;
-    b_ = y + h;
+  void set(TValueType x, TValueType y, TValueType w, TValueType h) {
+    left_ = x;
+    top_ = y;
+    right_ = x + w;
+    bottom_ = y + h;
   }
 
   /**
    * @brief Устанавливает смещение прямоугольной области.
+   *
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
-  void offset(TYPE x, TYPE y) {
-    l_ += x;
-    t_ += y;
-    r_ += x;
-    b_ += y;
+  void offset(TValueType x, TValueType y) {
+    left_ += x;
+    top_ += y;
+    right_ += x;
+    bottom_ += y;
   }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
+   *
    * @param[in] x Значение координаты позиции по оси X.
    * @sa setT() const,
    *     setR() const,
@@ -69,12 +74,13 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TYPE x) { l_ = x; }
+  void setL(TValueType x) { left_ = x; }
 
-  auto getL() const -> TYPE { return l_; }
+  auto getL() const -> TValueType { return left_; }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
+   *
    * @param[in] x Значение координаты позиции по оси Y.
    * @sa setL() const,
    *     setR() const,
@@ -82,49 +88,51 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TYPE y) { t_ = y; }
+  void setT(TValueType y) { top_ = y; }
 
-  auto getT() const -> TYPE { return t_; }
+  auto getT() const -> TValueType { return top_; }
 
-  void setR(TYPE w) { r_ = w; }
+  void setR(TValueType w) { right_ = w; }
 
-  auto getR() const -> TYPE { return r_; }
+  auto getR() const -> TValueType { return right_; }
 
-  void setB(TYPE h) { b_ = h; }
+  void setB(TValueType h) { bottom_ = h; }
 
-  auto getB() const -> TYPE { return b_; }
+  auto getB() const -> TValueType { return bottom_; }
 
   /**
    * @brief Получает ширину прямоугольной области.
+   *
    * @sa getL() const,
    *     getT() const,
    *     getR() const,
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TYPE { return r_ - l_; }
+  auto getW() const -> TValueType { return right_ - left_; }
 
   /**
    * @brief Получает высоту прямоугольной области.
+   *
    * @sa getL() const,
    *     getT() const,
    *     getR() const,
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TYPE { return b_ - t_; }
+  auto getH() const -> TValueType { return bottom_ - top_; }
 
   /**
-   * @brief Преобразовывает в TSize<TYPE> класс.
+   * @brief Преобразовывает в TSize<TValueType> класс.
    */
-  auto toSize() const -> TSize<TYPE> { return TSize<TYPE>(getW(), getH()); }
+  auto toSize() const -> TSize<TValueType> { return TSize<TValueType>(getW(), getH()); }
 
-  bool isEmpty() const { return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0)); }
+  bool isEmpty() const { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
 
-  bool isValid() const { return ((t_ > b_) || (l_ > r_)) ? false : false; }
+  bool isValid() const { return ((top_ > bottom_) || (left_ > right_)) ? false : false; }
 
 private:
-  TYPE l_, t_, r_, b_;
+  TValueType left_, top_, right_, bottom_;
 };
 
 using rect4i_t = TRect<s32_t>;

@@ -4,9 +4,8 @@
 
 using namespace sway;
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(TColor, DefaultConstructor) {
   const math::col4f_t color;
@@ -17,10 +16,9 @@ TEST(TColor, DefaultConstructor) {
   ASSERT_EQ(color.getA(), 1.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(TColor, ComponentConstructor) {
   const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;
@@ -32,9 +30,8 @@ TEST(TColor, ComponentConstructor) {
   ASSERT_EQ(color.getA(), a);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что преобразование в TVector4<type> проходит правильно.
+/**
+ * @brief Убеждаемся, что преобразование в TVector4<type> проходит правильно.
  */
 TEST(TColor, ConvertToVector4) {
   const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;

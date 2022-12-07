@@ -31,12 +31,14 @@ public:
 
   /**
    * @brief Возвращает необработанные данные.
+   *
    * @sa data() const
    */
   auto data() -> TYPE * { return _data; }
 
   /**
    * @brief Возвращает необработанные данные.
+   *
    * @sa data()
    */
   auto data() const -> const TYPE * { return _data; }
@@ -45,6 +47,7 @@ public:
 
   /**
    * @brief Возвращает значение в заданной позиции.
+   *
    * @param[in] position Позиция значения.
    * @sa operator[](std::size_t) const
    */
@@ -55,6 +58,7 @@ public:
 
   /**
    * @brief Возвращает значение в заданной позиции.
+   *
    * @param[in] position Позиция значения.
    * @sa operator[](std::size_t)
    */
@@ -69,6 +73,7 @@ public:
 
   /**
    * @brief Сравнивает два вектора на наличие равенства.
+   *
    * @param[in] vector Вектор с которым следует сравнить.
    * @sa operator==(const TVector<TYPE, SIZE> &) const,
    *     operator!=(const TVector<TYPE, SIZE> &) const
@@ -93,6 +98,7 @@ public:
 
   /**
    * @brief Делит указанный вектор на заданный вектор.
+   *
    * @param[in] vector Вектор на который следует разделит.
    * @sa operator/(const TVector<TYPE, SIZE> &) const
    */
@@ -107,6 +113,7 @@ public:
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.
+   *
    * @param[in] scalar Скаляр на который следует разделит.
    * @sa operator/(TYPE) const
    */

@@ -4,9 +4,8 @@
 
 using namespace sway;
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(TRect, DefaultConstructor) {
   const math::rect4i_t rect;
@@ -17,10 +16,9 @@ TEST(TRect, DefaultConstructor) {
   ASSERT_EQ(rect.getB(), 0);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(TRect, ComponentConstructor) {
   const s32_t x = 8, y = 16, w = 32, h = 64;
@@ -49,9 +47,8 @@ TEST(TRect, Offset) {
   ASSERT_EQ(rect.getH(), h);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что преобразование в TSize<type> проходит правильно.
+/**
+ * @brief Убеждаемся, что преобразование в TSize<type> проходит правильно.
  */
 TEST(TRect, ConvertToSize) {
   const s32_t x = 8, y = 16, w = 32, h = 64;

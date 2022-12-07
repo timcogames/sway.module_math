@@ -12,7 +12,7 @@ inline ostream &operator<<(ostream &str, const sway::math::TSize<TYPE> &size) {
 }
 
 template <typename TYPE>
-inline string toStr(const sway::math::TSize<TYPE> &size) {
+inline auto toStr(const sway::math::TSize<TYPE> &size) -> string {
   stringstream stream;
   stream << size;
   return stream.str();

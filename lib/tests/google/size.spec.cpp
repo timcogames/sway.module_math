@@ -4,9 +4,8 @@
 
 using namespace sway;
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(TSize, DefaultConstructor) {
   const math::size2i_t size;
@@ -15,10 +14,9 @@ TEST(TSize, DefaultConstructor) {
   ASSERT_EQ(size.getH(), 0);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(TSize, ComponentConstructor) {
   const s32_t w = 1, h = 2;
@@ -36,9 +34,8 @@ TEST(TSize, ScalarConstructor) {
   ASSERT_EQ(size.getH(), h);
 }
 
-/*!
- * \brief
- *    Тест для оператора равенства.
+/**
+ * @brief Тест для оператора равенства.
  */
 TEST(TSize, EqualityOperator) {
   const math::size2i_t size(1, 2);
@@ -47,9 +44,8 @@ TEST(TSize, EqualityOperator) {
   EXPECT_FALSE(size == math::size2i_one);
 }
 
-/*!
- * \brief
- *    Тест для оператора неравенства.
+/**
+ * @brief Тест для оператора неравенства.
  */
 TEST(TSize, NonEqualityOperator) {
   const math::size2i_t size(2, 1);

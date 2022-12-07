@@ -4,9 +4,8 @@
 
 using namespace sway;
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(TPoint, DefaultConstructor) {
   const math::point2i_t point;
@@ -15,10 +14,9 @@ TEST(TPoint, DefaultConstructor) {
   ASSERT_EQ(point.getY(), 0);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(TPoint, ComponentConstructor) {
   const s32_t x = 1, y = 2;
@@ -35,9 +33,8 @@ TEST(TPoint, ScalarConstructor) {
   ASSERT_EQ(size.getY(), 1);
 }
 
-/*!
- * \brief
- *    Тест для оператора равенства.
+/**
+ * @brief Тест для оператора равенства.
  */
 TEST(TPoint, EqualityOperator) {
   const math::point2i_t point(0, 0);
@@ -46,9 +43,8 @@ TEST(TPoint, EqualityOperator) {
   EXPECT_FALSE(point == math::point2i_one);
 }
 
-/*!
- * \brief
- *    Тест для оператора неравенства.
+/**
+ * @brief Тест для оператора неравенства.
  */
 TEST(TPoint, NonEqualityOperator) {
   const math::point2i_t point(1, 1);

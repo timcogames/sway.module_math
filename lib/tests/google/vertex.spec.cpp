@@ -4,9 +4,8 @@
 
 using namespace sway;
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexPosition, DefaultConstructor) {
   const math::VertexPosition vertex;
@@ -16,10 +15,9 @@ TEST(VertexPosition, DefaultConstructor) {
   ASSERT_EQ(vertex.z, 0.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(VertexPosition, ComponentConstructor) {
   const math::VertexPosition vertex(math::vec3f_t(1.0f, 2.0f, 3.0f));
@@ -30,9 +28,8 @@ TEST(VertexPosition, ComponentConstructor) {
   ASSERT_EQ(position.getZ(), 3.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexColor, DefaultConstructor) {
   const math::VertexColor vertex;
@@ -47,10 +44,9 @@ TEST(VertexColor, DefaultConstructor) {
   ASSERT_EQ(vertex.a, 0.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(VertexColor, ComponentConstructor) {
   const math::VertexColor vertex(math::vec3f_t(1.0f, 2.0f, 3.0f), math::col4f_t(0.1f, 0.2f, 0.3f));
@@ -67,9 +63,8 @@ TEST(VertexColor, ComponentConstructor) {
   ASSERT_EQ(color.getA(), 1.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+/**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexTexCoord, DefaultConstructor) {
   const math::VertexTexCoord vertex;
@@ -82,10 +77,9 @@ TEST(VertexTexCoord, DefaultConstructor) {
   ASSERT_EQ(vertex.v, 0.0f);
 }
 
-/*!
- * \brief
- *    Убеждаемся, что конструктор устанавливает все значения компонентов в те,
- *    которые были заданы.
+/**
+ * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
+ *        которые были заданы.
  */
 TEST(VertexTexCoord, ComponentConstructor) {
   const math::VertexTexCoord vertex(math::vec3f_t(1.0f, 2.0f, 3.0f), math::vec2f_t(0.1f, 0.2f));

@@ -16,6 +16,7 @@ public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   *
    * @sa TVector3(TYPE, TYPE, TYPE)
    */
   TVector3()
@@ -24,6 +25,7 @@ public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   *
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
    * @param[in] z Компонент Z вектора.
@@ -33,6 +35,7 @@ public:
 
   /**
    * @brief Устанавливает новые значения.
+   *
    * @param[in] x Значение X компонента.
    * @param[in] y Значение Y компонента.
    * @param[in] z Значение Z компонента.
@@ -45,21 +48,24 @@ public:
 
   /**
    * @brief Получает значение X компонента.
-   * @sa getY() const
+   *
+   * @sa getY() const,
    *     getZ() const
    */
   TYPE getX() const { return this->_data[0]; }
 
   /**
    * @brief Получает значение Y компонента.
-   * @sa getX() const
+   *
+   * @sa getX() const,
    *     getZ() const
    */
   TYPE getY() const { return this->_data[1]; }
 
   /**
    * @brief Получает значение Z компонента.
-   * @sa getX() const
+   *
+   * @sa getX() const,
    *     getY() const
    */
   TYPE getZ() const { return this->_data[2]; }

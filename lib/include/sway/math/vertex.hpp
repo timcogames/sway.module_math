@@ -11,6 +11,7 @@ NAMESPACE_BEGIN(math)
 
 /**
  * @brief Базовая структура представления вершины.
+ *
  * @note Содержит только позицию вершины.
  */
 struct VertexPosition {
@@ -19,6 +20,7 @@ struct VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexPosition(const vec3f_t &)
    */
   VertexPosition() { x = y = z = 0.0; }
@@ -26,12 +28,14 @@ struct VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexPosition()
    */
   VertexPosition(const vec3f_t &position) { setPosition(position); }
 
   /**
    * @brief Устанавливает позицию вершины.
+   *
    * @param[in] position Значение позиции вершины.
    */
   void setPosition(const vec3f_t &position) {
@@ -56,6 +60,7 @@ struct VertexColor : public VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexColor(const vec3f_t &, const col4f_t &)
    */
   VertexColor() { r = g = b = a = 0.0; }
@@ -63,6 +68,7 @@ struct VertexColor : public VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexColor()
    */
   VertexColor(const vec3f_t &position, const col4f_t &color)
@@ -72,6 +78,7 @@ struct VertexColor : public VertexPosition {
 
   /**
    * @brief Устанавливает цвет вершины.
+   *
    * @param[in] color Значение цвета вершины.
    */
   void setColor(const col4f_t &color) {
@@ -89,6 +96,7 @@ struct VertexColor : public VertexPosition {
 
 /**
  * @brief Структура представления вершины.
+ *
  * @note Содержит позицию, цвет и текстурные координаты вершины.
  */
 struct VertexTexCoord : public VertexPosition {
@@ -97,6 +105,7 @@ struct VertexTexCoord : public VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexTexCoord(const vec3f_t &, const vec2f_t &)
    */
   VertexTexCoord() { u = v = 0.0; }
@@ -104,6 +113,7 @@ struct VertexTexCoord : public VertexPosition {
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
+   *
    * @sa VertexTexCoord()
    */
   VertexTexCoord(const vec3f_t &position, const vec2f_t &texCoord)
@@ -113,6 +123,7 @@ struct VertexTexCoord : public VertexPosition {
 
   /**
    * @brief Устанавливает текстурные координаты.
+   *
    * @param[in] texCoord Значение текстурных координат.
    */
   void setTexCoord(const vec2f_t &texCoord) {
