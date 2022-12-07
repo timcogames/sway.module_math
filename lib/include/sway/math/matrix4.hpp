@@ -52,10 +52,10 @@ public:
    * @sa setCol(u32_t, const TVector4<TValueType> &)
    */
   void setRow(u32_t nbr, const TVector4<TValueType> &val) {
-    set(nbr, 0, value.getX());
-    set(nbr, 1, value.getY());
-    set(nbr, 2, value.getZ());
-    set(nbr, 3, value.getW());
+    set(nbr, 0, val.getX());
+    set(nbr, 1, val.getY());
+    set(nbr, 2, val.getZ());
+    set(nbr, 3, val.getW());
   }
 
   /**
@@ -77,10 +77,10 @@ public:
    * @sa setRow(u32_t, const TVector4<TValueType> &)
    */
   void setCol(u32_t nbr, const TVector4<TValueType> &val) {
-    set(0, nbr, value.getX());
-    set(1, nbr, value.getY());
-    set(2, nbr, value.getZ());
-    set(3, nbr, value.getW());
+    set(0, nbr, val.getX());
+    set(1, nbr, val.getY());
+    set(2, nbr, val.getZ());
+    set(3, nbr, val.getW());
   }
 
   /**
