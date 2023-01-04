@@ -41,8 +41,8 @@ public:
    * @param[in] y Значение Y компонента.
    */
   void set(TYPE x, TYPE y) {
-    this->_data[0] = x;
-    this->_data[1] = y;
+    this->data_[0] = x;
+    this->data_[1] = y;
   }
 
   /**
@@ -50,14 +50,14 @@ public:
    *
    * @sa getY() const
    */
-  TYPE getX() const { return this->_data[0]; }
+  TYPE getX() const { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
    *
    * @sa getX() const
    */
-  TYPE getY() const { return this->_data[1]; }
+  TYPE getY() const { return this->data_[1]; }
 
 #pragma region "Статические методы класса"
 

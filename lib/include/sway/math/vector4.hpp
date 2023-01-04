@@ -43,10 +43,10 @@ public:
    * @param[in] w Значение W компонента.
    */
   void set(TYPE x, TYPE y, TYPE z, TYPE w) {
-    this->_data[0] = x;
-    this->_data[1] = y;
-    this->_data[2] = z;
-    this->_data[3] = w;
+    this->data_[0] = x;
+    this->data_[1] = y;
+    this->data_[2] = z;
+    this->data_[3] = w;
   }
 
   /**
@@ -56,7 +56,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  TYPE getX() const { return this->_data[0]; }
+  TYPE getX() const { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -65,7 +65,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  TYPE getY() const { return this->_data[1]; }
+  TYPE getY() const { return this->data_[1]; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -74,7 +74,7 @@ public:
    *     getY() const,
    *     getW() const
    */
-  TYPE getZ() const { return this->_data[2]; }
+  TYPE getZ() const { return this->data_[2]; }
 
   /**
    * @brief Получает значение W компонента.
@@ -83,7 +83,7 @@ public:
    *     getY() const,
    *     getZ() const
    */
-  TYPE getW() const { return this->_data[3]; }
+  TYPE getW() const { return this->data_[3]; }
 };
 
 using vec4i_t = TVector4<s32_t>;

@@ -25,7 +25,7 @@ public:
    */
   TVector() {
     for (std::size_t i = 0; i != size; ++i) {
-      _data[i] = (TYPE)0;
+      data_[i] = (TYPE)0;
     }
   }
 
@@ -34,14 +34,14 @@ public:
    *
    * @sa data() const
    */
-  auto data() -> TYPE * { return _data; }
+  auto data() -> TYPE * { return data_; }
 
   /**
    * @brief Возвращает необработанные данные.
    *
    * @sa data()
    */
-  auto data() const -> const TYPE * { return _data; }
+  auto data() const -> const TYPE * { return data_; }
 
 #pragma region "Доступ к массиву"
 
@@ -53,7 +53,7 @@ public:
    */
   TYPE &operator[](std::size_t position) {
     assert(position >= 0 && position <= SIZE);
-    return _data[position];
+    return data_[position];
   }
 
   /**
@@ -64,7 +64,7 @@ public:
    */
   const TYPE operator[](std::size_t position) const {
     assert(position >= 0 && position <= SIZE);
-    return _data[position];
+    return data_[position];
   }
 
 #pragma endregion
@@ -80,7 +80,7 @@ public:
    */
   int equals(const TVector<TYPE, SIZE> &vector) const {
     for (int i = 0; i < SIZE; ++i) {
-      if (_data[i] != vector[i]) {
+      if (data_[i] != vector[i]) {
         return 0;
       }
 
@@ -103,8 +103,9 @@ public:
    * @sa operator/(const TVector<TYPE, SIZE> &) const
    */
   const TVector<TYPE, SIZE> &divide(const TVector<TYPE, SIZE> &vector) {
-    for (std::size_t i = 0; i < SIZE; ++i)
-      _data[i] /= vector[i];
+    for (std::size_t i = 0; i < SIZE; ++i) {
+      data_[i] /= vector[i];
+    }
 
     return *this;
   }
@@ -118,8 +119,9 @@ public:
    * @sa operator/(TYPE) const
    */
   const TVector<TYPE, SIZE> &divide(TYPE scalar) {
-    for (std::size_t i = 0; i < SIZE; ++i)
-      _data[i] /= scalar;
+    for (std::size_t i = 0; i < SIZE; ++i) {
+      data_[i] /= scalar;
+    }
 
     return *this;
   }
@@ -129,7 +131,7 @@ public:
 #pragma endregion
 
 protected:
-  TYPE _data[SIZE];  // Данные вектора.
+  TYPE data_[SIZE];  // Данные вектора.
 };
 
 NAMESPACE_END(math)

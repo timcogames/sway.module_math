@@ -41,9 +41,9 @@ public:
    * @param[in] z Значение Z компонента.
    */
   void set(TYPE x, TYPE y, TYPE z) {
-    this->_data[0] = x;
-    this->_data[1] = y;
-    this->_data[2] = z;
+    this->data_[0] = x;
+    this->data_[1] = y;
+    this->data_[2] = z;
   }
 
   /**
@@ -52,7 +52,7 @@ public:
    * @sa getY() const,
    *     getZ() const
    */
-  TYPE getX() const { return this->_data[0]; }
+  TYPE getX() const { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -60,7 +60,7 @@ public:
    * @sa getX() const,
    *     getZ() const
    */
-  TYPE getY() const { return this->_data[1]; }
+  TYPE getY() const { return this->data_[1]; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -68,7 +68,7 @@ public:
    * @sa getX() const,
    *     getY() const
    */
-  TYPE getZ() const { return this->_data[2]; }
+  TYPE getZ() const { return this->data_[2]; }
 
 #pragma region "Статические методы класса"
 
