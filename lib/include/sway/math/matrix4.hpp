@@ -12,7 +12,7 @@ NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
 template <typename TValueType>
-class TVector4;
+class Vector4;
 
 /**
  * @brief Шаблонный класс представления матрицы.
@@ -49,9 +49,9 @@ public:
    *
    * @param[in] nbr Номер ряда.
    * @param[in] val Значения для установки.
-   * @sa setCol(u32_t, const TVector4<TValueType> &)
+   * @sa setCol(u32_t, const Vector4<TValueType> &)
    */
-  void setRow(u32_t nbr, const TVector4<TValueType> &val) {
+  void setRow(u32_t nbr, const Vector4<TValueType> &val) {
     set(nbr, 0, val.getX());
     set(nbr, 1, val.getY());
     set(nbr, 2, val.getZ());
@@ -65,8 +65,8 @@ public:
    * @return Значения элементов.
    * @sa getCol(u32_t) const
    */
-  auto getRow(u32_t nbr) const -> TVector4<TValueType> {
-    return TVector4<TValueType>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
+  auto getRow(u32_t nbr) const -> Vector4<TValueType> {
+    return Vector4<TValueType>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
   }
 
   /**
@@ -74,9 +74,9 @@ public:
    *
    * @param[in] nbr Номер колонки.
    * @param[in] val Значения для установки.
-   * @sa setRow(u32_t, const TVector4<TValueType> &)
+   * @sa setRow(u32_t, const Vector4<TValueType> &)
    */
-  void setCol(u32_t nbr, const TVector4<TValueType> &val) {
+  void setCol(u32_t nbr, const Vector4<TValueType> &val) {
     set(0, nbr, val.getX());
     set(1, nbr, val.getY());
     set(2, nbr, val.getZ());
@@ -90,8 +90,8 @@ public:
    * @return Значения элементов.
    * @sa getRow(u32_t) const
    */
-  auto getCol(u32_t nbr) const -> TVector4<TValueType> {
-    return TVector4<TValueType>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
+  auto getCol(u32_t nbr) const -> Vector4<TValueType> {
+    return Vector4<TValueType>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
   }
 
   /**

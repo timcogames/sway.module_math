@@ -10,17 +10,17 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления вектора из четырех компонентов.
  */
-template <typename TYPE>
-class TVector4 final : public TVector<TYPE, 4> {
+template <typename TValueType>
+class Vector4 final : public Vector<TValueType, 4> {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa TVector4(TYPE, TYPE, TYPE, TYPE)
+   * @sa Vector4(TValueType, TValueType, TValueType, TValueType)
    */
-  TVector4()
-      : TVector<TYPE, 4>() {}
+  Vector4()
+      : Vector<TValueType, 4>() {}
 
   /**
    * @brief Конструктор класса.
@@ -30,9 +30,9 @@ public:
    * @param[in] y Компонент Y вектора.
    * @param[in] z Компонент Z вектора.
    * @param[in] w Компонент W вектора.
-   * @sa TVector4()
+   * @sa Vector4()
    */
-  TVector4(TYPE x, TYPE y, TYPE z, TYPE w) { set(x, y, z, w); }
+  Vector4(TValueType x, TValueType y, TValueType z, TValueType w) { set(x, y, z, w); }
 
   /**
    * @brief Устанавливает новые значения.
@@ -42,7 +42,7 @@ public:
    * @param[in] z Значение Z компонента.
    * @param[in] w Значение W компонента.
    */
-  void set(TYPE x, TYPE y, TYPE z, TYPE w) {
+  void set(TValueType x, TValueType y, TValueType z, TValueType w) {
     this->data_[0] = x;
     this->data_[1] = y;
     this->data_[2] = z;
@@ -56,7 +56,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  TYPE getX() const { return this->data_[0]; }
+  auto getX() const -> TValueType { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -65,7 +65,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  TYPE getY() const { return this->data_[1]; }
+  auto getY() const -> TValueType { return this->data_[1]; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -74,7 +74,7 @@ public:
    *     getY() const,
    *     getW() const
    */
-  TYPE getZ() const { return this->data_[2]; }
+  auto getZ() const -> TValueType { return this->data_[2]; }
 
   /**
    * @brief Получает значение W компонента.
@@ -83,12 +83,12 @@ public:
    *     getY() const,
    *     getZ() const
    */
-  TYPE getW() const { return this->data_[3]; }
+  auto getW() const -> TValueType { return this->data_[3]; }
 };
 
-using vec4i_t = TVector4<s32_t>;
-using vec4f_t = TVector4<f32_t>;
-using vec4d_t = TVector4<f64_t>;
+using vec4i_t = Vector4<s32_t>;
+using vec4f_t = Vector4<f32_t>;
+using vec4d_t = Vector4<f64_t>;
 
 static const vec4i_t vec4i_zero(0, 0, 0, 0);
 static const vec4i_t vec4i_one(1, 1, 1, 1);
@@ -97,12 +97,12 @@ static const vec4i_t vec4i_unitY(0, 1, 0, 0);
 static const vec4i_t vec4i_unitZ(0, 0, 1, 0);
 static const vec4i_t vec4i_unitW(0, 0, 0, 1);
 
-static const vec4f_t vec4f_zero(0.0, 0.0, 0.0, 0.0);
-static const vec4f_t vec4f_one(1.0, 1.0, 1.0, 1.0);
-static const vec4f_t vec4f_unitX(1.0, 0.0, 0.0, 0.0);
-static const vec4f_t vec4f_unitY(0.0, 1.0, 0.0, 0.0);
-static const vec4f_t vec4f_unitZ(0.0, 0.0, 1.0, 0.0);
-static const vec4f_t vec4f_unitW(0.0, 0.0, 0.0, 1.0);
+static const vec4f_t vec4f_zero(0.0F, 0.0F, 0.0F, 0.0F);
+static const vec4f_t vec4f_one(1.0F, 1.0F, 1.0F, 1.0F);
+static const vec4f_t vec4f_unitX(1.0F, 0.0F, 0.0F, 0.0F);
+static const vec4f_t vec4f_unitY(0.0F, 1.0F, 0.0F, 0.0F);
+static const vec4f_t vec4f_unitZ(0.0F, 0.0F, 1.0F, 0.0F);
+static const vec4f_t vec4f_unitW(0.0F, 0.0F, 0.0F, 1.0F);
 
 static const vec4d_t vec4d_zero(0.0, 0.0, 0.0, 0.0);
 static const vec4d_t vec4d_one(1.0, 1.0, 1.0, 1.0);

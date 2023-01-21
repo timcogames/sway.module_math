@@ -12,17 +12,17 @@ NAMESPACE_BEGIN(math)
  *        Класс, который хранит позицию в 2D-координатах,
  *        позволяет манипулировать ими, а также выполнять векторные операции.
  */
-template <typename TYPE>
-class TVector2 final : public TVector<TYPE, 2> {
+template <typename TValueType>
+class Vector2 final : public Vector<TValueType, 2> {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa TVector2(TYPE, TYPE)
+   * @sa Vector2(TValueType, TValueType)
    */
-  TVector2()
-      : TVector<TYPE, 2>() {}
+  Vector2()
+      : Vector<TValueType, 2>() {}
 
   /**
    * @brief Конструктор класса.
@@ -30,9 +30,9 @@ public:
    *
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
-   * @sa TVector2()
+   * @sa Vector2()
    */
-  TVector2(TYPE x, TYPE y) { set(x, y); }
+  Vector2(TValueType x, TValueType y) { set(x, y); }
 
   /**
    * @brief Устанавливает новые значения.
@@ -40,7 +40,7 @@ public:
    * @param[in] x Значение X компонента.
    * @param[in] y Значение Y компонента.
    */
-  void set(TYPE x, TYPE y) {
+  void set(TValueType x, TValueType y) {
     this->data_[0] = x;
     this->data_[1] = y;
   }
@@ -50,33 +50,33 @@ public:
    *
    * @sa getY() const
    */
-  TYPE getX() const { return this->data_[0]; }
+  auto getX() const -> TValueType { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
    *
    * @sa getX() const
    */
-  TYPE getY() const { return this->data_[1]; }
+  auto getY() const -> TValueType { return this->data_[1]; }
 
 #pragma region "Статические методы класса"
 
 #pragma endregion
 };
 
-using vec2i_t = TVector2<s32_t>;
-using vec2f_t = TVector2<f32_t>;
-using vec2d_t = TVector2<f64_t>;
+using vec2i_t = Vector2<s32_t>;
+using vec2f_t = Vector2<f32_t>;
+using vec2d_t = Vector2<f64_t>;
 
 static const vec2i_t vec2i_zero(0, 0);
 static const vec2i_t vec2i_one(1, 1);
 static const vec2i_t vec2i_unitX(1, 0);
 static const vec2i_t vec2i_unitY(0, 1);
 
-static const vec2f_t vec2f_zero(0.0, 0.0);
-static const vec2f_t vec2f_one(1.0, 1.0);
-static const vec2f_t vec2f_unitX(1.0, 0.0);
-static const vec2f_t vec2f_unitY(0.0, 1.0);
+static const vec2f_t vec2f_zero(0.0F, 0.0F);
+static const vec2f_t vec2f_one(1.0F, 1.0F);
+static const vec2f_t vec2f_unitX(1.0F, 0.0F);
+static const vec2f_t vec2f_unitY(0.0F, 1.0F);
 
 static const vec2d_t vec2d_zero(0.0, 0.0);
 static const vec2d_t vec2d_one(1.0, 1.0);

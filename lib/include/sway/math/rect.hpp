@@ -8,21 +8,21 @@ NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
 template <typename TValueType>
-class TSize;
+class Size;
 
 /**
  * @brief Шаблонный класс представления прямоугольной области.
  */
 template <typename TValueType>
-class TRect final {
+class Rect final {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa TRect(TValueType, TValueType, TValueType, TValueType)
+   * @sa Rect(TValueType, TValueType, TValueType, TValueType)
    */
-  TRect() { left_ = top_ = right_ = bottom_ = (TValueType)0; }
+  Rect() { left_ = top_ = right_ = bottom_ = (TValueType)0; }
 
   /**
    * @brief Конструктор класса.
@@ -32,9 +32,9 @@ public:
    * @param[in] y Значение координаты по оси Y.
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
-   * @sa TRect()
+   * @sa Rect()
    */
-  TRect(TValueType x, TValueType y, TValueType w, TValueType h) { set(x, y, w, h); }
+  Rect(TValueType x, TValueType y, TValueType w, TValueType h) { set(x, y, w, h); }
 
   /**
    * @brief Устанавливает новые значения.
@@ -123,21 +123,21 @@ public:
   auto getH() const -> TValueType { return bottom_ - top_; }
 
   /**
-   * @brief Преобразовывает в TSize<TValueType> класс.
+   * @brief Преобразовывает в Size<TValueType> класс.
    */
-  auto toSize() const -> TSize<TValueType> { return TSize<TValueType>(getW(), getH()); }
+  auto toSize() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
 
-  bool isEmpty() const { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
+  auto isEmpty() const -> bool { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
 
-  bool isValid() const { return ((top_ > bottom_) || (left_ > right_)) ? false : false; }
+  auto isValid() const -> bool { return ((top_ > bottom_) || (left_ > right_)) ? false : false; }
 
 private:
   TValueType left_, top_, right_, bottom_;
 };
 
-using rect4i_t = TRect<s32_t>;
-using rect4f_t = TRect<f32_t>;
-using rect4d_t = TRect<f64_t>;
+using rect4i_t = Rect<s32_t>;
+using rect4f_t = Rect<f32_t>;
+using rect4d_t = Rect<f64_t>;
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

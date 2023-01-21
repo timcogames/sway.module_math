@@ -8,45 +8,45 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TYPE>
-class TVector4;
+template <typename TValueType>
+class Vector4;
 
 /**
  * @brief Шаблонный класс представления цвета.
  */
-template <typename TYPE>
-class TColor final {
+template <typename TValueType>
+class Color final {
 public:
   /**
    * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
-   * 
-   * @sa TColor(TYPE, TYPE, TYPE, TYPE)
+   *
+   * @sa Color(TValueType, TValueType, TValueType, TValueType)
    */
-  TColor() {
-    r_ = g_ = b_ = (TYPE)0;
-    a_ = (TYPE)1;
+  Color() {
+    r_ = g_ = b_ = (TValueType)0;
+    a_ = (TValueType)1;
   }
 
   /**
    * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
-   * 
+   *
    * @param[in] r Значение канала красного цвета.
    * @param[in] g Значение канала зеленого цвета.
    * @param[in] b Значение канала синего цвета.
    * @param[in] a Значение альфа-канала.
-   * @sa TColor()
+   * @sa Color()
    */
-  TColor(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) { set(r, g, b, a); }
+  Color(TValueType r, TValueType g, TValueType b, TValueType a = (TValueType)1) { set(r, g, b, a); }
 
   /**
    * @brief Устанавливает новые значения.
-   * 
+   *
    * @param[in] r Значение канала красного цвета.
    * @param[in] g Значение канала зеленого цвета.
    * @param[in] b Значение канала синего цвета.
    * @param[in] a Значение альфа-канала.
    */
-  void set(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) {
+  void set(TValueType r, TValueType g, TValueType b, TValueType a = (TValueType)1) {
     r_ = r;
     g_ = g;
     b_ = b;
@@ -55,12 +55,12 @@ public:
 
   /**
    * @brief Получает значение канала красного цвета.
-   * 
+   *
    * @sa getG() const,
    *     getB() const,
    *     getA() const
    */
-  auto getR() const -> TYPE { return r_; }
+  auto getR() const -> TValueType { return r_; }
 
   /**
    * @brief Получает значение канала зеленого цвета.
@@ -68,38 +68,38 @@ public:
    *     getB() const,
    *     getA() const
    */
-  auto getG() const -> TYPE { return g_; }
+  auto getG() const -> TValueType { return g_; }
 
   /**
    * @brief Получает значение канала синего цвета.
-   * 
+   *
    * @sa getR() const,
    *     getG() const,
    *     getA() const
    */
-  auto getB() const -> TYPE { return b_; }
+  auto getB() const -> TValueType { return b_; }
 
   /**
    * @brief Получает значение альфа-канала.
-   * 
+   *
    * @sa getR() const,
    *     getG() const,
    *     getB() const
    */
-  auto getA() const -> TYPE { return a_; }
+  auto getA() const -> TValueType { return a_; }
 
   /**
-   * @brief Преобразовывает в TVector4<TYPE> класс.
+   * @brief Преобразовывает в Vector4<TValueType> класс.
    */
-  auto toVec4() const -> TVector4<TYPE> { return TVector4<TYPE>(r_, g_, b_, a_); }
+  auto toVec4() const -> Vector4<TValueType> { return Vector4<TValueType>(r_, g_, b_, a_); }
 
 private:
-  TYPE r_, g_, b_, a_;
+  TValueType r_, g_, b_, a_;
 };
 
-using col4i_t = TColor<s32_t>;
-using col4f_t = TColor<f32_t>;
-using col4d_t = TColor<f64_t>;
+using col4i_t = Color<s32_t>;
+using col4f_t = Color<f32_t>;
+using col4d_t = Color<f64_t>;
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

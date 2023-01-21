@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(TRect, DefaultConstructor) {
+TEST(Rect, DefaultConstructor) {
   const math::rect4i_t rect;
 
   ASSERT_EQ(rect.getL(), 0);
@@ -20,7 +20,7 @@ TEST(TRect, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(TRect, ComponentConstructor) {
+TEST(Rect, ComponentConstructor) {
   const s32_t x = 8, y = 16, w = 32, h = 64;
   const math::rect4i_t rect(x, y, w, h);
 
@@ -32,7 +32,7 @@ TEST(TRect, ComponentConstructor) {
   ASSERT_EQ(rect.getH(), h);
 }
 
-TEST(TRect, Offset) {
+TEST(Rect, Offset) {
   const s32_t x = 8, y = 16, w = 32, h = 64;
   const s32_t xoffset = 2, yoffset = 4;
 
@@ -50,7 +50,7 @@ TEST(TRect, Offset) {
 /**
  * @brief Убеждаемся, что преобразование в TSize<type> проходит правильно.
  */
-TEST(TRect, ConvertToSize) {
+TEST(Rect, ConvertToSize) {
   const s32_t x = 8, y = 16, w = 32, h = 64;
 
   math::rect4i_t rect(x, y, w, h);
@@ -60,8 +60,8 @@ TEST(TRect, ConvertToSize) {
   ASSERT_EQ(size.getH(), h);
 }
 
-TEST(TRect, IsEmpty) {
-  ASSERT_TRUE(math::TRect<s32_t>(0, 0, 0, 32).isEmpty());
-  ASSERT_TRUE(math::TRect<s32_t>(0, 0, 32, 0).isEmpty());
-  EXPECT_FALSE(math::TRect<s32_t>(0, 0, 32, 32).isEmpty());
+TEST(Rect, IsEmpty) {
+  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 0, 32).isEmpty());
+  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 0).isEmpty());
+  EXPECT_FALSE(math::Rect<s32_t>(0, 0, 32, 32).isEmpty());
 }

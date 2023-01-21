@@ -6,13 +6,13 @@
 
 NAMESPACE_BEGIN(std)
 
-template <typename TYPE>
-inline ostream &operator<<(ostream &str, const sway::math::TSize<TYPE> &size) {
+template <typename TValueType>
+inline auto operator<<(ostream &str, const sway::math::Size<TValueType> &size) -> ostream & {
   return str << '(' << size.getW() << ' ' << size.getH() << ')';
 }
 
-template <typename TYPE>
-inline auto toStr(const sway::math::TSize<TYPE> &size) -> string {
+template <typename TValueType>
+inline auto toStr(const sway::math::Size<TValueType> &size) -> string {
   stringstream stream;
   stream << size;
   return stream.str();

@@ -23,7 +23,7 @@ struct VertexPosition {
    *
    * @sa VertexPosition(const vec3f_t &)
    */
-  VertexPosition() { x = y = z = 0.0; }
+  VertexPosition() { x = y = z = 0.0F; }
 
   /**
    * @brief Конструктор класса.
@@ -47,7 +47,7 @@ struct VertexPosition {
   /**
    * @brief Возвращает позицию вершины.
    */
-  auto getPosition() const -> vec3f_t { return TVector3<f32_t>(x, y, z); }
+  auto getPosition() const -> vec3f_t { return Vector3<f32_t>(x, y, z); }
 };
 
 /**
@@ -63,7 +63,7 @@ struct VertexColor : public VertexPosition {
    *
    * @sa VertexColor(const vec3f_t &, const col4f_t &)
    */
-  VertexColor() { r = g = b = a = 0.0; }
+  VertexColor() { r = g = b = a = 0.0F; }
 
   /**
    * @brief Конструктор класса.
@@ -91,7 +91,7 @@ struct VertexColor : public VertexPosition {
   /**
    * @brief Возвращает цвет вершины.
    */
-  auto getColor() const -> col4f_t { return TColor<f32_t>(r, g, b, a); }
+  auto getColor() const -> col4f_t { return Color<f32_t>(r, g, b, a); }
 };
 
 /**
@@ -108,7 +108,7 @@ struct VertexTexCoord : public VertexPosition {
    *
    * @sa VertexTexCoord(const vec3f_t &, const vec2f_t &)
    */
-  VertexTexCoord() { u = v = 0.0; }
+  VertexTexCoord() { u = v = 0.0F; }
 
   /**
    * @brief Конструктор класса.
@@ -134,7 +134,7 @@ struct VertexTexCoord : public VertexPosition {
   /**
    * @brief Возвращает текстурные координаты.
    */
-  auto getTexCoord() const -> vec2f_t { return TVector2<f32_t>(u, v); }
+  auto getTexCoord() const -> vec2f_t { return Vector2<f32_t>(u, v); }
 };
 
 NAMESPACE_END(math)

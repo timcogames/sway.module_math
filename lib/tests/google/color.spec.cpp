@@ -7,21 +7,21 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(TColor, DefaultConstructor) {
+TEST(Color, DefaultConstructor) {
   const math::col4f_t color;
 
-  ASSERT_EQ(color.getR(), 0.0f);
-  ASSERT_EQ(color.getG(), 0.0f);
-  ASSERT_EQ(color.getB(), 0.0f);
-  ASSERT_EQ(color.getA(), 1.0f);
+  ASSERT_EQ(color.getR(), 0.0F);
+  ASSERT_EQ(color.getG(), 0.0F);
+  ASSERT_EQ(color.getB(), 0.0F);
+  ASSERT_EQ(color.getA(), 1.0F);
 }
 
 /**
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(TColor, ComponentConstructor) {
-  const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;
+TEST(Color, ComponentConstructor) {
+  const f32_t r = 0.1F, g = 0.2F, b = 0.3F, a = 1.0F;
   const math::col4f_t color(r, g, b, a);
 
   ASSERT_EQ(color.getR(), r);
@@ -34,7 +34,7 @@ TEST(TColor, ComponentConstructor) {
  * @brief Убеждаемся, что преобразование в TVector4<type> проходит правильно.
  */
 TEST(TColor, ConvertToVector4) {
-  const f32_t r = 0.1f, g = 0.2f, b = 0.3f, a = 1.0f;
+  const f32_t r = 0.1F, g = 0.2F, b = 0.3F, a = 1.0F;
 
   math::col4f_t color(r, g, b, a);
   math::vec4f_t vec4 = color.toVec4();

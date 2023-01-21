@@ -8,24 +8,24 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TYPE, std::size_t SIZE>
-class TVector {
-  static_assert(SIZE != 0, "Вектор не может иметь нулевой размер");
+template <typename TValueType, std::size_t TSize>
+class Vector {
+  static_assert(TSize != 0, "Вектор не может иметь нулевой размер");
 
 public:
-  using type_t = TYPE;  // Базовый тип данных.
+  using type_t = TValueType;  // Базовый тип данных.
 
   enum : std::size_t {
-    size = SIZE  // Размер вектора.
+    size = TSize  // Размер вектора.
   };
 
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми значениями.
    */
-  TVector() {
+  Vector() {
     for (std::size_t i = 0; i != size; ++i) {
-      data_[i] = (TYPE)0;
+      data_[i] = (TValueType)0;
     }
   }
 
@@ -34,14 +34,14 @@ public:
    *
    * @sa data() const
    */
-  auto data() -> TYPE * { return data_; }
+  auto data() -> TValueType * { return data_; }
 
   /**
    * @brief Возвращает необработанные данные.
    *
    * @sa data()
    */
-  auto data() const -> const TYPE * { return data_; }
+  auto data() const -> const TValueType * { return data_; }
 
 #pragma region "Доступ к массиву"
 
@@ -51,8 +51,8 @@ public:
    * @param[in] position Позиция значения.
    * @sa operator[](std::size_t) const
    */
-  TYPE &operator[](std::size_t position) {
-    assert(position >= 0 && position <= SIZE);
+  auto operator[](std::size_t position) -> TValueType & {
+    assert(position >= 0 && position <= TSize);
     return data_[position];
   }
 
@@ -62,8 +62,8 @@ public:
    * @param[in] position Позиция значения.
    * @sa operator[](std::size_t)
    */
-  const TYPE operator[](std::size_t position) const {
-    assert(position >= 0 && position <= SIZE);
+  auto operator[](std::size_t position) const -> const TValueType {
+    assert(position >= 0 && position <= TSize);
     return data_[position];
   }
 
@@ -75,11 +75,11 @@ public:
    * @brief Сравнивает два вектора на наличие равенства.
    *
    * @param[in] vector Вектор с которым следует сравнить.
-   * @sa operator==(const TVector<TYPE, SIZE> &) const,
-   *     operator!=(const TVector<TYPE, SIZE> &) const
+   * @sa operator==(const Vector<TValueType, TSize> &) const,
+   *     operator!=(const Vector<TValueType, TSize> &) const
    */
-  int equals(const TVector<TYPE, SIZE> &vector) const {
-    for (int i = 0; i < SIZE; ++i) {
+  auto equals(const Vector<TValueType, TSize> &vector) const -> int {
+    for (int i = 0; i < TSize; ++i) {
       if (data_[i] != vector[i]) {
         return 0;
       }
@@ -88,9 +88,9 @@ public:
     }
   }
 
-  int operator==(const TVector<TYPE, SIZE> &vector) const { return equals(vector); }
+  auto operator==(const Vector<TValueType, TSize> &vector) const -> int { return equals(vector); }
 
-  int operator!=(const TVector<TYPE, SIZE> &vector) const { return !equals(vector); }
+  auto operator!=(const Vector<TValueType, TSize> &vector) const -> int { return !equals(vector); }
 
 #pragma endregion
 
@@ -100,38 +100,40 @@ public:
    * @brief Делит указанный вектор на заданный вектор.
    *
    * @param[in] vector Вектор на который следует разделит.
-   * @sa operator/(const TVector<TYPE, SIZE> &) const
+   * @sa operator/(const Vector<TValueType, TSize> &) const
    */
-  const TVector<TYPE, SIZE> &divide(const TVector<TYPE, SIZE> &vector) {
-    for (std::size_t i = 0; i < SIZE; ++i) {
+  auto divide(const Vector<TValueType, TSize> &vector) -> const Vector<TValueType, TSize> & {
+    for (std::size_t i = 0; i < TSize; ++i) {
       data_[i] /= vector[i];
     }
 
     return *this;
   }
 
-  const TVector<TYPE, SIZE> operator/(const TVector<TYPE, SIZE> &vector) const { return divide(vector); }
+  auto operator/(const Vector<TValueType, TSize> &vector) const -> const Vector<TValueType, TSize> {
+    return divide(vector);
+  }
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.
    *
    * @param[in] scalar Скаляр на который следует разделит.
-   * @sa operator/(TYPE) const
+   * @sa operator/(TValueType) const
    */
-  const TVector<TYPE, SIZE> &divide(TYPE scalar) {
-    for (std::size_t i = 0; i < SIZE; ++i) {
+  auto divide(TValueType scalar) -> const Vector<TValueType, TSize> & {
+    for (std::size_t i = 0; i < TSize; ++i) {
       data_[i] /= scalar;
     }
 
     return *this;
   }
 
-  const TVector<TYPE, SIZE> operator/(TYPE scalar) const { return divide(scalar); }
+  auto operator/(TValueType scalar) const -> const Vector<TValueType, TSize> { return divide(scalar); }
 
 #pragma endregion
 
 protected:
-  TYPE data_[SIZE];  // Данные вектора.
+  TValueType data_[TSize];  // Данные вектора.
 };
 
 NAMESPACE_END(math)

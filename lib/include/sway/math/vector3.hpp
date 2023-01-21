@@ -10,17 +10,17 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления вектора из трех компонентов.
  */
-template <typename TYPE>
-class TVector3 final : public TVector<TYPE, 3> {
+template <typename TValueType>
+class Vector3 final : public Vector<TValueType, 3> {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa TVector3(TYPE, TYPE, TYPE)
+   * @sa Vector3(TValueType, TValueType, TValueType)
    */
-  TVector3()
-      : TVector<TYPE, 3>() {}
+  Vector3()
+      : Vector<TValueType, 3>() {}
 
   /**
    * @brief Конструктор класса.
@@ -29,9 +29,9 @@ public:
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
    * @param[in] z Компонент Z вектора.
-   * @sa TVector3()
+   * @sa Vector3()
    */
-  TVector3(TYPE x, TYPE y, TYPE z) { set(x, y, z); }
+  Vector3(TValueType x, TValueType y, TValueType z) { set(x, y, z); }
 
   /**
    * @brief Устанавливает новые значения.
@@ -40,7 +40,7 @@ public:
    * @param[in] y Значение Y компонента.
    * @param[in] z Значение Z компонента.
    */
-  void set(TYPE x, TYPE y, TYPE z) {
+  void set(TValueType x, TValueType y, TValueType z) {
     this->data_[0] = x;
     this->data_[1] = y;
     this->data_[2] = z;
@@ -52,7 +52,7 @@ public:
    * @sa getY() const,
    *     getZ() const
    */
-  TYPE getX() const { return this->data_[0]; }
+  auto getX() const -> TValueType { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -60,7 +60,7 @@ public:
    * @sa getX() const,
    *     getZ() const
    */
-  TYPE getY() const { return this->data_[1]; }
+  auto getY() const -> TValueType { return this->data_[1]; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -68,16 +68,16 @@ public:
    * @sa getX() const,
    *     getY() const
    */
-  TYPE getZ() const { return this->data_[2]; }
+  auto getZ() const -> TValueType { return this->data_[2]; }
 
 #pragma region "Статические методы класса"
 
 #pragma endregion
 };
 
-using vec3i_t = TVector3<s32_t>;
-using vec3f_t = TVector3<f32_t>;
-using vec3d_t = TVector3<f64_t>;
+using vec3i_t = Vector3<s32_t>;
+using vec3f_t = Vector3<f32_t>;
+using vec3d_t = Vector3<f64_t>;
 
 static const vec3i_t vec3i_zero(0, 0, 0);
 static const vec3i_t vec3i_one(1, 1, 1);
@@ -85,11 +85,11 @@ static const vec3i_t vec3i_unitX(1, 0, 0);
 static const vec3i_t vec3i_unitY(0, 1, 0);
 static const vec3i_t vec3i_unitZ(0, 0, 1);
 
-static const vec3f_t vec3f_zero(0.0f, 0.0f, 0.0f);
-static const vec3f_t vec3f_one(1.0f, 1.0f, 1.0f);
-static const vec3f_t vec3f_unitX(1.0f, 0.0f, 0.0f);
-static const vec3f_t vec3f_unitY(0.0f, 1.0f, 0.0f);
-static const vec3f_t vec3f_unitZ(0.0f, 0.0f, 1.0f);
+static const vec3f_t vec3f_zero(0.0F, 0.0F, 0.0F);
+static const vec3f_t vec3f_one(1.0F, 1.0F, 1.0F);
+static const vec3f_t vec3f_unitX(1.0F, 0.0F, 0.0F);
+static const vec3f_t vec3f_unitY(0.0F, 1.0F, 0.0F);
+static const vec3f_t vec3f_unitZ(0.0F, 0.0F, 1.0F);
 
 static const vec3d_t vec3d_zero(0.0, 0.0, 0.0);
 static const vec3d_t vec3d_one(1.0, 1.0, 1.0);
