@@ -48,7 +48,7 @@ TEST(Rect, Offset) {
 }
 
 /**
- * @brief Убеждаемся, что преобразование в TSize<type> проходит правильно.
+ * @brief Убеждаемся, что преобразование в Size<type> проходит правильно.
  */
 TEST(Rect, ConvertToSize) {
   const s32_t x = 8, y = 16, w = 32, h = 64;

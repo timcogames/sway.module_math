@@ -26,7 +26,7 @@ TEST(Point, ComponentConstructor) {
   ASSERT_EQ(point.getY(), y);
 }
 
-TEST(TPoint, ScalarConstructor) {
+TEST(Point, ScalarConstructor) {
   const math::point2i_t size(math::point2i_one);
 
   ASSERT_EQ(size.getX(), 1);

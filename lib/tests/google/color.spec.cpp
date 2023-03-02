@@ -31,7 +31,7 @@ TEST(Color, ComponentConstructor) {
 }
 
 /**
- * @brief Убеждаемся, что преобразование в TVector4<type> проходит правильно.
+ * @brief Убеждаемся, что преобразование в Vector4<type> проходит правильно.
  */
 TEST(TColor, ConvertToVector4) {
   const f32_t r = 0.1F, g = 0.2F, b = 0.3F, a = 1.0F;
