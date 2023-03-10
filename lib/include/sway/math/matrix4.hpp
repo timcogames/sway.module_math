@@ -89,6 +89,12 @@ public:
 
     return *this;
   }
+
+  auto operator*(const Matrix4<TValueType> &mat) const -> const Matrix4<TValueType> {
+    Matrix4<TValueType> result(*this);
+    result.multiply(mat);
+    return result;
+  }
 };
 
 using mat4i_t = Matrix4<s32_t>;

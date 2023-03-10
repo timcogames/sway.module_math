@@ -45,12 +45,6 @@ public:
     return this->multiply<TRows>(mat.getData());
   }
 
-  auto operator*(const Matrix<TRows, TColumns, TValueType> &mat) const -> const Matrix<TRows, TColumns, TValueType> {
-    Matrix<TRows, TColumns, TValueType> result(*this);
-    result.multiply(mat);
-    return result;
-  }
-
   void setData(const std::array<TValueType, TMatrixSize> &arr) { data_ = arr; }
 
   auto getData() const -> std::array<TValueType, TMatrixSize> { return data_; }
