@@ -2,11 +2,10 @@
 #define SWAY_MATH_MATRIX4_HPP
 
 #include <sway/core.hpp>
+#include <sway/math/matrix.hpp>
 #include <sway/math/vector4.hpp>
 
 #include <array>
-
-constexpr int MAXTRIX_SIZE = 16;
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -18,31 +17,13 @@ class Vector4;
  * @brief Шаблонный класс представления матрицы.
  */
 template <typename TValueType>
-class Matrix4 final {
+class Matrix4 final : public Matrix<4, 4, TValueType> {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
    */
   Matrix4() { makeIdentity(); }
-
-  /**
-   * @brief Устанавливает новое значение элемента матрицы.
-   *
-   * @param[in] row Номер ряда.
-   * @param[in] col Номер колонки.
-   * @param[in] val Значения элемента матрицы.
-   */
-  void set(u32_t row, u32_t col, TValueType val) { values_[row * 4 + col] = val; }
-
-  /**
-   * @brief Получает значение элемента матрицы.
-   *
-   * @param[in] row Номер ряда.
-   * @param[in] col Номер колонки.
-   * @return Значения элемента.
-   */
-  auto get(u32_t row, u32_t col) const -> TValueType { return values_[row * 4 + col]; }
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
@@ -52,10 +33,10 @@ public:
    * @sa setCol(u32_t, const Vector4<TValueType> &)
    */
   void setRow(u32_t nbr, const Vector4<TValueType> &val) {
-    set(nbr, 0, val.getX());
-    set(nbr, 1, val.getY());
-    set(nbr, 2, val.getZ());
-    set(nbr, 3, val.getW());
+    this->setValue(nbr, 0, val.getX());
+    this->setValue(nbr, 1, val.getY());
+    this->setValue(nbr, 2, val.getZ());
+    this->setValue(nbr, 3, val.getW());
   }
 
   /**
@@ -66,7 +47,8 @@ public:
    * @sa getCol(u32_t) const
    */
   auto getRow(u32_t nbr) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(get(nbr, 0), get(nbr, 1), get(nbr, 2), get(nbr, 3));
+    return Vector4<TValueType>(
+        this->getValue(nbr, 0), this->getValue(nbr, 1), this->getValue(nbr, 2), this->getValue(nbr, 3));
   }
 
   /**
@@ -77,10 +59,10 @@ public:
    * @sa setRow(u32_t, const Vector4<TValueType> &)
    */
   void setCol(u32_t nbr, const Vector4<TValueType> &val) {
-    set(0, nbr, val.getX());
-    set(1, nbr, val.getY());
-    set(2, nbr, val.getZ());
-    set(3, nbr, val.getW());
+    this->setValue(0, nbr, val.getX());
+    this->setValue(1, nbr, val.getY());
+    this->setValue(2, nbr, val.getZ());
+    this->setValue(3, nbr, val.getW());
   }
 
   /**
@@ -91,34 +73,22 @@ public:
    * @sa getRow(u32_t) const
    */
   auto getCol(u32_t nbr) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(get(0, nbr), get(1, nbr), get(2, nbr), get(3, nbr));
-  }
-
-  /**
-   * @brief Обнуляет все элементы матрицы.
-   */
-  auto makeZero() -> Matrix4<TValueType> & {
-    values_.fill(0);
-    return *this;
+    return Vector4<TValueType>(
+        this->getValue(0, nbr), this->getValue(1, nbr), this->getValue(2, nbr), this->getValue(3, nbr));
   }
 
   /**
    * @brief Приводит к единичной матрице.
    */
   auto makeIdentity() -> Matrix4<TValueType> & {
-    makeZero();
-    set(0, 0, (TValueType)1);
-    set(1, 1, (TValueType)1);
-    set(2, 2, (TValueType)1);
-    set(3, 3, (TValueType)1);
+    this->makeZero();
+    this->setValue(0, 0, (TValueType)1);
+    this->setValue(1, 1, (TValueType)1);
+    this->setValue(2, 2, (TValueType)1);
+    this->setValue(3, 3, (TValueType)1);
 
     return *this;
   }
-
-  auto get() -> std::array<TValueType, MAXTRIX_SIZE> { return values_; }
-
-private:
-  std::array<TValueType, MAXTRIX_SIZE> values_;  // Элементы матрицы.
 };
 
 using mat4i_t = Matrix4<s32_t>;

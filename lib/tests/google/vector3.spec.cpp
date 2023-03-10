@@ -36,3 +36,16 @@ TEST(Vector3, Divide) {
 
   EXPECT_TRUE(vec3.equals(math::vec3i_t(2, 3, 4)));
 }
+
+TEST(Vector3, Added) {
+  math::vec3i_t vec3(1, 2, 3);
+
+  vec3 = vec3.add(math::vec3i_t(2, 1, 0));
+  EXPECT_TRUE(vec3.equals(math::vec3i_t(3, 3, 3)));
+
+  vec3 = vec3 + math::vec3i_t(1, 1, 1);
+  EXPECT_TRUE(vec3.equals(math::vec3i_t(4, 4, 4)));
+
+  vec3 += math::vec3i_t(1, 1, 1);
+  EXPECT_TRUE(vec3.equals(math::vec3i_t(5, 5, 5)));
+}

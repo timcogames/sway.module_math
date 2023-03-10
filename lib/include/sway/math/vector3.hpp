@@ -70,9 +70,13 @@ public:
    */
   auto getZ() const -> TValueType { return this->data_[2]; }
 
-#pragma region "Статические методы класса"
+  auto add(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] + vec.getX(), this->data_[1] + vec.getY(), this->data_[2] + vec.getZ());
+  }
 
-#pragma endregion
+  auto operator+(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return add(vec); }
+
+  auto operator+=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & { return *this = add(vec); }
 };
 
 using vec3i_t = Vector3<s32_t>;

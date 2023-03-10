@@ -18,12 +18,12 @@ public:
 
   auto ortho(f32_t left, f32_t top, f32_t right, f32_t bottom, f32_t nearPlane, f32_t farPlane) -> mat4f_t {
     mat4f_t projmat;
-    projmat.set(0, 0, 2.0 / (right - left));
-    projmat.set(1, 1, 2.0 / (top - bottom));
-    projmat.set(2, 2, -(2.0) / (farPlane - nearPlane));
-    projmat.set(3, 0, -(right + left) / (right - left));
-    projmat.set(3, 1, -(top + bottom) / (top - bottom));
-    projmat.set(3, 2, -((farPlane + nearPlane) / (farPlane - nearPlane)));
+    projmat.setValue(0, 0, 2.0 / (right - left));
+    projmat.setValue(1, 1, 2.0 / (top - bottom));
+    projmat.setValue(2, 2, -(2.0) / (farPlane - nearPlane));
+    projmat.setValue(3, 0, -(right + left) / (right - left));
+    projmat.setValue(3, 1, -(top + bottom) / (top - bottom));
+    projmat.setValue(3, 2, -((farPlane + nearPlane) / (farPlane - nearPlane)));
 
     return projmat;
   }
