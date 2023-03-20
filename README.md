@@ -1,6 +1,6 @@
 # sway.module_math
 
-[![BCH compliance][bettercodehub-svg]][bettercodehub-url] [![Documentation][codedocs-svg]][codedocs-url] [![License][license-svg]][license-url]
+[![codecov][codecov-svg]][codecov-url] [![Documentation][codedocs-svg]][codedocs-url] [![License][license-svg]][license-url]
 
 ### Клонирование проекта
 
@@ -34,8 +34,8 @@ cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest 
 cmake --build .
 ```
 
-[bettercodehub-svg]: https://bettercodehub.com/edge/badge/timcogames/sway.module_math?branch=master
-[bettercodehub-url]: https://bettercodehub.com/
+[codecov-svg]: https://codecov.io/gh/timcogames/sway.module_math/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/timcogames/sway.module_math
 [codedocs-svg]: https://codedocs.xyz/timcogames/sway.module_math.svg
 [codedocs-url]: https://codedocs.xyz/timcogames/sway.module_math/
 [license-svg]: https://img.shields.io/github/license/mashape/apistatus.svg
