@@ -24,8 +24,9 @@ cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest 
 
 Опция сборки | Тип | Описание | По умолчанию
 :---|:---|:---|:---:
-`CUSTOM_GTEST_ROOT_DIR` | `PATH` | Путь до корневой директории Google библиотеки | `-`
+`MODULE_MATH_ENABLE_COVERAGE` | `BOOL` | Включает поддержку сбора данных о покрытии кода тестами | `OFF`
 `MODULE_MATH_ENABLE_TESTS` | `BOOL` | Включает построение тестов | `OFF`
+`CUSTOM_GTEST_ROOT_DIR` | `PATH` | Путь до корневой директории Google библиотеки | `-`
 
 Запускаем сборку
 

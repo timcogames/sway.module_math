@@ -13,6 +13,7 @@ set(META_MATH_VERSION_PATCH 16)
 set(META_MATH_VERSION ${META_MATH_VERSION_MAJOR}.${META_MATH_VERSION_MINOR}.${META_MATH_VERSION_PATCH})
 
 # Опции сборки
+option(MODULE_MATH_ENABLE_COVERAGE "Enable coverage builds" OFF)
 option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 option(CUSTOM_GTEST_ROOT_DIR "GTest root directory" OFF)
 
@@ -21,6 +22,13 @@ if (NOT CMAKE_BUILD_TYPE)
 endif ()
 
 project(${META_MATH_PRJNAME} VERSION ${META_MATH_VERSION} LANGUAGES CXX)
+
+if (MODULE_MATH_ENABLE_COVERAGE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftest-coverage")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif ()
 
 # Определяем каталог вывода по умолчанию
 if (CMAKE_BUILD_TYPE MATCHES Debug)
