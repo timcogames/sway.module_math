@@ -1,6 +1,7 @@
 node {
     stage('Build') {
         git url: 'https://github.com/timcogames/sway.module_math.git', branch: 'master'
+        sh 'git submodule update --init --recursive'
         sh 'mkdir -p build'
         dir('./build') {
             sh '/opt/homebrew/Cellar/cmake/3.22.1/bin/cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DMODULE_MATH_ENABLE_TESTS=ON -DMODULE_MATH_ENABLE_COVERAGE=ON ../'
