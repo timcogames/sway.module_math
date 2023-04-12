@@ -2,6 +2,7 @@
 #define SWAY_MATH_RECT_HPP
 
 #include <sway/core.hpp>
+#include <sway/math/point.hpp>
 #include <sway/math/size.hpp>
 
 NAMESPACE_BEGIN(sway)
@@ -127,9 +128,13 @@ public:
    */
   auto toSize() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
 
-  auto isEmpty() const -> bool { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
+  [[nodiscard]] auto isEmpty() const -> bool { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
 
-  auto isValid() const -> bool { return ((top_ > bottom_) || (left_ > right_)) ? false : false; }
+  [[nodiscard]] auto isValid() const -> bool { return ((top_ > bottom_) || (left_ > right_)) ? false : false; }
+
+  auto contains(const math::Point<TValueType> &point) const -> bool {
+    return left_ <= point.getX() && right_ >= point.getX() && top_ <= point.getY() && bottom_ >= point.getY();
+  }
 
 private:
   TValueType left_, top_, right_, bottom_;

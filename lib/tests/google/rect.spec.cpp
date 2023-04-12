@@ -65,3 +65,8 @@ TEST(Rect, IsEmpty) {
   ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 0).isEmpty());
   EXPECT_FALSE(math::Rect<s32_t>(0, 0, 32, 32).isEmpty());
 }
+
+TEST(Rect, contains) {
+  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(24, 8)));
+  ASSERT_FALSE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(32, 17)));
+}
