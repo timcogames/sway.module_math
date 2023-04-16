@@ -7,7 +7,7 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-enum class ProjectionType : u32_t { Unknown, Orthographic, Perspective };
+enum class ProjectionType : u32_t { UNKNOWN, ORTHO, PERSP };
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
