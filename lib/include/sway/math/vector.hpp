@@ -29,19 +29,12 @@ public:
     }
   }
 
-  /**
-   * @brief Возвращает необработанные данные.
-   *
-   * @sa data() const
-   */
-  auto data() -> TValueType * { return data_; }
+  void setData(const std::array<TValueType, TSize> &arr) { data_ = arr; }
 
   /**
    * @brief Возвращает необработанные данные.
-   *
-   * @sa data()
    */
-  auto data() const -> const TValueType * { return data_; }
+  auto getData() const -> std::array<TValueType, TSize> { return data_; }
 
 #pragma region "Доступ к массиву"
 
@@ -133,7 +126,7 @@ public:
 #pragma endregion
 
 protected:
-  TValueType data_[TSize];  // Данные вектора.
+  std::array<TValueType, TSize> data_;  // Данные вектора.
 };
 
 NAMESPACE_END(math)
