@@ -58,11 +58,13 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
-  void offset(TValueType x, TValueType y) {
+  auto offset(TValueType x, TValueType y) -> Rect<TValueType> {
     left_ += x;
     top_ += y;
     right_ += x;
     bottom_ += y;
+
+    return *this;
   }
 
   /**
