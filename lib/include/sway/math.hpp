@@ -1,6 +1,7 @@
 #ifndef SWAY_MATH_HPP
 #define SWAY_MATH_HPP
 
+#include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
 #include <sway/math/extensions/projection.hpp>
 #include <sway/math/extensions/projectiontypes.hpp>

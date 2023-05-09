@@ -3,7 +3,6 @@
 
 #include <sway/core.hpp>
 #include <sway/math/vector4.hpp>
-#include <sway/namespacemacros.hpp>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -100,6 +99,8 @@ private:
 using col4i_t = Color<s32_t>;
 using col4f_t = Color<f32_t>;
 using col4d_t = Color<f64_t>;
+
+#define COL4F_WHITE math::col4f_t(1.0F, 1.0F, 1.0F, 1.0F)
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
