@@ -91,11 +91,15 @@ public:
    */
   auto toRect() const -> Rect<TValueType> { return Rect<TValueType>((TValueType)0, (TValueType)0, w_, h_); }
 
+  auto operator/(const TValueType &rvalue) const -> Size<TValueType> {
+    return Size<TValueType>(w_ / rvalue, h_ / rvalue);
+  }
+
   /**
    * @brief Оператор равенства.
    */
   template <typename TOther>
-  bool operator==(const Size<TOther> &compare) const {
+  auto operator==(const Size<TOther> &compare) const -> bool {
     return w_ == compare.getW() && h_ == compare.getH();
   }
 
@@ -103,7 +107,7 @@ public:
    * @brief Оператор неравенства.
    */
   template <typename TOther>
-  bool operator!=(const Size<TOther> &compare) const {
+  auto operator!=(const Size<TOther> &compare) const -> bool {
     return !operator==(compare);
   }
 
