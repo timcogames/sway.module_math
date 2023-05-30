@@ -91,6 +91,10 @@ public:
    */
   auto toRect() const -> Rect<TValueType> { return Rect<TValueType>((TValueType)0, (TValueType)0, w_, h_); }
 
+  auto operator*(const TValueType &rvalue) const -> Size<TValueType> {
+    return Size<TValueType>(w_ * rvalue, h_ * rvalue);
+  }
+
   auto operator/(const TValueType &rvalue) const -> Size<TValueType> {
     return Size<TValueType>(w_ / rvalue, h_ / rvalue);
   }

@@ -53,3 +53,17 @@ TEST(Size, NonEqualityOperator) {
   EXPECT_TRUE(size != math::size2i_one);
   EXPECT_FALSE(size != math::size2i_t(2, 1));
 }
+
+TEST(Size, MultiplyOperator) {
+  math::size2i_t size(2, 7);
+  size = size * 3;
+
+  EXPECT_TRUE(size == math::size2i_t(6, 21));
+}
+
+TEST(Size, DivideOperator) {
+  math::size2i_t size(4, 16);
+  size = size / 2;
+
+  EXPECT_TRUE(size == math::size2i_t(2, 8));
+}
