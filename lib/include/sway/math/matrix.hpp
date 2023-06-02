@@ -41,8 +41,8 @@ public:
     return *this;
   }
 
-  auto multiply(const Matrix<TRows, TColumns, TValueType> &mat) -> Matrix<TRows, TColumns, TValueType> {
-    return this->multiply<TRows>(mat.getData());
+  auto multiply(const Matrix<TRows, TColumns, TValueType> &mtx) -> Matrix<TRows, TColumns, TValueType> {
+    return this->multiply<TRows>(mtx.getData());
   }
 
   void setData(const std::array<TValueType, TMatrixSize> &arr) { data_ = arr; }
