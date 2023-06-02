@@ -70,13 +70,69 @@ public:
    */
   auto getZ() const -> TValueType { return this->data_[2]; }
 
-  auto add(const Vector3<TValueType> &vtr) const -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->data_[0] + vtr.getX(), this->data_[1] + vtr.getY(), this->data_[2] + vtr.getZ());
+  auto add(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] + vec.getX(), this->data_[1] + vec.getY(), this->data_[2] + vec.getZ());
   }
 
-  auto operator+(const Vector3<TValueType> &vtr) const -> Vector3<TValueType> { return add(vtr); }
+  auto operator+(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return add(vec); }
 
-  auto operator+=(const Vector3<TValueType> &vtr) -> Vector3<TValueType> & { return *this = add(vtr); }
+  auto operator+=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & { return *this = add(vec); }
+
+  auto subtract(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] - vec.getX(), this->data_[1] - vec.getY(), this->data_[2] - vec.getZ());
+  }
+
+  auto operator-(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return subtract(vec); }
+
+  auto operator-=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+    *this = subtract(vec);
+    return *this;
+  }
+
+  auto multiply(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] * vec.getX(), this->data_[1] * vec.getY(), this->data_[2] * vec.getZ());
+  }
+
+  auto operator*(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return multiply(vec); }
+
+  auto operator*=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+    *this = multiply(vec);
+    return *this;
+  }
+
+  auto multiply(TValueType scalar) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] * scalar, this->data_[1] * scalar, this->data_[2] * scalar);
+  }
+
+  auto operator*(TValueType scalar) const -> Vector3<TValueType> { return multiply(scalar); }
+
+  auto operator*=(TValueType scalar) -> Vector3<TValueType> & {
+    *this = multiply(scalar);
+    return *this;
+  }
+
+  auto divide(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(
+        this->data_[0] /= vec.getX(), this->data_[1] /= vec.getY(), this->data_[2] /= vec.getZ());
+  }
+
+  auto operator/(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return divide(vec); }
+
+  auto operator/=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+    *this = divide(vec);
+    return *this;
+  }
+
+  auto divide(TValueType scalar) const -> Vector3<TValueType> {
+    return Vector3<TValueType>(this->data_[0] /= scalar, this->data_[1] /= scalar, this->data_[2] /= scalar);
+  }
+
+  auto operator/(TValueType scalar) const -> Vector3<TValueType> { return divide(scalar); }
+
+  auto operator/=(TValueType scalar) -> Vector3<TValueType> & {
+    *this = divide(scalar);
+    return *this;
+  }
 };
 
 using vec3i_t = Vector3<s32_t>;
