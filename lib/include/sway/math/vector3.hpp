@@ -22,6 +22,10 @@ public:
     return Vector3<TValueType>();
   }
 
+  static auto dot(const Vector3<TValueType> &a, const Vector3<TValueType> &b) -> f32_t {
+    return (a.getX() * b.getX()) + (a.getY() * b.getY()) + (a.getZ() * b.getZ());
+  }
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
@@ -100,11 +104,11 @@ public:
     return *this;
   }
 
-  auto multiply(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
+  auto multiply(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
     return Vector3<TValueType>(this->data_[0] * vec.getX(), this->data_[1] * vec.getY(), this->data_[2] * vec.getZ());
   }
 
-  auto operator*(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return multiply(vec); }
+  auto operator*(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return multiply(vec); }
 
   auto operator*=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
     *this = multiply(vec);
