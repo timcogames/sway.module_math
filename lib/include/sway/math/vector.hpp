@@ -67,13 +67,13 @@ public:
   /**
    * @brief Сравнивает два вектора на наличие равенства.
    *
-   * @param[in] vector Вектор с которым следует сравнить.
+   * @param[in] vec Вектор с которым следует сравнить.
    * @sa operator==(const Vector<TValueType, TSize> &) const,
    *     operator!=(const Vector<TValueType, TSize> &) const
    */
-  auto equals(const Vector<TValueType, TSize> &vector) const -> int {
+  auto equals(const Vector<TValueType, TSize> &vec) const -> int {
     for (int i = 0; i < TSize; ++i) {
-      if (data_[i] != vector[i]) {
+      if (data_[i] != vec[i]) {
         return 0;
       }
 
@@ -81,9 +81,9 @@ public:
     }
   }
 
-  auto operator==(const Vector<TValueType, TSize> &vector) const -> int { return equals(vector); }
+  auto operator==(const Vector<TValueType, TSize> &vec) const -> int { return equals(vec); }
 
-  auto operator!=(const Vector<TValueType, TSize> &vector) const -> int { return !equals(vector); }
+  auto operator!=(const Vector<TValueType, TSize> &vec) const -> int { return !equals(vec); }
 
 #pragma endregion
 
@@ -92,20 +92,18 @@ public:
   /**
    * @brief Делит указанный вектор на заданный вектор.
    *
-   * @param[in] vector Вектор на который следует разделит.
+   * @param[in] vec Вектор на который следует разделит.
    * @sa operator/(const Vector<TValueType, TSize> &) const
    */
-  auto divide(const Vector<TValueType, TSize> &vector) -> const Vector<TValueType, TSize> & {
+  auto divide(const Vector<TValueType, TSize> &vec) -> const Vector<TValueType, TSize> & {
     for (std::size_t i = 0; i < TSize; ++i) {
-      data_[i] /= vector[i];
+      data_[i] /= vec[i];
     }
 
     return *this;
   }
 
-  auto operator/(const Vector<TValueType, TSize> &vector) const -> const Vector<TValueType, TSize> {
-    return divide(vector);
-  }
+  auto operator/(const Vector<TValueType, TSize> &vec) const -> const Vector<TValueType, TSize> { return divide(vec); }
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.

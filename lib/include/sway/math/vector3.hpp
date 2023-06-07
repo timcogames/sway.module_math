@@ -15,8 +15,8 @@ class Vector3 final : public Vector<TValueType, 3> {
 public:
   static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
     auto lenSquared = vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ();
-    if (lenSquared > 0.0F) {
-      return vec.multiply(1.0F / (f32_t)sqrt(lenSquared));
+    if (lenSquared > (TValueType)0) {
+      return vec.multiply((TValueType)1 / (TValueType)sqrt(lenSquared));
     }
 
     return Vector3<TValueType>();
@@ -115,7 +115,7 @@ public:
     return *this;
   }
 
-  auto multiply(TValueType scalar) -> Vector3<TValueType> {
+  auto multiply(TValueType scalar) const -> Vector3<TValueType> {
     return Vector3<TValueType>(this->data_[0] * scalar, this->data_[1] * scalar, this->data_[2] * scalar);
   }
 
