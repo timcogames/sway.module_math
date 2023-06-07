@@ -49,3 +49,11 @@ TEST(Vector3, Added) {
   vec3 += math::vec3i_t(1, 1, 1);
   EXPECT_TRUE(vec3.equals(math::vec3i_t(5, 5, 5)));
 }
+
+TEST(Vector3, Subtract) {
+  const math::vec3i_t a(1, 2, 3);
+  const math::vec3i_t b(1, 1, 1);
+
+  auto res = a - b;
+  EXPECT_TRUE(res.equals(math::vec3i_t(0, 1, 2)));
+}

@@ -149,28 +149,28 @@ public:
     return result;
   }
 
-  auto multiply(const Vector4<TValueType> &vtr) -> Vector4<TValueType> {
+  auto multiply(const Vector4<TValueType> &vec) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
-    x = this->getValue(0, 0) * vtr.getX() +
-        this->getValue(1, 0) * vtr.getY() +
-        this->getValue(2, 0) * vtr.getZ() +
-        this->getValue(3, 0) * vtr.getW();
+    x = this->getValue(0, 0) * vec.getX() +
+        this->getValue(1, 0) * vec.getY() +
+        this->getValue(2, 0) * vec.getZ() +
+        this->getValue(3, 0) * vec.getW();
 
-    y = this->getValue(0, 1) * vtr.getX() +
-        this->getValue(1, 1) * vtr.getY() +
-        this->getValue(2, 1) * vtr.getZ() +
-        this->getValue(3, 1) * vtr.getW();
+    y = this->getValue(0, 1) * vec.getX() +
+        this->getValue(1, 1) * vec.getY() +
+        this->getValue(2, 1) * vec.getZ() +
+        this->getValue(3, 1) * vec.getW();
 
-    z = this->getValue(0, 2) * vtr.getX() +
-        this->getValue(1, 2) * vtr.getY() +
-        this->getValue(2, 2) * vtr.getZ() +
-        this->getValue(3, 2) * vtr.getW();
+    z = this->getValue(0, 2) * vec.getX() +
+        this->getValue(1, 2) * vec.getY() +
+        this->getValue(2, 2) * vec.getZ() +
+        this->getValue(3, 2) * vec.getW();
 
-    w = this->getValue(0, 3) * vtr.getX() +
-        this->getValue(1, 3) * vtr.getY() +
-        this->getValue(2, 3) * vtr.getZ() +
-        this->getValue(3, 3) * vtr.getW();
+    w = this->getValue(0, 3) * vec.getX() +
+        this->getValue(1, 3) * vec.getY() +
+        this->getValue(2, 3) * vec.getZ() +
+        this->getValue(3, 3) * vec.getW();
     // clang-format on
 
     return Vector4<TValueType>(x, y, z, w);

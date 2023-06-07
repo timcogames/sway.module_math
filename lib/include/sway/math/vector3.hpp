@@ -13,6 +13,15 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Vector3 final : public Vector<TValueType, 3> {
 public:
+  static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
+    auto lenSquared = vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ();
+    if (lenSquared > 0.0F) {
+      return vec.multiply(1.0F / (f32_t)sqrt(lenSquared));
+    }
+
+    return Vector3<TValueType>();
+  }
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
@@ -78,11 +87,13 @@ public:
 
   auto operator+=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & { return *this = add(vec); }
 
-  auto subtract(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
+  [[nodiscard]] auto subtract(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
     return Vector3<TValueType>(this->data_[0] - vec.getX(), this->data_[1] - vec.getY(), this->data_[2] - vec.getZ());
   }
 
   auto operator-(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return subtract(vec); }
+
+  auto operator-(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return subtract(vec); }
 
   auto operator-=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
     *this = subtract(vec);
