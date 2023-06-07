@@ -8,33 +8,62 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
+struct ProjectionDescription {
+  f32_t left;
+  f32_t top;
+  f32_t right;
+  f32_t bottom;
+  f32_t fov;
+  f32_t aspect;
+  f32_t near;
+  f32_t far;
+  f32_t zoom;
+};
+
 class Projection final {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
    */
-  Projection()
-      : zoom_(1.0F) {}
+  Projection(const ProjectionDescription &desc)
+      : desc_(desc) {}
 
-  auto getZoom() const -> f32_t { return zoom_; }
+  void ortho() {
+    auto w = desc_.right - desc_.left;
+    auto h = desc_.top - desc_.bottom;
+    auto d = desc_.far - desc_.near;
 
-  void setZoom(f32_t zoom) { zoom_ = zoom; }
+    auto x = w / (2.0F * desc_.zoom);
+    auto y = h / (2.0F * desc_.zoom);
+    auto z = d / -2.0F;
 
-  auto ortho(f32_t left, f32_t top, f32_t right, f32_t bottom, f32_t nearPlane, f32_t farPlane) -> mat4f_t {
-    mat4f_t mtx;
-    mtx.setValue(0, 0, (right - left) / (2.0F * zoom_));
-    mtx.setValue(1, 1, (top - bottom) / (2.0F * zoom_));
-    mtx.setValue(2, 2, -(2.0F) / (farPlane - nearPlane));
-    mtx.setValue(3, 0, -(right + left) / (right - left));
-    mtx.setValue(3, 1, -(top + bottom) / (top - bottom));
-    mtx.setValue(3, 2, -((farPlane + nearPlane) / (farPlane - nearPlane)));
-
-    return mtx;
+    mtx_.setValue(0, 0, x);
+    mtx_.setValue(1, 1, y);
+    mtx_.setValue(2, 2, z);
+    mtx_.setValue(3, 0, -(desc_.right + desc_.left) / w);
+    mtx_.setValue(3, 1, -(desc_.top + desc_.bottom) / h);
+    mtx_.setValue(3, 2, -(desc_.far + desc_.near) / d);
   }
 
+  void pers() {
+    mtx_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
+    mtx_.setValue(1, 1, 1 / tan(desc_.fov / 2));
+    mtx_.setValue(2, 2, (desc_.near + desc_.far) / (desc_.near - desc_.far));
+    mtx_.setValue(2, 3, -1);
+    mtx_.setValue(3, 2, (2 * desc_.near * desc_.far) / (desc_.near - desc_.far));
+    mtx_.setValue(3, 3, 0);
+  }
+
+  auto getDescription() const -> ProjectionDescription { return desc_; }
+
+  auto getData() const -> std::array<f32_t, 16> { return mtx_.getData(); }
+
+  void setZoom(f32_t zoom) { desc_.zoom = zoom; }
+
 private:
-  f32_t zoom_;
+  ProjectionDescription desc_;
+  mat4f_t mtx_;
 };
 
 NAMESPACE_END(math)

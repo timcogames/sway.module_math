@@ -17,13 +17,16 @@ class Vector4;
  * @brief Шаблонный класс представления матрицы.
  */
 template <typename TValueType>
-class Matrix4 final : public Matrix<4, 4, TValueType> {
+class Matrix4 : public Matrix<4, 4, TValueType> {
 public:
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
    */
   Matrix4() { makeIdentity(); }
+
+  Matrix4(const Matrix<4, 4, TValueType> &mtx)
+      : Matrix<4, 4, TValueType>(mtx) {}
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
@@ -81,7 +84,6 @@ public:
    * @brief Приводит к единичной матрице.
    */
   auto makeIdentity() -> Matrix4<TValueType> & {
-    this->makeZero();
     this->setValue(0, 0, (TValueType)1);
     this->setValue(1, 1, (TValueType)1);
     this->setValue(2, 2, (TValueType)1);
@@ -147,7 +149,7 @@ public:
     return result;
   }
 
-  auto multiplyVEC4(const Vector4<TValueType> &vtr) -> Vector4<TValueType> {
+  auto multiply(const Vector4<TValueType> &vtr) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
     x = this->getValue(0, 0) * vtr.getX() +
@@ -172,6 +174,10 @@ public:
     // clang-format on
 
     return Vector4<TValueType>(x, y, z, w);
+  }
+
+  auto multiply(const Matrix4<TValueType> &mtx) -> Matrix4<TValueType> {
+    return this->template multiply_<4>(mtx.getData());
   }
 
   auto operator*(const Matrix4<TValueType> &mtx) const -> const Matrix4<TValueType> {

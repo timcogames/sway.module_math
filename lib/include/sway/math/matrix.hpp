@@ -21,28 +21,14 @@ public:
     return mtx;
   }
 
+  Matrix() { this->makeZero(); }
+
+  Matrix(const Matrix<TRows, TColumns, TValueType> &mtx)
+      : data_(mtx.getData()) {}
+
   auto makeZero() -> Matrix<TRows, TColumns, TValueType> & {
     data_.fill(0);
     return *this;
-  }
-
-  template <int TInner>
-  auto multiply(const std::array<TValueType, TRows * TColumns> &arr) -> Matrix<TRows, TColumns, TValueType> {
-    std::array<TValueType, TRows *TColumns> result = {};
-    for (int row = 0; row < TRows; ++row) {
-      for (int col = 0; col < TColumns; ++col) {
-        for (int i = 0; i < TInner; ++i) {
-          result[row * TRows + col] += this->getValue(row, i) * arr[i * TInner + col];
-        }
-      }
-    }
-
-    this->setData(result);
-    return *this;
-  }
-
-  auto multiply(const Matrix<TRows, TColumns, TValueType> &mtx) -> Matrix<TRows, TColumns, TValueType> {
-    return this->multiply<TRows>(mtx.getData());
   }
 
   void setData(const std::array<TValueType, TMatrixSize> &arr) { data_ = arr; }
@@ -70,6 +56,21 @@ public:
   auto getValue(u32_t elm) const -> TValueType { return data_[elm]; }
 
 protected:
+  template <int TInner>
+  auto multiply_(const std::array<TValueType, TRows * TColumns> &arr) -> Matrix<TRows, TColumns, TValueType> {
+    std::array<TValueType, TRows *TColumns> result = {};
+    for (int row = 0; row < TRows; ++row) {
+      for (int col = 0; col < TColumns; ++col) {
+        for (int i = 0; i < TInner; ++i) {
+          result[row * TRows + col] += this->getValue(row, i) * arr[i * TInner + col];
+        }
+      }
+    }
+
+    this->setData(result);
+    return *this;
+  }
+
   std::array<TValueType, TMatrixSize> data_;  // Элементы матрицы.
 };
 

@@ -83,7 +83,7 @@ TEST(Matrix4, Multiply) {
   for (int i = 0; i < 16; ++i) {
     wss.str(L"");
     wss << mtxA.getData()[i] << std::ends;
-    printf("%s ", wss.str().c_str());
+    printf("%s ", (lpstr_t)wss.str().c_str());
     if ((i + 1) % 4 == 0) {
       printf("\n");
     }
@@ -96,7 +96,7 @@ TEST(Matrix4, Multiply) {
   for (int i = 0; i < 16; ++i) {
     wss.str(L"");
     wss << result.getValue(i) << std::ends;
-    printf("%s ", wss.str().c_str());
+    printf("%s ", (lpstr_t)wss.str().c_str());
     if ((i + 1) % 4 == 0) {
       printf("\n");
     }
