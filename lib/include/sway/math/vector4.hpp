@@ -58,6 +58,8 @@ public:
    */
   auto getX() const -> TValueType { return this->data_[0]; }
 
+  void setX(TValueType val) { this->data_[0] = val; }
+
   /**
    * @brief Получает значение Y компонента.
    *
@@ -66,6 +68,8 @@ public:
    *     getW() const
    */
   auto getY() const -> TValueType { return this->data_[1]; }
+
+  void setY(TValueType val) { this->data_[1] = val; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -76,6 +80,8 @@ public:
    */
   auto getZ() const -> TValueType { return this->data_[2]; }
 
+  void setZ(TValueType val) { this->data_[2] = val; }
+
   /**
    * @brief Получает значение W компонента.
    *
@@ -84,6 +90,8 @@ public:
    *     getZ() const
    */
   auto getW() const -> TValueType { return this->data_[3]; }
+
+  void setW(TValueType val) { this->data_[3] = val; }
 };
 
 using vec4i_t = Vector4<s32_t>;

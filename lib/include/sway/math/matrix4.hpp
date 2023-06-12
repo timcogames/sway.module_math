@@ -92,7 +92,7 @@ public:
     return *this;
   }
 
-  auto inverse() -> Matrix4<TValueType> {
+  auto inverse() const -> Matrix4<TValueType> {
     const auto &mtx = *((const Matrix4<TValueType> *)this);
 
     auto a00 = mtx.getValue(0, 0);

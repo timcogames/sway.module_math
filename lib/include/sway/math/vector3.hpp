@@ -13,6 +13,8 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Vector3 final : public Vector<TValueType, 3> {
 public:
+  static auto from(std::array<TValueType, 4> data) { return Vector3<TValueType>(data[0], data[1], data[2]); }
+
   static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
     auto lenSquared = vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ();
     if (lenSquared > (TValueType)0) {
@@ -22,8 +24,8 @@ public:
     return Vector3<TValueType>();
   }
 
-  static auto dot(const Vector3<TValueType> &a, const Vector3<TValueType> &b) -> f32_t {
-    return (a.getX() * b.getX()) + (a.getY() * b.getY()) + (a.getZ() * b.getZ());
+  static auto dot(const Vector3<TValueType> &lhs, const Vector3<TValueType> &rhs) -> f32_t {
+    return (lhs.getX() * rhs.getX()) + (lhs.getY() * rhs.getY()) + (lhs.getZ() * rhs.getZ());
   }
 
   /**

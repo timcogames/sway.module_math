@@ -42,7 +42,7 @@ public:
    * @param[in] col Номер колонки.
    * @param[in] val Значения элемента матрицы.
    */
-  void setValue(u32_t row, u32_t col, TValueType val) { data_[row * TRows + col] = val; }
+  void setValue(u32_t row, u32_t col, TValueType val) { data_[col * TColumns + row] = val; }
 
   /**
    * @brief Получает значение элемента матрицы.
@@ -51,7 +51,7 @@ public:
    * @param[in] col Номер колонки.
    * @return Значения элемента.
    */
-  auto getValue(u32_t row, u32_t col) const -> TValueType { return data_[row * TRows + col]; }
+  auto getValue(u32_t row, u32_t col) const -> TValueType { return data_[col * TColumns + row]; }
 
   auto getValue(u32_t elm) const -> TValueType { return data_[elm]; }
 
