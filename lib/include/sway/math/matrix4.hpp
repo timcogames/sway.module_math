@@ -22,22 +22,22 @@ public:
   static Matrix4<TValueType> multiply(Matrix4<TValueType> lhs, Matrix4<TValueType> rhs) {
     Matrix4<TValueType> result;
     // clang-format off
-    result.setValue(0, 0, lhs.getValue(0,0)*rhs.getValue(0,0) + lhs.getValue(1,0)*rhs.getValue(0,1) + lhs.getValue(2,0)*rhs.getValue(0,2) + lhs.getValue(3,0)*rhs.getValue(0,3));
-    result.setValue(1, 0, lhs.getValue(0,0)*rhs.getValue(1,0) + lhs.getValue(1,0)*rhs.getValue(1,1) + lhs.getValue(2,0)*rhs.getValue(1,2) + lhs.getValue(3,0)*rhs.getValue(1,3));
-    result.setValue(2, 0, lhs.getValue(0,0)*rhs.getValue(2,0) + lhs.getValue(1,0)*rhs.getValue(2,1) + lhs.getValue(2,0)*rhs.getValue(2,2) + lhs.getValue(3,0)*rhs.getValue(2,3));
-    result.setValue(3, 0, lhs.getValue(0,0)*rhs.getValue(3,0) + lhs.getValue(1,0)*rhs.getValue(3,1) + lhs.getValue(2,0)*rhs.getValue(3,2) + lhs.getValue(3,0)*rhs.getValue(3,3));
-    result.setValue(0, 1, lhs.getValue(0,1)*rhs.getValue(0,0) + lhs.getValue(1,1)*rhs.getValue(0,1) + lhs.getValue(2,1)*rhs.getValue(0,2) + lhs.getValue(3,1)*rhs.getValue(0,3));
-    result.setValue(1, 1, lhs.getValue(0,1)*rhs.getValue(1,0) + lhs.getValue(1,1)*rhs.getValue(1,1) + lhs.getValue(2,1)*rhs.getValue(1,2) + lhs.getValue(3,1)*rhs.getValue(1,3));
-    result.setValue(2, 1, lhs.getValue(0,1)*rhs.getValue(2,0) + lhs.getValue(1,1)*rhs.getValue(2,1) + lhs.getValue(2,1)*rhs.getValue(2,2) + lhs.getValue(3,1)*rhs.getValue(2,3));
-    result.setValue(3, 1, lhs.getValue(0,1)*rhs.getValue(3,0) + lhs.getValue(1,1)*rhs.getValue(3,1) + lhs.getValue(2,1)*rhs.getValue(3,2) + lhs.getValue(3,1)*rhs.getValue(3,3));
-    result.setValue(0, 2, lhs.getValue(0,2)*rhs.getValue(0,0) + lhs.getValue(1,2)*rhs.getValue(0,1) + lhs.getValue(2,2)*rhs.getValue(0,2) + lhs.getValue(3,2)*rhs.getValue(0,3));
-    result.setValue(1, 2, lhs.getValue(0,2)*rhs.getValue(1,0) + lhs.getValue(1,2)*rhs.getValue(1,1) + lhs.getValue(2,2)*rhs.getValue(1,2) + lhs.getValue(3,2)*rhs.getValue(1,3));
-    result.setValue(2, 2, lhs.getValue(0,2)*rhs.getValue(2,0) + lhs.getValue(1,2)*rhs.getValue(2,1) + lhs.getValue(2,2)*rhs.getValue(2,2) + lhs.getValue(3,2)*rhs.getValue(2,3));
-    result.setValue(3, 2, lhs.getValue(0,2)*rhs.getValue(3,0) + lhs.getValue(1,2)*rhs.getValue(3,1) + lhs.getValue(2,2)*rhs.getValue(3,2) + lhs.getValue(3,2)*rhs.getValue(3,3));
-    result.setValue(0, 3, lhs.getValue(0,3)*rhs.getValue(0,0) + lhs.getValue(1,3)*rhs.getValue(0,1) + lhs.getValue(3,3)*rhs.getValue(0,2) + lhs.getValue(3,3)*rhs.getValue(0,3));
-    result.setValue(1, 3, lhs.getValue(0,3)*rhs.getValue(1,0) + lhs.getValue(1,3)*rhs.getValue(1,1) + lhs.getValue(3,3)*rhs.getValue(1,2) + lhs.getValue(3,3)*rhs.getValue(1,3));
-    result.setValue(2, 3, lhs.getValue(0,3)*rhs.getValue(2,0) + lhs.getValue(1,3)*rhs.getValue(2,1) + lhs.getValue(3,3)*rhs.getValue(2,2) + lhs.getValue(3,3)*rhs.getValue(2,3));
-    result.setValue(3, 3, lhs.getValue(0,3)*rhs.getValue(3,0) + lhs.getValue(1,3)*rhs.getValue(3,1) + lhs.getValue(3,3)*rhs.getValue(3,2) + lhs.getValue(3,3)*rhs.getValue(3,3));
+    result.setValue(0, 0, lhs.getValue(0, 0) * rhs.getValue(0, 0) + lhs.getValue(0, 1) * rhs.getValue(1, 0) + lhs.getValue(0, 2) * rhs.getValue(2, 0) + lhs.getValue(0, 3) * rhs.getValue(3, 0));
+    result.setValue(0, 1, lhs.getValue(0, 0) * rhs.getValue(0, 1) + lhs.getValue(0, 1) * rhs.getValue(1, 1) + lhs.getValue(0, 2) * rhs.getValue(2, 1) + lhs.getValue(0, 3) * rhs.getValue(3, 1));
+    result.setValue(0, 2, lhs.getValue(0, 0) * rhs.getValue(0, 2) + lhs.getValue(0, 1) * rhs.getValue(1, 2) + lhs.getValue(0, 2) * rhs.getValue(2, 2) + lhs.getValue(0, 3) * rhs.getValue(3, 2));
+    result.setValue(0, 3, lhs.getValue(0, 0) * rhs.getValue(0, 3) + lhs.getValue(0, 1) * rhs.getValue(1, 3) + lhs.getValue(0, 2) * rhs.getValue(2, 3) + lhs.getValue(0, 3) * rhs.getValue(3, 3));
+    result.setValue(1, 0, lhs.getValue(1, 0) * rhs.getValue(0, 0) + lhs.getValue(1, 1) * rhs.getValue(1, 0) + lhs.getValue(1, 2) * rhs.getValue(2, 0) + lhs.getValue(1, 3) * rhs.getValue(3, 0));
+    result.setValue(1, 1, lhs.getValue(1, 0) * rhs.getValue(0, 1) + lhs.getValue(1, 1) * rhs.getValue(1, 1) + lhs.getValue(1, 2) * rhs.getValue(2, 1) + lhs.getValue(1, 3) * rhs.getValue(3, 1));
+    result.setValue(1, 2, lhs.getValue(1, 0) * rhs.getValue(0, 2) + lhs.getValue(1, 1) * rhs.getValue(1, 2) + lhs.getValue(1, 2) * rhs.getValue(2, 2) + lhs.getValue(1, 3) * rhs.getValue(3, 2));
+    result.setValue(1, 3, lhs.getValue(1, 0) * rhs.getValue(0, 3) + lhs.getValue(1, 1) * rhs.getValue(1, 3) + lhs.getValue(1, 2) * rhs.getValue(2, 3) + lhs.getValue(1, 3) * rhs.getValue(3, 3));
+    result.setValue(2, 0, lhs.getValue(2, 0) * rhs.getValue(0, 0) + lhs.getValue(2, 1) * rhs.getValue(1, 0) + lhs.getValue(2, 2) * rhs.getValue(2, 0) + lhs.getValue(2, 3) * rhs.getValue(3, 0));
+    result.setValue(2, 1, lhs.getValue(2, 0) * rhs.getValue(0, 1) + lhs.getValue(2, 1) * rhs.getValue(1, 1) + lhs.getValue(2, 2) * rhs.getValue(2, 1) + lhs.getValue(2, 3) * rhs.getValue(3, 1));
+    result.setValue(2, 2, lhs.getValue(2, 0) * rhs.getValue(0, 2) + lhs.getValue(2, 1) * rhs.getValue(1, 2) + lhs.getValue(2, 2) * rhs.getValue(2, 2) + lhs.getValue(2, 3) * rhs.getValue(3, 2));
+    result.setValue(2, 3, lhs.getValue(2, 0) * rhs.getValue(0, 3) + lhs.getValue(2, 1) * rhs.getValue(1, 3) + lhs.getValue(2, 2) * rhs.getValue(2, 3) + lhs.getValue(2, 3) * rhs.getValue(3, 3));
+    result.setValue(3, 0, lhs.getValue(3, 0) * rhs.getValue(0, 0) + lhs.getValue(3, 1) * rhs.getValue(1, 0) + lhs.getValue(3, 2) * rhs.getValue(2, 0) + lhs.getValue(3, 3) * rhs.getValue(3, 0));
+    result.setValue(3, 1, lhs.getValue(3, 0) * rhs.getValue(0, 1) + lhs.getValue(3, 1) * rhs.getValue(1, 1) + lhs.getValue(3, 2) * rhs.getValue(2, 1) + lhs.getValue(3, 3) * rhs.getValue(3, 1));
+    result.setValue(3, 2, lhs.getValue(3, 0) * rhs.getValue(0, 2) + lhs.getValue(3, 1) * rhs.getValue(1, 2) + lhs.getValue(3, 2) * rhs.getValue(2, 2) + lhs.getValue(3, 3) * rhs.getValue(3, 2));
+    result.setValue(3, 3, lhs.getValue(3, 0) * rhs.getValue(0, 3) + lhs.getValue(3, 1) * rhs.getValue(1, 3) + lhs.getValue(3, 2) * rhs.getValue(2, 3) + lhs.getValue(3, 3) * rhs.getValue(3, 3));
     // clang-format on
     return result;
   }
