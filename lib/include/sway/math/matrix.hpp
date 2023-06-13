@@ -16,15 +16,15 @@ template <int TRows, int TColumns, typename TValueType, int TMatrixSize = TRows 
 class Matrix {
 public:
   static Matrix<TRows, TColumns, TValueType> fromArray(const std::array<TValueType, TMatrixSize> &arr) {
-    Matrix<TRows, TColumns, TValueType> mtx;
-    mtx.setData(arr);
-    return mtx;
+    Matrix<TRows, TColumns, TValueType> mat;
+    mat.setData(arr);
+    return mat;
   }
 
   Matrix() { this->makeZero(); }
 
-  Matrix(const Matrix<TRows, TColumns, TValueType> &mtx)
-      : data_(mtx.getData()) {}
+  Matrix(const Matrix<TRows, TColumns, TValueType> &mat)
+      : data_(mat.getData()) {}
 
   auto makeZero() -> Matrix<TRows, TColumns, TValueType> & {
     data_.fill(0);
@@ -62,7 +62,7 @@ protected:
     for (int row = 0; row < TRows; ++row) {
       for (int col = 0; col < TColumns; ++col) {
         for (int i = 0; i < TInner; ++i) {
-          result[row * TRows + col] += this->getValue(row, i) * arr[i * TInner + col];
+          result[col * TRows + row] += this->getValue(i, col) * arr[i * TInner + row];
         }
       }
     }

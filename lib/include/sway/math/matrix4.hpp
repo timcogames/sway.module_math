@@ -19,14 +19,37 @@ class Vector4;
 template <typename TValueType>
 class Matrix4 : public Matrix<4, 4, TValueType> {
 public:
+  static Matrix4<TValueType> multiply(Matrix4<TValueType> lhs, Matrix4<TValueType> rhs) {
+    Matrix4<TValueType> result;
+    // clang-format off
+    result.setValue(0, 0, lhs.getValue(0, 0) * rhs.getValue(0, 0) + lhs.getValue(0, 1) * rhs.getValue(1, 0) + lhs.getValue(0, 2) * rhs.getValue(2, 0) + lhs.getValue(0, 3) * rhs.getValue(3, 0));
+    result.setValue(0, 1, lhs.getValue(0, 0) * rhs.getValue(0, 1) + lhs.getValue(0, 1) * rhs.getValue(1, 1) + lhs.getValue(0, 2) * rhs.getValue(2, 1) + lhs.getValue(0, 3) * rhs.getValue(3, 1));
+    result.setValue(0, 2, lhs.getValue(0, 0) * rhs.getValue(0, 2) + lhs.getValue(0, 1) * rhs.getValue(1, 2) + lhs.getValue(0, 2) * rhs.getValue(2, 2) + lhs.getValue(0, 3) * rhs.getValue(3, 2));
+    result.setValue(0, 3, lhs.getValue(0, 0) * rhs.getValue(0, 3) + lhs.getValue(0, 1) * rhs.getValue(1, 3) + lhs.getValue(0, 2) * rhs.getValue(2, 3) + lhs.getValue(0, 3) * rhs.getValue(3, 3));
+    result.setValue(1, 0, lhs.getValue(1, 0) * rhs.getValue(0, 0) + lhs.getValue(1, 1) * rhs.getValue(1, 0) + lhs.getValue(1, 2) * rhs.getValue(2, 0) + lhs.getValue(1, 3) * rhs.getValue(3, 0));
+    result.setValue(1, 1, lhs.getValue(1, 0) * rhs.getValue(0, 1) + lhs.getValue(1, 1) * rhs.getValue(1, 1) + lhs.getValue(1, 2) * rhs.getValue(2, 1) + lhs.getValue(1, 3) * rhs.getValue(3, 1));
+    result.setValue(1, 2, lhs.getValue(1, 0) * rhs.getValue(0, 2) + lhs.getValue(1, 1) * rhs.getValue(1, 2) + lhs.getValue(1, 2) * rhs.getValue(2, 2) + lhs.getValue(1, 3) * rhs.getValue(3, 2));
+    result.setValue(1, 3, lhs.getValue(1, 0) * rhs.getValue(0, 3) + lhs.getValue(1, 1) * rhs.getValue(1, 3) + lhs.getValue(1, 2) * rhs.getValue(2, 3) + lhs.getValue(1, 3) * rhs.getValue(3, 3));
+    result.setValue(2, 0, lhs.getValue(2, 0) * rhs.getValue(0, 0) + lhs.getValue(2, 1) * rhs.getValue(1, 0) + lhs.getValue(2, 2) * rhs.getValue(2, 0) + lhs.getValue(2, 3) * rhs.getValue(3, 0));
+    result.setValue(2, 1, lhs.getValue(2, 0) * rhs.getValue(0, 1) + lhs.getValue(2, 1) * rhs.getValue(1, 1) + lhs.getValue(2, 2) * rhs.getValue(2, 1) + lhs.getValue(2, 3) * rhs.getValue(3, 1));
+    result.setValue(2, 2, lhs.getValue(2, 0) * rhs.getValue(0, 2) + lhs.getValue(2, 1) * rhs.getValue(1, 2) + lhs.getValue(2, 2) * rhs.getValue(2, 2) + lhs.getValue(2, 3) * rhs.getValue(3, 2));
+    result.setValue(2, 3, lhs.getValue(2, 0) * rhs.getValue(0, 3) + lhs.getValue(2, 1) * rhs.getValue(1, 3) + lhs.getValue(2, 2) * rhs.getValue(2, 3) + lhs.getValue(2, 3) * rhs.getValue(3, 3));
+    result.setValue(3, 0, lhs.getValue(3, 0) * rhs.getValue(0, 0) + lhs.getValue(3, 1) * rhs.getValue(1, 0) + lhs.getValue(3, 2) * rhs.getValue(2, 0) + lhs.getValue(3, 3) * rhs.getValue(3, 0));
+    result.setValue(3, 1, lhs.getValue(3, 0) * rhs.getValue(0, 1) + lhs.getValue(3, 1) * rhs.getValue(1, 1) + lhs.getValue(3, 2) * rhs.getValue(2, 1) + lhs.getValue(3, 3) * rhs.getValue(3, 1));
+    result.setValue(3, 2, lhs.getValue(3, 0) * rhs.getValue(0, 2) + lhs.getValue(3, 1) * rhs.getValue(1, 2) + lhs.getValue(3, 2) * rhs.getValue(2, 2) + lhs.getValue(3, 3) * rhs.getValue(3, 2));
+    result.setValue(3, 3, lhs.getValue(3, 0) * rhs.getValue(0, 3) + lhs.getValue(3, 1) * rhs.getValue(1, 3) + lhs.getValue(3, 2) * rhs.getValue(2, 3) + lhs.getValue(3, 3) * rhs.getValue(3, 3));
+    // clang-format on
+    return result;
+  }
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса.
    */
   Matrix4() { makeIdentity(); }
 
-  Matrix4(const Matrix<4, 4, TValueType> &mtx)
-      : Matrix<4, 4, TValueType>(mtx) {}
+  Matrix4(const Matrix<4, 4, TValueType> &mat)
+      : Matrix<4, 4, TValueType>(mat) {}
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
@@ -93,24 +116,24 @@ public:
   }
 
   auto inverse() const -> Matrix4<TValueType> {
-    const auto &mtx = *((const Matrix4<TValueType> *)this);
+    const auto &mat = *((const Matrix4<TValueType> *)this);
 
-    auto a00 = mtx.getValue(0, 0);
-    auto a01 = mtx.getValue(0, 1);
-    auto a02 = mtx.getValue(0, 2);
-    auto a03 = mtx.getValue(0, 3);
-    auto a10 = mtx.getValue(1, 0);
-    auto a11 = mtx.getValue(1, 1);
-    auto a12 = mtx.getValue(1, 2);
-    auto a13 = mtx.getValue(1, 3);
-    auto a20 = mtx.getValue(2, 0);
-    auto a21 = mtx.getValue(2, 1);
-    auto a22 = mtx.getValue(2, 2);
-    auto a23 = mtx.getValue(2, 3);
-    auto a30 = mtx.getValue(3, 0);
-    auto a31 = mtx.getValue(3, 1);
-    auto a32 = mtx.getValue(3, 2);
-    auto a33 = mtx.getValue(3, 3);
+    auto a00 = mat.getValue(0, 0);
+    auto a01 = mat.getValue(0, 1);
+    auto a02 = mat.getValue(0, 2);
+    auto a03 = mat.getValue(0, 3);
+    auto a10 = mat.getValue(1, 0);
+    auto a11 = mat.getValue(1, 1);
+    auto a12 = mat.getValue(1, 2);
+    auto a13 = mat.getValue(1, 3);
+    auto a20 = mat.getValue(2, 0);
+    auto a21 = mat.getValue(2, 1);
+    auto a22 = mat.getValue(2, 2);
+    auto a23 = mat.getValue(2, 3);
+    auto a30 = mat.getValue(3, 0);
+    auto a31 = mat.getValue(3, 1);
+    auto a32 = mat.getValue(3, 2);
+    auto a33 = mat.getValue(3, 3);
 
     auto b00 = a00 * a11 - a01 * a10;
     auto b01 = a00 * a12 - a02 * a10;
@@ -176,13 +199,13 @@ public:
     return Vector4<TValueType>(x, y, z, w);
   }
 
-  auto multiply(const Matrix4<TValueType> &mtx) -> Matrix4<TValueType> {
-    return this->template multiply_<4>(mtx.getData());
+  auto multiply(const Matrix4<TValueType> &mat) -> Matrix4<TValueType> {
+    return this->template multiply_<4>(mat.getData());
   }
 
-  auto operator*(const Matrix4<TValueType> &mtx) const -> const Matrix4<TValueType> {
+  auto operator*(const Matrix4<TValueType> &mat) const -> const Matrix4<TValueType> {
     Matrix4<TValueType> result(*this);
-    result.multiply(mtx);
+    result.multiply(mat);
     return result;
   }
 };

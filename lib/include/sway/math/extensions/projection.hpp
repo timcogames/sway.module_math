@@ -17,7 +17,7 @@ struct ProjectionDescription {
   f32_t aspect;
   f32_t near;
   f32_t far;
-  f32_t zoom;
+  // f32_t zoom;
 };
 
 class Projection final {
@@ -34,36 +34,34 @@ public:
     auto h = desc_.top - desc_.bottom;
     auto d = desc_.far - desc_.near;
 
-    auto x = w / (2.0F * desc_.zoom);
-    auto y = h / (2.0F * desc_.zoom);
+    auto x = w / 2.0F;
+    auto y = h / 2.0F;
     auto z = d / -2.0F;
 
-    mtx_.setValue(0, 0, x);
-    mtx_.setValue(1, 1, y);
-    mtx_.setValue(2, 2, z);
-    mtx_.setValue(3, 0, -(desc_.right + desc_.left) / w);
-    mtx_.setValue(3, 1, -(desc_.top + desc_.bottom) / h);
-    mtx_.setValue(3, 2, -(desc_.far + desc_.near) / d);
+    mat_.setValue(0, 0, x);
+    mat_.setValue(1, 1, y);
+    mat_.setValue(2, 2, z);
+    mat_.setValue(3, 0, -(desc_.left + desc_.right) / w);
+    mat_.setValue(3, 1, -(desc_.top + desc_.bottom) / h);
+    mat_.setValue(3, 2, -(desc_.far + desc_.near) / d);
   }
 
   void pers() {
-    mtx_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
-    mtx_.setValue(1, 1, 1 / tan(desc_.fov / 2));
-    mtx_.setValue(2, 2, (desc_.near + desc_.far) / (desc_.near - desc_.far));
-    mtx_.setValue(2, 3, -1);
-    mtx_.setValue(3, 2, (2 * desc_.near * desc_.far) / (desc_.near - desc_.far));
-    mtx_.setValue(3, 3, 0);
+    mat_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
+    mat_.setValue(1, 1, 1 / tan(desc_.fov / 2));
+    mat_.setValue(2, 2, (desc_.near + desc_.far) / (desc_.near - desc_.far));
+    mat_.setValue(2, 3, -1);
+    mat_.setValue(3, 2, (2 * desc_.near * desc_.far) / (desc_.near - desc_.far));
+    mat_.setValue(3, 3, 0);
   }
 
   auto getDescription() const -> ProjectionDescription { return desc_; }
 
-  auto getData() const -> std::array<f32_t, 16> { return mtx_.getData(); }
-
-  void setZoom(f32_t zoom) { desc_.zoom = zoom; }
+  auto getData() const -> std::array<f32_t, 16> { return mat_.getData(); }
 
 private:
   ProjectionDescription desc_;
-  mat4f_t mtx_;
+  mat4f_t mat_;
 };
 
 NAMESPACE_END(math)
