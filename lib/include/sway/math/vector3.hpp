@@ -123,7 +123,7 @@ public:
     return Vector3<TValueType>(this->data_[0] * scalar, this->data_[1] * scalar, this->data_[2] * scalar);
   }
 
-  auto operator*(TValueType scalar) -> Vector3<TValueType> { return multiply(scalar); }
+  auto operator*(TValueType scalar) const -> Vector3<TValueType> { return multiply(scalar); }
 
   auto operator*=(TValueType scalar) -> Vector3<TValueType> & {
     *this = multiply(scalar);

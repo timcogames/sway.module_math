@@ -10,14 +10,13 @@ NAMESPACE_BEGIN(math)
 
 struct ProjectionDescription {
   f32_t left;
-  f32_t top;
   f32_t right;
   f32_t bottom;
+  f32_t top;
   f32_t fov;
   f32_t aspect;
   f32_t near;
   f32_t far;
-  // f32_t zoom;
 };
 
 class Projection final {

@@ -9,6 +9,7 @@
 #include <sway/math/matrixstack.hpp>
 #include <sway/math/matrixtypes.hpp>
 #include <sway/math/point.hpp>
+#include <sway/math/ray.hpp>
 #include <sway/math/rect.hpp>
 #include <sway/math/size.hpp>
 #include <sway/math/vector.hpp>
