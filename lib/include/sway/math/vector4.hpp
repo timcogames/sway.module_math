@@ -92,6 +92,32 @@ public:
   auto getW() const -> TValueType { return this->data_[3]; }
 
   void setW(TValueType val) { this->data_[3] = val; }
+
+  [[nodiscard]] auto subtract(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
+    return Vector4<TValueType>(this->data_[0] - vec.getX(), this->data_[1] - vec.getY(), this->data_[2] - vec.getZ(),
+        this->data_[3] - vec.getW());
+  }
+
+  auto operator-(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return subtract(vec); }
+
+  auto operator-(const Vector4<TValueType> &vec) const -> Vector4<TValueType> { return subtract(vec); }
+
+  auto operator-=(const Vector4<TValueType> &vec) -> Vector4<TValueType> & {
+    *this = subtract(vec);
+    return *this;
+  }
+
+  auto divide(TValueType scalar) -> Vector4<TValueType> {
+    return Vector4<TValueType>(
+        this->data_[0] /= scalar, this->data_[1] /= scalar, this->data_[2] /= scalar, this->data_[3] /= scalar);
+  }
+
+  auto operator/(TValueType scalar) -> Vector4<TValueType> { return divide(scalar); }
+
+  auto operator/=(TValueType scalar) -> Vector4<TValueType> & {
+    *this = divide(scalar);
+    return *this;
+  }
 };
 
 using vec4i_t = Vector4<s32_t>;
