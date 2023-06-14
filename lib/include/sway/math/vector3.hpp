@@ -15,6 +15,8 @@ class Vector3 final : public Vector<TValueType, 3> {
 public:
   static auto from(std::array<TValueType, 4> data) { return Vector3<TValueType>(data[0], data[1], data[2]); }
 
+  static auto from(std::array<TValueType, 3> data) { return Vector3<TValueType>(data[0], data[1], data[2]); }
+
   static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
     auto lenSquared = vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ();
     if (lenSquared > (TValueType)0) {
