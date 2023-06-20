@@ -44,13 +44,13 @@ public:
     return result;
   }
 
-  auto mult(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
+  static auto mult(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
     TValueType x, y, z;
     // clang-format off
     TValueType invW = 1.0F / (lhs.getValue(3, 0) * rhs.getX() +
-                         lhs.getValue(3, 1) * rhs.getY() +
-                         lhs.getValue(3, 2) * rhs.getZ() +
-                         lhs.getValue(3, 3));
+                              lhs.getValue(3, 1) * rhs.getY() +
+                              lhs.getValue(3, 2) * rhs.getZ() +
+                              lhs.getValue(3, 3));
 
     x = (lhs.getValue(0, 0) * rhs.getX() +
          lhs.getValue(0, 1) * rhs.getY() +
