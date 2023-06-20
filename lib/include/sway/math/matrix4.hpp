@@ -3,6 +3,7 @@
 
 #include <sway/core.hpp>
 #include <sway/math/matrix.hpp>
+#include <sway/math/vector3.hpp>
 #include <sway/math/vector4.hpp>
 
 #include <array>
@@ -17,9 +18,9 @@ class Vector4;
  * @brief Шаблонный класс представления матрицы.
  */
 template <typename TValueType>
-class Matrix4 : public Matrix<4, 4, TValueType> {
+class Matrix4 : public Matrix<TValueType, 4, 4> {
 public:
-  static Matrix4<TValueType> multiply(Matrix4<TValueType> lhs, Matrix4<TValueType> rhs) {
+  static auto mult(Matrix4<TValueType> lhs, Matrix4<TValueType> rhs) -> Matrix4<TValueType> {
     Matrix4<TValueType> result;
     // clang-format off
     result.setValue(0, 0, lhs.getValue(0, 0) * rhs.getValue(0, 0) + lhs.getValue(0, 1) * rhs.getValue(1, 0) + lhs.getValue(0, 2) * rhs.getValue(2, 0) + lhs.getValue(0, 3) * rhs.getValue(3, 0));
@@ -39,7 +40,59 @@ public:
     result.setValue(3, 2, lhs.getValue(3, 0) * rhs.getValue(0, 2) + lhs.getValue(3, 1) * rhs.getValue(1, 2) + lhs.getValue(3, 2) * rhs.getValue(2, 2) + lhs.getValue(3, 3) * rhs.getValue(3, 2));
     result.setValue(3, 3, lhs.getValue(3, 0) * rhs.getValue(0, 3) + lhs.getValue(3, 1) * rhs.getValue(1, 3) + lhs.getValue(3, 2) * rhs.getValue(2, 3) + lhs.getValue(3, 3) * rhs.getValue(3, 3));
     // clang-format on
+
     return result;
+  }
+
+  auto mult(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
+    TValueType x, y, z;
+    // clang-format off
+    TValueType invW = 1.0F / (lhs.getValue(3, 0) * rhs.getX() +
+                         lhs.getValue(3, 1) * rhs.getY() +
+                         lhs.getValue(3, 2) * rhs.getZ() +
+                         lhs.getValue(3, 3));
+
+    x = (lhs.getValue(0, 0) * rhs.getX() +
+         lhs.getValue(0, 1) * rhs.getY() +
+         lhs.getValue(0, 2) * rhs.getZ()) * invW;
+
+    y = (lhs.getValue(1, 0) * rhs.getX() +
+         lhs.getValue(1, 1) * rhs.getY() +
+         lhs.getValue(1, 2) * rhs.getZ()) * invW;
+
+    z = (lhs.getValue(2, 0) * rhs.getX() +
+         lhs.getValue(2, 1) * rhs.getY() +
+         lhs.getValue(2, 2) * rhs.getZ()) * invW;
+    // clang-format on
+
+    return Vector3<TValueType>(x, y, z);
+  }
+
+  static auto mult(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
+    TValueType x, y, z, w;
+    // clang-format off
+    x = lhs.getValue(0, 0) * rhs.getX() +
+        lhs.getValue(0, 1) * rhs.getY() +
+        lhs.getValue(0, 2) * rhs.getZ() +
+        lhs.getValue(0, 3) * rhs.getW();
+
+    y = lhs.getValue(1, 0) * rhs.getX() +
+        lhs.getValue(1, 1) * rhs.getY() +
+        lhs.getValue(1, 2) * rhs.getZ() +
+        lhs.getValue(1, 3) * rhs.getW();
+
+    z = lhs.getValue(2, 0) * rhs.getX() +
+        lhs.getValue(2, 1) * rhs.getY() +
+        lhs.getValue(2, 2) * rhs.getZ() +
+        lhs.getValue(2, 3) * rhs.getW();
+
+    w = lhs.getValue(3, 0) * rhs.getX() +
+        lhs.getValue(3, 1) * rhs.getY() +
+        lhs.getValue(3, 2) * rhs.getZ() +
+        lhs.getValue(3, 3) * rhs.getW();
+    // clang-format on
+
+    return Vector4<TValueType>(x, y, z, w);
   }
 
   /**
@@ -48,8 +101,8 @@ public:
    */
   Matrix4() { makeIdentity(); }
 
-  Matrix4(const Matrix<4, 4, TValueType> &mat)
-      : Matrix<4, 4, TValueType>(mat) {}
+  Matrix4(const Matrix<TValueType, 4, 4> &mat)
+      : Matrix<TValueType, 4, 4>(mat) {}
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
@@ -172,40 +225,9 @@ public:
     return result;
   }
 
-  auto multiply(const Vector4<TValueType> &vec) -> Vector4<TValueType> {
-    TValueType x, y, z, w;
-    // clang-format off
-    x = this->getValue(0, 0) * vec.getX() +
-        this->getValue(1, 0) * vec.getY() +
-        this->getValue(2, 0) * vec.getZ() +
-        this->getValue(3, 0) * vec.getW();
-
-    y = this->getValue(0, 1) * vec.getX() +
-        this->getValue(1, 1) * vec.getY() +
-        this->getValue(2, 1) * vec.getZ() +
-        this->getValue(3, 1) * vec.getW();
-
-    z = this->getValue(0, 2) * vec.getX() +
-        this->getValue(1, 2) * vec.getY() +
-        this->getValue(2, 2) * vec.getZ() +
-        this->getValue(3, 2) * vec.getW();
-
-    w = this->getValue(0, 3) * vec.getX() +
-        this->getValue(1, 3) * vec.getY() +
-        this->getValue(2, 3) * vec.getZ() +
-        this->getValue(3, 3) * vec.getW();
-    // clang-format on
-
-    return Vector4<TValueType>(x, y, z, w);
-  }
-
-  auto multiply(const Matrix4<TValueType> &mat) -> Matrix4<TValueType> {
-    return this->template multiply_<4>(mat.getData());
-  }
-
   auto operator*(const Matrix4<TValueType> &mat) const -> const Matrix4<TValueType> {
     Matrix4<TValueType> result(*this);
-    result.multiply(mat);
+    result.template multiply<4>(mat.getData());
     return result;
   }
 };

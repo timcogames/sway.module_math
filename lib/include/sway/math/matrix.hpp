@@ -12,21 +12,24 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления матрицы.
  */
-template <int TRows, int TColumns, typename TValueType, int TMatrixSize = TRows *TColumns>
+// clang-format off
+template <typename TValueType,
+          int TRows, int TColumns,
+          int TMatrixSize = TRows * TColumns>  // clang-format on
 class Matrix {
 public:
-  static Matrix<TRows, TColumns, TValueType> fromArray(const std::array<TValueType, TMatrixSize> &arr) {
-    Matrix<TRows, TColumns, TValueType> mat;
+  static auto fromArray(const std::array<TValueType, TMatrixSize> &arr) -> Matrix<TValueType, TRows, TColumns> {
+    Matrix<TValueType, TRows, TColumns> mat;
     mat.setData(arr);
     return mat;
   }
 
   Matrix() { this->makeZero(); }
 
-  Matrix(const Matrix<TRows, TColumns, TValueType> &mat)
+  Matrix(const Matrix<TValueType, TRows, TColumns> &mat)
       : data_(mat.getData()) {}
 
-  auto makeZero() -> Matrix<TRows, TColumns, TValueType> & {
+  auto makeZero() -> Matrix<TValueType, TRows, TColumns> & {
     data_.fill(0);
     return *this;
   }
@@ -55,13 +58,23 @@ public:
 
   auto getValue(u32_t elm) const -> TValueType { return data_[elm]; }
 
-protected:
+  auto operator==(const Matrix<TValueType, TRows, TColumns> &other) const -> bool {
+    for (auto i = 0; i < TRows * TColumns; ++i) {
+      if (data_[i] != other.getValue(i)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   template <int TInner>
-  auto multiply_(const std::array<TValueType, TRows * TColumns> &arr) -> Matrix<TRows, TColumns, TValueType> {
-    std::array<TValueType, TRows *TColumns> result = {};
-    for (int row = 0; row < TRows; ++row) {
-      for (int col = 0; col < TColumns; ++col) {
-        for (int i = 0; i < TInner; ++i) {
+  auto multiply(const std::array<TValueType, TRows * TColumns> &arr) -> Matrix<TValueType, TRows, TColumns> {
+    // clang-format off
+    std::array<TValueType, TRows * TColumns> result = {0};  // clang-format on
+    for (auto row = 0; row < TRows; ++row) {
+      for (auto col = 0; col < TColumns; ++col) {
+        for (auto i = 0; i < TInner; ++i) {
           result[col * TRows + row] += this->getValue(i, col) * arr[i * TInner + row];
         }
       }
@@ -71,7 +84,8 @@ protected:
     return *this;
   }
 
-  std::array<TValueType, TMatrixSize> data_;  // Элементы матрицы.
+protected:
+  std::array<TValueType, TMatrixSize> data_;  // Элементы матрицы (Column-major ordering).
 };
 
 NAMESPACE_END(math)

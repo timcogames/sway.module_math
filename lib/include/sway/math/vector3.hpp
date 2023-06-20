@@ -18,9 +18,9 @@ public:
   static auto from(std::array<TValueType, 3> data) { return Vector3<TValueType>(data[0], data[1], data[2]); }
 
   static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
-    auto lenSquared = vec.getX() * vec.getX() + vec.getY() * vec.getY() + vec.getZ() * vec.getZ();
-    if (lenSquared > (TValueType)0) {
-      return vec.multiply((TValueType)1 / (TValueType)sqrt(lenSquared));
+    auto len = vec.getLengthSquared();
+    if (len > (TValueType)0) {
+      return vec.multiply((TValueType)1 / (TValueType)sqrt(len));
     }
 
     return Vector3<TValueType>();
@@ -86,6 +86,10 @@ public:
    *     getY() const
    */
   [[nodiscard]] auto getZ() const -> TValueType { return this->data_[2]; }
+
+  auto getLengthSquared() const -> TValueType {
+    return this->data_[0] * this->data_[0] + this->data_[1] * this->data_[1] + this->data_[2] * this->data_[2];
+  }
 
   auto add(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
     return Vector3<TValueType>(this->data_[0] + vec.getX(), this->data_[1] + vec.getY(), this->data_[2] + vec.getZ());
