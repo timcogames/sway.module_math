@@ -19,7 +19,7 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DMODULE_MATH_ENABLE_TESTS=ON ../
+cmake -DCUSTOM_THIRDPARTY_DIR=/Users/apriori85/Documents/Third-party -DMODULE_MATH_ENABLE_TESTS=ON -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest ../
 ```
 
 Опция сборки | Тип | Описание | По умолчанию

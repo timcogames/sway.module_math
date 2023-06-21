@@ -42,6 +42,7 @@ endif ()
 set(MODULE_MATH_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 # Добавляем пути для поиска хедеров
+# include_directories("${CUSTOM_THIRDPARTY_DIR}/glm")
 include_directories("${MODULE_MATH_DIR}/submodules/sway.module_core/lib/include")
 include_directories("${MODULE_MATH_DIR}/lib/include")
 

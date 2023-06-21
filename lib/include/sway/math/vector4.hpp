@@ -118,6 +118,12 @@ public:
     *this = divide(scalar);
     return *this;
   }
+
+  friend auto operator<<(std::ostream &out, const Vector4<TValueType> &vec) -> std::ostream & {
+    // clang-format off
+    return out << "vec4(" << vec.getX() << ", " << vec.getY() << ", " << vec.getZ() << ", " << vec.getW() << ")";
+    // clang-format on
+  }
 };
 
 using vec4i_t = Vector4<s32_t>;

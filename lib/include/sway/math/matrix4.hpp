@@ -7,6 +7,7 @@
 #include <sway/math/vector4.hpp>
 
 #include <array>
+#include <string>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -20,31 +21,7 @@ class Vector4;
 template <typename TValueType>
 class Matrix4 : public Matrix<TValueType, 4, 4> {
 public:
-  static auto mult(Matrix4<TValueType> lhs, Matrix4<TValueType> rhs) -> Matrix4<TValueType> {
-    Matrix4<TValueType> result;
-    // clang-format off
-    result.setValue(0, 0, lhs.getValue(0, 0) * rhs.getValue(0, 0) + lhs.getValue(0, 1) * rhs.getValue(1, 0) + lhs.getValue(0, 2) * rhs.getValue(2, 0) + lhs.getValue(0, 3) * rhs.getValue(3, 0));
-    result.setValue(0, 1, lhs.getValue(0, 0) * rhs.getValue(0, 1) + lhs.getValue(0, 1) * rhs.getValue(1, 1) + lhs.getValue(0, 2) * rhs.getValue(2, 1) + lhs.getValue(0, 3) * rhs.getValue(3, 1));
-    result.setValue(0, 2, lhs.getValue(0, 0) * rhs.getValue(0, 2) + lhs.getValue(0, 1) * rhs.getValue(1, 2) + lhs.getValue(0, 2) * rhs.getValue(2, 2) + lhs.getValue(0, 3) * rhs.getValue(3, 2));
-    result.setValue(0, 3, lhs.getValue(0, 0) * rhs.getValue(0, 3) + lhs.getValue(0, 1) * rhs.getValue(1, 3) + lhs.getValue(0, 2) * rhs.getValue(2, 3) + lhs.getValue(0, 3) * rhs.getValue(3, 3));
-    result.setValue(1, 0, lhs.getValue(1, 0) * rhs.getValue(0, 0) + lhs.getValue(1, 1) * rhs.getValue(1, 0) + lhs.getValue(1, 2) * rhs.getValue(2, 0) + lhs.getValue(1, 3) * rhs.getValue(3, 0));
-    result.setValue(1, 1, lhs.getValue(1, 0) * rhs.getValue(0, 1) + lhs.getValue(1, 1) * rhs.getValue(1, 1) + lhs.getValue(1, 2) * rhs.getValue(2, 1) + lhs.getValue(1, 3) * rhs.getValue(3, 1));
-    result.setValue(1, 2, lhs.getValue(1, 0) * rhs.getValue(0, 2) + lhs.getValue(1, 1) * rhs.getValue(1, 2) + lhs.getValue(1, 2) * rhs.getValue(2, 2) + lhs.getValue(1, 3) * rhs.getValue(3, 2));
-    result.setValue(1, 3, lhs.getValue(1, 0) * rhs.getValue(0, 3) + lhs.getValue(1, 1) * rhs.getValue(1, 3) + lhs.getValue(1, 2) * rhs.getValue(2, 3) + lhs.getValue(1, 3) * rhs.getValue(3, 3));
-    result.setValue(2, 0, lhs.getValue(2, 0) * rhs.getValue(0, 0) + lhs.getValue(2, 1) * rhs.getValue(1, 0) + lhs.getValue(2, 2) * rhs.getValue(2, 0) + lhs.getValue(2, 3) * rhs.getValue(3, 0));
-    result.setValue(2, 1, lhs.getValue(2, 0) * rhs.getValue(0, 1) + lhs.getValue(2, 1) * rhs.getValue(1, 1) + lhs.getValue(2, 2) * rhs.getValue(2, 1) + lhs.getValue(2, 3) * rhs.getValue(3, 1));
-    result.setValue(2, 2, lhs.getValue(2, 0) * rhs.getValue(0, 2) + lhs.getValue(2, 1) * rhs.getValue(1, 2) + lhs.getValue(2, 2) * rhs.getValue(2, 2) + lhs.getValue(2, 3) * rhs.getValue(3, 2));
-    result.setValue(2, 3, lhs.getValue(2, 0) * rhs.getValue(0, 3) + lhs.getValue(2, 1) * rhs.getValue(1, 3) + lhs.getValue(2, 2) * rhs.getValue(2, 3) + lhs.getValue(2, 3) * rhs.getValue(3, 3));
-    result.setValue(3, 0, lhs.getValue(3, 0) * rhs.getValue(0, 0) + lhs.getValue(3, 1) * rhs.getValue(1, 0) + lhs.getValue(3, 2) * rhs.getValue(2, 0) + lhs.getValue(3, 3) * rhs.getValue(3, 0));
-    result.setValue(3, 1, lhs.getValue(3, 0) * rhs.getValue(0, 1) + lhs.getValue(3, 1) * rhs.getValue(1, 1) + lhs.getValue(3, 2) * rhs.getValue(2, 1) + lhs.getValue(3, 3) * rhs.getValue(3, 1));
-    result.setValue(3, 2, lhs.getValue(3, 0) * rhs.getValue(0, 2) + lhs.getValue(3, 1) * rhs.getValue(1, 2) + lhs.getValue(3, 2) * rhs.getValue(2, 2) + lhs.getValue(3, 3) * rhs.getValue(3, 2));
-    result.setValue(3, 3, lhs.getValue(3, 0) * rhs.getValue(0, 3) + lhs.getValue(3, 1) * rhs.getValue(1, 3) + lhs.getValue(3, 2) * rhs.getValue(2, 3) + lhs.getValue(3, 3) * rhs.getValue(3, 3));
-    // clang-format on
-
-    return result;
-  }
-
-  static auto mult(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
+  static auto transform(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
     TValueType x, y, z;
     // clang-format off
     TValueType invW = 1.0F / (lhs.getValue(3, 0) * rhs.getX() +
@@ -68,27 +45,27 @@ public:
     return Vector3<TValueType>(x, y, z);
   }
 
-  static auto mult(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
+  static auto transform(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
     x = lhs.getValue(0, 0) * rhs.getX() +
-        lhs.getValue(0, 1) * rhs.getY() +
-        lhs.getValue(0, 2) * rhs.getZ() +
-        lhs.getValue(0, 3) * rhs.getW();
+        lhs.getValue(1, 0) * rhs.getY() +
+        lhs.getValue(2, 0) * rhs.getZ() +
+        lhs.getValue(3, 0) * rhs.getW();
 
-    y = lhs.getValue(1, 0) * rhs.getX() +
+    y = lhs.getValue(0, 1) * rhs.getX() +
         lhs.getValue(1, 1) * rhs.getY() +
-        lhs.getValue(1, 2) * rhs.getZ() +
-        lhs.getValue(1, 3) * rhs.getW();
+        lhs.getValue(2, 1) * rhs.getZ() +
+        lhs.getValue(3, 1) * rhs.getW();
 
-    z = lhs.getValue(2, 0) * rhs.getX() +
-        lhs.getValue(2, 1) * rhs.getY() +
+    z = lhs.getValue(0, 2) * rhs.getX() +
+        lhs.getValue(1, 2) * rhs.getY() +
         lhs.getValue(2, 2) * rhs.getZ() +
-        lhs.getValue(2, 3) * rhs.getW();
+        lhs.getValue(3, 2) * rhs.getW();
 
-    w = lhs.getValue(3, 0) * rhs.getX() +
-        lhs.getValue(3, 1) * rhs.getY() +
-        lhs.getValue(3, 2) * rhs.getZ() +
+    w = lhs.getValue(0, 3) * rhs.getX() +
+        lhs.getValue(1, 3) * rhs.getY() +
+        lhs.getValue(2, 3) * rhs.getZ() +
         lhs.getValue(3, 3) * rhs.getW();
     // clang-format on
 
@@ -225,10 +202,19 @@ public:
     return result;
   }
 
-  auto operator*(const Matrix4<TValueType> &mat) const -> const Matrix4<TValueType> {
-    Matrix4<TValueType> result(*this);
-    result.template multiply<4>(mat.getData());
-    return result;
+  auto operator*(const Matrix4<TValueType> &rhs) const -> const Matrix4<TValueType> {
+    Matrix4<TValueType> mat(*this);
+    mat.template multiply<4>(rhs.getData());
+    return mat;
+  }
+
+  friend auto operator<<(std::ostream &out, const Matrix4<TValueType> &mat) -> std::ostream & {
+    // clang-format off
+    return out << "mat4x4((" << mat.getValue(0, 0) << ", " << mat.getValue(0, 1) << ", " << mat.getValue(0, 2) << ", " << mat.getValue(0, 3) << "), "
+               <<        "(" << mat.getValue(1, 0) << ", " << mat.getValue(1, 1) << ", " << mat.getValue(1, 2) << ", " << mat.getValue(1, 3) << "), "
+               <<        "(" << mat.getValue(2, 0) << ", " << mat.getValue(2, 1) << ", " << mat.getValue(2, 2) << ", " << mat.getValue(2, 3) << "), "
+               <<        "(" << mat.getValue(3, 0) << ", " << mat.getValue(3, 1) << ", " << mat.getValue(3, 2) << ", " << mat.getValue(3, 3) << "))";
+    // clang-format on
   }
 };
 

@@ -89,43 +89,22 @@ TEST(Matrix, multiplication) {
   EXPECT_EQ(a.multiply<3>(b.getData()), expected);
 }
 
-TEST(Matrix4, Multiply) {
+TEST(Matrix4, mult) {
+  std::ostream &os = std::cout;
+
   math::mat4f_t matA;
-  matA.makeIdentity();
   matA.setValue(0, 1, 2);
   matA.setValue(0, 2, 2);
   matA.setValue(1, 1, 3);
+  os << "matA\n" << matA << std::endl;
 
   math::mat4f_t matB;
-  matB.makeIdentity();
   matB.setValue(0, 1, 5);
   matB.setValue(0, 2, 2);
   matB.setValue(1, 1, 3);
+  os << "matB\n" << matB << std::endl;
 
-  std::wstringstream wss;
-  wss << std::fixed << std::setprecision(2);
-
-  for (int i = 0; i < 16; ++i) {
-    wss.str(L"");
-    wss << matA.getData()[i] << std::ends;
-    printf("%s ", (lpstr_t)wss.str().c_str());
-    if ((i + 1) % 4 == 0) {
-      printf("\n");
-    }
-  }
-
-  printf("\n");
-
-  const auto result = matA * matB;
-
-  for (int i = 0; i < 16; ++i) {
-    wss.str(L"");
-    wss << result.getValue(i) << std::ends;
-    printf("%s ", (lpstr_t)wss.str().c_str());
-    if ((i + 1) % 4 == 0) {
-      printf("\n");
-    }
-  }
-
-  wss << std::resetiosflags(std::ios_base::fixed | std::ios_base::floatfield);
+  const auto multAB = matA * matB;
+  auto vecA = math::vec4f_t(2, 5, 6, 1);
+  os << "MULT\n" << math::mat4f_t::transform(multAB.inverse(), vecA) << std::endl;
 }
