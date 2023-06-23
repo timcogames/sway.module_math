@@ -18,13 +18,13 @@ class Transform {
 public:
   static auto translate(Matrix4<TValueType> const &mat, TValueType x, TValueType y, TValueType z)
       -> Matrix4<TValueType> {
-    math::Matrix4<TValueType> result(mat);
-    result.setCol(3, math::Vector4<TValueType>(x, y, z, mat.getValue(3, 3)));
+    Matrix4<TValueType> result(mat);
+    result.setCol(3, Vector4<TValueType>(x, y, z, mat.getValue(3, 3)));
     return result;
   }
 
   static auto scale(Matrix4<TValueType> const &mat, TValueType x, TValueType y, TValueType z) -> Matrix4<TValueType> {
-    Matrix4<TValueType> result;
+    Matrix4<TValueType> result(mat);
     result.setValue(0, 0, x);
     result.setValue(1, 1, y);
     result.setValue(2, 2, z);

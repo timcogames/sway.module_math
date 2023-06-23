@@ -33,14 +33,14 @@ public:
     auto h = desc_.top - desc_.bottom;
     auto d = desc_.far - desc_.near;
 
-    auto x = w / 2.0F;
-    auto y = h / 2.0F;
+    auto x = w / +2.0F;
+    auto y = h / +2.0F;
     auto z = d / -2.0F;
 
     mat_.setValue(0, 0, x);
     mat_.setValue(1, 1, y);
     mat_.setValue(2, 2, z);
-    mat_.setValue(3, 0, -(desc_.left + desc_.right) / w);
+    mat_.setValue(3, 0, -(desc_.right + desc_.left) / w);
     mat_.setValue(3, 1, -(desc_.top + desc_.bottom) / h);
     mat_.setValue(3, 2, -(desc_.far + desc_.near) / d);
   }
