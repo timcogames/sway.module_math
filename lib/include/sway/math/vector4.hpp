@@ -142,7 +142,8 @@ public:
 
   friend auto operator<<(std::ostream &out, const Vector4<TValueType> &vec) -> std::ostream & {
     // clang-format off
-    return out << "vec4(" << vec.getX() << ", " << vec.getY() << ", " << vec.getZ() << ", " << vec.getW() << ")";
+    return out << std::fixed << std::setprecision(6) 
+               << "vec4(" << vec.getX() << ", " << vec.getY() << ", " << vec.getZ() << ", " << vec.getW() << ")";
     // clang-format on
   }
 };

@@ -24,25 +24,25 @@ public:
   static auto transform(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
-    x = lhs.getValue(0, 0) * rhs.getX() +
-        lhs.getValue(1, 0) * rhs.getY() +
-        lhs.getValue(2, 0) * rhs.getZ() +
-        lhs.getValue(3, 0) * rhs.getW();
+    x = lhs.getValue(0,0) * rhs.getX() +
+        lhs.getValue(0,1) * rhs.getY() +
+        lhs.getValue(0,2) * rhs.getZ() +
+        lhs.getValue(0,3) * rhs.getW();
 
-    y = lhs.getValue(0, 1) * rhs.getX() +
-        lhs.getValue(1, 1) * rhs.getY() +
-        lhs.getValue(2, 1) * rhs.getZ() +
-        lhs.getValue(3, 1) * rhs.getW();
+    y = lhs.getValue(1,0) * rhs.getX() +
+        lhs.getValue(1,1) * rhs.getY() +
+        lhs.getValue(1,2) * rhs.getZ() +
+        lhs.getValue(1,3) * rhs.getW();
 
-    z = lhs.getValue(0, 2) * rhs.getX() +
-        lhs.getValue(1, 2) * rhs.getY() +
-        lhs.getValue(2, 2) * rhs.getZ() +
-        lhs.getValue(3, 2) * rhs.getW();
+    z = lhs.getValue(2,0) * rhs.getX() +
+        lhs.getValue(2,1) * rhs.getY() +
+        lhs.getValue(2,2) * rhs.getZ() +
+        lhs.getValue(2,3) * rhs.getW();
 
-    w = lhs.getValue(0, 3) * rhs.getX() +
-        lhs.getValue(1, 3) * rhs.getY() +
-        lhs.getValue(2, 3) * rhs.getZ() +
-        lhs.getValue(3, 3) * rhs.getW();
+    w = lhs.getValue(3,0) * rhs.getX() +
+        lhs.getValue(3,1) * rhs.getY() +
+        lhs.getValue(3,2) * rhs.getZ() +
+        lhs.getValue(3,3) * rhs.getW();
     // clang-format on
 
     return Vector4<TValueType>(x, y, z, w);
