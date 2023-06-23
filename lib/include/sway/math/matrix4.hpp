@@ -21,30 +21,6 @@ class Vector4;
 template <typename TValueType>
 class Matrix4 : public Matrix<TValueType, 4, 4> {
 public:
-  static auto transform(Matrix4<TValueType> lhs, const Vector3<TValueType> &rhs) -> Vector3<TValueType> {
-    TValueType x, y, z;
-    // clang-format off
-    TValueType invW = 1.0F / (lhs.getValue(3, 0) * rhs.getX() +
-                              lhs.getValue(3, 1) * rhs.getY() +
-                              lhs.getValue(3, 2) * rhs.getZ() +
-                              lhs.getValue(3, 3));
-
-    x = (lhs.getValue(0, 0) * rhs.getX() +
-         lhs.getValue(0, 1) * rhs.getY() +
-         lhs.getValue(0, 2) * rhs.getZ()) * invW;
-
-    y = (lhs.getValue(1, 0) * rhs.getX() +
-         lhs.getValue(1, 1) * rhs.getY() +
-         lhs.getValue(1, 2) * rhs.getZ()) * invW;
-
-    z = (lhs.getValue(2, 0) * rhs.getX() +
-         lhs.getValue(2, 1) * rhs.getY() +
-         lhs.getValue(2, 2) * rhs.getZ()) * invW;
-    // clang-format on
-
-    return Vector3<TValueType>(x, y, z);
-  }
-
   static auto transform(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
@@ -210,10 +186,11 @@ public:
 
   friend auto operator<<(std::ostream &out, const Matrix4<TValueType> &mat) -> std::ostream & {
     // clang-format off
-    return out << "mat4x4((" << mat.getValue(0, 0) << ", " << mat.getValue(0, 1) << ", " << mat.getValue(0, 2) << ", " << mat.getValue(0, 3) << "), "
-               <<        "(" << mat.getValue(1, 0) << ", " << mat.getValue(1, 1) << ", " << mat.getValue(1, 2) << ", " << mat.getValue(1, 3) << "), "
-               <<        "(" << mat.getValue(2, 0) << ", " << mat.getValue(2, 1) << ", " << mat.getValue(2, 2) << ", " << mat.getValue(2, 3) << "), "
-               <<        "(" << mat.getValue(3, 0) << ", " << mat.getValue(3, 1) << ", " << mat.getValue(3, 2) << ", " << mat.getValue(3, 3) << "))";
+    return out << std::fixed << std::setprecision(6) 
+               << "mat4x4((" << mat.getValue(0, 0) << ", " << mat.getValue(1, 0) << ", " << mat.getValue(2, 0) << ", " << mat.getValue(3, 0) << "), "
+               <<        "(" << mat.getValue(0, 1) << ", " << mat.getValue(1, 1) << ", " << mat.getValue(2, 1) << ", " << mat.getValue(3, 1) << "), "
+               <<        "(" << mat.getValue(0, 2) << ", " << mat.getValue(1, 2) << ", " << mat.getValue(2, 2) << ", " << mat.getValue(3, 2) << "), "
+               <<        "(" << mat.getValue(0, 3) << ", " << mat.getValue(1, 3) << ", " << mat.getValue(2, 3) << ", " << mat.getValue(3, 3) << "))";
     // clang-format on
   }
 };

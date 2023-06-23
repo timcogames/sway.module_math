@@ -47,6 +47,8 @@ public:
    */
   void setValue(u32_t row, u32_t col, TValueType val) { data_[col * TColumns + row] = val; }
 
+  void setValue(u32_t elm, TValueType val) { data_[elm] = val; }
+
   /**
    * @brief Получает значение элемента матрицы.
    *
@@ -72,13 +74,21 @@ public:
   auto multiply(const std::array<TValueType, TRows * TColumns> &arr) -> Matrix<TValueType, TRows, TColumns> {
     // clang-format off
     std::array<TValueType, TRows * TColumns> result = {0};  // clang-format on
-    for (auto row = 0; row < TRows; ++row) {
-      for (auto col = 0; col < TColumns; ++col) {
-        for (auto i = 0; i < TInner; ++i) {
-          result[col * TRows + row] += this->getValue(i, col) * arr[i * TInner + row];
+    for (auto y = 0; y < 4; y++) {
+      for (auto x = 0; x < 4; x++) {
+        for (auto i = 0; i < TInner; i++) {
+          result[x + 4 * y] += this->getValue(x, i) * arr[i + TInner * y];
         }
       }
     }
+
+    // for (auto row = 0; row < TRows; ++row) {
+    //   for (auto col = 0; col < TColumns; ++col) {
+    //     for (auto i = 0; i < TInner; ++i) {
+    //       result[col * TRows + row] += this->getValue(i, col) * arr[i * TInner + row];
+    //     }
+    //   }
+    // }
 
     this->setData(result);
     return *this;
