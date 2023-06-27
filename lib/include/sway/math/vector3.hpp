@@ -71,6 +71,8 @@ public:
    */
   [[nodiscard]] auto getX() const -> TValueType { return this->data_[0]; }
 
+  void setX(TValueType val) { this->data_[0] = val; }
+
   /**
    * @brief Получает значение Y компонента.
    *
@@ -79,6 +81,8 @@ public:
    */
   [[nodiscard]] auto getY() const -> TValueType { return this->data_[1]; }
 
+  void setY(TValueType val) { this->data_[1] = val; }
+
   /**
    * @brief Получает значение Z компонента.
    *
@@ -86,6 +90,8 @@ public:
    *     getY() const
    */
   [[nodiscard]] auto getZ() const -> TValueType { return this->data_[2]; }
+
+  void setZ(TValueType val) { this->data_[2] = val; }
 
   auto getLengthSquared() const -> TValueType {
     return this->data_[0] * this->data_[0] + this->data_[1] * this->data_[1] + this->data_[2] * this->data_[2];

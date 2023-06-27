@@ -24,25 +24,25 @@ public:
   static auto transform(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
     TValueType x, y, z, w;
     // clang-format off
-    x = lhs.getValue(0,0) * rhs.getX() +
-        lhs.getValue(0,1) * rhs.getY() +
-        lhs.getValue(0,2) * rhs.getZ() +
-        lhs.getValue(0,3) * rhs.getW();
+    x = lhs.getValue(0, 0) * rhs.getX() +
+        lhs.getValue(0, 1) * rhs.getY() +
+        lhs.getValue(0, 2) * rhs.getZ() +
+        lhs.getValue(0, 3) * rhs.getW();
 
-    y = lhs.getValue(1,0) * rhs.getX() +
-        lhs.getValue(1,1) * rhs.getY() +
-        lhs.getValue(1,2) * rhs.getZ() +
-        lhs.getValue(1,3) * rhs.getW();
+    y = lhs.getValue(1, 0) * rhs.getX() +
+        lhs.getValue(1, 1) * rhs.getY() +
+        lhs.getValue(1, 2) * rhs.getZ() +
+        lhs.getValue(1, 3) * rhs.getW();
 
-    z = lhs.getValue(2,0) * rhs.getX() +
-        lhs.getValue(2,1) * rhs.getY() +
-        lhs.getValue(2,2) * rhs.getZ() +
-        lhs.getValue(2,3) * rhs.getW();
+    z = lhs.getValue(2, 0) * rhs.getX() +
+        lhs.getValue(2, 1) * rhs.getY() +
+        lhs.getValue(2, 2) * rhs.getZ() +
+        lhs.getValue(2, 3) * rhs.getW();
 
-    w = lhs.getValue(3,0) * rhs.getX() +
-        lhs.getValue(3,1) * rhs.getY() +
-        lhs.getValue(3,2) * rhs.getZ() +
-        lhs.getValue(3,3) * rhs.getW();
+    w = lhs.getValue(3, 0) * rhs.getX() +
+        lhs.getValue(3, 1) * rhs.getY() +
+        lhs.getValue(3, 2) * rhs.getZ() +
+        lhs.getValue(3, 3) * rhs.getW();
     // clang-format on
 
     return Vector4<TValueType>(x, y, z, w);
@@ -122,7 +122,8 @@ public:
   }
 
   auto inverse() const -> Matrix4<TValueType> {
-    const auto &mat = *((const Matrix4<TValueType> *)this);
+    Matrix4<TValueType> mat(*this);
+    Matrix4<TValueType> res;
 
     auto a00 = mat.getValue(0, 0);
     auto a01 = mat.getValue(0, 1);
@@ -155,27 +156,30 @@ public:
     auto b11 = a22 * a33 - a23 * a32;
 
     auto det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+    if (det == 0.0F) {
+      return res.makeZero();
+    }
+
     det = 1.0F / det;
 
-    Matrix4<TValueType> result;
-    result.setValue(0, 0, (a11 * b11 - a12 * b10 + a13 * b09) * det);
-    result.setValue(0, 1, (a02 * b10 - a01 * b11 - a03 * b09) * det);
-    result.setValue(0, 2, (a31 * b05 - a32 * b04 + a33 * b03) * det);
-    result.setValue(0, 3, (a22 * b04 - a21 * b05 - a23 * b03) * det);
-    result.setValue(1, 0, (a12 * b08 - a10 * b11 - a13 * b07) * det);
-    result.setValue(1, 1, (a00 * b11 - a02 * b08 + a03 * b07) * det);
-    result.setValue(1, 2, (a32 * b02 - a30 * b05 - a33 * b01) * det);
-    result.setValue(1, 3, (a20 * b05 - a22 * b02 + a23 * b01) * det);
-    result.setValue(2, 0, (a10 * b10 - a11 * b08 + a13 * b06) * det);
-    result.setValue(2, 1, (a01 * b08 - a00 * b10 - a03 * b06) * det);
-    result.setValue(2, 2, (a30 * b04 - a31 * b02 + a33 * b00) * det);
-    result.setValue(2, 3, (a21 * b02 - a20 * b04 - a23 * b00) * det);
-    result.setValue(3, 0, (a11 * b07 - a10 * b09 - a12 * b06) * det);
-    result.setValue(3, 1, (a00 * b09 - a01 * b07 + a02 * b06) * det);
-    result.setValue(3, 2, (a31 * b01 - a30 * b03 - a32 * b00) * det);
-    result.setValue(3, 3, (a20 * b03 - a21 * b01 + a22 * b00) * det);
+    res.setValue(0, 0, (a11 * b11 - a12 * b10 + a13 * b09) * det);
+    res.setValue(0, 1, (a02 * b10 - a01 * b11 - a03 * b09) * det);
+    res.setValue(0, 2, (a31 * b05 - a32 * b04 + a33 * b03) * det);
+    res.setValue(0, 3, (a22 * b04 - a21 * b05 - a23 * b03) * det);
+    res.setValue(1, 0, (a12 * b08 - a10 * b11 - a13 * b07) * det);
+    res.setValue(1, 1, (a00 * b11 - a02 * b08 + a03 * b07) * det);
+    res.setValue(1, 2, (a32 * b02 - a30 * b05 - a33 * b01) * det);
+    res.setValue(1, 3, (a20 * b05 - a22 * b02 + a23 * b01) * det);
+    res.setValue(2, 0, (a10 * b10 - a11 * b08 + a13 * b06) * det);
+    res.setValue(2, 1, (a01 * b08 - a00 * b10 - a03 * b06) * det);
+    res.setValue(2, 2, (a30 * b04 - a31 * b02 + a33 * b00) * det);
+    res.setValue(2, 3, (a21 * b02 - a20 * b04 - a23 * b00) * det);
+    res.setValue(3, 0, (a11 * b07 - a10 * b09 - a12 * b06) * det);
+    res.setValue(3, 1, (a00 * b09 - a01 * b07 + a02 * b06) * det);
+    res.setValue(3, 2, (a31 * b01 - a30 * b03 - a32 * b00) * det);
+    res.setValue(3, 3, (a20 * b03 - a21 * b01 + a22 * b00) * det);
 
-    return result;
+    return res;
   }
 
   auto operator*(const Matrix4<TValueType> &rhs) const -> const Matrix4<TValueType> {
