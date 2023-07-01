@@ -13,6 +13,10 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Vector4 final : public Vector<TValueType, 4> {
 public:
+  static auto from(std::array<TValueType, 3> data, TValueType w) {
+    return Vector4<TValueType>(data[0], data[1], data[2], w);
+  }
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
@@ -127,6 +131,11 @@ public:
   }
 
   auto operator*(TValueType scalar) const -> Vector4<TValueType> { return multiply(scalar); }
+
+  auto operator*=(TValueType scalar) -> Vector4<TValueType> {
+    *this = multiply(scalar);
+    return *this;
+  }
 
   auto divide(TValueType scalar) -> Vector4<TValueType> {
     return Vector4<TValueType>(
