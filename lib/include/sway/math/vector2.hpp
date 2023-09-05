@@ -59,9 +59,9 @@ public:
    */
   auto getY() const -> TValueType { return this->data_[1]; }
 
-#pragma region "Статические методы класса"
-
-#pragma endregion
+  friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
+    return out << std::fixed << std::setprecision(6) << "{x: " << vec.getX() << ", y: " << vec.getY() << "}";
+  }
 };
 
 using vec2i_t = Vector2<s32_t>;

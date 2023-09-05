@@ -2,6 +2,7 @@
 #define SWAY_MATH_POINT_HPP
 
 #include <sway/core.hpp>
+#include <sway/math/vector2.hpp>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -66,7 +67,7 @@ public:
    *
    * @sa getY() const
    */
-  auto getX() const -> TValueType { return x_; }
+  [[nodiscard]] auto getX() const -> TValueType { return x_; }
 
   /**
    * @brief Устанавливает новое значение координаты по оси Y.
@@ -81,7 +82,9 @@ public:
    *
    * @sa getX() const
    */
-  auto getY() const -> TValueType { return y_; }
+  [[nodiscard]] auto getY() const -> TValueType { return y_; }
+
+  [[nodiscard]] auto toVec() const -> Vector2<TValueType> { return Vector2<TValueType>(x_, y_); }
 
   /**
    * @brief Оператор равенства.
@@ -97,6 +100,10 @@ public:
   template <typename TOther>
   auto operator!=(const Point<TOther> &compare) const -> bool {
     return !operator==(compare);
+  }
+
+  friend auto operator<<(std::ostream &out, const Point<TValueType> &pt2) -> std::ostream & {
+    return out << std::fixed << std::setprecision(6) << "{x: " << pt2.getX() << ", y: " << pt2.getY() << "}";
   }
 
 protected:
