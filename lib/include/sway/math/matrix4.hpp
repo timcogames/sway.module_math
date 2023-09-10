@@ -182,6 +182,18 @@ public:
     return res;
   }
 
+  [[nodiscard]] auto toStr() const -> std::string {
+    std::stringstream stream;
+    // clang-format off
+    stream << std::fixed << std::setprecision(6) 
+           << "mat4x4((" << this->getValue(0, 0) << ", " << this->getValue(1, 0) << ", " << this->getValue(2, 0) << ", " << this->getValue(3, 0) << "), "
+           <<        "(" << this->getValue(0, 1) << ", " << this->getValue(1, 1) << ", " << this->getValue(2, 1) << ", " << this->getValue(3, 1) << "), "
+           <<        "(" << this->getValue(0, 2) << ", " << this->getValue(1, 2) << ", " << this->getValue(2, 2) << ", " << this->getValue(3, 2) << "), "
+           <<        "(" << this->getValue(0, 3) << ", " << this->getValue(1, 3) << ", " << this->getValue(2, 3) << ", " << this->getValue(3, 3) << "))";
+    // clang-format on
+    return stream.str();
+  }
+
   auto operator*(const Matrix4<TValueType> &rhs) const -> const Matrix4<TValueType> {
     Matrix4<TValueType> mat(*this);
     mat.template multiply<4>(rhs.getData());
@@ -189,13 +201,7 @@ public:
   }
 
   friend auto operator<<(std::ostream &out, const Matrix4<TValueType> &mat) -> std::ostream & {
-    // clang-format off
-    return out << std::fixed << std::setprecision(6) 
-               << "mat4x4((" << mat.getValue(0, 0) << ", " << mat.getValue(1, 0) << ", " << mat.getValue(2, 0) << ", " << mat.getValue(3, 0) << "), "
-               <<        "(" << mat.getValue(0, 1) << ", " << mat.getValue(1, 1) << ", " << mat.getValue(2, 1) << ", " << mat.getValue(3, 1) << "), "
-               <<        "(" << mat.getValue(0, 2) << ", " << mat.getValue(1, 2) << ", " << mat.getValue(2, 2) << ", " << mat.getValue(3, 2) << "), "
-               <<        "(" << mat.getValue(0, 3) << ", " << mat.getValue(1, 3) << ", " << mat.getValue(2, 3) << ", " << mat.getValue(3, 3) << "))";
-    // clang-format on
+    return out << mat.toStr();
   }
 };
 

@@ -16,6 +16,11 @@ set(META_MATH_VERSION ${META_MATH_VERSION_MAJOR}.${META_MATH_VERSION_MINOR}.${ME
 option(MODULE_MATH_ENABLE_COVERAGE "Enable coverage builds" OFF)
 option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 option(CUSTOM_GTEST_ROOT_DIR "GTest root directory" OFF)
+option(CUSTOM_THIRDPARTY_DIR "Third party directory" OFF)
+
+# set(CUSTOM_GTEST_ROOT_DIR ${CUSTOM_THIRDPARTY_DIR} CACHE STRING "GTest root directory")
+# if (${CUSTOM_GTEST_ROOT_DIR} STREQUAL "OFF")
+# endif ()
 
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build" FORCE)
@@ -42,7 +47,6 @@ endif ()
 set(MODULE_MATH_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 # Добавляем пути для поиска хедеров
-# include_directories("${CUSTOM_THIRDPARTY_DIR}/glm")
 include_directories("${MODULE_MATH_DIR}/submodules/sway.module_core/lib/include")
 include_directories("${MODULE_MATH_DIR}/lib/include")
 

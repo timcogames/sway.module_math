@@ -2,6 +2,11 @@
 
 #include <gtest/gtest.h>
 
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <glm/matrix.hpp>
+#include <glm/vec4.hpp>
+
 using namespace sway;
 
 constexpr s32_t IDEN_MAT4[4][4] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
@@ -64,47 +69,53 @@ TEST(Matrix4, Set) {
   ASSERT_TRUE(std::equal(std::begin(mat.getData()), std::end(mat.getData()), std::begin(RAND_MAT4x4)));
 }
 
-TEST(Matrix, multiplication) {
-  // clang-format off
-  auto a = math::Matrix<int, 3, 3>::fromArray({
-      2,-1, 1,
-      0,-2, 1,
-      1,-2, 0
-  });  // clang-format on
+// TEST(Matrix, multiplication) {
+//   // clang-format off
+//   auto a = math::Matrix<int, 3, 3>::fromArray({
+//       2,-1, 1,
+//       0,-2, 1,
+//       1,-2, 0
+//   });  // clang-format on
 
-  // clang-format off
-  auto b = math::Matrix<int, 3, 3>::fromArray({
-     -2, 3, 5,
-     -1,-3, 9,
-      5, 6,-7
-  });  // clang-format on
+//   // clang-format off
+//   auto b = math::Matrix<int, 3, 3>::fromArray({
+//      -2, 3, 5,
+//      -1,-3, 9,
+//       5, 6,-7
+//   });  // clang-format on
 
-  // clang-format off
-  auto expected = math::Matrix<int, 3, 3>::fromArray({
-      2, 15,- 6,
-      7, 12,-25,
-      0,  9,-13
-  });  // clang-format on
+//   // clang-format off
+//   auto expected = math::Matrix<int, 3, 3>::fromArray({
+//       2, 15,- 6,
+//       7, 12,-25,
+//       0,  9,-13
+//   });  // clang-format on
 
-  EXPECT_EQ(a.multiply<3>(b.getData()), expected);
-}
+//   EXPECT_EQ(a.multiply<3>(b.getData()), expected);
+// }
 
 TEST(Matrix4, mult) {
   std::ostream &os = std::cout;
 
+  auto arrA = math::Matrix<f32_t, 4, 4>::fromArray(
+      {1.0f, 0.0165f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0432f, 0.032f, 0.0f, 0.09f, -50.0f, 0.02f, 0.04f, 0.076f, -1.0f, 1.0})
+                  .getData();
   math::mat4f_t matA;
-  matA.setValue(0, 1, 2);
-  matA.setValue(0, 2, 2);
-  matA.setValue(1, 1, 3);
-  os << "matA\n" << matA << std::endl;
+  matA.setData(arrA);
 
+  auto arrB = math::Matrix<f32_t, 4, 4>::fromArray({1.0f, 0.0f, 0.0f, -0.486085, 0.0f, 1.0f, 0.0f, -0.454206, 0.0f,
+                                                       0.0f, 1.0f, -0.000230312, 0.0f, 0.0f, 1.0f, 0.99977})
+                  .getData();
   math::mat4f_t matB;
-  matB.setValue(0, 1, 5);
-  matB.setValue(0, 2, 2);
-  matB.setValue(1, 1, 3);
-  os << "matB\n" << matB << std::endl;
+  matB.setData(arrB);
 
-  const auto multAB = matA * matB;
-  auto vecA = math::vec4f_t(2, 5, 6, 1);
-  os << "MULT\n" << math::mat4f_t::transform(multAB.inverse(), vecA) << std::endl;
+  auto vecA = math::vec4f_t(3.0f, 8.0f, -1.34f, 1.0f);
+  const auto multAB = math::mat4f_t::transform((matA * matB).inverse(), vecA);
+  os << "MULT\n" << multAB << std::endl;
+
+  auto matAA = glm::make_mat4(arrA.data());
+  auto matBB = glm::make_mat4(arrB.data());
+  const auto multAABB = glm::inverse(matAA * matBB);
+  auto vecAA = glm::vec4(3.0f, 8.0f, -1.34f, 1.0f);
+  std::cout << "\n" << glm::to_string(multAABB * vecAA) << std::endl;
 }

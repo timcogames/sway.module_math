@@ -31,3 +31,13 @@ TEST(Transform, translate) {
   EXPECT_EQ(matModelTransform.getValue(3, 2), 0);
   EXPECT_EQ(matModelTransform.getValue(3, 3), 1);
 }
+
+TEST(Transform, scale) {
+  math::mat4f_t matModelTransformSTD;
+  matModelTransformSTD = math::Transform<f32_t>::scale(matModelTransformSTD, 2, 2, 1);
+
+  auto matModelTransformGLM = glm::mat4(1);
+  matModelTransformGLM = glm::scale(matModelTransformGLM, glm::vec3(2, 2, 1));
+
+  EXPECT_STREQ(matModelTransformSTD.toStr().c_str(), glm::to_string(matModelTransformGLM).c_str());
+}
