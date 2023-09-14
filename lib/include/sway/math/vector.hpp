@@ -71,19 +71,19 @@ public:
    * @sa operator==(const Vector<TValueType, TSize> &) const,
    *     operator!=(const Vector<TValueType, TSize> &) const
    */
-  auto equals(const Vector<TValueType, TSize> &vec) const -> int {
-    for (int i = 0; i < TSize; ++i) {
+  auto equals(const Vector<TValueType, TSize> &vec) const -> bool {
+    for (auto i = 0; i < TSize; ++i) {
       if (data_[i] != vec[i]) {
-        return 0;
+        return false;
       }
-
-      return 1;
     }
+
+    return true;
   }
 
-  auto operator==(const Vector<TValueType, TSize> &vec) const -> int { return equals(vec); }
+  auto operator==(const Vector<TValueType, TSize> &vec) const -> bool { return equals(vec); }
 
-  auto operator!=(const Vector<TValueType, TSize> &vec) const -> int { return !equals(vec); }
+  auto operator!=(const Vector<TValueType, TSize> &vec) const -> bool { return !equals(vec); }
 
 #pragma endregion
 

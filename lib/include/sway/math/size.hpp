@@ -69,7 +69,7 @@ public:
    * @brief Получает значение ширины.
    * @sa getH()
    */
-  auto getW() const -> TValueType { return w_; }
+  [[nodiscard]] auto getW() const -> TValueType { return w_; }
 
   /**
    * @brief Устанавливает значение высоты.
@@ -84,12 +84,14 @@ public:
    *
    * @sa getW()
    */
-  auto getH() const -> TValueType { return h_; }
+  [[nodiscard]] auto getH() const -> TValueType { return h_; }
 
   /**
    * @brief Преобразовывает в Rect<TValueType> класс.
    */
-  auto toRect() const -> Rect<TValueType> { return Rect<TValueType>((TValueType)0, (TValueType)0, w_, h_); }
+  [[nodiscard]] auto toRect() const -> Rect<TValueType> {
+    return Rect<TValueType>((TValueType)0, (TValueType)0, w_, h_);
+  }
 
   auto operator*(const TValueType &rvalue) const -> Size<TValueType> {
     return Size<TValueType>(w_ * rvalue, h_ * rvalue);

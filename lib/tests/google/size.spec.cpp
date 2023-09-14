@@ -67,3 +67,5 @@ TEST(Size, DivideOperator) {
 
   EXPECT_TRUE(size == math::size2i_t(2, 8));
 }
+
+TEST(Size, std::to_string) { EXPECT_STREQ(std::to_string(math::size2i_t(1, 2)).c_str(), "{w: 1, h: 2}"); }

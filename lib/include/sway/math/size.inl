@@ -8,11 +8,11 @@ NAMESPACE_BEGIN(std)
 
 template <typename TValueType>
 inline auto operator<<(ostream &str, const sway::math::Size<TValueType> &size) -> ostream & {
-  return str << '(' << size.getW() << ' ' << size.getH() << ')';
+  return str << std::fixed << std::setprecision(6) << "{w: " << size.getW() << ", h: " << size.getH() << "}";
 }
 
 template <typename TValueType>
-inline auto toStr(const sway::math::Size<TValueType> &size) -> string {
+inline auto to_string(const sway::math::Size<TValueType> &size) -> string {
   stringstream stream;
   stream << size;
   return stream.str();

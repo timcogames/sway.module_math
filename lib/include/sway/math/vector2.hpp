@@ -50,14 +50,14 @@ public:
    *
    * @sa getY() const
    */
-  auto getX() const -> TValueType { return this->data_[0]; }
+  [[nodiscard]] auto getX() const -> TValueType { return this->data_[0]; }
 
   /**
    * @brief Получает значение Y компонента.
    *
    * @sa getX() const
    */
-  auto getY() const -> TValueType { return this->data_[1]; }
+  [[nodiscard]] auto getY() const -> TValueType { return this->data_[1]; }
 
   friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
     return out << std::fixed << std::setprecision(6) << "{x: " << vec.getX() << ", y: " << vec.getY() << "}";
