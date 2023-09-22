@@ -4,7 +4,7 @@ node {
         sh 'git submodule update --init --recursive'
         sh 'mkdir -p build'
         dir('./build') {
-            sh '/opt/homebrew/Cellar/cmake/3.22.1/bin/cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DMODULE_MATH_ENABLE_TESTS=ON -DMODULE_MATH_ENABLE_COVERAGE=ON ../'
+            sh '/opt/homebrew/Cellar/cmake/3.22.1/bin/cmake -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DCUSTOM_THIRDPARTY_DIR=/Users/apriori85/Documents/Third-party -DMODULE_MATH_ENABLE_TESTS=ON -DMODULE_MATH_ENABLE_COVERAGE=ON ../'
             sh '/opt/homebrew/bin/cmake --build ./'
         }
 
@@ -16,7 +16,7 @@ node {
             keepAll: true,
             reportDir: 'code_coverage_report',
             reportFiles: 'index.html',
-            reportName: "LCov Report"
+            reportName: 'LCov Report'
         ])
 
         withCredentials([string(credentialsId: 'MODULE_MATH_CODECOV_TOKEN', variable: 'CODECOV')]) {
