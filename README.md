@@ -19,16 +19,24 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DCUSTOM_THIRDPARTY_DIR=/Users/apriori85/Documents/Third-party \
-      -DCUSTOM_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest \
+cmake -DGLOB_THIRD_PARTY_DIR=/Users/apriori85/Documents/Third-party \
+      -DGLOB_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest \
       -DMODULE_MATH_ENABLE_TESTS=ON ../
 ```
 
 Опция сборки | Тип | Описание | По умолчанию
 :---|:---|:---|:---:
-`MODULE_MATH_ENABLE_COVERAGE` | `BOOL` | Включает поддержку сбора данных о покрытии кода тестами | `OFF`
-`MODULE_MATH_ENABLE_TESTS` | `BOOL` | Включает построение тестов | `OFF`
-`CUSTOM_GTEST_ROOT_DIR` | `PATH` | Путь до корневой директории Google библиотеки | `-`
+`GLOB_THIRD_PARTY_DIR` | PATH | Путь до корневой директории Other библиотек | `-`
+`GLOB_EMSCRIPTEN_PLATFORM` | BOOL | Использует Emscripten компилятор | `OFF`
+`GLOB_EMSCRIPTEN_USE_WEB_BINDINGS` | BOOL | Использует Emscripten привязки для функций | `OFF`
+`GLOB_EMSCRIPTEN_ROOT_DIR` | PATH | Путь до корневой директории Emscripten библиотеки | `-`
+`GLOB_BOOST_ROOT_DIR` | PATH | Путь до корневой директории Boost библиотеки (Не используется) | `-`
+`GLOB_GTEST_ROOT_DIR` | PATH | Путь до корневой директории GTest библиотеки | `-`
+
+Опция сборки | Тип | Описание | По умолчанию
+:---|:---|:---|:---:
+`MODULE_MATH_ENABLE_COVERAGE` | BOOL | Включает поддержку сбора данных о покрытии кода тестами | `OFF`
+`MODULE_MATH_ENABLE_TESTS` | BOOL | Включает построение тестов | `OFF`
 
 Запускаем сборку
 

@@ -18,7 +18,7 @@ struct ProjectionDescription {
 
 class Projection final {
 public:
-  Projection() {}
+  Projection() = default;
 
   /**
    * @brief Конструктор класса.
@@ -48,7 +48,7 @@ public:
     return mat_.getData();
   }
 
-  void pers() {
+  void makePersp() {
     mat_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
     mat_.setValue(1, 1, 1 / tan(desc_.fov / 2));
     mat_.setValue(2, 2, (desc_.near + desc_.far) / (desc_.near - desc_.far));
@@ -57,9 +57,9 @@ public:
     mat_.setValue(3, 3, 0);
   }
 
-  auto getDescription() const -> ProjectionDescription { return desc_; }
+  [[nodiscard]] auto getDescription() const -> ProjectionDescription { return desc_; }
 
-  auto getData() const -> std::array<f32_t, 16> { return mat_.getData(); }
+  [[nodiscard]] auto getData() const -> std::array<f32_t, 16> { return mat_.getData(); }
 
 private:
   ProjectionDescription desc_;
