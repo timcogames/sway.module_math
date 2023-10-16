@@ -2,6 +2,12 @@
 
 [![codecov][codecov-svg]][codecov-url] [![Documentation][codedocs-svg]][codedocs-url] [![License][license-svg]][license-url]
 
+## Зависимости
+
+[glm (Временная зависимость)](https://github.com/g-truc/glm)\
+[cmake v3.14.3](https://cmake.org/files/v3.14)\
+[googletest](https://google.github.io/googletest/)
+
 ### Клонирование проекта
 
 ```console
@@ -19,8 +25,8 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DGLOB_THIRD_PARTY_DIR=/Users/apriori85/Documents/Third-party \
-      -DGLOB_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest \
+cmake -DGLOB_THIRD_PARTY_DIR=/Users/<USER_NAME>/Documents/Third-party \
+      -DGLOB_GTEST_ROOT_DIR=/Users/<USER_NAME>/Documents/Third-party/googletest \
       -DMODULE_MATH_ENABLE_TESTS=ON ../
 ```
 
@@ -28,7 +34,7 @@ cmake -DGLOB_THIRD_PARTY_DIR=/Users/apriori85/Documents/Third-party \
 :---|:---|:---|:---:
 `GLOB_THIRD_PARTY_DIR` | PATH | Путь до корневой директории Other библиотек | `-`
 `GLOB_EMSCRIPTEN_PLATFORM` | BOOL | Использует Emscripten компилятор | `OFF`
-`GLOB_EMSCRIPTEN_USE_WEB_BINDINGS` | BOOL | Использует Emscripten привязки для функций | `OFF`
+`GLOB_EMSCRIPTEN_USE_BINDINGS` | BOOL | Использует Emscripten привязки для функций | `OFF`
 `GLOB_EMSCRIPTEN_ROOT_DIR` | PATH | Путь до корневой директории Emscripten библиотеки | `-`
 `GLOB_BOOST_ROOT_DIR` | PATH | Путь до корневой директории Boost библиотеки (Не используется) | `-`
 `GLOB_GTEST_ROOT_DIR` | PATH | Путь до корневой директории GTest библиотеки | `-`

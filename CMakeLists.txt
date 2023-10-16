@@ -10,20 +10,15 @@ include("${MODULE_MATH_CMAKE_DIR}/set_output_dir.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/project_metadata.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/enable_cxx17.cmake")
 
-project_metadata("math" 0.4.16)
-
 # Опции сборки
 option(MODULE_MATH_ENABLE_COVERAGE "Enable coverage builds" OFF)
 option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 
 # set(GLOB_GTEST_ROOT_DIR ${GLOB_THIRD_PARTY_DIR} CACHE STRING "GTest root directory")
-# if (${GLOB_GTEST_ROOT_DIR} STREQUAL "OFF")
-# endif ()
+# if(${GLOB_GTEST_ROOT_DIR} STREQUAL "OFF")
+# endif()
 
-if (NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Choose the type of build" FORCE)
-endif ()
-
+project_metadata("math" 0.5.0)
 project(${MODULE_MATH_TARGET} VERSION ${MODULE_MATH_VERSION} LANGUAGES CXX)
 
 if(MODULE_MATH_ENABLE_COVERAGE)
@@ -36,15 +31,15 @@ set_output_dir("${CMAKE_SOURCE_DIR}/bin")
 set(MODULE_MATH_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 # Добавляем пути для поиска хедеров
-include_directories("${MODULE_MATH_DIR}/submodules/sway.module_core/lib/include")
-include_directories("${MODULE_MATH_DIR}/lib/include")
+include_directories("${MODULE_MATH_DIR}/submodules/sway.module_core/lib/cpp/include")
+include_directories("${MODULE_MATH_DIR}/lib/cpp/include")
 
 # Добавляем построение тестов
-if (MODULE_MATH_ENABLE_TESTS)
-  if (MODULE_MATH_SHARED_LIB)
+if(MODULE_MATH_ENABLE_TESTS)
+  if(MODULE_MATH_SHARED_LIB)
     message(STATUS "[${MODULE_MATH_TARGET}]: Tests are only allowed with a static lib")
-  else ()
+  else()
     message(STATUS "[${MODULE_MATH_TARGET}]:Tests have been enabled")
-    add_subdirectory(lib/tests/google)
-  endif ()
-endif ()
+    add_subdirectory(lib/cpp/tests/google)
+  endif()
+endif()

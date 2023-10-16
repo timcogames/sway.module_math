@@ -5,11 +5,11 @@ languages:
     
     production:
       include:
-        - /lib/src/.*\.cpp
-        - /lib/include/sway/.*\.h
+        - /lib/cpp/src/.*\.cpp
+        - /lib/cpp/include/sway/.*\.h
       exclude:
-        - /lib/tests/.*
+        - /lib/cpp/tests/.*
 
     test:
       include:
-        - /lib/tests/.*\.cpp
+        - /lib/cpp/tests/.*\.cpp
