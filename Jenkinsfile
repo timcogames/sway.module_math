@@ -4,7 +4,7 @@ node {
         sh 'git submodule update --init --recursive'
         sh 'mkdir -p build'
         dir('./build') {
-            sh '/opt/homebrew/Cellar/cmake/3.22.1/bin/cmake -DGLOB_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DCUSTOM_THIRDPARTY_DIR=/Users/apriori85/Documents/Third-party -DMODULE_MATH_ENABLE_TESTS=ON -DMODULE_MATH_ENABLE_COVERAGE=ON ../'
+            sh '/opt/homebrew/Cellar/cmake/3.22.1/bin/cmake -DGLOB_GTEST_ROOT_DIR=/Users/apriori85/Documents/Third-party/googletest -DGLOB_THIRD_PARTY_DIR=/Users/apriori85/Documents/Third-party -DMODULE_MATH_ENABLE_TESTS=ON -DMODULE_MATH_ENABLE_COVERAGE=ON ../'
             sh '/opt/homebrew/bin/cmake --build ./'
         }
 

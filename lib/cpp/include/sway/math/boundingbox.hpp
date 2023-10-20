@@ -18,8 +18,8 @@ struct BoundingBox {
   }
 };
 
-using bbox2i_t = BoundingBox<i32_t, 2>;
-using bbox3i_t = BoundingBox<i32_t, 3>;
+using bbox2i_t = BoundingBox<s32_t, 2>;
+using bbox3i_t = BoundingBox<s32_t, 3>;
 
 using bbox2f_t = BoundingBox<f32_t, 2>;
 using bbox3f_t = BoundingBox<f32_t, 3>;

@@ -22,7 +22,7 @@ option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 
 #_________________________________________________________________________________
 #                                                                          Project
-project_metadata("math" 0.5.1)
+project_metadata("math" 0.5.2)
 project(${MODULE_MATH_TARGET} VERSION ${MODULE_MATH_VERSION} LANGUAGES CXX)
 
 #_________________________________________________________________________________
