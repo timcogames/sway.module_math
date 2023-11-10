@@ -1,6 +1,18 @@
 node {
+    def SELECTED_ACTIVE_BRANCH = 'master'
+
+    stage('Options') {
+        SELECTED_ACTIVE_BRANCH = input(message: 'Select active branch', parameters: [
+            [$class: 'ChoiceParameterDefinition', 
+                choices: 'master\ndevelop', 
+                name: 'Active branch', 
+                description: 'Select option the relevant branch']
+        ])
+        echo "Active branch is ${SELECTED_ACTIVE_BRANCH}"
+    }
+
     stage('Build') {
-        git url: 'https://github.com/timcogames/sway.module_math.git', branch: 'master'
+        git url: 'https://github.com/timcogames/sway.module_math.git', branch: "${SELECTED_ACTIVE_BRANCH}"
         sh 'git submodule update --init --recursive'
         sh 'mkdir -p build'
         dir('./build') {

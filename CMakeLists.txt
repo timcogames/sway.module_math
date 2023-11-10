@@ -37,8 +37,8 @@ set_output_dir("${CMAKE_SOURCE_DIR}/bin")
 
 #_________________________________________________________________________________
 #                                                          Include project headers
-include_directories("${CMAKE_CURRENT_LIST_DIR}/submodules/sway.module_core/lib/cpp/include")
-include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/cpp/include")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/submodules/sway.module_core/lib/cxx/include")
+include_directories("${CMAKE_CURRENT_LIST_DIR}/lib/cxx/include")
 
 #_________________________________________________________________________________
 #                                                                            Tests
@@ -47,6 +47,6 @@ if(MODULE_MATH_ENABLE_TESTS)
     message(STATUS "[${MODULE_MATH_TARGET}]: Tests are only allowed with a static lib")
   else()
     message(STATUS "[${MODULE_MATH_TARGET}]:Tests have been enabled")
-    add_subdirectory(lib/cpp/tests/google)
+    add_subdirectory(lib/cxx/tests/google)
   endif()
 endif()
