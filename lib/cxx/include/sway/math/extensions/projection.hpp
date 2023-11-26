@@ -5,6 +5,8 @@
 #include <sway/math/matrix4.hpp>
 #include <sway/math/rect.hpp>
 
+#include <math.h>  // tan
+
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 

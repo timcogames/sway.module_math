@@ -4,6 +4,8 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
+#include <iomanip>  // setprecision
+
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
