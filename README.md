@@ -25,9 +25,9 @@ mkdir build && cd ./build
 Конфигурируем проект для сборки
 
 ```console
-cmake -DGLOB_THIRD_PARTY_DIR=/Users/<USER_NAME>/Documents/Third-party \
-      -DGLOB_GTEST_ROOT_DIR=/Users/<USER_NAME>/Documents/Third-party/googletest \
-      -DMODULE_MATH_ENABLE_TESTS=ON ../
+cmake -D GLOB_THIRD_PARTY_DIR=/Users/<USER_NAME>/Documents/Third-party \
+      -D GLOB_GTEST_ROOT_DIR=/Users/<USER_NAME>/Documents/Third-party/googletest \
+      -D MODULE_MATH_ENABLE_TESTS=ON ../
 ```
 
 Опция сборки | Тип | Описание | По умолчанию
