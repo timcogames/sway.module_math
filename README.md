@@ -5,7 +5,7 @@
 ## Зависимости
 
 [glm (Временная зависимость)](https://github.com/g-truc/glm)\
-[cmake v3.14.3](https://cmake.org/files/v3.14)\
+[cmake v3.27.9](https://cmake.org/files/v3.27)\
 [googletest](https://google.github.io/googletest/)
 
 ### Клонирование проекта
