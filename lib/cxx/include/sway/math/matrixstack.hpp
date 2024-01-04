@@ -34,7 +34,7 @@ public:
   }
 
 private:
-  std::array<std::stack<mat4f_t>, MATRIX_LENGTH> matrices_;
+  std::array<std::stack<mat4f_t>, NUM_MATRIX_TYPES> matrices_;
 };
 
 NAMESPACE_END(math)

@@ -8,7 +8,7 @@ NAMESPACE_BEGIN(math)
 
 enum class MatrixType : u32_t { VIEW, PROJ, TFRM, Latest };
 
-#define MATRIX_LENGTH (core::detail::toUnderlying(MatrixType::Latest))
+#define NUM_MATRIX_TYPES (core::detail::toUnderlying(MatrixType::Latest))
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
