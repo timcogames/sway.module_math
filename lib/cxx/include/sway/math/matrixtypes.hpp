@@ -6,7 +6,7 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-enum class MatrixType : u32_t { VIEW, PROJ, MODEL, Latest };
+enum class MatrixType : u32_t { VIEW, PROJ, TFRM, Latest };
 
 #define MATRIX_LENGTH (core::detail::toUnderlying(MatrixType::Latest))
 
