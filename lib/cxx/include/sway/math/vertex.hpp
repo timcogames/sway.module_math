@@ -137,6 +137,48 @@ struct VertexTexCoord : public VertexPosition {
   auto getTexCoord() const -> vec2f_t { return Vector2<f32_t>(u, v); }
 };
 
+struct VertexTexCoordEx {
+  f32_t x, y, z;
+  f32_t r, g, b, a;
+  f32_t u, v;
+
+  VertexTexCoordEx() {
+    x = y = z = 0.0F;
+    r = g = b = a = 0.0F;
+    u = v = 0.0F;
+  }
+
+  VertexTexCoordEx(const math::vec3f_t &position, const math::col4f_t &color, const math::vec2f_t &texCoord) {
+    setPosition(position);
+    setColor(color);
+    setTexCoord(texCoord);
+  }
+
+  void setPosition(const math::vec3f_t &position) {
+    x = position.getX();
+    y = position.getY();
+    z = position.getZ();
+  }
+
+  [[nodiscard]] auto getPosition() const -> math::vec3f_t { return math::Vector3<f32_t>(x, y, z); }
+
+  void setColor(const math::col4f_t &color) {
+    r = color.getR();
+    g = color.getG();
+    b = color.getB();
+    a = color.getA();
+  }
+
+  [[nodiscard]] auto getColor() const -> math::col4f_t { return math::Color<f32_t>(r, g, b, a); }
+
+  void setTexCoord(const math::vec2f_t &texCoord) {
+    u = texCoord.getX();
+    v = texCoord.getY();
+  }
+
+  auto getTexCoord() const -> math::vec2f_t { return math::Vector2<f32_t>(u, v); }
+};
+
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 

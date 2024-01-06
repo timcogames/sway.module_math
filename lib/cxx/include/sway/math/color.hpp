@@ -102,6 +102,9 @@ using col4d_t = Color<f64_t>;
 
 #define COL4F_WHITE math::col4f_t(1.0F, 1.0F, 1.0F, 1.0F)
 #define COL4F_BLACK math::col4f_t(0.0F, 0.0F, 0.0F, 1.0F)
+#define COL4F_RED math::col4f_t(1.0F, 0.0F, 0.0F, 1.0F)
+#define COL4F_GREEN math::col4f_t(0.0F, 1.0F, 0.0F, 1.0F)
+#define COL4F_BLUE math::col4f_t(0.0F, 0.0F, 1.0F, 1.0F)
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
