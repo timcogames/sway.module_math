@@ -27,6 +27,8 @@ include("${MODULE_MATH_CMAKE_DIR}/enable_cxx17.cmake")
 # Build options
 #---------------------------------------------------------------------------------
 
+set_glob_options()
+
 option(MODULE_MATH_ENABLE_COVERAGE "Enable coverage builds" OFF)
 option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 
