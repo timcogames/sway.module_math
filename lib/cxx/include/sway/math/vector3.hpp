@@ -162,6 +162,13 @@ public:
     *this = divide(scalar);
     return *this;
   }
+
+  friend auto operator<<(std::ostream &out, const Vector3<TValueType> &vec) -> std::ostream & {
+    return out << std::fixed << std::setprecision(6) << "{"
+               << "x: " << vec.getX() << ","
+               << "y: " << vec.getY() << ","
+               << "z: " << vec.getZ() << "}";
+  }
 };
 
 using vec3i_t = Vector3<s32_t>;
