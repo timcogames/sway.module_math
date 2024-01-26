@@ -14,9 +14,9 @@ NAMESPACE_BEGIN(math)
 
 struct NDC {
   // [0..1] -> [-1,+1]
-  static auto convFromScreen(const point2f_t &point, const size2i_t &dims) -> vec2f_t {
-    auto xpos = (point.getX() / static_cast<float>(dims.getW())) * 2.0F - 1.0F;
-    auto ypos = 1.0F - 2.0F * (point.getY() / static_cast<float>(dims.getH()));
+  static auto convFromScreen(const point2f_t &point, const size2i_t &scr) -> vec2f_t {
+    auto xpos = (point.getX() / static_cast<float>(scr.getW())) * 2.0F - 1.0F;
+    auto ypos = 1.0F - 2.0F * (point.getY() / static_cast<float>(scr.getH()));
 
     return vec2f_t(xpos, ypos);
   }
@@ -31,7 +31,7 @@ struct NDC {
 };
 
 struct CoordinateSystemUtils {
-  static auto convScreenToWorld(const vec4f_t &ndc, const mat4f_t &vpInv) -> vec3f_t {
+  static auto convScreenToWorldSpace(const vec4f_t &ndc, const mat4f_t &vpInv) -> vec3f_t {
     auto ptWorld = mat4f_t::transform(vpInv, ndc);
     ptWorld /= ptWorld.getW();
     return vec3f_t::from(ptWorld.getData());

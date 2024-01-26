@@ -2,7 +2,11 @@
 #define SWAY_MATH_RAY_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/vector3.hpp>
+#include <sway/math/extensions/coordinatesystemutils.hpp>
+#include <sway/math/matrix4.hpp>
+#include <sway/math/point.hpp>
+#include <sway/math/size.hpp>
+#include <sway/math/vector4.hpp>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -10,6 +14,17 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Ray {
 public:
+  static auto convFromScreenPoint(math::Point<TValueType> point, const math::size2i_t &scr,
+      const math::Matrix4<TValueType> &vpInv) -> Ray<TValueType> {
+    auto ndc = math::NDC::convFromScreen(point, scr);
+
+    auto start = math::vec4f_t(ndc.getX(), ndc.getY(), 0.0F, 1.0F);
+    auto end = math::vec4f_t(ndc.getX(), ndc.getY(), 1.0F, 1.0F);
+
+    return Ray<TValueType>(CoordinateSystemUtils::convScreenToWorldSpace(start, vpInv),
+        CoordinateSystemUtils::convScreenToWorldSpace(end, vpInv));
+  }
+
   Ray(const Vector3<TValueType> &start, const Vector3<TValueType> &end)
       : origin_(start)
       , direction_(Vector3<TValueType>::normalize(end - start)) {}
