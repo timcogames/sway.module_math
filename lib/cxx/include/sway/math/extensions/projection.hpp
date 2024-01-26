@@ -14,8 +14,8 @@ struct ProjectionDescription {
   rect4f_t rect;
   f32_t fov;
   f32_t aspect;
-  f32_t near;
-  f32_t far;
+  f32_t znear;
+  f32_t zfar;
 };
 
 class Projection final {
@@ -34,38 +34,40 @@ public:
   void setAspect(f32_t aspect) { desc_.aspect = aspect; }
 
   auto makeOrtho() -> std::array<f32_t, 16> {
-    auto d = desc_.far - desc_.near;
+    auto d = desc_.zfar - desc_.znear;
 
     auto x = desc_.rect.getW() / (2.0F * desc_.aspect);
     auto y = desc_.rect.getH() / (2.0F * desc_.aspect);
     auto z = d / -2.0F;
 
-    mat_.setValue(0, 0, x);
-    mat_.setValue(1, 1, y);
-    mat_.setValue(2, 2, z);
-    mat_.setValue(3, 0, -(desc_.rect.getR() + desc_.rect.getL()) / desc_.rect.getW());
-    mat_.setValue(3, 1, -(desc_.rect.getT() + desc_.rect.getB()) / desc_.rect.getH());
-    mat_.setValue(3, 2, -(desc_.far + desc_.near) / d);
+    mtx_.makeIdentity();
+    mtx_.setValue(0, 0, x);
+    mtx_.setValue(1, 1, y);
+    mtx_.setValue(2, 2, z);
+    mtx_.setValue(3, 0, -(desc_.rect.getR() + desc_.rect.getL()) / desc_.rect.getW());
+    mtx_.setValue(3, 1, -(desc_.rect.getT() + desc_.rect.getB()) / desc_.rect.getH());
+    mtx_.setValue(3, 2, -(desc_.zfar + desc_.znear) / d);
 
-    return mat_.getData();
+    return mtx_.getData();
   }
 
   void makePersp() {
-    mat_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
-    mat_.setValue(1, 1, 1 / tan(desc_.fov / 2));
-    mat_.setValue(2, 2, (desc_.near + desc_.far) / (desc_.near - desc_.far));
-    mat_.setValue(2, 3, -1);
-    mat_.setValue(3, 2, (2 * desc_.near * desc_.far) / (desc_.near - desc_.far));
-    mat_.setValue(3, 3, 0);
+    mtx_.makeIdentity();
+    mtx_.setValue(0, 0, 1 / tan(desc_.fov / 2) / desc_.aspect);
+    mtx_.setValue(1, 1, 1 / tan(desc_.fov / 2));
+    mtx_.setValue(2, 2, (desc_.znear + desc_.zfar) / (desc_.znear - desc_.zfar));
+    mtx_.setValue(2, 3, -1);
+    mtx_.setValue(3, 2, (2 * desc_.znear * desc_.zfar) / (desc_.znear - desc_.zfar));
+    mtx_.setValue(3, 3, 0);
   }
 
   [[nodiscard]] auto getDescription() const -> ProjectionDescription { return desc_; }
 
-  [[nodiscard]] auto getData() const -> std::array<f32_t, 16> { return mat_.getData(); }
+  [[nodiscard]] auto getData() const -> std::array<f32_t, 16> { return mtx_.getData(); }
 
 private:
   ProjectionDescription desc_;
-  mat4f_t mat_;
+  mat4f_t mtx_;
 };
 
 NAMESPACE_END(math)
