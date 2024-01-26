@@ -3,6 +3,7 @@
 
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
+#include <sway/math/extensions/coordinatesystemutils.hpp>
 #include <sway/math/extensions/projection.hpp>
 #include <sway/math/extensions/projectiontypes.hpp>
 #include <sway/math/matrix4.hpp>

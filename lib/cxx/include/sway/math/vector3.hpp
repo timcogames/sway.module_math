@@ -4,6 +4,8 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
+#include <cmath>
+
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
