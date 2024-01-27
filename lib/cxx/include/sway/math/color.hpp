@@ -59,7 +59,10 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]] auto getR() const -> TValueType { return r_; }
+  [[nodiscard]]
+  auto getR() const -> TValueType {
+    return r_;
+  }
 
   /**
    * @brief Получает значение канала зеленого цвета.
@@ -67,7 +70,10 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]] auto getG() const -> TValueType { return g_; }
+  [[nodiscard]]
+  auto getG() const -> TValueType {
+    return g_;
+  }
 
   /**
    * @brief Получает значение канала синего цвета.
@@ -76,7 +82,10 @@ public:
    *     getG() const,
    *     getA() const
    */
-  [[nodiscard]] auto getB() const -> TValueType { return b_; }
+  [[nodiscard]]
+  auto getB() const -> TValueType {
+    return b_;
+  }
 
   /**
    * @brief Получает значение альфа-канала.
@@ -85,12 +94,18 @@ public:
    *     getG() const,
    *     getB() const
    */
-  [[nodiscard]] auto getA() const -> TValueType { return a_; }
+  [[nodiscard]]
+  auto getA() const -> TValueType {
+    return a_;
+  }
 
   /**
    * @brief Преобразовывает в Vector4<TValueType> класс.
    */
-  [[nodiscard]] auto toVec4() const -> Vector4<TValueType> { return Vector4<TValueType>(r_, g_, b_, a_); }
+  [[nodiscard]]
+  auto toVec4() const -> Vector4<TValueType> {
+    return Vector4<TValueType>(r_, g_, b_, a_);
+  }
 
 private:
   TValueType r_, g_, b_, a_;

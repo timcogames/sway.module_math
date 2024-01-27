@@ -67,7 +67,10 @@ public:
    *
    * @sa getY() const
    */
-  [[nodiscard]] auto getX() const -> TValueType { return x_; }
+  [[nodiscard]]
+  auto getX() const -> TValueType {
+    return x_;
+  }
 
   /**
    * @brief Устанавливает новое значение координаты по оси Y.
@@ -82,9 +85,15 @@ public:
    *
    * @sa getX() const
    */
-  [[nodiscard]] auto getY() const -> TValueType { return y_; }
+  [[nodiscard]]
+  auto getY() const -> TValueType {
+    return y_;
+  }
 
-  [[nodiscard]] auto toVec() const -> Vector2<TValueType> { return Vector2<TValueType>(x_, y_); }
+  [[nodiscard]]
+  auto toVec() const -> Vector2<TValueType> {
+    return Vector2<TValueType>(x_, y_);
+  }
 
   /**
    * @brief Оператор равенства.

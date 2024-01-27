@@ -182,7 +182,8 @@ public:
     return res;
   }
 
-  [[nodiscard]] auto toStr() const -> std::string {
+  [[nodiscard]]
+  auto toStr() const -> std::string {
     std::stringstream stream;
     // clang-format off
     stream << std::fixed << std::setprecision(6) 

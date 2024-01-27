@@ -61,9 +61,15 @@ public:
     mtx_.setValue(3, 3, 0);
   }
 
-  [[nodiscard]] auto getDescription() const -> ProjectionDescription { return desc_; }
+  [[nodiscard]]
+  auto getDescription() const -> ProjectionDescription {
+    return desc_;
+  }
 
-  [[nodiscard]] auto getData() const -> std::array<f32_t, 16> { return mtx_.getData(); }
+  [[nodiscard]]
+  auto getData() const -> std::array<f32_t, 16> {
+    return mtx_.getData();
+  }
 
 private:
   ProjectionDescription desc_;

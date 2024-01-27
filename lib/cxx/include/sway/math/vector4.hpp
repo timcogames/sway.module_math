@@ -62,7 +62,10 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  [[nodiscard]] auto getX() const -> TValueType { return this->data_[0]; }
+  [[nodiscard]]
+  auto getX() const -> TValueType {
+    return this->data_[0];
+  }
 
   void setX(TValueType val) { this->data_[0] = val; }
 
@@ -73,7 +76,10 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  [[nodiscard]] auto getY() const -> TValueType { return this->data_[1]; }
+  [[nodiscard]]
+  auto getY() const -> TValueType {
+    return this->data_[1];
+  }
 
   void setY(TValueType val) { this->data_[1] = val; }
 
@@ -84,7 +90,10 @@ public:
    *     getY() const,
    *     getW() const
    */
-  [[nodiscard]] auto getZ() const -> TValueType { return this->data_[2]; }
+  [[nodiscard]]
+  auto getZ() const -> TValueType {
+    return this->data_[2];
+  }
 
   void setZ(TValueType val) { this->data_[2] = val; }
 
@@ -95,7 +104,10 @@ public:
    *     getY() const,
    *     getZ() const
    */
-  [[nodiscard]] auto getW() const -> TValueType { return this->data_[3]; }
+  [[nodiscard]]
+  auto getW() const -> TValueType {
+    return this->data_[3];
+  }
 
   void setW(TValueType val) { this->data_[3] = val; }
 
@@ -106,7 +118,8 @@ public:
 
   auto operator+(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return add(vec); }
 
-  [[nodiscard]] auto subtract(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
+  [[nodiscard]]
+  auto subtract(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
     return Vector4<TValueType>(this->data_[0] - vec.getX(), this->data_[1] - vec.getY(), this->data_[2] - vec.getZ(),
         this->data_[3] - vec.getW());
   }

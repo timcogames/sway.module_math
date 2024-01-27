@@ -151,9 +151,13 @@ public:
    */
   auto toSize() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
 
-  [[nodiscard]] auto isEmpty() const -> bool { return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0)); }
+  [[nodiscard]]
+  auto isEmpty() const -> bool {
+    return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0));
+  }
 
-  [[nodiscard]] auto isValid() const -> bool {
+  [[nodiscard]]
+  auto isValid() const -> bool {
     return ((data_[1 /* T */] > data_[3 /* B */]) || (data_[0 /* L */] > data_[2 /* R */])) ? false : false;
   }
 
