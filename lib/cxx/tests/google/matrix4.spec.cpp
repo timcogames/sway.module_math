@@ -17,56 +17,56 @@ constexpr s32_t RAND_MAT4x4[16] = {6, 5, 9, 8, 8, 0, 3, 4, 8, 2, 7, 9, 1, 1, 5, 
  * @brief Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
  */
 TEST(Matrix4, DefaultCtor) {
-  const math::mat4i_t mat;
+  math::mat4i_t mtx;
 
-  ASSERT_EQ(mat.getValue(0, 0), 1);
-  ASSERT_EQ(mat.getValue(0, 1), 0);
-  ASSERT_EQ(mat.getValue(0, 2), 0);
-  ASSERT_EQ(mat.getValue(0, 3), 0);
+  ASSERT_EQ(mtx.getValue(0, 0), 1);
+  ASSERT_EQ(mtx.getValue(0, 1), 0);
+  ASSERT_EQ(mtx.getValue(0, 2), 0);
+  ASSERT_EQ(mtx.getValue(0, 3), 0);
 
-  ASSERT_EQ(mat.getValue(1, 0), 0);
-  ASSERT_EQ(mat.getValue(1, 1), 1);
-  ASSERT_EQ(mat.getValue(1, 2), 0);
-  ASSERT_EQ(mat.getValue(1, 3), 0);
+  ASSERT_EQ(mtx.getValue(1, 0), 0);
+  ASSERT_EQ(mtx.getValue(1, 1), 1);
+  ASSERT_EQ(mtx.getValue(1, 2), 0);
+  ASSERT_EQ(mtx.getValue(1, 3), 0);
 
-  ASSERT_EQ(mat.getValue(2, 0), 0);
-  ASSERT_EQ(mat.getValue(2, 1), 0);
-  ASSERT_EQ(mat.getValue(2, 2), 1);
-  ASSERT_EQ(mat.getValue(2, 3), 0);
+  ASSERT_EQ(mtx.getValue(2, 0), 0);
+  ASSERT_EQ(mtx.getValue(2, 1), 0);
+  ASSERT_EQ(mtx.getValue(2, 2), 1);
+  ASSERT_EQ(mtx.getValue(2, 3), 0);
 
-  ASSERT_EQ(mat.getValue(3, 0), 0);
-  ASSERT_EQ(mat.getValue(3, 1), 0);
-  ASSERT_EQ(mat.getValue(3, 2), 0);
-  ASSERT_EQ(mat.getValue(3, 3), 1);
+  ASSERT_EQ(mtx.getValue(3, 0), 0);
+  ASSERT_EQ(mtx.getValue(3, 1), 0);
+  ASSERT_EQ(mtx.getValue(3, 2), 0);
+  ASSERT_EQ(mtx.getValue(3, 3), 1);
 }
 
 /**
  * @brief Убеждаемся, что установка всех компонентов матрицы проходит правильно.
  */
 TEST(Matrix4, Set) {
-  math::mat4i_t mat;
+  math::mat4i_t mtx;
 
-  mat.setValue(0, 0, RAND_MAT4[0][0]);
-  mat.setValue(0, 1, RAND_MAT4[0][1]);
-  mat.setValue(0, 2, RAND_MAT4[0][2]);
-  mat.setValue(0, 3, RAND_MAT4[0][3]);
+  mtx.setValue(0, 0, RAND_MAT4[0][0]);
+  mtx.setValue(0, 1, RAND_MAT4[0][1]);
+  mtx.setValue(0, 2, RAND_MAT4[0][2]);
+  mtx.setValue(0, 3, RAND_MAT4[0][3]);
 
-  mat.setValue(1, 0, RAND_MAT4[1][0]);
-  mat.setValue(1, 1, RAND_MAT4[1][1]);
-  mat.setValue(1, 2, RAND_MAT4[1][2]);
-  mat.setValue(1, 3, RAND_MAT4[1][3]);
+  mtx.setValue(1, 0, RAND_MAT4[1][0]);
+  mtx.setValue(1, 1, RAND_MAT4[1][1]);
+  mtx.setValue(1, 2, RAND_MAT4[1][2]);
+  mtx.setValue(1, 3, RAND_MAT4[1][3]);
 
-  mat.setValue(2, 0, RAND_MAT4[2][0]);
-  mat.setValue(2, 1, RAND_MAT4[2][1]);
-  mat.setValue(2, 2, RAND_MAT4[2][2]);
-  mat.setValue(2, 3, RAND_MAT4[2][3]);
+  mtx.setValue(2, 0, RAND_MAT4[2][0]);
+  mtx.setValue(2, 1, RAND_MAT4[2][1]);
+  mtx.setValue(2, 2, RAND_MAT4[2][2]);
+  mtx.setValue(2, 3, RAND_MAT4[2][3]);
 
-  mat.setValue(3, 0, RAND_MAT4[3][0]);
-  mat.setValue(3, 1, RAND_MAT4[3][1]);
-  mat.setValue(3, 2, RAND_MAT4[3][2]);
-  mat.setValue(3, 3, RAND_MAT4[3][3]);
+  mtx.setValue(3, 0, RAND_MAT4[3][0]);
+  mtx.setValue(3, 1, RAND_MAT4[3][1]);
+  mtx.setValue(3, 2, RAND_MAT4[3][2]);
+  mtx.setValue(3, 3, RAND_MAT4[3][3]);
 
-  ASSERT_TRUE(std::equal(std::begin(mat.getData()), std::end(mat.getData()), std::begin(RAND_MAT4x4)));
+  ASSERT_TRUE(std::equal(std::begin(mtx.getData()), std::end(mtx.getData()), std::begin(RAND_MAT4x4)));
 }
 
 // TEST(Matrix, multiplication) {

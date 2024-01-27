@@ -8,7 +8,7 @@ using namespace sway;
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexPosition, DefaultCtor) {
-  const math::VertexPosition vertex;
+  math::VertexPosition vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
   ASSERT_EQ(vertex.y, 0.0F);
@@ -20,8 +20,8 @@ TEST(VertexPosition, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(VertexPosition, ComponentCtor) {
-  const math::VertexPosition vertex(math::vec3f_t(1.0F, 2.0F, 3.0F));
-  const math::vec3f_t position = vertex.getPosition();
+  math::VertexPosition vertex(math::vec3f_t(1.0F, 2.0F, 3.0F));
+  auto position = vertex.getPosition();
 
   ASSERT_EQ(position.getX(), 1.0f);
   ASSERT_EQ(position.getY(), 2.0f);
@@ -32,7 +32,7 @@ TEST(VertexPosition, ComponentCtor) {
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexColor, DefaultCtor) {
-  const math::VertexColor vertex;
+  math::VertexColor vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
   ASSERT_EQ(vertex.y, 0.0F);
@@ -49,9 +49,9 @@ TEST(VertexColor, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(VertexColor, ComponentCtor) {
-  const math::VertexColor vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F));
-  const math::vec3f_t position = vertex.getPosition();
-  const math::col4f_t color = vertex.getColor();
+  math::VertexColor vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F));
+  auto position = vertex.getPosition();
+  auto color = vertex.getColor();
 
   ASSERT_EQ(position.getX(), 1.0F);
   ASSERT_EQ(position.getY(), 2.0F);
@@ -67,7 +67,7 @@ TEST(VertexColor, ComponentCtor) {
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(VertexTexCoord, DefaultCtor) {
-  const math::VertexTexCoord vertex;
+  math::VertexTexCoord vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
   ASSERT_EQ(vertex.y, 0.0F);
@@ -82,9 +82,9 @@ TEST(VertexTexCoord, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(VertexTexCoord, ComponentCtor) {
-  const math::VertexTexCoord vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::vec2f_t(0.1F, 0.2F));
-  const math::vec3f_t position = vertex.getPosition();
-  const math::vec2f_t texcoord = vertex.getTexCoord();
+  math::VertexTexCoord vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::vec2f_t(0.1F, 0.2F));
+  auto position = vertex.getPosition();
+  auto texcoord = vertex.getTexCoord();
 
   ASSERT_EQ(position.getX(), 1.0F);
   ASSERT_EQ(position.getY(), 2.0F);

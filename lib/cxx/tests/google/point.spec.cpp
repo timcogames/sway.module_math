@@ -8,10 +8,10 @@ using namespace sway;
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(Point, DefaultCtor) {
-  const math::point2i_t point;
+  math::point2i_t pnt;
 
-  ASSERT_EQ(point.getX(), 0);
-  ASSERT_EQ(point.getY(), 0);
+  ASSERT_EQ(pnt.getX(), 0);
+  ASSERT_EQ(pnt.getY(), 0);
 }
 
 /**
@@ -19,36 +19,36 @@ TEST(Point, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(Point, ComponentCtor) {
-  const s32_t x = 1, y = 2;
-  const math::point2i_t point(x, y);
+  const auto x = 1, y = 2;
+  math::point2i_t pnt(x, y);
 
-  ASSERT_EQ(point.getX(), x);
-  ASSERT_EQ(point.getY(), y);
+  ASSERT_EQ(pnt.getX(), x);
+  ASSERT_EQ(pnt.getY(), y);
 }
 
 TEST(Point, ScalarConstructor) {
-  const math::point2i_t size(math::point2i_one);
+  math::point2i_t pnt(math::point2i_one);
 
-  ASSERT_EQ(size.getX(), 1);
-  ASSERT_EQ(size.getY(), 1);
+  ASSERT_EQ(pnt.getX(), 1);
+  ASSERT_EQ(pnt.getY(), 1);
 }
 
 /**
  * @brief Тест для оператора равенства.
  */
 TEST(Point, EqualityOperator) {
-  const math::point2i_t point(0, 0);
+  math::point2i_t pnt(0, 0);
 
-  EXPECT_TRUE(point == math::point2i_zero);
-  EXPECT_FALSE(point == math::point2i_one);
+  EXPECT_TRUE(pnt == math::point2i_zero);
+  EXPECT_FALSE(pnt == math::point2i_one);
 }
 
 /**
  * @brief Тест для оператора неравенства.
  */
 TEST(Point, NonEqualityOperator) {
-  const math::point2i_t point(1, 1);
+  math::point2i_t pnt(1, 1);
 
-  EXPECT_TRUE(point != math::point2i_zero);
-  EXPECT_FALSE(point != math::point2i_one);
+  EXPECT_TRUE(pnt != math::point2i_zero);
+  EXPECT_FALSE(pnt != math::point2i_one);
 }

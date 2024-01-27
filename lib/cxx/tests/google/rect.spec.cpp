@@ -8,7 +8,7 @@ using namespace sway;
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
 TEST(Rect, DefaultCtor) {
-  const math::rect4i_t rect;
+  math::rect4i_t rect;
 
   ASSERT_EQ(rect.getL(), 0);
   ASSERT_EQ(rect.getT(), 0);
@@ -21,8 +21,8 @@ TEST(Rect, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(Rect, ComponentCtor) {
-  const s32_t x = 8, y = 16, w = 32, h = 64;
-  const math::rect4i_t rect(x, y, w, h);
+  const auto x = 8, y = 16, w = 32, h = 64;
+  math::rect4i_t rect(x, y, w, h);
 
   ASSERT_EQ(rect.getL(), x);
   ASSERT_EQ(rect.getT(), y);
@@ -33,8 +33,8 @@ TEST(Rect, ComponentCtor) {
 }
 
 TEST(Rect, Offset) {
-  const s32_t x = 8, y = 16, w = 32, h = 64;
-  const s32_t xoffset = 2, yoffset = 4;
+  const auto x = 8, y = 16, w = 32, h = 64;
+  const auto xoffset = 2, yoffset = 4;
 
   math::rect4i_t rect(x, y, w, h);
   rect.offset(xoffset, yoffset);
@@ -51,7 +51,7 @@ TEST(Rect, Offset) {
  * @brief Убеждаемся, что преобразование в Size<type> проходит правильно.
  */
 TEST(Rect, ConvertToSize) {
-  const s32_t x = 8, y = 16, w = 32, h = 64;
+  const auto x = 8, y = 16, w = 32, h = 64;
 
   math::rect4i_t rect(x, y, w, h);
   math::size2i_t size = rect.toSize();

@@ -17,6 +17,15 @@ class Size;
 template <typename TValueType>
 class Rect final {
 public:
+  // clang-format off
+  enum : u32_t { IDX_L = 0, IDX_T, IDX_R, IDX_B };
+  enum : u32_t {
+    IDX_TL = 0,
+    IDX_TR,
+    IDX_BL,
+    IDX_BR
+  };  // clang-format on
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
@@ -67,10 +76,10 @@ public:
    * @sa set(const std::array<TValueType, 4> &)
    */
   void set(TValueType x, TValueType y, TValueType w, TValueType h) {
-    data_[0 /* L */] = x;
-    data_[1 /* T */] = y;
-    data_[2 /* R */] = x + w;
-    data_[3 /* B */] = y + h;
+    data_[IDX_L] = x;
+    data_[IDX_T] = y;
+    data_[IDX_R] = x + w;
+    data_[IDX_B] = y + h;
   }
 
   /**
@@ -80,10 +89,10 @@ public:
    * @param[in] y Значение координаты по оси Y.
    */
   auto offset(TValueType x, TValueType y) -> Rect<TValueType> {
-    data_[0 /* L */] += x;
-    data_[1 /* T */] += y;
-    data_[2 /* R */] += x;
-    data_[3 /* B */] += y;
+    data_[IDX_L] += x;
+    data_[IDX_T] += y;
+    data_[IDX_R] += x;
+    data_[IDX_B] += y;
 
     return *this;
   }
@@ -98,9 +107,9 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TValueType x) { data_[0 /* L */] = x; }
+  void setL(TValueType x) { data_[IDX_L] = x; }
 
-  auto getL() const -> TValueType { return data_[0 /* L */]; }
+  auto getL() const -> TValueType { return data_[IDX_L]; }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
@@ -112,17 +121,17 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TValueType y) { data_[1 /* T */] = y; }
+  void setT(TValueType y) { data_[IDX_T] = y; }
 
-  auto getT() const -> TValueType { return data_[1 /* T */]; }
+  auto getT() const -> TValueType { return data_[IDX_T]; }
 
-  void setR(TValueType w) { data_[2 /* R */] = w; }
+  void setR(TValueType w) { data_[IDX_R] = w; }
 
-  auto getR() const -> TValueType { return data_[2 /* R */]; }
+  auto getR() const -> TValueType { return data_[IDX_R]; }
 
-  void setB(TValueType h) { data_[3 /* B */] = h; }
+  void setB(TValueType h) { data_[IDX_B] = h; }
 
-  auto getB() const -> TValueType { return data_[3 /* B */]; }
+  auto getB() const -> TValueType { return data_[IDX_B]; }
 
   /**
    * @brief Получает ширину прямоугольной области.
@@ -133,7 +142,7 @@ public:
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TValueType { return data_[2 /* R */] - data_[0 /* L */]; }
+  auto getW() const -> TValueType { return data_[IDX_R] - data_[IDX_L]; }
 
   /**
    * @brief Получает высоту прямоугольной области.
@@ -144,7 +153,7 @@ public:
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TValueType { return data_[3 /* B */] - data_[1 /* T */]; }
+  auto getH() const -> TValueType { return data_[IDX_B] - data_[IDX_T]; }
 
   /**
    * @brief Преобразовывает в Size<TValueType> класс.
@@ -158,12 +167,12 @@ public:
 
   [[nodiscard]]
   auto isValid() const -> bool {
-    return ((data_[1 /* T */] > data_[3 /* B */]) || (data_[0 /* L */] > data_[2 /* R */])) ? false : false;
+    return ((data_[IDX_T] > data_[IDX_B]) || (data_[IDX_L] > data_[IDX_R])) ? false : false;
   }
 
   auto contains(const math::Point<TValueType> &point) const -> bool {
-    return data_[0 /* L */] <= point.getX() && data_[2 /* R */] >= point.getX() && data_[1 /* T */] <= point.getY() &&
-           data_[3 /* B */] >= point.getY();
+    return data_[IDX_L] <= point.getX() && data_[IDX_R] >= point.getX() && data_[IDX_T] <= point.getY() &&
+           data_[IDX_B] >= point.getY();
   }
 
 private:
