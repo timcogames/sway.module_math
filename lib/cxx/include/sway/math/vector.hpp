@@ -8,35 +8,27 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType, std::size_t TSize>
+template <typename TValueType, std::size_t TElementCount>
 class Vector {
-  static_assert(TSize != 0, "Вектор не может иметь нулевой размер");
+  static_assert(TElementCount != 0, "Вектор не может иметь нулевой размер");
 
 public:
-  using type_t = TValueType;  // Базовый тип данных.
+  using DataElementType_t = TValueType;
+  enum : std::size_t { DataElementCount_t = TElementCount, DataSize_t = sizeof(TValueType) * TElementCount };
 
-  enum : std::size_t {
-    size = TSize  // Размер вектора.
-  };
-
-  /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с нулевыми значениями.
-   */
   Vector() {
-    for (std::size_t i = 0; i != size; ++i) {
+    for (std::size_t i = 0; i != DataElementCount_t; ++i) {
       data_[i] = (TValueType)0;
     }
   }
 
-  void setData(const std::array<TValueType, TSize> &arr) { data_ = arr; }
+  void set(const std::array<TValueType, TElementCount> &arr) { data_ = arr; }
 
-  /**
-   * @brief Возвращает необработанные данные.
-   */
-  auto getData() const -> std::array<TValueType, TSize> { return data_; }
+  auto array() const -> std::array<TValueType, TElementCount> { return data_; }
 
-#pragma region "Доступ к массиву"
+  auto data() const -> void * { return data_.data(); }
+
+#pragma region "Access operators"
 
   /**
    * @brief Возвращает значение в заданной позиции.
@@ -45,7 +37,7 @@ public:
    * @sa operator[](std::size_t) const
    */
   auto operator[](std::size_t position) -> TValueType & {
-    assert(position >= 0 && position <= TSize);
+    assert(position >= 0 && position <= DataElementCount_t);
     return data_[position];
   }
 
@@ -56,24 +48,24 @@ public:
    * @sa operator[](std::size_t)
    */
   auto operator[](std::size_t position) const -> const TValueType {
-    assert(position >= 0 && position <= TSize);
+    assert(position >= 0 && position <= DataElementCount_t);
     return data_[position];
   }
 
 #pragma endregion
 
-#pragma region "Равенство"
+#pragma region "Equality"
 
   /**
    * @brief Сравнивает два вектора на наличие равенства.
    *
-   * @param[in] vec Вектор с которым следует сравнить.
-   * @sa operator==(const Vector<TValueType, TSize> &) const,
-   *     operator!=(const Vector<TValueType, TSize> &) const
+   * @param[in] other Вектор с которым следует сравнить.
+   * @sa operator==(const Vector<TValueType, TElementCount> &) const,
+   *     operator!=(const Vector<TValueType, TElementCount> &) const
    */
-  auto equals(const Vector<TValueType, TSize> &vec) const -> bool {
-    for (auto i = 0; i < TSize; ++i) {
-      if (data_[i] != vec[i]) {
+  auto equals(const Vector<TValueType, TElementCount> &other) const -> bool {
+    for (auto i = 0; i < DataElementCount_t; ++i) {
+      if (data_[i] != other[i]) {
         return false;
       }
     }
@@ -81,29 +73,31 @@ public:
     return true;
   }
 
-  auto operator==(const Vector<TValueType, TSize> &vec) const -> bool { return equals(vec); }
+  auto operator==(const Vector<TValueType, TElementCount> &other) const -> bool { return equals(other); }
 
-  auto operator!=(const Vector<TValueType, TSize> &vec) const -> bool { return !equals(vec); }
+  auto operator!=(const Vector<TValueType, TElementCount> &other) const -> bool { return !equals(other); }
 
 #pragma endregion
 
-#pragma region "Арифметические операции"
+#pragma region "Arithmetic operations"
 
   /**
    * @brief Делит указанный вектор на заданный вектор.
    *
-   * @param[in] vec Вектор на который следует разделит.
-   * @sa operator/(const Vector<TValueType, TSize> &) const
+   * @param[in] other Вектор на который следует разделит.
+   * @sa operator/(const Vector<TValueType, TElementCount> &) const
    */
-  auto divide(const Vector<TValueType, TSize> &vec) -> const Vector<TValueType, TSize> & {
-    for (std::size_t i = 0; i < TSize; ++i) {
-      data_[i] /= vec[i];
+  auto divide(const Vector<TValueType, TElementCount> &other) -> const Vector<TValueType, TElementCount> & {
+    for (std::size_t i = 0; i < DataElementCount_t; ++i) {
+      data_[i] /= other[i];
     }
 
     return *this;
   }
 
-  auto operator/(const Vector<TValueType, TSize> &vec) const -> const Vector<TValueType, TSize> { return divide(vec); }
+  auto operator/(const Vector<TValueType, TElementCount> &other) const -> const Vector<TValueType, TElementCount> {
+    return divide(other);
+  }
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.
@@ -111,20 +105,20 @@ public:
    * @param[in] scalar Скаляр на который следует разделит.
    * @sa operator/(TValueType) const
    */
-  auto divide(TValueType scalar) -> const Vector<TValueType, TSize> & {
-    for (std::size_t i = 0; i < TSize; ++i) {
+  auto divide(TValueType scalar) -> const Vector<TValueType, TElementCount> & {
+    for (std::size_t i = 0; i < DataElementCount_t; ++i) {
       data_[i] /= scalar;
     }
 
     return *this;
   }
 
-  auto operator/(TValueType scalar) const -> const Vector<TValueType, TSize> { return divide(scalar); }
+  auto operator/(TValueType scalar) const -> const Vector<TValueType, TElementCount> { return divide(scalar); }
 
 #pragma endregion
 
 protected:
-  std::array<TValueType, TSize> data_;  // Данные вектора.
+  std::array<TValueType, DataElementCount_t> data_;
 };
 
 NAMESPACE_END(math)

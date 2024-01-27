@@ -30,4 +30,4 @@ TEST(Vector4, ComponentConstructor) {
   ASSERT_EQ(vec4.getW(), w);
 }
 
-TEST(Vector4, Size) { ASSERT_EQ(math::vec4i_t::size, 4); }
+TEST(Vector4, Size) { ASSERT_EQ(math::vec4i_t::DataElementCount_t, 4); }

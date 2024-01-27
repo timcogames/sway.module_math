@@ -34,7 +34,7 @@ struct CoordinateSystemUtils {
   static auto convScreenToWorldSpace(const vec4f_t &ndc, const mat4f_t &vpInv) -> vec3f_t {
     auto ptWorld = mat4f_t::transform(vpInv, ndc);
     ptWorld /= ptWorld.getW();
-    return vec3f_t::from(ptWorld.getData());
+    return vec3f_t::from(ptWorld.array());
   }
 };
 

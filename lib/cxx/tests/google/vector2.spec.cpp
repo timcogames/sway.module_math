@@ -26,4 +26,4 @@ TEST(Vector2, ComponentConstructor) {
   ASSERT_EQ(vec2.getY(), y);
 }
 
-TEST(Vector2, Size) { ASSERT_EQ(math::vec2i_t::size, 2); }
+TEST(Vector2, Size) { ASSERT_EQ(math::vec2i_t::DataElementCount_t, 2); }

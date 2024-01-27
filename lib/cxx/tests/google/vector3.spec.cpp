@@ -28,7 +28,7 @@ TEST(Vector3, ComponentConstructor) {
   ASSERT_EQ(vec3.getZ(), z);
 }
 
-TEST(Vector3, Size) { ASSERT_EQ(math::vec3i_t::size, 3); }
+TEST(Vector3, Size) { ASSERT_EQ(math::vec3i_t::DataElementCount_t, 3); }
 
 TEST(Vector3, Divide) {
   math::vec3i_t vec3(4, 6, 8);
