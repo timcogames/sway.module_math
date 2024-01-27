@@ -25,9 +25,9 @@ public:
 
   void set(const std::array<TValueType, TElementCount> &arr) { data_ = arr; }
 
-  auto array() const -> std::array<TValueType, TElementCount> { return data_; }
+  auto array() -> std::array<TValueType, TElementCount> { return data_; }
 
-  auto data() const -> void * { return data_.data(); }
+  auto data() -> TValueType * { return data_.data(); }
 
   auto lerp(const Vector<TValueType, TElementCount> &other, TValueType step) const
       -> Vector<TValueType, TElementCount> {
