@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Point, DefaultConstructor) {
+TEST(Point, DefaultCtor) {
   const math::point2i_t point;
 
   ASSERT_EQ(point.getX(), 0);
@@ -18,7 +18,7 @@ TEST(Point, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Point, ComponentConstructor) {
+TEST(Point, ComponentCtor) {
   const s32_t x = 1, y = 2;
   const math::point2i_t point(x, y);
 

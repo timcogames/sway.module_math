@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Size, DefaultConstructor) {
+TEST(Size, DefaultCtor) {
   const math::size2i_t size;
 
   ASSERT_EQ(size.getW(), 0);
@@ -18,7 +18,7 @@ TEST(Size, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Size, ComponentConstructor) {
+TEST(Size, ComponentCtor) {
   const s32_t w = 1, h = 2;
   const math::size2i_t size(w, h);
 

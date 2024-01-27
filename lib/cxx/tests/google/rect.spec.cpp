@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Rect, DefaultConstructor) {
+TEST(Rect, DefaultCtor) {
   const math::rect4i_t rect;
 
   ASSERT_EQ(rect.getL(), 0);
@@ -20,7 +20,7 @@ TEST(Rect, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Rect, ComponentConstructor) {
+TEST(Rect, ComponentCtor) {
   const s32_t x = 8, y = 16, w = 32, h = 64;
   const math::rect4i_t rect(x, y, w, h);
 

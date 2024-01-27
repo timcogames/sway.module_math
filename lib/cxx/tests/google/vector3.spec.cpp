@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Vector3, DefaultConstructor) {
+TEST(Vector3, DefaultCtor) {
   math::vec3i_t vec3;
 
   ASSERT_EQ(vec3.getX(), 0);
@@ -19,7 +19,7 @@ TEST(Vector3, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Vector3, ComponentConstructor) {
+TEST(Vector3, ComponentCtor) {
   s32_t x = 1, y = 2, z = 3;
   math::vec3i_t vec3(x, y, z);
 

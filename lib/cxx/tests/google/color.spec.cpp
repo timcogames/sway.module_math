@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Color, DefaultConstructor) {
+TEST(Color, DefaultCtor) {
   const math::col4f_t color;
 
   ASSERT_EQ(color.getR(), 0.0F);
@@ -20,7 +20,7 @@ TEST(Color, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Color, ComponentConstructor) {
+TEST(Color, ComponentCtor) {
   const f32_t r = 0.1F, g = 0.2F, b = 0.3F, a = 1.0F;
   const math::col4f_t color(r, g, b, a);
 

@@ -10,7 +10,10 @@ constexpr f32_t PI = 3.14159265358979323846F;
 
 class Utils {
 public:
-  static auto lerp(f32_t x, f32_t y, f32_t t) -> f32_t { return (1.0F - t) * x + t * y; }
+  template <typename TValueType>
+  static auto lerp(TValueType from, TValueType to, TValueType step) -> TValueType {
+    return from + step * (to - from);
+  }
 };
 
 NAMESPACE_END(math)

@@ -2,6 +2,7 @@
 #define SWAY_MATH_VECTOR_HPP
 
 #include <sway/core.hpp>
+#include <sway/math/utils.hpp>
 
 #include <assert.h>
 
@@ -17,7 +18,7 @@ public:
   enum : std::size_t { DataElementCount_t = TElementCount, DataSize_t = sizeof(TValueType) * TElementCount };
 
   Vector() {
-    for (std::size_t i = 0; i != DataElementCount_t; ++i) {
+    for (auto i = 0; i != DataElementCount_t; ++i) {
       data_[i] = (TValueType)0;
     }
   }
@@ -27,6 +28,16 @@ public:
   auto array() const -> std::array<TValueType, TElementCount> { return data_; }
 
   auto data() const -> void * { return data_.data(); }
+
+  auto lerp(const Vector<TValueType, TElementCount> &other, TValueType step) const
+      -> Vector<TValueType, TElementCount> {
+    Vector<TValueType, TElementCount> result;
+    for (auto i = 0; i != DataElementCount_t; ++i) {
+      result[i] = Utils::lerp(data_[i], other[i], step);
+    }
+
+    return result;
+  }
 
 #pragma region "Access operators"
 
@@ -88,7 +99,7 @@ public:
    * @sa operator/(const Vector<TValueType, TElementCount> &) const
    */
   auto divide(const Vector<TValueType, TElementCount> &other) -> const Vector<TValueType, TElementCount> & {
-    for (std::size_t i = 0; i < DataElementCount_t; ++i) {
+    for (auto i = 0; i < DataElementCount_t; ++i) {
       data_[i] /= other[i];
     }
 
@@ -106,7 +117,7 @@ public:
    * @sa operator/(TValueType) const
    */
   auto divide(TValueType scalar) -> const Vector<TValueType, TElementCount> & {
-    for (std::size_t i = 0; i < DataElementCount_t; ++i) {
+    for (auto i = 0; i < DataElementCount_t; ++i) {
       data_[i] /= scalar;
     }
 

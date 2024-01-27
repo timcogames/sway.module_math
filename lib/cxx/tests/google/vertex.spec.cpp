@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexPosition, DefaultConstructor) {
+TEST(VertexPosition, DefaultCtor) {
   const math::VertexPosition vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -19,7 +19,7 @@ TEST(VertexPosition, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexPosition, ComponentConstructor) {
+TEST(VertexPosition, ComponentCtor) {
   const math::VertexPosition vertex(math::vec3f_t(1.0F, 2.0F, 3.0F));
   const math::vec3f_t position = vertex.getPosition();
 
@@ -31,7 +31,7 @@ TEST(VertexPosition, ComponentConstructor) {
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexColor, DefaultConstructor) {
+TEST(VertexColor, DefaultCtor) {
   const math::VertexColor vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -48,7 +48,7 @@ TEST(VertexColor, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexColor, ComponentConstructor) {
+TEST(VertexColor, ComponentCtor) {
   const math::VertexColor vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F));
   const math::vec3f_t position = vertex.getPosition();
   const math::col4f_t color = vertex.getColor();
@@ -66,7 +66,7 @@ TEST(VertexColor, ComponentConstructor) {
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexTexCoord, DefaultConstructor) {
+TEST(VertexTexCoord, DefaultCtor) {
   const math::VertexTexCoord vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -81,7 +81,7 @@ TEST(VertexTexCoord, DefaultConstructor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexTexCoord, ComponentConstructor) {
+TEST(VertexTexCoord, ComponentCtor) {
   const math::VertexTexCoord vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::vec2f_t(0.1F, 0.2F));
   const math::vec3f_t position = vertex.getPosition();
   const math::vec2f_t texcoord = vertex.getTexCoord();
