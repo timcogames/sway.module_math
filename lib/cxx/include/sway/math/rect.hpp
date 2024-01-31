@@ -82,6 +82,13 @@ public:
     data_[IDX_B] = y + h;
   }
 
+  void set(TValueType x, TValueType y, const Size<TValueType> &size) {
+    data_[IDX_L] = x;
+    data_[IDX_T] = y;
+    data_[IDX_R] = x + size.getW();
+    data_[IDX_B] = y + size.getH();
+  }
+
   /**
    * @brief Устанавливает смещение прямоугольной области.
    *
