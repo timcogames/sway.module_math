@@ -155,11 +155,15 @@ public:
    */
   auto getH() const -> TValueType { return data_[IDX_B] - data_[IDX_T]; }
 
-  auto position() const -> Point<TValueType> { return Point<TValueType>(getL(), getT()); }
+  [[nodiscard]]
+  auto position() const -> Point<TValueType> {
+    return Point<TValueType>(getL(), getT());
+  }
 
-  auto size() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
-
-  auto area() const -> TValueType { return getW() * getH(); }
+  [[nodiscard]]
+  auto size() const -> Size<TValueType> {
+    return Size<TValueType>(getW(), getH());
+  }
 
   [[nodiscard]]
   auto empty() const -> bool {
