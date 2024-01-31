@@ -155,13 +155,14 @@ public:
    */
   auto getH() const -> TValueType { return data_[IDX_B] - data_[IDX_T]; }
 
-  /**
-   * @brief Преобразовывает в Size<TValueType> класс.
-   */
-  auto toSize() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
+  auto position() const -> Point<TValueType> { return Point<TValueType>(getL(), getT()); }
+
+  auto size() const -> Size<TValueType> { return Size<TValueType>(getW(), getH()); }
+
+  auto area() const -> TValueType { return getW() * getH(); }
 
   [[nodiscard]]
-  auto isEmpty() const -> bool {
+  auto empty() const -> bool {
     return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0));
   }
 
