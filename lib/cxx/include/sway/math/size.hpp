@@ -109,11 +109,6 @@ public:
     return getW() * getH();
   }
 
-  [[nodiscard]]
-  auto area() const -> TValueType {
-    return getW() * getH();
-  }
-
   /**
    * @brief Преобразовывает в Rect<TValueType> класс.
    */
