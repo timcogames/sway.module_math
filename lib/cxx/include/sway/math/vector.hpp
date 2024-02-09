@@ -11,17 +11,19 @@ NAMESPACE_BEGIN(math)
 
 template <typename TValueType, std::size_t TElementCount>
 class Vector {
-  static_assert(TElementCount != 0, "Вектор не может иметь нулевой размер");
+  static_assert(TElementCount != 0, "Vector cannot have size zero");
 
 public:
+  using Self_t = Vector<TValueType, TElementCount>;
   using DataElementType_t = TValueType;
+
   enum : std::size_t { DataElementCount_t = TElementCount, DataSize_t = sizeof(TValueType) * TElementCount };
 
-  Vector() {
-    for (auto i = 0; i != DataElementCount_t; ++i) {
-      data_[i] = (TValueType)0;
-    }
-  }
+  Vector() { data_.fill((TValueType)0); }
+
+  Vector(const std::array<TValueType, TElementCount> &arr) { set(arr); }
+
+  virtual ~Vector() = default;
 
   void set(const std::array<TValueType, TElementCount> &arr) { data_ = arr; }
 
@@ -124,7 +126,7 @@ public:
     return *this;
   }
 
-  auto operator/(TValueType scalar) const -> const Vector<TValueType, TElementCount> { return divide(scalar); }
+  auto operator/(TValueType scalar) -> const Vector<TValueType, TElementCount> { return divide(scalar); }
 
 #pragma endregion
 

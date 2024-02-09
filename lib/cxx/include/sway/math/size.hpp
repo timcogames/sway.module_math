@@ -14,8 +14,10 @@ class Rect;
  * @brief Шаблонный класс представления размера.
  */
 template <typename TValueType>
-class Size final {
+class Size : public Vector<TValueType, 2> {
 public:
+  enum : u32_t { IDX_WDT = 0, IDX_HGT };
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
@@ -23,7 +25,17 @@ public:
    * @sa Size(TValueType),
    *     Size(TValueType, TValueType)
    */
-  Size() { w_ = h_ = (TValueType)0; }
+  Size()
+      : Vector<TValueType, Size<TValueType>::DataElementCount_t>() {}
+
+  Size(const Vector<TValueType, Size<TValueType>::DataElementCount_t> &copy) {
+    for (auto i = 0; i != Size<TValueType>::DataElementCount_t; ++i) {
+      this->data_[i] = (TValueType)copy[i];
+    }
+  }
+
+  Size(const std::array<TValueType, Size<TValueType>::DataElementCount_t> &arr)
+      : Vector<TValueType, Size<TValueType>::DataElementCount_t>(arr) {}
 
   /**
    * @brief Конструктор класса.
@@ -53,8 +65,8 @@ public:
    * @param[in] h Значение высоты.
    */
   void set(TValueType w, TValueType h) {
-    w_ = w;
-    h_ = h;
+    this->data_[IDX_WDT] = w;
+    this->data_[IDX_HGT] = h;
   }
 
   /**
@@ -63,7 +75,7 @@ public:
    * @param[in] w Новое значение ширины.
    * @sa setH(TValueType)
    */
-  void setW(TValueType w) { w_ = w; }
+  void setW(TValueType w) { this->data_[IDX_WDT] = w; }
 
   /**
    * @brief Получает значение ширины.
@@ -71,7 +83,7 @@ public:
    */
   [[nodiscard]]
   auto getW() const -> TValueType {
-    return w_;
+    return this->data_[IDX_WDT];
   }
 
   /**
@@ -80,7 +92,7 @@ public:
    * @param[in] h Новое значение высоты.
    * @sa setW(TValueType)
    */
-  void setH(TValueType h) { h_ = h; }
+  void setH(TValueType h) { this->data_[IDX_HGT] = h; }
 
   /**
    * @brief Получает значение высоты.
@@ -89,7 +101,12 @@ public:
    */
   [[nodiscard]]
   auto getH() const -> TValueType {
-    return h_;
+    return this->data_[IDX_HGT];
+  }
+
+  [[nodiscard]]
+  auto area() const -> TValueType {
+    return getW() * getH();
   }
 
   /**
@@ -97,35 +114,12 @@ public:
    */
   [[nodiscard]]
   auto toRect() const -> Rect<TValueType> {
-    return Rect<TValueType>((TValueType)0, (TValueType)0, w_, h_);
+    return Rect<TValueType>((TValueType)0, (TValueType)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
   }
 
   auto operator*(const TValueType &rvalue) const -> Size<TValueType> {
-    return Size<TValueType>(w_ * rvalue, h_ * rvalue);
+    return Size<TValueType>(this->data_[IDX_WDT] * rvalue, this->data_[IDX_HGT] * rvalue);
   }
-
-  auto operator/(const TValueType &rvalue) const -> Size<TValueType> {
-    return Size<TValueType>(w_ / rvalue, h_ / rvalue);
-  }
-
-  /**
-   * @brief Оператор равенства.
-   */
-  template <typename TOther>
-  auto operator==(const Size<TOther> &compare) const -> bool {
-    return w_ == compare.getW() && h_ == compare.getH();
-  }
-
-  /**
-   * @brief Оператор неравенства.
-   */
-  template <typename TOther>
-  auto operator!=(const Size<TOther> &compare) const -> bool {
-    return !operator==(compare);
-  }
-
-private:
-  TValueType w_, h_;
 };
 
 using size2i_t = Size<s32_t>;

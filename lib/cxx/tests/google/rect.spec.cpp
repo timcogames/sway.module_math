@@ -54,16 +54,16 @@ TEST(Rect, ConvertToSize) {
   const auto x = 8, y = 16, w = 32, h = 64;
 
   math::rect4i_t rect(x, y, w, h);
-  math::size2i_t size = rect.toSize();
+  math::size2i_t size = rect.size();
 
   ASSERT_EQ(size.getW(), w);
   ASSERT_EQ(size.getH(), h);
 }
 
 TEST(Rect, IsEmpty) {
-  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 0, 32).isEmpty());
-  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 0).isEmpty());
-  EXPECT_FALSE(math::Rect<s32_t>(0, 0, 32, 32).isEmpty());
+  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 0, 32).empty());
+  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 0).empty());
+  EXPECT_FALSE(math::Rect<s32_t>(0, 0, 32, 32).empty());
 }
 
 TEST(Rect, contains) {

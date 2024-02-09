@@ -16,6 +16,8 @@ class Vector4;
 template <typename TValueType>
 class Color final {
 public:
+  enum : u32_t { IDX_R = 0, IDX_G, IDX_B, IDX_A };
+
   /**
    * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
    *
@@ -106,6 +108,19 @@ public:
   auto toVec4() const -> Vector4<TValueType> {
     return Vector4<TValueType>(r_, g_, b_, a_);
   }
+
+  auto add(const Color<TValueType> &vec) -> Color<TValueType> {
+    return Color<TValueType>(
+        this->r_ + vec.getR(), this->g_ + vec.getG(), this->b_ + vec.getB(), this->a_ + vec.getA());
+  }
+
+  auto operator+(const Color<TValueType> &vec) -> Color<TValueType> { return add(vec); }
+
+  auto multiply(TValueType scalar) const -> Color<TValueType> {
+    return Color<TValueType>(this->r_ * scalar, this->g_ * scalar, this->b_ * scalar, this->a_ * scalar);
+  }
+
+  auto operator*(TValueType scalar) const -> Color<TValueType> { return multiply(scalar); }
 
 private:
   TValueType r_, g_, b_, a_;
