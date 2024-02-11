@@ -5,17 +5,33 @@
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
+NAMESPACE_BEGIN(util)
 
 constexpr f32_t PI = 3.14159265358979323846F;
 
-class Utils {
-public:
-  template <typename TValueType>
-  static auto lerp(TValueType from, TValueType to, TValueType step) -> TValueType {
-    return from + step * (to - from);
-  }
-};
+inline auto powerOf2(int val) -> int {
+  // val |= (val >> 1);
+  // val |= (val >> 2);
+  // val |= (val >> 4);
+  // val |= (val >> 8);
+  // val |= (val >> 16);
+  // val |= (val >> 32);
+  // return val + 1;
 
+  auto result = 1;
+  while (result < val) {
+    result <<= 1;
+  }
+
+  return result;
+}
+
+template <typename TValueType>
+inline auto lerp(TValueType from, TValueType to, TValueType step) -> TValueType {
+  return from + step * (to - from);
+}
+
+NAMESPACE_END(util)
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
 

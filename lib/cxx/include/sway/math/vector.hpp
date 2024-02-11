@@ -35,7 +35,7 @@ public:
       -> Vector<TValueType, TElementCount> {
     Vector<TValueType, TElementCount> result;
     for (auto i = 0; i != DataElementCount_t; ++i) {
-      result[i] = Utils::lerp(data_[i], other[i], step);
+      result[i] = util::lerp(data_[i], other[i], step);
     }
 
     return result;
