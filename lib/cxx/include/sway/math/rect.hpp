@@ -4,6 +4,7 @@
 #include <sway/core.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/size.hpp>
+#include <sway/math/vector4.hpp>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
@@ -15,7 +16,7 @@ class Size;
  * @brief Шаблонный класс представления прямоугольной области.
  */
 template <typename TValueType>
-class Rect final : public Vector<TValueType, 4> {
+class Rect final : public Vector4<TValueType> {
 public:
   // clang-format off
   enum : u32_t { IDX_L = 0, IDX_T, IDX_R, IDX_B };
@@ -34,7 +35,7 @@ public:
    *     Rect(TValueType, TValueType, TValueType, TValueType)
    */
   Rect()
-      : Vector<TValueType, 4>() {}
+      : Vector4<TValueType>() {}
 
   /**
    * @brief Конструктор класса.
@@ -45,7 +46,7 @@ public:
    *     Rect(TValueType, TValueType, TValueType, TValueType)
    */
   Rect(const std::array<TValueType, 4> &data)
-      : Vector<TValueType, 4>(data) {}
+      : Vector4<TValueType>(data) {}
 
   /**
    * @brief Конструктор класса.
@@ -58,7 +59,9 @@ public:
    * @sa Rect(),
    *     Rect(const std::array<TValueType, 4> &)
    */
-  Rect(TValueType x, TValueType y, TValueType w, TValueType h) { set(x, y, w, h); }
+  Rect(TValueType x, TValueType y, TValueType w, TValueType h) { this->set(x, y, w, h); }
+
+  virtual ~Rect() = default;
 
   /**
    * @brief Устанавливает новые значения.
@@ -69,18 +72,10 @@ public:
    * @param[in] h Значение высоты.
    * @sa set(const std::array<TValueType, 4> &)
    */
-  void set(TValueType x, TValueType y, TValueType w, TValueType h) {
-    this->data_[IDX_L] = x;
-    this->data_[IDX_T] = y;
-    this->data_[IDX_R] = x + w;
-    this->data_[IDX_B] = y + h;
-  }
+  void set(TValueType x, TValueType y, TValueType w, TValueType h) { Vector4<TValueType>::set(x, y, x + w, y + h); }
 
   void set(TValueType x, TValueType y, const Size<TValueType> &size) {
-    this->data_[IDX_L] = x;
-    this->data_[IDX_T] = y;
-    this->data_[IDX_R] = x + size.getW();
-    this->data_[IDX_B] = y + size.getH();
+    this->set(x, y, x + size.getW(), y + size.getH());
   }
 
   /**
@@ -185,14 +180,6 @@ public:
     return this->data_[IDX_L] <= point.getX() && this->data_[IDX_R] >= point.getX() &&
            this->data_[IDX_T] <= point.getY() && this->data_[IDX_B] >= point.getY();
   }
-
-  friend auto operator<<(std::ostream &out, const Rect<TValueType> &rect) -> std::ostream & {
-    return out << std::fixed << std::setprecision(6) << "{"
-               << "x: " << rect.getX() << ","
-               << "y: " << rect.getY() << ","
-               << "w: " << rect.getZ() << ","
-               << "h: " << rect.getW() << "}";
-  }
 };
 
 using rect4i_t = Rect<s32_t>;
@@ -201,5 +188,7 @@ using rect4d_t = Rect<f64_t>;
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
+
+#include <sway/math/rect.inl>
 
 #endif  // SWAY_MATH_RECT_HPP

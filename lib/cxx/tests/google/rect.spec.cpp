@@ -17,6 +17,19 @@ TEST(Rect, DefaultCtor) {
 }
 
 /**
+ * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
+ */
+TEST(Rect, ArrayCtor) {
+  std::array<s32_t, 4> arr = {8, 16, 32, 64};
+  math::rect4i_t rect(arr);
+
+  ASSERT_EQ(rect.getL(), 8);
+  ASSERT_EQ(rect.getT(), 16);
+  ASSERT_EQ(rect.getR(), 32);
+  ASSERT_EQ(rect.getB(), 64);
+}
+
+/**
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
@@ -69,4 +82,8 @@ TEST(Rect, IsEmpty) {
 TEST(Rect, contains) {
   ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(24, 8)));
   ASSERT_FALSE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(32, 17)));
+}
+
+TEST(Rect, toString) {
+  EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 32, 64)).c_str(), "{x: 8, y: 16, w: 32, h: 64}");
 }

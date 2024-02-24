@@ -13,7 +13,7 @@ NAMESPACE_BEGIN(math)
  * @brief Шаблонный класс представления вектора из четырех компонентов.
  */
 template <typename TValueType>
-class Vector4 final : public Vector<TValueType, 4> {
+class Vector4 : public Vector<TValueType, 4> {
 public:
   static auto from(std::array<TValueType, 3> data, TValueType w) {
     return Vector4<TValueType>(data[0], data[1], data[2], w);
@@ -28,6 +28,9 @@ public:
   Vector4()
       : Vector<TValueType, 4>() {}
 
+  Vector4(const std::array<TValueType, 4> &data)
+      : Vector<TValueType, 4>(data) {}
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
@@ -39,6 +42,8 @@ public:
    * @sa Vector4()
    */
   Vector4(TValueType x, TValueType y, TValueType z, TValueType w) { set(x, y, z, w); }
+
+  virtual ~Vector4() = default;
 
   /**
    * @brief Устанавливает новые значения.
