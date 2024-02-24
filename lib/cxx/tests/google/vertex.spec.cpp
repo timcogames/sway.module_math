@@ -82,14 +82,21 @@ TEST(VertexTexCoord, DefaultCtor) {
  *        которые были заданы.
  */
 TEST(VertexTexCoord, ComponentCtor) {
-  math::VertexTexCoord vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::vec2f_t(0.1F, 0.2F));
-  auto position = vertex.getPosition();
-  auto texcoord = vertex.getTexCoord();
+  math::VertexTexCoord vertex(
+      math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F), math::vec2f_t(0.1F, 0.2F));
+  auto pos = vertex.getPosition();
+  auto col = vertex.getColor();
+  auto tex = vertex.getTexCoord();
 
-  ASSERT_EQ(position.getX(), 1.0F);
-  ASSERT_EQ(position.getY(), 2.0F);
-  ASSERT_EQ(position.getZ(), 3.0F);
+  ASSERT_EQ(pos.getX(), 1.0F);
+  ASSERT_EQ(pos.getY(), 2.0F);
+  ASSERT_EQ(pos.getZ(), 3.0F);
 
-  ASSERT_EQ(texcoord.getX(), 0.1F);
-  ASSERT_EQ(texcoord.getY(), 0.2F);
+  ASSERT_EQ(col.getR(), 0.1F);
+  ASSERT_EQ(col.getG(), 0.2F);
+  ASSERT_EQ(col.getB(), 0.3F);
+  ASSERT_EQ(col.getA(), 1.0F);
+
+  ASSERT_EQ(tex.getX(), 0.1F);
+  ASSERT_EQ(tex.getY(), 0.2F);
 }

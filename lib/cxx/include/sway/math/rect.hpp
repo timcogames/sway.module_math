@@ -98,6 +98,11 @@ public:
     return *this;
   }
 
+  auto offset(Point<TValueType> pos) -> Rect<TValueType> {
+    this->offset(pos.getX(), pos.getY());
+    return *this;
+  }
+
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
    *
