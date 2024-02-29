@@ -176,10 +176,10 @@ public:
   }
 
   friend auto operator<<(std::ostream &out, const Vector3<TValueType> &vec) -> std::ostream & {
-    return out << std::fixed << std::setprecision(6) << "{"
-               << "x: " << vec.getX() << ","
-               << "y: " << vec.getY() << ","
-               << "z: " << vec.getZ() << "}";
+    return out << std::fixed << std::setprecision(3) << "{"
+               << "x:" << vec.getX() << ", "
+               << "y:" << vec.getY() << ", "
+               << "z:" << vec.getZ() << "}";
   }
 };
 

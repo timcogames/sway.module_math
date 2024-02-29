@@ -98,6 +98,12 @@ struct VertexColor : public VertexPosition {
   auto getColor() const -> col4f_t {
     return Color<f32_t>(r, g, b, a);
   }
+
+  friend auto operator<<(std::ostream &out, const VertexColor &vtx) -> std::ostream & {
+    return out << "{"
+               << "pos:" << vtx.getPosition() << ", "
+               << "col:" << vtx.getColor().toVec4() << "}";
+  }
 };
 
 /**

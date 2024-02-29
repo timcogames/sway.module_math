@@ -112,7 +112,7 @@ public:
   }
 
   friend auto operator<<(std::ostream &out, const Point<TValueType> &pt2) -> std::ostream & {
-    return out << std::fixed << std::setprecision(6) << "{x: " << pt2.getX() << ", y: " << pt2.getY() << "}";
+    return out << std::fixed << std::setprecision(3) << "{x:" << pt2.getX() << ", y:" << pt2.getY() << "}";
   }
 
 protected:
