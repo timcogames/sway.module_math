@@ -3,6 +3,8 @@
 
 #include <sway/core.hpp>
 
+#include <algorithm>
+
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 NAMESPACE_BEGIN(util)
@@ -29,6 +31,11 @@ inline auto powerOf2(int val) -> int {
 template <typename TValueType>
 inline auto lerp(TValueType from, TValueType to, TValueType step) -> TValueType {
   return from + step * (to - from);
+}
+
+template <typename TValueType>
+inline auto clamp(const TValueType &val, const TValueType &lower, const TValueType &upper) -> TValueType {
+  return std::max(lower, std::min(val, upper));
 }
 
 NAMESPACE_END(util)
