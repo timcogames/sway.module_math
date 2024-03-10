@@ -34,43 +34,58 @@ TEST(Rect, ArrayCtor) {
  *        которые были заданы.
  */
 TEST(Rect, ComponentCtor) {
-  const auto x = 8, y = 16, w = 32, h = 64;
-  math::rect4i_t rect(x, y, w, h);
+  const auto x = 8, y = 16, xw = 24, yh = 32;
+  math::rect4i_t rect(x, y, xw, yh);
 
   ASSERT_EQ(rect.getL(), x);
   ASSERT_EQ(rect.getT(), y);
-  ASSERT_EQ(rect.getR(), x + w);
-  ASSERT_EQ(rect.getB(), y + h);
-  ASSERT_EQ(rect.getW(), w);
-  ASSERT_EQ(rect.getH(), h);
+  ASSERT_EQ(rect.getR(), xw);
+  ASSERT_EQ(rect.getB(), yh);
+  ASSERT_EQ(rect.getW(), xw - x);
+  ASSERT_EQ(rect.getH(), yh - y);
 }
 
-TEST(Rect, Offset) {
-  const auto x = 8, y = 16, w = 32, h = 64;
+TEST(Rect, OffsetPositive) {
+  const auto x = 8, y = 16, xw = 24, yh = 32;
   const auto xoffset = 2, yoffset = 4;
 
-  math::rect4i_t rect(x, y, w, h);
+  math::rect4i_t rect(x, y, xw, yh);
   rect.offset(xoffset, yoffset);
 
   ASSERT_EQ(rect.getL(), x + xoffset);
   ASSERT_EQ(rect.getT(), y + yoffset);
-  ASSERT_EQ(rect.getR(), x + xoffset + w);
-  ASSERT_EQ(rect.getB(), y + yoffset + h);
-  ASSERT_EQ(rect.getW(), w);
-  ASSERT_EQ(rect.getH(), h);
+  ASSERT_EQ(rect.getR(), xw + xoffset);
+  ASSERT_EQ(rect.getB(), yh + yoffset);
+  ASSERT_EQ(rect.getW(), xw - x);
+  ASSERT_EQ(rect.getH(), yh - y);
+}
+
+TEST(Rect, OffsetNegative) {
+  const auto x = -24, y = -32, xw = -8, yh = -16;
+  const auto xoffset = 2, yoffset = 4;
+
+  math::rect4i_t rect(x, y, xw, yh);
+  rect.offset(xoffset, yoffset);
+
+  ASSERT_EQ(rect.getL(), x + xoffset);
+  ASSERT_EQ(rect.getT(), y + yoffset);
+  ASSERT_EQ(rect.getR(), xw + xoffset);
+  ASSERT_EQ(rect.getB(), yh + yoffset);
+  ASSERT_EQ(rect.getW(), xw - x);
+  ASSERT_EQ(rect.getH(), yh - y);
 }
 
 /**
  * @brief Убеждаемся, что преобразование в Size<type> проходит правильно.
  */
 TEST(Rect, ConvertToSize) {
-  const auto x = 8, y = 16, w = 32, h = 64;
+  const auto x = 8, y = 16, xw = 24, yh = 32;
 
-  math::rect4i_t rect(x, y, w, h);
+  math::rect4i_t rect(x, y, xw, yh);
   math::size2i_t size = rect.size();
 
-  ASSERT_EQ(size.getW(), w);
-  ASSERT_EQ(size.getH(), h);
+  ASSERT_EQ(size.getW(), xw - x);
+  ASSERT_EQ(size.getH(), yh - y);
 }
 
 TEST(Rect, IsEmpty) {
@@ -81,9 +96,10 @@ TEST(Rect, IsEmpty) {
 
 TEST(Rect, contains) {
   ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(24, 8)));
+  ASSERT_TRUE(math::Rect<s32_t>(-16, -8, 16, 8).contains(math::Point<s32_t>(-10, 4)));
   ASSERT_FALSE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(32, 17)));
 }
 
 TEST(Rect, toString) {
-  EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 32, 64)).c_str(), "{x: 8, y: 16, w: 32, h: 64}");
+  EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 24, 32)).c_str(), "{x:8, y:16, xw:24, yh:32, w:16, h:16}");
 }

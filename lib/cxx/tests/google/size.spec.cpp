@@ -26,7 +26,7 @@ TEST(Size, ComponentCtor) {
   ASSERT_EQ(size.getH(), h);
 }
 
-TEST(Size, ScalarConstructor) {
+TEST(Size, ScalarCtor) {
   const auto w = 1, h = 2;
   math::size2i_t size(math::Size<s32_t>(w, h));
 
@@ -68,4 +68,4 @@ TEST(Size, DivideOperator) {
   EXPECT_TRUE(size == math::size2i_t(2, 8));
 }
 
-TEST(Size, ToString) { EXPECT_STREQ(std::to_string(math::size2i_t(1, 2)).c_str(), "{w: 1, h: 2}"); }
+TEST(Size, ToString) { EXPECT_STREQ(std::to_string(math::size2i_t(1, 2)).c_str(), "{w:1, h:2}"); }

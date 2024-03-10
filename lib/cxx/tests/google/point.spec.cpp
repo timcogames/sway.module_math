@@ -26,7 +26,7 @@ TEST(Point, ComponentCtor) {
   ASSERT_EQ(pnt.getY(), y);
 }
 
-TEST(Point, ScalarConstructor) {
+TEST(Point, ScalarCtor) {
   math::point2i_t pnt(math::point2i_one);
 
   ASSERT_EQ(pnt.getX(), 1);

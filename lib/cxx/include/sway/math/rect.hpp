@@ -59,7 +59,8 @@ public:
    * @sa Rect(),
    *     Rect(const std::array<TValueType, 4> &)
    */
-  Rect(TValueType x, TValueType y, TValueType w, TValueType h) { this->set(x, y, w, h); }
+  Rect(TValueType x, TValueType y, TValueType xw, TValueType yh)
+      : Vector4<TValueType>(x, y, xw, yh) {}
 
   virtual ~Rect() = default;
 
@@ -72,7 +73,7 @@ public:
    * @param[in] h Значение высоты.
    * @sa set(const std::array<TValueType, 4> &)
    */
-  void set(TValueType x, TValueType y, TValueType w, TValueType h) { Vector4<TValueType>::set(x, y, x + w, y + h); }
+  void set(TValueType x, TValueType y, TValueType xw, TValueType yh) { Vector4<TValueType>::set(x, y, xw, yh); }
 
   void set(TValueType x, TValueType y, const Size<TValueType> &size) {
     this->set(x, y, x + size.getW(), y + size.getH());
