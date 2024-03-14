@@ -79,10 +79,10 @@ public:
    * @param[in] y Значение координаты по оси Y.
    */
   auto offset(TValueType x, TValueType y) -> Rect<TValueType> {
-    this->data_[RectEdge::IDX_L] += x;
-    this->data_[RectEdge::IDX_T] += y;
-    this->data_[RectEdge::IDX_R] += x;
-    this->data_[RectEdge::IDX_B] += y;
+    this->at(RectEdge::IDX_L) += x;
+    this->at(RectEdge::IDX_T) += y;
+    this->at(RectEdge::IDX_R) += x;
+    this->at(RectEdge::IDX_B) += y;
 
     return *this;
   }
@@ -102,9 +102,9 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TValueType x) { this->data_[RectEdge::IDX_L] = x; }
+  void setL(TValueType x) { this->at(RectEdge::IDX_L) = x; }
 
-  auto getL() const -> TValueType { return this->data_[RectEdge::IDX_L]; }
+  auto getL() const -> TValueType { return this->at(RectEdge::IDX_L); }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
@@ -116,17 +116,17 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TValueType y) { this->data_[RectEdge::IDX_T] = y; }
+  void setT(TValueType y) { this->at(RectEdge::IDX_T) = y; }
 
-  auto getT() const -> TValueType { return this->data_[RectEdge::IDX_T]; }
+  auto getT() const -> TValueType { return this->at(RectEdge::IDX_T); }
 
-  void setR(TValueType w) { this->data_[RectEdge::IDX_R] = w; }
+  void setR(TValueType w) { this->at(RectEdge::IDX_R) = w; }
 
-  auto getR() const -> TValueType { return this->data_[RectEdge::IDX_R]; }
+  auto getR() const -> TValueType { return this->at(RectEdge::IDX_R); }
 
-  void setB(TValueType h) { this->data_[RectEdge::IDX_B] = h; }
+  void setB(TValueType h) { this->at(RectEdge::IDX_B) = h; }
 
-  auto getB() const -> TValueType { return this->data_[RectEdge::IDX_B]; }
+  auto getB() const -> TValueType { return this->at(RectEdge::IDX_B); }
 
   /**
    * @brief Получает ширину прямоугольной области.
@@ -137,7 +137,7 @@ public:
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TValueType { return this->data_[RectEdge::IDX_R] - this->data_[RectEdge::IDX_L]; }
+  auto getW() const -> TValueType { return this->at(RectEdge::IDX_R) - this->at(RectEdge::IDX_L); }
 
   /**
    * @brief Получает высоту прямоугольной области.
@@ -148,7 +148,7 @@ public:
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TValueType { return this->data_[RectEdge::IDX_B] - this->data_[RectEdge::IDX_T]; }
+  auto getH() const -> TValueType { return this->at(RectEdge::IDX_B) - this->at(RectEdge::IDX_T); }
 
   [[nodiscard]]
   auto position() const -> Point<TValueType> {
@@ -168,22 +168,26 @@ public:
   [[nodiscard]]
   auto isValid() const -> bool {
     // clang-format off
-    return ((this->data_[RectEdge::IDX_T] > this->data_[RectEdge::IDX_B]) ||
-            (this->data_[RectEdge::IDX_L] > this->data_[RectEdge::IDX_R])) ? false : false;
+    return ((this->at(RectEdge::IDX_T) > this->at(RectEdge::IDX_B)) ||
+            (this->at(RectEdge::IDX_L) > this->at(RectEdge::IDX_R))) ? false : false;
     // clang-format on
   }
 
   auto contains(const Point<TValueType> &point) const -> bool {
-    return this->data_[RectEdge::IDX_L] <= point.getX() && this->data_[RectEdge::IDX_R] >= point.getX() &&
-           this->data_[RectEdge::IDX_T] <= point.getY() && this->data_[RectEdge::IDX_B] >= point.getY();
+    return this->at(RectEdge::IDX_L) <= point.getX() && this->at(RectEdge::IDX_R) >= point.getX() &&
+           this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
   }
 
   void reduce(Border<TValueType> border) {
-    this->data_[RectEdge::IDX_L] += border.getL();
-    this->data_[RectEdge::IDX_T] += border.getT();
-    this->data_[RectEdge::IDX_R] -= border.getL() + border.getR();
-    this->data_[RectEdge::IDX_B] -= border.getT() + border.getB();
+    this->at(RectEdge::IDX_L) += border.getL();
+    this->at(RectEdge::IDX_T) += border.getT();
+    this->at(RectEdge::IDX_R) -= border.getL() + border.getR();
+    this->at(RectEdge::IDX_B) -= border.getT() + border.getB();
   }
+
+  auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
+
+  auto at(RectEdge edge) -> TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
 };
 
 using rect4i_t = Rect<s32_t>;

@@ -14,10 +14,10 @@ public:
       : Border(0, 0, 0, 0) {}
 
   Border(TValueType l, TValueType t, TValueType r, TValueType b) {
-    data_[RectEdge::IDX_L] = l;
-    data_[RectEdge::IDX_T] = t;
-    data_[RectEdge::IDX_R] = r;
-    data_[RectEdge::IDX_B] = b;
+    data_[core::detail::toUnderlying(RectEdge::IDX_L)] = l;
+    data_[core::detail::toUnderlying(RectEdge::IDX_T)] = t;
+    data_[core::detail::toUnderlying(RectEdge::IDX_R)] = r;
+    data_[core::detail::toUnderlying(RectEdge::IDX_B)] = b;
   }
 
   Border(TValueType val)
@@ -26,16 +26,16 @@ public:
   Border(TValueType x, TValueType y)
       : Border(x, y, x, y) {}
 
-  auto getL() const -> TValueType { return data_[RectEdge::IDX_L]; }
+  auto getL() const -> TValueType { return data_[core::detail::toUnderlying(RectEdge::IDX_L)]; }
 
-  auto getT() const -> TValueType { return data_[RectEdge::IDX_T]; }
+  auto getT() const -> TValueType { return data_[core::detail::toUnderlying(RectEdge::IDX_T)]; }
 
-  auto getR() const -> TValueType { return data_[RectEdge::IDX_R]; }
+  auto getR() const -> TValueType { return data_[core::detail::toUnderlying(RectEdge::IDX_R)]; }
 
-  auto getB() const -> TValueType { return data_[RectEdge::IDX_B]; }
+  auto getB() const -> TValueType { return data_[core::detail::toUnderlying(RectEdge::IDX_B)]; }
 
 private:
-  std::array<TValueType, RectEdge::Latest> data_;
+  std::array<TValueType, 4> data_;
 };
 
 NAMESPACE_END(math)
