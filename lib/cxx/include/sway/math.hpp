@@ -1,6 +1,7 @@
 #ifndef SWAY_MATH_HPP
 #define SWAY_MATH_HPP
 
+#include <sway/math/border.hpp>
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
 #include <sway/math/extensions/coordinatesystemutils.hpp>
@@ -12,6 +13,8 @@
 #include <sway/math/point.hpp>
 #include <sway/math/ray.hpp>
 #include <sway/math/rect.hpp>
+#include <sway/math/rectangles.hpp>
+#include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
 #include <sway/math/transform.hpp>
 #include <sway/math/utils.hpp>

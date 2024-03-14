@@ -2,7 +2,9 @@
 #define SWAY_MATH_RECT_HPP
 
 #include <sway/core.hpp>
+#include <sway/math/border.hpp>
 #include <sway/math/point.hpp>
+#include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
 #include <sway/math/vector4.hpp>
 
@@ -18,15 +20,6 @@ class Size;
 template <typename TValueType>
 class Rect final : public Vector4<TValueType> {
 public:
-  // clang-format off
-  enum : u32_t { IDX_L = 0, IDX_T, IDX_R, IDX_B };
-  enum : u32_t {
-    IDX_TL = 0,
-    IDX_TR,
-    IDX_BL,
-    IDX_BR
-  };  // clang-format on
-
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
@@ -86,10 +79,10 @@ public:
    * @param[in] y Значение координаты по оси Y.
    */
   auto offset(TValueType x, TValueType y) -> Rect<TValueType> {
-    this->data_[IDX_L] += x;
-    this->data_[IDX_T] += y;
-    this->data_[IDX_R] += x;
-    this->data_[IDX_B] += y;
+    this->data_[RectEdge::IDX_L] += x;
+    this->data_[RectEdge::IDX_T] += y;
+    this->data_[RectEdge::IDX_R] += x;
+    this->data_[RectEdge::IDX_B] += y;
 
     return *this;
   }
@@ -109,9 +102,9 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TValueType x) { this->data_[IDX_L] = x; }
+  void setL(TValueType x) { this->data_[RectEdge::IDX_L] = x; }
 
-  auto getL() const -> TValueType { return this->data_[IDX_L]; }
+  auto getL() const -> TValueType { return this->data_[RectEdge::IDX_L]; }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
@@ -123,17 +116,17 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TValueType y) { this->data_[IDX_T] = y; }
+  void setT(TValueType y) { this->data_[RectEdge::IDX_T] = y; }
 
-  auto getT() const -> TValueType { return this->data_[IDX_T]; }
+  auto getT() const -> TValueType { return this->data_[RectEdge::IDX_T]; }
 
-  void setR(TValueType w) { this->data_[IDX_R] = w; }
+  void setR(TValueType w) { this->data_[RectEdge::IDX_R] = w; }
 
-  auto getR() const -> TValueType { return this->data_[IDX_R]; }
+  auto getR() const -> TValueType { return this->data_[RectEdge::IDX_R]; }
 
-  void setB(TValueType h) { this->data_[IDX_B] = h; }
+  void setB(TValueType h) { this->data_[RectEdge::IDX_B] = h; }
 
-  auto getB() const -> TValueType { return this->data_[IDX_B]; }
+  auto getB() const -> TValueType { return this->data_[RectEdge::IDX_B]; }
 
   /**
    * @brief Получает ширину прямоугольной области.
@@ -144,7 +137,7 @@ public:
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TValueType { return this->data_[IDX_R] - this->data_[IDX_L]; }
+  auto getW() const -> TValueType { return this->data_[RectEdge::IDX_R] - this->data_[RectEdge::IDX_L]; }
 
   /**
    * @brief Получает высоту прямоугольной области.
@@ -155,7 +148,7 @@ public:
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TValueType { return this->data_[IDX_B] - this->data_[IDX_T]; }
+  auto getH() const -> TValueType { return this->data_[RectEdge::IDX_B] - this->data_[RectEdge::IDX_T]; }
 
   [[nodiscard]]
   auto position() const -> Point<TValueType> {
@@ -174,12 +167,22 @@ public:
 
   [[nodiscard]]
   auto isValid() const -> bool {
-    return ((this->data_[IDX_T] > this->data_[IDX_B]) || (this->data_[IDX_L] > this->data_[IDX_R])) ? false : false;
+    // clang-format off
+    return ((this->data_[RectEdge::IDX_T] > this->data_[RectEdge::IDX_B]) ||
+            (this->data_[RectEdge::IDX_L] > this->data_[RectEdge::IDX_R])) ? false : false;
+    // clang-format on
   }
 
-  auto contains(const math::Point<TValueType> &point) const -> bool {
-    return this->data_[IDX_L] <= point.getX() && this->data_[IDX_R] >= point.getX() &&
-           this->data_[IDX_T] <= point.getY() && this->data_[IDX_B] >= point.getY();
+  auto contains(const Point<TValueType> &point) const -> bool {
+    return this->data_[RectEdge::IDX_L] <= point.getX() && this->data_[RectEdge::IDX_R] >= point.getX() &&
+           this->data_[RectEdge::IDX_T] <= point.getY() && this->data_[RectEdge::IDX_B] >= point.getY();
+  }
+
+  void reduce(Border<TValueType> border) {
+    this->data_[RectEdge::IDX_L] += border.getL();
+    this->data_[RectEdge::IDX_T] += border.getT();
+    this->data_[RectEdge::IDX_R] -= border.getL() + border.getR();
+    this->data_[RectEdge::IDX_B] -= border.getT() + border.getB();
   }
 };
 
