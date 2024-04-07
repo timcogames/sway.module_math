@@ -6,6 +6,7 @@
 #include <sway/math/point.hpp>
 #include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
+#include <sway/math/utils.hpp>
 #include <sway/math/vector4.hpp>
 
 NAMESPACE_BEGIN(sway)
@@ -137,7 +138,13 @@ public:
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TValueType { return this->at(RectEdge::IDX_R) - this->at(RectEdge::IDX_L); }
+  auto getW() const -> TValueType {
+    if ((this->at(RectEdge::IDX_L) >= this->at(RectEdge::IDX_R))) {
+      return 0;
+    }
+
+    return util::abs(this->at(RectEdge::IDX_R) - this->at(RectEdge::IDX_L));
+  }
 
   /**
    * @brief Получает высоту прямоугольной области.
@@ -148,7 +155,13 @@ public:
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TValueType { return this->at(RectEdge::IDX_B) - this->at(RectEdge::IDX_T); }
+  auto getH() const -> TValueType {
+    if (this->at(RectEdge::IDX_B) >= this->at(RectEdge::IDX_T)) {
+      return 0;
+    }
+
+    return util::abs(this->at(RectEdge::IDX_T) - this->at(RectEdge::IDX_B));
+  }
 
   [[nodiscard]]
   auto position() const -> Point<TValueType> {
@@ -168,14 +181,14 @@ public:
   [[nodiscard]]
   auto isValid() const -> bool {
     // clang-format off
-    return ((this->at(RectEdge::IDX_T) > this->at(RectEdge::IDX_B)) ||
-            (this->at(RectEdge::IDX_L) > this->at(RectEdge::IDX_R))) ? false : false;
+    return ((this->at(RectEdge::IDX_L) < this->at(RectEdge::IDX_R)) && 
+            (this->at(RectEdge::IDX_B) < this->at(RectEdge::IDX_T))) ? true : false;
     // clang-format on
   }
 
   auto contains(const Point<TValueType> &point) const -> bool {
     return this->at(RectEdge::IDX_L) <= point.getX() && this->at(RectEdge::IDX_R) >= point.getX() &&
-           this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
+           this->at(RectEdge::IDX_B) <= point.getY() && this->at(RectEdge::IDX_T) >= point.getY();
   }
 
   void reduce(Border<TValueType> border) {

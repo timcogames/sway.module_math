@@ -38,6 +38,18 @@ inline auto clamp(const TValueType &val, const TValueType &lower, const TValueTy
   return std::max(lower, std::min(val, upper));
 }
 
+template <typename TValueType>
+inline auto abs(const TValueType &val) -> TValueType {
+  if constexpr (std::is_integral_v<TValueType>) {
+    return std::abs(val);
+  } else if constexpr (std::is_floating_point_v<TValueType>) {
+    return std::fabsf(val);
+  } else /* double */ {
+    assert(sizeof(TValueType) == 8);
+    return std::fabs(val);
+  }
+}
+
 NAMESPACE_END(util)
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

@@ -35,17 +35,22 @@ public:
 
   auto makeOrtho() -> std::array<f32_t, 16> {
     auto d = desc_.zfar - desc_.znear;
+    auto r = desc_.rect;
 
-    auto x = desc_.rect.getW() / (2.0F * desc_.aspect);
-    auto y = desc_.rect.getH() / (2.0F * desc_.aspect);
-    auto z = d / -2.0F;
+    r.multiply(desc_.aspect);
+
+    // clang-format off
+    auto x =  2.0F / (r.getR() - r.getL());
+    auto y =  2.0F / (r.getT() - r.getB());
+    auto z = -2.0F / d;
+    // clang-format on
 
     mtx_.makeIdentity();
     mtx_.setValue(0, 0, x);
     mtx_.setValue(1, 1, y);
     mtx_.setValue(2, 2, z);
-    mtx_.setValue(3, 0, -(desc_.rect.getR() + desc_.rect.getL()) / desc_.rect.getW());
-    mtx_.setValue(3, 1, -(desc_.rect.getT() + desc_.rect.getB()) / desc_.rect.getH());
+    mtx_.setValue(3, 0, -(r.getR() + r.getL()) / (r.getR() - r.getL()));
+    mtx_.setValue(3, 1, -(r.getT() + r.getB()) / (r.getT() - r.getB()));
     mtx_.setValue(3, 2, -(desc_.zfar + desc_.znear) / d);
 
     return mtx_.getData();
