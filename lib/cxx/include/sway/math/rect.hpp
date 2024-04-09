@@ -193,9 +193,9 @@ public:
 
   void reduce(Border<TValueType> border) {
     this->at(RectEdge::IDX_L) += border.getL();
-    this->at(RectEdge::IDX_T) += border.getB() + border.getT();
+    this->at(RectEdge::IDX_B) += border.getB();
     this->at(RectEdge::IDX_R) -= border.getL() + border.getR();
-    this->at(RectEdge::IDX_B) -= border.getB();
+    this->at(RectEdge::IDX_T) -= border.getB() + border.getT();
   }
 
   auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
