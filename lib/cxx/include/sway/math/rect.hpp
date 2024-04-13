@@ -156,11 +156,11 @@ public:
    *     getW() const
    */
   auto getH() const -> TValueType {
-    if (this->at(RectEdge::IDX_B) >= this->at(RectEdge::IDX_T)) {
+    if (this->at(RectEdge::IDX_T) >= this->at(RectEdge::IDX_B)) {
       return 0;
     }
 
-    return util::abs(this->at(RectEdge::IDX_T) - this->at(RectEdge::IDX_B));
+    return util::abs(this->at(RectEdge::IDX_B) - this->at(RectEdge::IDX_T));
   }
 
   [[nodiscard]]
@@ -182,20 +182,20 @@ public:
   auto isValid() const -> bool {
     // clang-format off
     return ((this->at(RectEdge::IDX_L) < this->at(RectEdge::IDX_R)) && 
-            (this->at(RectEdge::IDX_B) < this->at(RectEdge::IDX_T))) ? true : false;
+            (this->at(RectEdge::IDX_T) < this->at(RectEdge::IDX_B))) ? true : false;
     // clang-format on
   }
 
   auto contains(const Point<TValueType> &point) const -> bool {
     return this->at(RectEdge::IDX_L) <= point.getX() && this->at(RectEdge::IDX_R) >= point.getX() &&
-           this->at(RectEdge::IDX_B) <= point.getY() && this->at(RectEdge::IDX_T) >= point.getY();
+           this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
   }
 
   void reduce(Border<TValueType> border) {
     this->at(RectEdge::IDX_L) += border.getL();
-    this->at(RectEdge::IDX_B) += border.getB();
+    this->at(RectEdge::IDX_T) += border.getT();
     this->at(RectEdge::IDX_R) -= border.getR();
-    this->at(RectEdge::IDX_T) -= border.getT();
+    this->at(RectEdge::IDX_B) -= border.getB();
   }
 
   auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
