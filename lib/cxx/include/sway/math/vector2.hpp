@@ -55,6 +55,8 @@ public:
     return this->data_[0];
   }
 
+  void setX(TValueType val) { this->data_[0] = val; }
+
   /**
    * @brief Получает значение Y компонента.
    *
@@ -65,10 +67,10 @@ public:
     return this->data_[1];
   }
 
+  void setY(TValueType val) { this->data_[1] = val; }
+
   friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
-    return out << std::fixed << std::setprecision(3) << "{"
-               << "x:" << vec.getX() << ", "
-               << "y:" << vec.getY() << "}";
+    return out << std::fixed << std::setprecision(3) << "{" << "x:" << vec.getX() << ", " << "y:" << vec.getY() << "}";
   }
 };
 
