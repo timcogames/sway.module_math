@@ -2,12 +2,12 @@
 #define SWAY_MATH_HPP
 
 #include <sway/math/alignments.hpp>
-#include <sway/math/border.hpp>
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
 #include <sway/math/extensions/coordinatesystemutils.hpp>
 #include <sway/math/extensions/projection.hpp>
 #include <sway/math/extensions/projectiontypes.hpp>
+#include <sway/math/margin.hpp>
 #include <sway/math/matrix4.hpp>
 #include <sway/math/matrixstack.hpp>
 #include <sway/math/matrixtypes.hpp>
