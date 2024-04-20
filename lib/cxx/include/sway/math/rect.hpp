@@ -27,6 +27,7 @@ public:
    *
    * @sa Rect(const std::array<TValueType, 4> &),
    *     Rect(TValueType, TValueType, TValueType, TValueType)
+   *     Rect(TValueType, TValueType, const Size<TValueType> &)
    */
   Rect()
       : Vector4<TValueType>() {}
@@ -38,6 +39,7 @@ public:
    * @param[in] data Данные координат.
    * @sa Rect(),
    *     Rect(TValueType, TValueType, TValueType, TValueType)
+   *     Rect(TValueType, TValueType, const Size<TValueType> &)
    */
   Rect(const std::array<TValueType, 4> &data)
       : Vector4<TValueType>(data) {}
@@ -46,25 +48,29 @@ public:
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
    *
-   * @param[in] x Значение координаты по оси X.
-   * @param[in] y Значение координаты по оси Y.
-   * @param[in] w Значение ширины.
-   * @param[in] h Значение высоты.
+   * @param[in] x Значение левой координаты по оси X.
+   * @param[in] y Значение нижней/верхней (зависит от системы координат) координаты по оси Y.
+   * @param[in] xw Значение правой координаты по оси X.
+   * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
    * @sa Rect(),
-   *     Rect(const std::array<TValueType, 4> &)
+   *     Rect(const std::array<TValueType, 4> &),
+   *     Rect(TValueType, TValueType, const Size<TValueType> &)
    */
   Rect(TValueType x, TValueType y, TValueType xw, TValueType yh)
       : Vector4<TValueType>(x, y, xw, yh) {}
+
+  Rect(TValueType x, TValueType y, const Size<TValueType> &size)
+      : Vector4<TValueType>(x, y, x + size.getW(), y + size.getH()) {}
 
   virtual ~Rect() = default;
 
   /**
    * @brief Устанавливает новые значения.
    *
-   * @param[in] x Значение координаты по оси X.
-   * @param[in] y Значение координаты по оси Y.
-   * @param[in] w Значение ширины.
-   * @param[in] h Значение высоты.
+   * @param[in] x Значение левой координаты по оси X.
+   * @param[in] y Значение нижней/верхней (зависит от системы кординат) координаты по оси Y.
+   * @param[in] xw Значение правой координаты по оси X.
+   * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
    * @sa set(const std::array<TValueType, 4> &)
    */
   void set(TValueType x, TValueType y, TValueType xw, TValueType yh) { Vector4<TValueType>::set(x, y, xw, yh); }
