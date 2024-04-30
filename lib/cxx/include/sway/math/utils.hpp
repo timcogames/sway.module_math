@@ -4,12 +4,14 @@
 #include <sway/core.hpp>
 
 #include <algorithm>
+#include <assert.h>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 NAMESPACE_BEGIN(util)
 
 constexpr f32_t PI = 3.14159265358979323846F;
+constexpr f32_t EPSILON 1.0e-05;
 
 inline auto powerOf2(int val) -> int {
   // val |= (val >> 1);
