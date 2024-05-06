@@ -100,9 +100,7 @@ struct VertexColor : public VertexPosition {
   }
 
   friend auto operator<<(std::ostream &out, const VertexColor &vtx) -> std::ostream & {
-    return out << "{"
-               << "pos:" << vtx.getPosition() << ", "
-               << "col:" << vtx.getColor().toVec4() << "}";
+    return out << "{" << "pos:" << vtx.getPosition() << ", " << "col:" << vtx.getColor().toVec4() << "}";
   }
 };
 

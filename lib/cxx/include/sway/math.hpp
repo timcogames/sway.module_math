@@ -16,6 +16,7 @@
 #include <sway/math/rect.hpp>
 #include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
+#include <sway/math/texel.hpp>
 #include <sway/math/transform.hpp>
 #include <sway/math/utils.hpp>
 #include <sway/math/vector.hpp>
