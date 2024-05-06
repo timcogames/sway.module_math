@@ -2,7 +2,7 @@
 #define SWAY_MATH_TEXEL_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/size2f.hpp>
+#include <sway/math/size.hpp>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
