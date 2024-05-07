@@ -11,7 +11,8 @@ NAMESPACE_BEGIN(math)
 NAMESPACE_BEGIN(util)
 
 constexpr f32_t PI = 3.14159265358979323846F;
-constexpr f32_t EPSILON = 0.00001F;
+constexpr f64_t EPSILON = 1e-05;  // aka 0.00001
+constexpr s32_t INDEFINITE = -1;
 
 inline auto powerOf2(int val) -> int {
   auto result = 1;
