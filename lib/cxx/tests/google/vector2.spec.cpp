@@ -43,5 +43,5 @@ TEST(vec2f, lerp) {
   math::vec2f_t from(2.0F, -2.0F);
   math::vec2f_t to(4.0F, 4.0F);
 
-  ASSERT_EQ(from.lerp(to, step).array(), math::vec2f_t(3.0F, 1.0F).array());
+  ASSERT_EQ(from.lerp(to, step).asArray(), math::vec2f_t(3.0F, 1.0F).asArray());
 }

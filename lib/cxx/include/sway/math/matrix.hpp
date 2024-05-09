@@ -27,7 +27,7 @@ public:
   Matrix() { this->makeZero(); }
 
   Matrix(const Matrix<TValueType, TRows, TColumns> &mat)
-      : data_(mat.getData()) {}
+      : data_(mat.asArray()) {}
 
   auto makeZero() -> Matrix<TValueType, TRows, TColumns> & {
     data_.fill(0);
@@ -36,7 +36,7 @@ public:
 
   void setData(const std::array<TValueType, TMatrixSize> &arr) { data_ = arr; }
 
-  auto getData() const -> std::array<TValueType, TMatrixSize> { return data_; }
+  auto asArray() const -> std::array<TValueType, TMatrixSize> { return data_; }
 
   /**
    * @brief Устанавливает новое значение элемента матрицы.

@@ -8,8 +8,12 @@ NAMESPACE_BEGIN(std)
 
 template <typename TValueType>
 inline auto operator<<(ostream &str, const sway::math::Rect<TValueType> &rect) -> ostream & {
-  return str << fixed << setprecision(3) << "{x:" << rect.getL() << ", y:" << rect.getT() << ", xw:" << rect.getR()
-             << ", yh:" << rect.getB() << ", w:" << rect.getW() << ", h:" << rect.getH() << "}";
+  // clang-format off
+  return str << fixed << setprecision(3) << "{" 
+             << "l:" << rect.getL() << ", " << "t:" << rect.getT() << ", "
+             << "r:" << rect.getR() << ", " << "b:" << rect.getB() << ", " 
+             << "size:" << rect.asSize() << "}";
+  // clang-format on
 }
 
 template <typename TValueType>

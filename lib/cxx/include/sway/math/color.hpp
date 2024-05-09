@@ -105,7 +105,7 @@ public:
    * @brief Преобразовывает в Vector4<TValueType> класс.
    */
   [[nodiscard]]
-  auto toVec4() const -> Vector4<TValueType> {
+  auto asVec4() const -> Vector4<TValueType> {
     return Vector4<TValueType>(r_, g_, b_, a_);
   }
 

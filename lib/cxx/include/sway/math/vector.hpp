@@ -27,12 +27,18 @@ public:
 
   void set(const std::array<TValueType, TElementCount> &arr) { data_ = arr; }
 
-  auto array() -> std::array<TValueType, TElementCount> { return data_; }
+  [[nodiscard]]
+  auto asArray() const -> std::array<TValueType, TElementCount> {
+    return data_;
+  }
 
-  auto data() -> TValueType * { return data_.data(); }
+  [[nodiscard]]
+  auto asDataPtr() const -> TValueType * {
+    return data_.data();
+  }
 
-  auto lerp(const Vector<TValueType, TElementCount> &other, TValueType step) const
-      -> Vector<TValueType, TElementCount> {
+  auto lerp(
+      const Vector<TValueType, TElementCount> &other, TValueType step) const -> Vector<TValueType, TElementCount> {
     Vector<TValueType, TElementCount> result;
     for (auto i = 0; i != DataElementCount_t; ++i) {
       result[i] = util::lerp(data_[i], other[i], step);

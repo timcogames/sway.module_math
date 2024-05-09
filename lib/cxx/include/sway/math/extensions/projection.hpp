@@ -53,7 +53,7 @@ public:
     mtx_.setValue(3, 1, -(r.getT() + r.getB()) / (r.getT() - r.getB()));
     mtx_.setValue(3, 2, -(desc_.zfar + desc_.znear) / d);
 
-    return mtx_.getData();
+    return mtx_.asArray();
   }
 
   void makePersp() {
@@ -72,8 +72,8 @@ public:
   }
 
   [[nodiscard]]
-  auto getData() const -> std::array<f32_t, 16> {
-    return mtx_.getData();
+  auto asArray() const -> std::array<f32_t, 16> {
+    return mtx_.asArray();
   }
 
 private:

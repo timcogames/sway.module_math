@@ -82,7 +82,7 @@ TEST(Rect, ConvertToSize) {
   const auto x = 8, y = 16, xw = 24, yh = 32;
 
   math::rect4i_t rect(x, y, xw, yh);
-  math::size2i_t size = rect.size();
+  math::size2i_t size = rect.asSize();
 
   ASSERT_EQ(size.getW(), xw - x);
   ASSERT_EQ(size.getH(), yh - y);
@@ -101,5 +101,5 @@ TEST(Rect, contains) {
 }
 
 TEST(Rect, toString) {
-  EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 24, 32)).c_str(), "{x:8, y:16, xw:24, yh:32, w:16, h:16}");
+  EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 24, 32)).c_str(), "{l:8, t:16, r:24, b:32, size:{w:16, h:16}}");
 }

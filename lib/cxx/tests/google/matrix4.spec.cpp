@@ -66,7 +66,7 @@ TEST(Matrix4, Set) {
   mtx.setValue(3, 2, RAND_MAT4[3][2]);
   mtx.setValue(3, 3, RAND_MAT4[3][3]);
 
-  ASSERT_TRUE(std::equal(std::begin(mtx.getData()), std::end(mtx.getData()), std::begin(RAND_MAT4x4)));
+  ASSERT_TRUE(std::equal(std::begin(mtx.asArray()), std::end(mtx.asArray()), std::begin(RAND_MAT4x4)));
 }
 
 // TEST(Matrix, multiplication) {
@@ -91,7 +91,7 @@ TEST(Matrix4, Set) {
 //       0,  9,-13
 //   });  // clang-format on
 
-//   EXPECT_EQ(a.multiply<3>(b.getData()), expected);
+//   EXPECT_EQ(a.multiply<3>(b.asArray()), expected);
 // }
 
 TEST(Matrix4, mult) {
@@ -99,13 +99,13 @@ TEST(Matrix4, mult) {
 
   auto arrA = math::Matrix<f32_t, 4, 4>::fromArray(
       {1.0f, 0.0165f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0432f, 0.032f, 0.0f, 0.09f, -50.0f, 0.02f, 0.04f, 0.076f, -1.0f, 1.0})
-                  .getData();
+                  .asArray();
   math::mat4f_t matA;
   matA.setData(arrA);
 
   auto arrB = math::Matrix<f32_t, 4, 4>::fromArray({1.0f, 0.0f, 0.0f, -0.486085, 0.0f, 1.0f, 0.0f, -0.454206, 0.0f,
                                                        0.0f, 1.0f, -0.000230312, 0.0f, 0.0f, 1.0f, 0.99977})
-                  .getData();
+                  .asArray();
   math::mat4f_t matB;
   matB.setData(arrB);
 

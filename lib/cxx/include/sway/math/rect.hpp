@@ -170,12 +170,12 @@ public:
   }
 
   [[nodiscard]]
-  auto position() const -> Point<TValueType> {
+  auto asPoint() const -> Point<TValueType> {
     return Point<TValueType>(getL(), getT());
   }
 
   [[nodiscard]]
-  auto size() const -> Size<TValueType> {
+  auto asSize() const -> Size<TValueType> {
     return Size<TValueType>(getW(), getH());
   }
 

@@ -113,7 +113,7 @@ public:
    * @brief Преобразовывает в Rect<TValueType> класс.
    */
   [[nodiscard]]
-  auto toRect() const -> Rect<TValueType> {
+  auto asRect() const -> Rect<TValueType> {
     return Rect<TValueType>((TValueType)0, (TValueType)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
   }
 

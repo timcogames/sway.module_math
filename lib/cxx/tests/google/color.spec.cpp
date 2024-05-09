@@ -36,7 +36,7 @@ TEST(Color, ComponentCtor) {
 TEST(TColor, ConvertToVector4) {
   const auto r = 0.1F, g = 0.2F, b = 0.3F, a = 1.0F;
   math::col4f_t color(r, g, b, a);
-  math::vec4f_t vec4 = color.toVec4();
+  math::vec4f_t vec4 = color.asVec4();
 
   ASSERT_EQ(vec4.getX(), r);
   ASSERT_EQ(vec4.getY(), g);

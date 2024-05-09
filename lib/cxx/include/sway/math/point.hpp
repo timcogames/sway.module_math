@@ -91,7 +91,7 @@ public:
   }
 
   [[nodiscard]]
-  auto toVec() const -> Vector2<TValueType> {
+  auto asVec() const -> Vector2<TValueType> {
     return Vector2<TValueType>(x_, y_);
   }
 

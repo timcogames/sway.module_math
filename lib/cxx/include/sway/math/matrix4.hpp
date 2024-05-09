@@ -197,7 +197,7 @@ public:
 
   auto operator*(const Matrix4<TValueType> &rhs) const -> const Matrix4<TValueType> {
     Matrix4<TValueType> mat(*this);
-    mat.template multiply<4>(rhs.getData());
+    mat.template multiply<4>(rhs.asArray());
     return mat;
   }
 
