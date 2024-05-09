@@ -33,7 +33,7 @@ public:
   }
 
   [[nodiscard]]
-  auto asDataPtr() const -> TValueType * {
+  auto asDataPtr() -> TValueType * {
     return data_.data();
   }
 
