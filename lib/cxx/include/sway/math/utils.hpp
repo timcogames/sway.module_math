@@ -5,6 +5,7 @@
 
 #include <algorithm>  // random_shuffle
 #include <assert.h>
+#include <random>
 
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
