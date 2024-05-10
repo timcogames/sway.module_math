@@ -3,7 +3,7 @@
 
 #include <sway/core.hpp>
 
-#include <algorithm>
+#include <algorithm>  // random_shuffle
 #include <assert.h>
 
 NAMESPACE_BEGIN(sway)
@@ -13,6 +13,20 @@ NAMESPACE_BEGIN(util)
 constexpr f32_t PI = 3.14159265358979323846F;
 constexpr f64_t EPSILON = 1.0e-05;  // aka 0.00001
 constexpr s32_t INDEFINITE = -1;
+
+inline auto randomInt(const s32_t nbr) -> std::vector<s32_t> {
+  std::vector<s32_t> result;
+
+  for (auto i = 0; i < nbr; ++i) {
+    result.push_back(i);
+  }
+
+  std::random_device rng;
+  std::mt19937 urng(rng());
+
+  std::shuffle(result.begin(), result.end(), urng);
+  return result;
+}
 
 inline auto powerOf2(int val) -> int {
   auto result = 1;
