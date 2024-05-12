@@ -2,6 +2,7 @@
 #define SWAY_MATH_HPP
 
 #include <sway/math/alignments.hpp>
+#include <sway/math/axises.hpp>
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
 #include <sway/math/extensions/coordinatesystemutils.hpp>
