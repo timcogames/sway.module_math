@@ -122,6 +122,10 @@ public:
   }
 };
 
+using sizei_t = Size<s32_t>;
+using sizef_t = Size<f32_t>;
+using sized_t = Size<f64_t>;
+
 using size2i_t = Size<s32_t>;
 using size2f_t = Size<f32_t>;
 using size2d_t = Size<f64_t>;

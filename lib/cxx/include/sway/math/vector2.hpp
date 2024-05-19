@@ -69,6 +69,10 @@ public:
 
   void setY(TValueType val) { this->data_[1] = val; }
 
+  auto multiply(const Vector2<TValueType> &vec) const -> Vector2<TValueType> {
+    return Vector2<TValueType>(this->data_[0] * vec.getX(), this->data_[1] * vec.getY());
+  }
+
   friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
     return out << std::fixed << std::setprecision(3) << "{" << "x:" << vec.getX() << ", " << "y:" << vec.getY() << "}";
   }
