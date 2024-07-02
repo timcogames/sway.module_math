@@ -15,6 +15,8 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Vector2 final : public Vector<TValueType, 2> {
 public:
+  static auto from(std::array<TValueType, 2> data) { return Vector2<TValueType>(data[0], data[1]); }
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
