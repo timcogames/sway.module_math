@@ -15,7 +15,9 @@ NAMESPACE_BEGIN(math)
 template <typename TValueType>
 class Vector2 final : public Vector<TValueType, 2> {
 public:
-  static auto from(std::array<TValueType, 2> data) { return Vector2<TValueType>(data[0], data[1]); }
+  static auto from(std::array<TValueType, 2> data) {
+    return Vector2<TValueType>(data[Vector<TValueType, 2>::IDX_X], data[Vector<TValueType, 2>::IDX_Y]);
+  }
 
   /**
    * @brief Конструктор класса.
@@ -36,16 +38,7 @@ public:
    */
   Vector2(TValueType x, TValueType y) { set(x, y); }
 
-  /**
-   * @brief Устанавливает новые значения.
-   *
-   * @param[in] x Значение X компонента.
-   * @param[in] y Значение Y компонента.
-   */
-  void set(TValueType x, TValueType y) {
-    this->data_[0] = x;
-    this->data_[1] = y;
-  }
+  virtual ~Vector2() = default;
 
   /**
    * @brief Получает значение X компонента.
@@ -54,10 +47,10 @@ public:
    */
   [[nodiscard]]
   auto getX() const -> TValueType {
-    return this->data_[0];
+    return this->data_[Vector<TValueType, 2>::IDX_X];
   }
 
-  void setX(TValueType val) { this->data_[0] = val; }
+  void setX(TValueType val) { this->data_[Vector<TValueType, 2>::IDX_X] = val; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -66,13 +59,24 @@ public:
    */
   [[nodiscard]]
   auto getY() const -> TValueType {
-    return this->data_[1];
+    return this->data_[Vector<TValueType, 2>::IDX_Y];
   }
 
-  void setY(TValueType val) { this->data_[1] = val; }
+  void setY(TValueType val) { this->data_[Vector<TValueType, 2>::IDX_Y] = val; }
+
+  /**
+   * @brief Устанавливает новые значения.
+   *
+   * @param[in] x Значение X компонента.
+   * @param[in] y Значение Y компонента.
+   */
+  void set(TValueType x, TValueType y) {
+    this->setX(x);
+    this->setY(y);
+  }
 
   auto multiply(const Vector2<TValueType> &vec) const -> Vector2<TValueType> {
-    return Vector2<TValueType>(this->data_[0] * vec.getX(), this->data_[1] * vec.getY());
+    return Vector2<TValueType>(this->getX() * vec.getX(), this->getY() * vec.getY());
   }
 
   friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
@@ -84,6 +88,7 @@ using vec2i_t = Vector2<s32_t>;
 using vec2f_t = Vector2<f32_t>;
 using vec2d_t = Vector2<f64_t>;
 
+// NOLINTBEGIN(readability-identifier-naming)
 static const vec2i_t vec2i_zero(0, 0);
 static const vec2i_t vec2i_one(1, 1);
 static const vec2i_t vec2i_unitX(1, 0);
@@ -98,6 +103,7 @@ static const vec2d_t vec2d_zero(0.0, 0.0);
 static const vec2d_t vec2d_one(1.0, 1.0);
 static const vec2d_t vec2d_unitX(1.0, 0.0);
 static const vec2d_t vec2d_unitY(0.0, 1.0);
+// NOLINTEND(readability-identifier-naming)
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

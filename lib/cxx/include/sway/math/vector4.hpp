@@ -16,7 +16,23 @@ template <typename TValueType>
 class Vector4 : public Vector<TValueType, 4> {
 public:
   static auto from(std::array<TValueType, 3> data, TValueType w) {
-    return Vector4<TValueType>(data[0], data[1], data[2], w);
+    // clang-format off
+    return Vector4<TValueType>(
+      data[Vector<TValueType, 3>::IDX_X], 
+      data[Vector<TValueType, 3>::IDX_Y], 
+      data[Vector<TValueType, 3>::IDX_Z], 
+      w);
+    // clang-format on
+  }
+
+  static auto from(std::array<TValueType, 4> data) {
+    // clang-format off
+    return Vector4<TValueType>(
+      data[Vector<TValueType, 4>::IDX_X], 
+      data[Vector<TValueType, 4>::IDX_Y], 
+      data[Vector<TValueType, 4>::IDX_Z], 
+      data[Vector<TValueType, 4>::IDX_W]);
+    // clang-format on
   }
 
   /**
@@ -46,21 +62,6 @@ public:
   virtual ~Vector4() = default;
 
   /**
-   * @brief Устанавливает новые значения.
-   *
-   * @param[in] x Значение X компонента.
-   * @param[in] y Значение Y компонента.
-   * @param[in] z Значение Z компонента.
-   * @param[in] w Значение W компонента.
-   */
-  void set(TValueType x, TValueType y, TValueType z, TValueType w) {
-    this->data_[0] = x;
-    this->data_[1] = y;
-    this->data_[2] = z;
-    this->data_[3] = w;
-  }
-
-  /**
    * @brief Получает значение X компонента.
    *
    * @sa getY() const,
@@ -69,10 +70,10 @@ public:
    */
   [[nodiscard]]
   auto getX() const -> TValueType {
-    return this->data_[0];
+    return this->data_[Vector<TValueType, 4>::IDX_X];
   }
 
-  void setX(TValueType val) { this->data_[0] = val; }
+  void setX(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_X] = val; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -83,10 +84,10 @@ public:
    */
   [[nodiscard]]
   auto getY() const -> TValueType {
-    return this->data_[1];
+    return this->data_[Vector<TValueType, 4>::IDX_Y];
   }
 
-  void setY(TValueType val) { this->data_[1] = val; }
+  void setY(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_Y] = val; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -97,10 +98,10 @@ public:
    */
   [[nodiscard]]
   auto getZ() const -> TValueType {
-    return this->data_[2];
+    return this->data_[Vector<TValueType, 4>::IDX_Z];
   }
 
-  void setZ(TValueType val) { this->data_[2] = val; }
+  void setZ(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_Z] = val; }
 
   /**
    * @brief Получает значение W компонента.
@@ -111,22 +112,37 @@ public:
    */
   [[nodiscard]]
   auto getW() const -> TValueType {
-    return this->data_[3];
+    return this->data_[Vector<TValueType, 4>::IDX_W];
   }
 
-  void setW(TValueType val) { this->data_[3] = val; }
+  void setW(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_W] = val; }
+
+  /**
+   * @brief Устанавливает новые значения.
+   *
+   * @param[in] x Значение X компонента.
+   * @param[in] y Значение Y компонента.
+   * @param[in] z Значение Z компонента.
+   * @param[in] w Значение W компонента.
+   */
+  void set(TValueType x, TValueType y, TValueType z, TValueType w) {
+    this->setX(x);
+    this->setY(y);
+    this->setZ(z);
+    this->setW(w);
+  }
 
   auto add(const Vector4<TValueType> &vec) -> Vector4<TValueType> {
-    return Vector4<TValueType>(this->data_[0] + vec.getX(), this->data_[1] + vec.getY(), this->data_[2] + vec.getZ(),
-        this->data_[3] + vec.getW());
+    return Vector4<TValueType>(
+        this->getX() + vec.getX(), this->getY() + vec.getY(), this->getZ() + vec.getZ(), this->getW() + vec.getW());
   }
 
   auto operator+(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return add(vec); }
 
   [[nodiscard]]
   auto subtract(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(this->data_[0] - vec.getX(), this->data_[1] - vec.getY(), this->data_[2] - vec.getZ(),
-        this->data_[3] - vec.getW());
+    return Vector4<TValueType>(
+        this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ(), this->getW() - vec.getW());
   }
 
   auto operator-(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return subtract(vec); }
@@ -139,15 +155,15 @@ public:
   }
 
   auto multiply(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(this->data_[0] * vec.getX(), this->data_[1] * vec.getY(), this->data_[2] * vec.getZ(),
-        this->data_[3] * vec.getW());
+    return Vector4<TValueType>(
+        this->getX() * vec.getX(), this->getY() * vec.getY(), this->getZ() * vec.getZ(), this->getW() * vec.getW());
   }
 
   auto operator*(const Vector4<TValueType> &vec) const -> Vector4<TValueType> { return multiply(vec); }
 
   auto multiply(TValueType scalar) const -> Vector4<TValueType> {
     return Vector4<TValueType>(
-        this->data_[0] * scalar, this->data_[1] * scalar, this->data_[2] * scalar, this->data_[3] * scalar);
+        this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar, this->getW() * scalar);
   }
 
   auto operator*(TValueType scalar) const -> Vector4<TValueType> { return multiply(scalar); }
@@ -159,7 +175,7 @@ public:
 
   auto divide(TValueType scalar) -> Vector4<TValueType> {
     return Vector4<TValueType>(
-        this->data_[0] /= scalar, this->data_[1] /= scalar, this->data_[2] /= scalar, this->data_[3] /= scalar);
+        this->getX() / scalar, this->getY() / scalar, this->getZ() / scalar, this->getW() / scalar);
   }
 
   auto operator/(TValueType scalar) -> Vector4<TValueType> { return divide(scalar); }

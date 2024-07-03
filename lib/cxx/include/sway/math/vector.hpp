@@ -17,6 +17,7 @@ public:
   using Self_t = Vector<TValueType, TElementCount>;
   using DataElementType_t = TValueType;
 
+  enum : u32_t { IDX_X = 0, IDX_Y, IDX_Z, IDX_W };
   enum : std::size_t { DataElementCount_t = TElementCount, DataSize_t = sizeof(TValueType) * TElementCount };
 
   Vector() { data_.fill((TValueType)0); }
@@ -52,23 +53,23 @@ public:
   /**
    * @brief Возвращает значение в заданной позиции.
    *
-   * @param[in] position Позиция значения.
+   * @param[in] idx Позиция значения.
    * @sa operator[](std::size_t) const
    */
-  auto operator[](std::size_t position) -> TValueType & {
-    assert(position >= 0 && position <= DataElementCount_t);
-    return data_[position];
+  auto operator[](std::size_t idx) -> TValueType & {
+    assert(idx >= 0 && idx <= DataElementCount_t);
+    return data_[idx];
   }
 
   /**
    * @brief Возвращает значение в заданной позиции.
    *
-   * @param[in] position Позиция значения.
+   * @param[in] idx Позиция значения.
    * @sa operator[](std::size_t)
    */
-  auto operator[](std::size_t position) const -> const TValueType {
-    assert(position >= 0 && position <= DataElementCount_t);
-    return data_[position];
+  auto operator[](std::size_t idx) const -> const TValueType {
+    assert(idx >= 0 && idx <= DataElementCount_t);
+    return data_[idx];
   }
 
 #pragma endregion
