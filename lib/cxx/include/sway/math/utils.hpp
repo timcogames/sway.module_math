@@ -11,7 +11,9 @@ NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 NAMESPACE_BEGIN(util)
 
-constexpr f32_t PI = 3.14159265358979323846F;
+constexpr f32_t PI = 3.141592654F;
+constexpr f32_t HALF_PI = 1.570796327F;
+
 constexpr f64_t EPSILON = 1.0e-05;  // aka 0.00001
 constexpr s32_t INDEFINITE = -1;
 
