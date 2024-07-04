@@ -75,8 +75,48 @@ public:
     this->setY(y);
   }
 
+  auto add(const Vector2<TValueType> &vec) -> Vector2<TValueType> {
+    return Vector2<TValueType>(this->getX() + vec.getX(), this->getY() + vec.getY());
+  }
+
+  auto operator+(const Vector2<TValueType> &vec) -> Vector2<TValueType> { return add(vec); }
+
+  auto operator+=(const Vector2<TValueType> &vec) -> Vector2<TValueType> & { return *this = add(vec); }
+
+  [[nodiscard]]
+  auto subtract(const Vector2<TValueType> &vec) const -> Vector2<TValueType> {
+    return Vector2<TValueType>(this->getX() - vec.getX(), this->getY() - vec.getY());
+  }
+
+  auto operator-(const Vector2<TValueType> &vec) -> Vector2<TValueType> { return subtract(vec); }
+
+  auto operator-(const Vector2<TValueType> &vec) const -> Vector2<TValueType> { return subtract(vec); }
+
+  auto operator-=(const Vector2<TValueType> &vec) -> Vector2<TValueType> & {
+    *this = subtract(vec);
+    return *this;
+  }
+
   auto multiply(const Vector2<TValueType> &vec) const -> Vector2<TValueType> {
     return Vector2<TValueType>(this->getX() * vec.getX(), this->getY() * vec.getY());
+  }
+
+  auto operator*(const Vector2<TValueType> &vec) const -> Vector2<TValueType> { return multiply(vec); }
+
+  auto operator*=(const Vector2<TValueType> &vec) -> Vector2<TValueType> & {
+    *this = multiply(vec);
+    return *this;
+  }
+
+  auto multiply(TValueType scalar) const -> Vector2<TValueType> {
+    return Vector2<TValueType>(this->getX() * scalar, this->getY() * scalar);
+  }
+
+  auto operator*(TValueType scalar) const -> Vector2<TValueType> { return multiply(scalar); }
+
+  auto operator*=(TValueType scalar) -> Vector2<TValueType> & {
+    *this = multiply(scalar);
+    return *this;
   }
 
   friend auto operator<<(std::ostream &out, const Vector2<TValueType> &vec) -> std::ostream & {
