@@ -15,10 +15,10 @@ constexpr f32_t PI = 3.141592654F;
 constexpr f32_t HALF_PI = 1.570796327F;
 
 constexpr f64_t EPSILON = 1.0e-05;  // aka 0.00001
-constexpr s32_t INDEFINITE = -1;
+constexpr i32_t INDEFINITE = -1;
 
-inline auto randomInt(const s32_t nbr) -> std::vector<s32_t> {
-  std::vector<s32_t> result;
+inline auto randomInt(const i32_t nbr) -> std::vector<i32_t> {
+  std::vector<i32_t> result;
   for (auto i = 0; i < nbr; ++i) {
     result.push_back(i);
   }

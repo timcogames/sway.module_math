@@ -126,7 +126,7 @@ private:
   TValueType r_, g_, b_, a_;
 };
 
-using col4i_t = Color<s32_t>;
+using col4i_t = Color<i32_t>;
 using col4f_t = Color<f32_t>;
 using col4d_t = Color<f64_t>;
 

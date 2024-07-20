@@ -124,7 +124,7 @@ public:
   }
 };
 
-using vec2i_t = Vector2<s32_t>;
+using vec2i_t = Vector2<i32_t>;
 using vec2f_t = Vector2<f32_t>;
 using vec2d_t = Vector2<f64_t>;
 

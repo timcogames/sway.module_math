@@ -15,7 +15,7 @@ class MatrixStack {
 public:
   template <MatrixType Type>
   auto getStack() -> std::stack<mat4f_t> & {
-    return std::get<core::detail::toUnderlying(Type)>(matrices_);
+    return std::get<core::detail::toBase(Type)>(matrices_);
   }
 
   template <MatrixType Type>

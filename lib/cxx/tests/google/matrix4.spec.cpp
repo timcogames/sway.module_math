@@ -9,14 +9,14 @@
 
 using namespace sway;
 
-constexpr s32_t IDEN_MAT4[4][4] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
-constexpr s32_t RAND_MAT4[4][4] = {6, 5, 9, 8, 8, 0, 3, 4, 8, 2, 7, 9, 1, 1, 5, 3};
-constexpr s32_t RAND_MAT4x4[16] = {6, 5, 9, 8, 8, 0, 3, 4, 8, 2, 7, 9, 1, 1, 5, 3};
+constexpr i32_t IDEN_MAT4[4][4] = {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+constexpr i32_t RAND_MAT4[4][4] = {6, 5, 9, 8, 8, 0, 3, 4, 8, 2, 7, 9, 1, 1, 5, 3};
+constexpr i32_t RAND_MAT4x4[16] = {6, 5, 9, 8, 8, 0, 3, 4, 8, 2, 7, 9, 1, 1, 5, 3};
 
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит матрицу к единичной.
  */
-TEST(Matrix4, DefaultCtor) {
+TEST(Matrix4, ctor_def) {
   math::mat4i_t mtx;
 
   ASSERT_EQ(mtx.getValue(0, 0), 1);
@@ -43,7 +43,7 @@ TEST(Matrix4, DefaultCtor) {
 /**
  * @brief Убеждаемся, что установка всех компонентов матрицы проходит правильно.
  */
-TEST(Matrix4, Set) {
+TEST(Matrix4, set) {
   math::mat4i_t mtx;
 
   mtx.setValue(0, 0, RAND_MAT4[0][0]);

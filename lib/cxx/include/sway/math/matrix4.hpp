@@ -206,7 +206,7 @@ public:
   }
 };
 
-using mat4i_t = Matrix4<s32_t>;
+using mat4i_t = Matrix4<i32_t>;
 using mat4f_t = Matrix4<f32_t>;
 using mat4d_t = Matrix4<f64_t>;
 

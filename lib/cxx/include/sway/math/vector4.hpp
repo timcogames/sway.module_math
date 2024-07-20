@@ -194,7 +194,7 @@ public:
   }
 };
 
-using vec4i_t = Vector4<s32_t>;
+using vec4i_t = Vector4<i32_t>;
 using vec4f_t = Vector4<f32_t>;
 using vec4d_t = Vector4<f64_t>;
 

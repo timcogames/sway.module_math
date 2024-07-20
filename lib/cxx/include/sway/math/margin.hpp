@@ -14,10 +14,10 @@ public:
       : Margin(0, 0, 0, 0) {}
 
   Margin(TValueType l, TValueType t, TValueType r, TValueType b) {
-    data_[core::detail::toUnderlying(RectEdge::IDX_L)] = l;
-    data_[core::detail::toUnderlying(RectEdge::IDX_T)] = t;
-    data_[core::detail::toUnderlying(RectEdge::IDX_R)] = r;
-    data_[core::detail::toUnderlying(RectEdge::IDX_B)] = b;
+    data_[core::detail::toBase(RectEdge::IDX_L)] = l;
+    data_[core::detail::toBase(RectEdge::IDX_T)] = t;
+    data_[core::detail::toBase(RectEdge::IDX_R)] = r;
+    data_[core::detail::toBase(RectEdge::IDX_B)] = b;
   }
 
   Margin(TValueType val)
@@ -26,7 +26,7 @@ public:
   Margin(TValueType x, TValueType y)
       : Margin(x, y, x, y) {}
 
-  auto at(RectEdge edge) const -> TValueType { return data_[core::detail::toUnderlying(edge)]; }
+  auto at(RectEdge edge) const -> TValueType { return data_[core::detail::toBase(edge)]; }
 
   auto getL() const -> TValueType { return this->at(RectEdge::IDX_L); }
 

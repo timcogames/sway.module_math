@@ -12,9 +12,9 @@ enum class VertAlign : s8_t { CENTER = ENUM_BITMASK(4), TOP = ENUM_BITMASK(5), B
 template <auto TEnumValue>
 constexpr auto ConvFromXAlign() -> s8_t {
   if constexpr (std::is_same_v<decltype(TEnumValue), HorzAlign>) {
-    return core::detail::toUnderlying<HorzAlign>(TEnumValue);
+    return core::detail::toBase<HorzAlign>(TEnumValue);
   } else if constexpr (std::is_same_v<decltype(TEnumValue), VertAlign>) {
-    return core::detail::toUnderlying<VertAlign>(TEnumValue);
+    return core::detail::toBase<VertAlign>(TEnumValue);
   }
 }
 

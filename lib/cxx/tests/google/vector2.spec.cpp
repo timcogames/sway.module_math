@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(vec2i, default_ctor) {
+TEST(vec2i, ctor_def) {
   math::vec2i_t vec;
 
   ASSERT_EQ(vec.getX(), 0);
@@ -18,7 +18,7 @@ TEST(vec2i, default_ctor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(vec2i, component_ctor) {
+TEST(vec2i, ctor_comps) {
   const auto x = 1, y = 2;
   math::vec2i_t vec(x, y);
 

@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Size, DefaultCtor) {
+TEST(Size, ctor_def) {
   math::size2i_t size;
 
   ASSERT_EQ(size.getW(), 0);
@@ -18,7 +18,7 @@ TEST(Size, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Size, ComponentCtor) {
+TEST(Size, ctor_comps) {
   const auto w = 1, h = 2;
   math::size2i_t size(w, h);
 
@@ -26,9 +26,9 @@ TEST(Size, ComponentCtor) {
   ASSERT_EQ(size.getH(), h);
 }
 
-TEST(Size, ScalarCtor) {
+TEST(Size, ctor_scalar) {
   const auto w = 1, h = 2;
-  math::size2i_t size(math::Size<s32_t>(w, h));
+  math::size2i_t size(math::Size<i32_t>(w, h));
 
   ASSERT_EQ(size.getW(), w);
   ASSERT_EQ(size.getH(), h);
@@ -37,7 +37,7 @@ TEST(Size, ScalarCtor) {
 /**
  * @brief Тест для оператора равенства.
  */
-TEST(Size, EqualityOperator) {
+TEST(Size, equality_operator) {
   math::size2i_t size(1, 2);
 
   EXPECT_TRUE(size == math::size2i_t(1, 2));
@@ -47,25 +47,25 @@ TEST(Size, EqualityOperator) {
 /**
  * @brief Тест для оператора неравенства.
  */
-TEST(Size, NonEqualityOperator) {
+TEST(Size, non_equality_operator) {
   math::size2i_t size(2, 1);
 
   EXPECT_TRUE(size != math::size2i_one);
   EXPECT_FALSE(size != math::size2i_t(2, 1));
 }
 
-TEST(Size, MultiplyOperator) {
+TEST(Size, multiply_operator) {
   math::size2i_t size(2, 7);
   size = size * 3;
 
   EXPECT_TRUE(size == math::size2i_t(6, 21));
 }
 
-TEST(Size, DivideOperator) {
+TEST(Size, divide_operator) {
   math::size2i_t size(4, 16);
   size = size / 2;
 
   EXPECT_TRUE(size == math::size2i_t(2, 8));
 }
 
-TEST(Size, ToString) { EXPECT_STREQ(std::to_string(math::size2i_t(1, 2)).c_str(), "{w:1, h:2}"); }
+TEST(Size, to_string) { EXPECT_STREQ(std::to_string(math::size2i_t(1, 2)).c_str(), "{w:1, h:2}"); }

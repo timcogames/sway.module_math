@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Rect, DefaultCtor) {
+TEST(Rect, ctor_def) {
   math::rect4i_t rect;
 
   ASSERT_EQ(rect.getL(), 0);
@@ -19,8 +19,8 @@ TEST(Rect, DefaultCtor) {
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Rect, ArrayCtor) {
-  std::array<s32_t, 4> arr = {8, 16, 32, 64};
+TEST(Rect, ctor_array) {
+  std::array<i32_t, 4> arr = {8, 16, 32, 64};
   math::rect4i_t rect(arr);
 
   ASSERT_EQ(rect.getL(), 8);
@@ -33,7 +33,7 @@ TEST(Rect, ArrayCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Rect, ComponentCtor) {
+TEST(Rect, ctor_comps) {
   const auto x = 8, y = 16, xw = 24, yh = 32;
   math::rect4i_t rect(x, y, xw, yh);
 
@@ -45,7 +45,7 @@ TEST(Rect, ComponentCtor) {
   ASSERT_EQ(rect.getH(), yh - y);
 }
 
-TEST(Rect, OffsetPositive) {
+TEST(Rect, offset_positive) {
   const auto x = 8, y = 16, xw = 24, yh = 32;
   const auto xoffset = 2, yoffset = 4;
 
@@ -60,7 +60,7 @@ TEST(Rect, OffsetPositive) {
   ASSERT_EQ(rect.getH(), yh - y);
 }
 
-TEST(Rect, OffsetNegative) {
+TEST(Rect, offset_negative) {
   const auto x = -24, y = -32, xw = -8, yh = -16;
   const auto xoffset = 2, yoffset = 4;
 
@@ -78,7 +78,7 @@ TEST(Rect, OffsetNegative) {
 /**
  * @brief Убеждаемся, что преобразование в Size<type> проходит правильно.
  */
-TEST(Rect, ConvertToSize) {
+TEST(Rect, convert_to_size) {
   const auto x = 8, y = 16, xw = 24, yh = 32;
 
   math::rect4i_t rect(x, y, xw, yh);
@@ -88,18 +88,18 @@ TEST(Rect, ConvertToSize) {
   ASSERT_EQ(size.getH(), yh - y);
 }
 
-TEST(Rect, IsEmpty) {
-  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 0, 32).empty());
-  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 0).empty());
-  EXPECT_FALSE(math::Rect<s32_t>(0, 0, 32, 32).empty());
+TEST(Rect, is_empty) {
+  ASSERT_TRUE(math::Rect<i32_t>(0, 0, 0, 32).empty());
+  ASSERT_TRUE(math::Rect<i32_t>(0, 0, 32, 0).empty());
+  EXPECT_FALSE(math::Rect<i32_t>(0, 0, 32, 32).empty());
 }
 
 TEST(Rect, contains) {
-  ASSERT_TRUE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(24, 8)));
-  ASSERT_TRUE(math::Rect<s32_t>(-16, -8, 16, 8).contains(math::Point<s32_t>(-10, 4)));
-  ASSERT_FALSE(math::Rect<s32_t>(0, 0, 32, 16).contains(math::Point<s32_t>(32, 17)));
+  ASSERT_TRUE(math::Rect<i32_t>(0, 0, 32, 16).contains(math::Point<i32_t>(24, 8)));
+  ASSERT_TRUE(math::Rect<i32_t>(-16, -8, 16, 8).contains(math::Point<i32_t>(-10, 4)));
+  ASSERT_FALSE(math::Rect<i32_t>(0, 0, 32, 16).contains(math::Point<i32_t>(32, 17)));
 }
 
-TEST(Rect, toString) {
+TEST(Rect, to_string) {
   EXPECT_STREQ(std::to_string(math::rect4i_t(8, 16, 24, 32)).c_str(), "{l:8, t:16, r:24, b:32, size:{w:16, h:16}}");
 }

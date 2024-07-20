@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexPosition, DefaultCtor) {
+TEST(VertexPosition, ctor_def) {
   math::VertexPosition vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -19,7 +19,7 @@ TEST(VertexPosition, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexPosition, ComponentCtor) {
+TEST(VertexPosition, ctor_comps) {
   math::VertexPosition vertex(math::vec3f_t(1.0F, 2.0F, 3.0F));
   auto position = vertex.getPosition();
 
@@ -31,7 +31,7 @@ TEST(VertexPosition, ComponentCtor) {
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexColor, DefaultCtor) {
+TEST(VertexColor, ctor_def) {
   math::VertexColor vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -48,7 +48,7 @@ TEST(VertexColor, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexColor, ComponentCtor) {
+TEST(VertexColor, ctor_comps) {
   math::VertexColor vertex(math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F));
   auto position = vertex.getPosition();
   auto color = vertex.getColor();
@@ -66,7 +66,7 @@ TEST(VertexColor, ComponentCtor) {
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(VertexTexCoord, DefaultCtor) {
+TEST(VertexTexCoord, ctor_def) {
   math::VertexTexCoord vertex;
 
   ASSERT_EQ(vertex.x, 0.0F);
@@ -81,7 +81,7 @@ TEST(VertexTexCoord, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(VertexTexCoord, ComponentCtor) {
+TEST(VertexTexCoord, ctor_comps) {
   math::VertexTexCoord vertex(
       math::vec3f_t(1.0F, 2.0F, 3.0F), math::col4f_t(0.1F, 0.2F, 0.3F), math::vec2f_t(0.1F, 0.2F));
   auto pos = vertex.getPosition();

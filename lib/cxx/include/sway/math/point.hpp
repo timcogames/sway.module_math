@@ -119,7 +119,7 @@ protected:
   TValueType x_, y_;
 };
 
-using point2i_t = Point<s32_t>;
+using point2i_t = Point<i32_t>;
 using point2f_t = Point<f32_t>;
 using point2d_t = Point<f64_t>;
 

@@ -159,7 +159,13 @@ public:
   }
 
   auto divide(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() / vec.getX(), this->getY() / vec.getY(), this->getZ() / vec.getZ());
+    // clang-format off
+    return {
+      this->data_[Vector<TValueType, 3>::IDX_X] /= vec.getX(),
+      this->data_[Vector<TValueType, 3>::IDX_Y] /= vec.getY(),
+      this->data_[Vector<TValueType, 3>::IDX_Z] /= vec.getZ()
+    };
+    // clang-format on
   }
 
   auto operator/(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return divide(vec); }
@@ -170,7 +176,13 @@ public:
   }
 
   auto divide(TValueType scalar) -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() /= scalar, this->getY() /= scalar, this->getZ() /= scalar);
+    // clang-format off
+    return {
+      this->data_[Vector<TValueType, 3>::IDX_X] /= scalar,
+      this->data_[Vector<TValueType, 3>::IDX_Y] /= scalar,
+      this->data_[Vector<TValueType, 3>::IDX_Z] /= scalar
+    };
+    // clang-format on
   }
 
   auto operator/(TValueType scalar) -> Vector3<TValueType> { return divide(scalar); }
@@ -188,7 +200,7 @@ public:
   }
 };
 
-using vec3i_t = Vector3<s32_t>;
+using vec3i_t = Vector3<i32_t>;
 using vec3f_t = Vector3<f32_t>;
 using vec3d_t = Vector3<f64_t>;
 

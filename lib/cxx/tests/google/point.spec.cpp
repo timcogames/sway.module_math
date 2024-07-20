@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Point, DefaultCtor) {
+TEST(Point, ctor_def) {
   math::point2i_t pnt;
 
   ASSERT_EQ(pnt.getX(), 0);
@@ -18,7 +18,7 @@ TEST(Point, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Point, ComponentCtor) {
+TEST(Point, ctor_comps) {
   const auto x = 1, y = 2;
   math::point2i_t pnt(x, y);
 
@@ -26,7 +26,7 @@ TEST(Point, ComponentCtor) {
   ASSERT_EQ(pnt.getY(), y);
 }
 
-TEST(Point, ScalarCtor) {
+TEST(Point, ctor_scalar) {
   math::point2i_t pnt(math::point2i_one);
 
   ASSERT_EQ(pnt.getX(), 1);
@@ -36,7 +36,7 @@ TEST(Point, ScalarCtor) {
 /**
  * @brief Тест для оператора равенства.
  */
-TEST(Point, EqualityOperator) {
+TEST(Point, equality_operator) {
   math::point2i_t pnt(0, 0);
 
   EXPECT_TRUE(pnt == math::point2i_zero);
@@ -46,7 +46,7 @@ TEST(Point, EqualityOperator) {
 /**
  * @brief Тест для оператора неравенства.
  */
-TEST(Point, NonEqualityOperator) {
+TEST(Point, non_equality_operator) {
   math::point2i_t pnt(1, 1);
 
   EXPECT_TRUE(pnt != math::point2i_zero);

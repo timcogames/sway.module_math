@@ -7,7 +7,7 @@ using namespace sway;
 /**
  * @brief Убеждаемся, что конструктор по умолчанию приводит все компоненты к нулю.
  */
-TEST(Vector3, DefaultCtor) {
+TEST(Vector3, ctor_def) {
   math::vec3i_t vec;
 
   ASSERT_EQ(vec.getX(), 0);
@@ -19,7 +19,7 @@ TEST(Vector3, DefaultCtor) {
  * @brief Убеждаемся, что конструктор устанавливает все значения компонентов в те,
  *        которые были заданы.
  */
-TEST(Vector3, ComponentCtor) {
+TEST(Vector3, ctor_comps) {
   const auto x = 1, y = 2, z = 3;
   math::vec3i_t vec(x, y, z);
 
@@ -28,16 +28,32 @@ TEST(Vector3, ComponentCtor) {
   ASSERT_EQ(vec.getZ(), z);
 }
 
-TEST(Vector3, Size) { ASSERT_EQ(math::vec3i_t::DataElementCount_t, 3); }
+TEST(Vector3, size) { ASSERT_EQ(math::vec3i_t::DataElementCount_t, 3); }
 
-TEST(Vector3, Divide) {
-  math::vec3i_t vec(4, 6, 8);
-  vec.divide(2);
-
-  EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+TEST(Vector3, divide) {
+  {
+    math::vec3i_t vec(4, 6, 8);
+    vec /= 2;
+    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+  }
+  {
+    math::vec3i_t vec(4, 6, 8);
+    vec.divide(2);
+    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+  }
+  {
+    math::vec3i_t vec(4, 6, 8);
+    vec /= math::vec3i_t(2, 2, 2);
+    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+  }
+  {
+    math::vec3i_t vec(4, 6, 8);
+    vec.divide(math::vec3i_t(2, 2, 2));
+    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+  }
 }
 
-TEST(Vector3, Added) {
+TEST(Vector3, added) {
   math::vec3i_t vec(1, 2, 3);
 
   vec = vec.add(math::vec3i_t(2, 1, 0));
@@ -50,7 +66,7 @@ TEST(Vector3, Added) {
   EXPECT_TRUE(vec.equals(math::vec3i_t(5, 5, 5)));
 }
 
-TEST(Vector3, Subtract) {
+TEST(Vector3, subtract) {
   math::vec3i_t a(1, 2, 3);
   math::vec3i_t b(1, 1, 1);
 
@@ -58,7 +74,7 @@ TEST(Vector3, Subtract) {
   EXPECT_TRUE(res.equals(math::vec3i_t(0, 1, 2)));
 }
 
-TEST(Vector3, Dot) {
+TEST(Vector3, dot) {
   math::vec3i_t a(1, 2, 3);
   math::vec3i_t b(1, 1, 1);
 
@@ -66,7 +82,7 @@ TEST(Vector3, Dot) {
   EXPECT_TRUE(res == 6);
 }
 
-TEST(Vector3, Normalize) {
+TEST(Vector3, normalize) {
   auto res = math::vec3f_t::normalize(math::vec3f_t(1.0F, 2.0F, 3.0F));
   auto frm = core::misc::format("[%f, %f, %f]", res.getX(), res.getY(), res.getZ());
   EXPECT_TRUE(frm == std::string("[0.267261, 0.534522, 0.801784]"));

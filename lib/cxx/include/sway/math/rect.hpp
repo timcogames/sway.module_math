@@ -204,12 +204,12 @@ public:
     this->at(RectEdge::IDX_B) -= margin.getB();
   }
 
-  auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
+  auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toBase(edge)]; }
 
-  auto at(RectEdge edge) -> TValueType & { return this->data_[core::detail::toUnderlying(edge)]; }
+  auto at(RectEdge edge) -> TValueType & { return this->data_[core::detail::toBase(edge)]; }
 };
 
-using rect4i_t = Rect<s32_t>;
+using rect4i_t = Rect<i32_t>;
 using rect4f_t = Rect<f32_t>;
 using rect4d_t = Rect<f64_t>;
 
