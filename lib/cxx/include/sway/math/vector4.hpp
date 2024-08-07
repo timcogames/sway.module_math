@@ -12,40 +12,46 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления вектора из четырех компонентов.
  */
-template <typename TValueType>
-class Vector4 : public Vector<TValueType, 4> {
+template <typename TYPE>
+class Vector4 : public Vector<TYPE, 4> {
 public:
-  static auto from(std::array<TValueType, 3> data, TValueType w) {
+#pragma region "Static methods"
+
+  static auto from(std::array<TYPE, 3> data, TYPE w) {
     // clang-format off
-    return Vector4<TValueType>(
-      data[Vector<TValueType, 3>::IDX_X], 
-      data[Vector<TValueType, 3>::IDX_Y], 
-      data[Vector<TValueType, 3>::IDX_Z], 
+    return Vector4<TYPE>(
+      data[Vector<TYPE, 3>::IDX_X], 
+      data[Vector<TYPE, 3>::IDX_Y], 
+      data[Vector<TYPE, 3>::IDX_Z], 
       w);
     // clang-format on
   }
 
-  static auto from(std::array<TValueType, 4> data) {
+  static auto from(std::array<TYPE, 4> data) {
     // clang-format off
-    return Vector4<TValueType>(
-      data[Vector<TValueType, 4>::IDX_X], 
-      data[Vector<TValueType, 4>::IDX_Y], 
-      data[Vector<TValueType, 4>::IDX_Z], 
-      data[Vector<TValueType, 4>::IDX_W]);
+    return Vector4<TYPE>(
+      data[Vector<TYPE, 4>::IDX_X], 
+      data[Vector<TYPE, 4>::IDX_Y], 
+      data[Vector<TYPE, 4>::IDX_Z], 
+      data[Vector<TYPE, 4>::IDX_W]);
     // clang-format on
   }
+
+#pragma endregion
+
+#pragma region "Ctors/Dtor"
 
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa Vector4(TValueType, TValueType, TValueType, TValueType)
+   * @sa Vector4(TYPE, TYPE, TYPE, TYPE)
    */
   Vector4()
-      : Vector<TValueType, 4>() {}
+      : Vector<TYPE, 4>() {}
 
-  Vector4(const std::array<TValueType, 4> &data)
-      : Vector<TValueType, 4>(data) {}
+  Vector4(const std::array<TYPE, 4> &data)
+      : Vector<TYPE, 4>(data) {}
 
   /**
    * @brief Конструктор класса.
@@ -57,9 +63,11 @@ public:
    * @param[in] w Компонент W вектора.
    * @sa Vector4()
    */
-  Vector4(TValueType x, TValueType y, TValueType z, TValueType w) { set(x, y, z, w); }
+  Vector4(TYPE x, TYPE y, TYPE z, TYPE w) { set(x, y, z, w); }
 
   virtual ~Vector4() = default;
+
+#pragma endregion
 
   /**
    * @brief Получает значение X компонента.
@@ -69,11 +77,11 @@ public:
    *     getW() const
    */
   [[nodiscard]]
-  auto getX() const -> TValueType {
-    return this->data_[Vector<TValueType, 4>::IDX_X];
+  auto getX() const -> TYPE {
+    return this->data_[Vector<TYPE, 4>::IDX_X];
   }
 
-  void setX(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_X] = val; }
+  void setX(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_X] = val; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -83,11 +91,11 @@ public:
    *     getW() const
    */
   [[nodiscard]]
-  auto getY() const -> TValueType {
-    return this->data_[Vector<TValueType, 4>::IDX_Y];
+  auto getY() const -> TYPE {
+    return this->data_[Vector<TYPE, 4>::IDX_Y];
   }
 
-  void setY(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_Y] = val; }
+  void setY(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_Y] = val; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -97,11 +105,11 @@ public:
    *     getW() const
    */
   [[nodiscard]]
-  auto getZ() const -> TValueType {
-    return this->data_[Vector<TValueType, 4>::IDX_Z];
+  auto getZ() const -> TYPE {
+    return this->data_[Vector<TYPE, 4>::IDX_Z];
   }
 
-  void setZ(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_Z] = val; }
+  void setZ(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_Z] = val; }
 
   /**
    * @brief Получает значение W компонента.
@@ -111,11 +119,11 @@ public:
    *     getZ() const
    */
   [[nodiscard]]
-  auto getW() const -> TValueType {
-    return this->data_[Vector<TValueType, 4>::IDX_W];
+  auto getW() const -> TYPE {
+    return this->data_[Vector<TYPE, 4>::IDX_W];
   }
 
-  void setW(TValueType val) { this->data_[Vector<TValueType, 4>::IDX_W] = val; }
+  void setW(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_W] = val; }
 
   /**
    * @brief Устанавливает новые значения.
@@ -125,67 +133,65 @@ public:
    * @param[in] z Значение Z компонента.
    * @param[in] w Значение W компонента.
    */
-  void set(TValueType x, TValueType y, TValueType z, TValueType w) {
+  void set(TYPE x, TYPE y, TYPE z, TYPE w) {
     this->setX(x);
     this->setY(y);
     this->setZ(z);
     this->setW(w);
   }
 
-  auto add(const Vector4<TValueType> &vec) -> Vector4<TValueType> {
-    return Vector4<TValueType>(
+  auto add(const Vector4<TYPE> &vec) -> Vector4<TYPE> {
+    return Vector4<TYPE>(
         this->getX() + vec.getX(), this->getY() + vec.getY(), this->getZ() + vec.getZ(), this->getW() + vec.getW());
   }
 
-  auto operator+(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return add(vec); }
+  auto operator+(const Vector4<TYPE> &vec) -> Vector4<TYPE> { return add(vec); }
 
   [[nodiscard]]
-  auto subtract(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(
+  auto subtract(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(
         this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ(), this->getW() - vec.getW());
   }
 
-  auto operator-(const Vector4<TValueType> &vec) -> Vector4<TValueType> { return subtract(vec); }
+  auto operator-(const Vector4<TYPE> &vec) -> Vector4<TYPE> { return subtract(vec); }
 
-  auto operator-(const Vector4<TValueType> &vec) const -> Vector4<TValueType> { return subtract(vec); }
+  auto operator-(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return subtract(vec); }
 
-  auto operator-=(const Vector4<TValueType> &vec) -> Vector4<TValueType> & {
+  auto operator-=(const Vector4<TYPE> &vec) -> Vector4<TYPE> & {
     *this = subtract(vec);
     return *this;
   }
 
-  auto multiply(const Vector4<TValueType> &vec) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(
+  auto multiply(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(
         this->getX() * vec.getX(), this->getY() * vec.getY(), this->getZ() * vec.getZ(), this->getW() * vec.getW());
   }
 
-  auto operator*(const Vector4<TValueType> &vec) const -> Vector4<TValueType> { return multiply(vec); }
+  auto operator*(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return multiply(vec); }
 
-  auto multiply(TValueType scalar) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(
-        this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar, this->getW() * scalar);
+  auto multiply(TYPE scalar) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar, this->getW() * scalar);
   }
 
-  auto operator*(TValueType scalar) const -> Vector4<TValueType> { return multiply(scalar); }
+  auto operator*(TYPE scalar) const -> Vector4<TYPE> { return multiply(scalar); }
 
-  auto operator*=(TValueType scalar) -> Vector4<TValueType> {
+  auto operator*=(TYPE scalar) -> Vector4<TYPE> {
     *this = multiply(scalar);
     return *this;
   }
 
-  auto divide(TValueType scalar) -> Vector4<TValueType> {
-    return Vector4<TValueType>(
-        this->getX() / scalar, this->getY() / scalar, this->getZ() / scalar, this->getW() / scalar);
+  auto divide(TYPE scalar) -> Vector4<TYPE> {
+    return Vector4<TYPE>(this->getX() / scalar, this->getY() / scalar, this->getZ() / scalar, this->getW() / scalar);
   }
 
-  auto operator/(TValueType scalar) -> Vector4<TValueType> { return divide(scalar); }
+  auto operator/(TYPE scalar) -> Vector4<TYPE> { return divide(scalar); }
 
-  auto operator/=(TValueType scalar) -> Vector4<TValueType> & {
+  auto operator/=(TYPE scalar) -> Vector4<TYPE> & {
     *this = divide(scalar);
     return *this;
   }
 
-  friend auto operator<<(std::ostream &out, const Vector4<TValueType> &vec) -> std::ostream & {
+  friend auto operator<<(std::ostream &out, const Vector4<TYPE> &vec) -> std::ostream & {
     return out << std::fixed << std::setprecision(3) << "{"
                << "x:" << vec.getX() << ", "
                << "y:" << vec.getY() << ", "

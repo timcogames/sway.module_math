@@ -9,12 +9,12 @@ NAMESPACE_BEGIN(math)
 enum class HorzAlign : s8_t { CENTER = ENUM_BITMASK(1), LEFT = ENUM_BITMASK(2), RIGHT = ENUM_BITMASK(3) };
 enum class VertAlign : s8_t { CENTER = ENUM_BITMASK(4), TOP = ENUM_BITMASK(5), BOTTOM = ENUM_BITMASK(6) };
 
-template <auto TEnumValue>
+template <auto VALUE>
 constexpr auto ConvFromXAlign() -> s8_t {
-  if constexpr (std::is_same_v<decltype(TEnumValue), HorzAlign>) {
-    return core::detail::toBase<HorzAlign>(TEnumValue);
-  } else if constexpr (std::is_same_v<decltype(TEnumValue), VertAlign>) {
-    return core::detail::toBase<VertAlign>(TEnumValue);
+  if constexpr (std::is_same_v<decltype(VALUE), HorzAlign>) {
+    return core::detail::toBase<HorzAlign>(VALUE);
+  } else if constexpr (std::is_same_v<decltype(VALUE), VertAlign>) {
+    return core::detail::toBase<VertAlign>(VALUE);
   }
 }
 

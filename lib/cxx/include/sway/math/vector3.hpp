@@ -12,40 +12,44 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления вектора из трех компонентов.
  */
-template <typename TValueType>
-class Vector3 final : public Vector<TValueType, 3> {
+template <typename TYPE>
+class Vector3 final : public Vector<TYPE, 3> {
 public:
-  static auto from(std::array<TValueType, 4> data) {
-    return Vector3<TValueType>(
-        data[Vector<TValueType, 3>::IDX_X], data[Vector<TValueType, 3>::IDX_Y], data[Vector<TValueType, 3>::IDX_Z]);
+#pragma region "Static methods"
+
+  static auto from(std::array<TYPE, 4> data) {
+    return Vector3<TYPE>(data[Vector<TYPE, 3>::IDX_X], data[Vector<TYPE, 3>::IDX_Y], data[Vector<TYPE, 3>::IDX_Z]);
   }
 
-  static auto from(std::array<TValueType, 3> data) {
-    return Vector3<TValueType>(
-        data[Vector<TValueType, 3>::IDX_X], data[Vector<TValueType, 3>::IDX_Y], data[Vector<TValueType, 3>::IDX_Z]);
+  static auto from(std::array<TYPE, 3> data) {
+    return Vector3<TYPE>(data[Vector<TYPE, 3>::IDX_X], data[Vector<TYPE, 3>::IDX_Y], data[Vector<TYPE, 3>::IDX_Z]);
   }
 
-  static auto normalize(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
+  static auto normalize(const Vector3<TYPE> &vec) -> Vector3<TYPE> {
     auto len = vec.getLengthSquared();
-    if (len > (TValueType)0) {
-      return vec.multiply((TValueType)1 / (TValueType)sqrt(len));
+    if (len > (TYPE)0) {
+      return vec.multiply((TYPE)1 / (TYPE)sqrt(len));
     }
 
-    return Vector3<TValueType>();
+    return Vector3<TYPE>();
   }
 
-  static auto dot(const Vector3<TValueType> &lhs, const Vector3<TValueType> &rhs) -> f32_t {
+  static auto dot(const Vector3<TYPE> &lhs, const Vector3<TYPE> &rhs) -> f32_t {
     return (lhs.getX() * rhs.getX()) + (lhs.getY() * rhs.getY()) + (lhs.getZ() * rhs.getZ());
   }
+
+#pragma endregion
+
+#pragma region "Ctors/Dtor"
 
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa Vector3(TValueType, TValueType, TValueType)
+   * @sa Vector3(TYPE, TYPE, TYPE)
    */
   Vector3()
-      : Vector<TValueType, 3>() {}
+      : Vector<TYPE, 3>() {}
 
   /**
    * @brief Конструктор класса.
@@ -56,7 +60,11 @@ public:
    * @param[in] z Компонент Z вектора.
    * @sa Vector3()
    */
-  Vector3(TValueType x, TValueType y, TValueType z) { set(x, y, z); }
+  Vector3(TYPE x, TYPE y, TYPE z) { set(x, y, z); }
+
+  virtual ~Vector3() = default;
+
+#pragma endregion
 
   /**
    * @brief Получает значение X компонента.
@@ -65,11 +73,11 @@ public:
    *     getZ() const
    */
   [[nodiscard]]
-  auto getX() const -> TValueType {
-    return this->data_[Vector<TValueType, 3>::IDX_X];
+  auto getX() const -> TYPE {
+    return this->data_[Vector<TYPE, 3>::IDX_X];
   }
 
-  void setX(TValueType val) { this->data_[Vector<TValueType, 3>::IDX_X] = val; }
+  void setX(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_X] = val; }
 
   /**
    * @brief Получает значение Y компонента.
@@ -78,11 +86,11 @@ public:
    *     getZ() const
    */
   [[nodiscard]]
-  auto getY() const -> TValueType {
-    return this->data_[Vector<TValueType, 3>::IDX_Y];
+  auto getY() const -> TYPE {
+    return this->data_[Vector<TYPE, 3>::IDX_Y];
   }
 
-  void setY(TValueType val) { this->data_[Vector<TValueType, 3>::IDX_Y] = val; }
+  void setY(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_Y] = val; }
 
   /**
    * @brief Получает значение Z компонента.
@@ -91,11 +99,11 @@ public:
    *     getY() const
    */
   [[nodiscard]]
-  auto getZ() const -> TValueType {
-    return this->data_[Vector<TValueType, 3>::IDX_Z];
+  auto getZ() const -> TYPE {
+    return this->data_[Vector<TYPE, 3>::IDX_Z];
   }
 
-  void setZ(TValueType val) { this->data_[Vector<TValueType, 3>::IDX_Z] = val; }
+  void setZ(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_Z] = val; }
 
   /**
    * @brief Устанавливает новые значения.
@@ -104,95 +112,95 @@ public:
    * @param[in] y Значение Y компонента.
    * @param[in] z Значение Z компонента.
    */
-  void set(TValueType x, TValueType y, TValueType z) {
+  void set(TYPE x, TYPE y, TYPE z) {
     this->setX(x);
     this->setY(y);
     this->setZ(z);
   }
 
-  auto getLengthSquared() const -> TValueType {
+  auto getLengthSquared() const -> TYPE {
     return this->getX() * this->getX() + this->getY() * this->getY() + this->getZ() * this->getZ();
   }
 
-  auto add(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() + vec.getX(), this->getY() + vec.getY(), this->getZ() + vec.getZ());
+  auto add(const Vector3<TYPE> &vec) -> Vector3<TYPE> {
+    return Vector3<TYPE>(this->getX() + vec.getX(), this->getY() + vec.getY(), this->getZ() + vec.getZ());
   }
 
-  auto operator+(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return add(vec); }
+  auto operator+(const Vector3<TYPE> &vec) -> Vector3<TYPE> { return add(vec); }
 
-  auto operator+=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & { return *this = add(vec); }
+  auto operator+=(const Vector3<TYPE> &vec) -> Vector3<TYPE> & { return *this = add(vec); }
 
   [[nodiscard]]
-  auto subtract(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ());
+  auto subtract(const Vector3<TYPE> &vec) const -> Vector3<TYPE> {
+    return Vector3<TYPE>(this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ());
   }
 
-  auto operator-(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return subtract(vec); }
+  auto operator-(const Vector3<TYPE> &vec) -> Vector3<TYPE> { return subtract(vec); }
 
-  auto operator-(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return subtract(vec); }
+  auto operator-(const Vector3<TYPE> &vec) const -> Vector3<TYPE> { return subtract(vec); }
 
-  auto operator-=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+  auto operator-=(const Vector3<TYPE> &vec) -> Vector3<TYPE> & {
     *this = subtract(vec);
     return *this;
   }
 
-  auto multiply(const Vector3<TValueType> &vec) const -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() * vec.getX(), this->getY() * vec.getY(), this->getZ() * vec.getZ());
+  auto multiply(const Vector3<TYPE> &vec) const -> Vector3<TYPE> {
+    return Vector3<TYPE>(this->getX() * vec.getX(), this->getY() * vec.getY(), this->getZ() * vec.getZ());
   }
 
-  auto operator*(const Vector3<TValueType> &vec) const -> Vector3<TValueType> { return multiply(vec); }
+  auto operator*(const Vector3<TYPE> &vec) const -> Vector3<TYPE> { return multiply(vec); }
 
-  auto operator*=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+  auto operator*=(const Vector3<TYPE> &vec) -> Vector3<TYPE> & {
     *this = multiply(vec);
     return *this;
   }
 
-  auto multiply(TValueType scalar) const -> Vector3<TValueType> {
-    return Vector3<TValueType>(this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar);
+  auto multiply(TYPE scalar) const -> Vector3<TYPE> {
+    return Vector3<TYPE>(this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar);
   }
 
-  auto operator*(TValueType scalar) const -> Vector3<TValueType> { return multiply(scalar); }
+  auto operator*(TYPE scalar) const -> Vector3<TYPE> { return multiply(scalar); }
 
-  auto operator*=(TValueType scalar) -> Vector3<TValueType> & {
+  auto operator*=(TYPE scalar) -> Vector3<TYPE> & {
     *this = multiply(scalar);
     return *this;
   }
 
-  auto divide(const Vector3<TValueType> &vec) -> Vector3<TValueType> {
+  auto divide(const Vector3<TYPE> &vec) -> Vector3<TYPE> {
     // clang-format off
     return {
-      this->data_[Vector<TValueType, 3>::IDX_X] /= vec.getX(),
-      this->data_[Vector<TValueType, 3>::IDX_Y] /= vec.getY(),
-      this->data_[Vector<TValueType, 3>::IDX_Z] /= vec.getZ()
+      this->data_[Vector<TYPE, 3>::IDX_X] /= vec.getX(),
+      this->data_[Vector<TYPE, 3>::IDX_Y] /= vec.getY(),
+      this->data_[Vector<TYPE, 3>::IDX_Z] /= vec.getZ()
     };
     // clang-format on
   }
 
-  auto operator/(const Vector3<TValueType> &vec) -> Vector3<TValueType> { return divide(vec); }
+  auto operator/(const Vector3<TYPE> &vec) -> Vector3<TYPE> { return divide(vec); }
 
-  auto operator/=(const Vector3<TValueType> &vec) -> Vector3<TValueType> & {
+  auto operator/=(const Vector3<TYPE> &vec) -> Vector3<TYPE> & {
     *this = divide(vec);
     return *this;
   }
 
-  auto divide(TValueType scalar) -> Vector3<TValueType> {
+  auto divide(TYPE scalar) -> Vector3<TYPE> {
     // clang-format off
     return {
-      this->data_[Vector<TValueType, 3>::IDX_X] /= scalar,
-      this->data_[Vector<TValueType, 3>::IDX_Y] /= scalar,
-      this->data_[Vector<TValueType, 3>::IDX_Z] /= scalar
+      this->data_[Vector<TYPE, 3>::IDX_X] /= scalar,
+      this->data_[Vector<TYPE, 3>::IDX_Y] /= scalar,
+      this->data_[Vector<TYPE, 3>::IDX_Z] /= scalar
     };
     // clang-format on
   }
 
-  auto operator/(TValueType scalar) -> Vector3<TValueType> { return divide(scalar); }
+  auto operator/(TYPE scalar) -> Vector3<TYPE> { return divide(scalar); }
 
-  auto operator/=(TValueType scalar) -> Vector3<TValueType> & {
+  auto operator/=(TYPE scalar) -> Vector3<TYPE> & {
     *this = divide(scalar);
     return *this;
   }
 
-  friend auto operator<<(std::ostream &out, const Vector3<TValueType> &vec) -> std::ostream & {
+  friend auto operator<<(std::ostream &out, const Vector3<TYPE> &vec) -> std::ostream & {
     return out << std::fixed << std::setprecision(3) << "{"
                << "x:" << vec.getX() << ", "
                << "y:" << vec.getY() << ", "

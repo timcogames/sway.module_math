@@ -12,25 +12,27 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType>
+template <typename TYPE>
 class Size;
 
 /**
  * @brief Шаблонный класс представления прямоугольной области.
  */
-template <typename TValueType>
-class Rect final : public Vector4<TValueType> {
+template <typename TYPE>
+class Rect final : public Vector4<TYPE> {
 public:
+#pragma region "Ctors/Dtor"
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa Rect(const std::array<TValueType, 4> &),
-   *     Rect(TValueType, TValueType, TValueType, TValueType)
-   *     Rect(TValueType, TValueType, const Size<TValueType> &)
+   * @sa Rect(const std::array<TYPE, 4> &),
+   *     Rect(TYPE, TYPE, TYPE, TYPE)
+   *     Rect(TYPE, TYPE, const Size<TYPE> &)
    */
   Rect()
-      : Vector4<TValueType>() {}
+      : Vector4<TYPE>() {}
 
   /**
    * @brief Конструктор класса.
@@ -38,11 +40,11 @@ public:
    *
    * @param[in] data Данные координат.
    * @sa Rect(),
-   *     Rect(TValueType, TValueType, TValueType, TValueType)
-   *     Rect(TValueType, TValueType, const Size<TValueType> &)
+   *     Rect(TYPE, TYPE, TYPE, TYPE)
+   *     Rect(TYPE, TYPE, const Size<TYPE> &)
    */
-  Rect(const std::array<TValueType, 4> &data)
-      : Vector4<TValueType>(data) {}
+  Rect(const std::array<TYPE, 4> &data)
+      : Vector4<TYPE>(data) {}
 
   /**
    * @brief Конструктор класса.
@@ -53,16 +55,18 @@ public:
    * @param[in] xw Значение правой координаты по оси X.
    * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
    * @sa Rect(),
-   *     Rect(const std::array<TValueType, 4> &),
-   *     Rect(TValueType, TValueType, const Size<TValueType> &)
+   *     Rect(const std::array<TYPE, 4> &),
+   *     Rect(TYPE, TYPE, const Size<TYPE> &)
    */
-  Rect(TValueType x, TValueType y, TValueType xw, TValueType yh)
-      : Vector4<TValueType>(x, y, xw, yh) {}
+  Rect(TYPE x, TYPE y, TYPE xw, TYPE yh)
+      : Vector4<TYPE>(x, y, xw, yh) {}
 
-  Rect(TValueType x, TValueType y, const Size<TValueType> &size)
-      : Vector4<TValueType>(x, y, x + size.getW(), y + size.getH()) {}
+  Rect(TYPE x, TYPE y, const Size<TYPE> &size)
+      : Vector4<TYPE>(x, y, x + size.getW(), y + size.getH()) {}
 
   virtual ~Rect() = default;
+
+#pragma endregion
 
   /**
    * @brief Устанавливает новые значения.
@@ -71,13 +75,11 @@ public:
    * @param[in] y Значение нижней/верхней (зависит от системы кординат) координаты по оси Y.
    * @param[in] xw Значение правой координаты по оси X.
    * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
-   * @sa set(const std::array<TValueType, 4> &)
+   * @sa set(const std::array<TYPE, 4> &)
    */
-  void set(TValueType x, TValueType y, TValueType xw, TValueType yh) { Vector4<TValueType>::set(x, y, xw, yh); }
+  void set(TYPE x, TYPE y, TYPE xw, TYPE yh) { Vector4<TYPE>::set(x, y, xw, yh); }
 
-  void set(TValueType x, TValueType y, const Size<TValueType> &size) {
-    this->set(x, y, x + size.getW(), y + size.getH());
-  }
+  void set(TYPE x, TYPE y, const Size<TYPE> &size) { this->set(x, y, x + size.getW(), y + size.getH()); }
 
   /**
    * @brief Устанавливает смещение прямоугольной области.
@@ -85,7 +87,7 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
-  auto offset(TValueType x, TValueType y) -> Rect<TValueType> {
+  auto offset(TYPE x, TYPE y) -> Rect<TYPE> {
     this->at(RectEdge::IDX_L) += x;
     this->at(RectEdge::IDX_T) += y;
     this->at(RectEdge::IDX_R) += x;
@@ -94,7 +96,7 @@ public:
     return *this;
   }
 
-  auto offset(Point<TValueType> pos) -> Rect<TValueType> {
+  auto offset(Point<TYPE> pos) -> Rect<TYPE> {
     this->offset(pos.getX(), pos.getY());
     return *this;
   }
@@ -109,9 +111,9 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TValueType x) { this->at(RectEdge::IDX_L) = x; }
+  void setL(TYPE x) { this->at(RectEdge::IDX_L) = x; }
 
-  auto getL() const -> TValueType { return this->at(RectEdge::IDX_L); }
+  auto getL() const -> TYPE { return this->at(RectEdge::IDX_L); }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
@@ -123,17 +125,17 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TValueType y) { this->at(RectEdge::IDX_T) = y; }
+  void setT(TYPE y) { this->at(RectEdge::IDX_T) = y; }
 
-  auto getT() const -> TValueType { return this->at(RectEdge::IDX_T); }
+  auto getT() const -> TYPE { return this->at(RectEdge::IDX_T); }
 
-  void setR(TValueType w) { this->at(RectEdge::IDX_R) = w; }
+  void setR(TYPE w) { this->at(RectEdge::IDX_R) = w; }
 
-  auto getR() const -> TValueType { return this->at(RectEdge::IDX_R); }
+  auto getR() const -> TYPE { return this->at(RectEdge::IDX_R); }
 
-  void setB(TValueType h) { this->at(RectEdge::IDX_B) = h; }
+  void setB(TYPE h) { this->at(RectEdge::IDX_B) = h; }
 
-  auto getB() const -> TValueType { return this->at(RectEdge::IDX_B); }
+  auto getB() const -> TYPE { return this->at(RectEdge::IDX_B); }
 
   /**
    * @brief Получает ширину прямоугольной области.
@@ -144,7 +146,7 @@ public:
    *     getB() const,
    *     getH() const
    */
-  auto getW() const -> TValueType {
+  auto getW() const -> TYPE {
     if ((this->at(RectEdge::IDX_L) >= this->at(RectEdge::IDX_R))) {
       return 0;
     }
@@ -161,7 +163,7 @@ public:
    *     getB() const,
    *     getW() const
    */
-  auto getH() const -> TValueType {
+  auto getH() const -> TYPE {
     if (this->at(RectEdge::IDX_T) >= this->at(RectEdge::IDX_B)) {
       return 0;
     }
@@ -170,18 +172,18 @@ public:
   }
 
   [[nodiscard]]
-  auto asPoint() const -> Point<TValueType> {
-    return Point<TValueType>(getL(), getT());
+  auto asPoint() const -> Point<TYPE> {
+    return Point<TYPE>(getL(), getT());
   }
 
   [[nodiscard]]
-  auto asSize() const -> Size<TValueType> {
-    return Size<TValueType>(getW(), getH());
+  auto asSize() const -> Size<TYPE> {
+    return Size<TYPE>(getW(), getH());
   }
 
   [[nodiscard]]
   auto empty() const -> bool {
-    return ((getW() <= (TValueType)0) || (getH() <= (TValueType)0));
+    return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0));
   }
 
   [[nodiscard]]
@@ -192,21 +194,21 @@ public:
     // clang-format on
   }
 
-  auto contains(const Point<TValueType> &point) const -> bool {
+  auto contains(const Point<TYPE> &point) const -> bool {
     return this->at(RectEdge::IDX_L) <= point.getX() && this->at(RectEdge::IDX_R) >= point.getX() &&
            this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
   }
 
-  void reduce(Margin<TValueType> margin) {
+  void reduce(Margin<TYPE> margin) {
     this->at(RectEdge::IDX_L) += margin.getL();
     this->at(RectEdge::IDX_T) += margin.getT();
     this->at(RectEdge::IDX_R) -= margin.getR();
     this->at(RectEdge::IDX_B) -= margin.getB();
   }
 
-  auto at(RectEdge edge) const -> const TValueType & { return this->data_[core::detail::toBase(edge)]; }
+  auto at(RectEdge edge) const -> const TYPE & { return this->data_[core::detail::toBase(edge)]; }
 
-  auto at(RectEdge edge) -> TValueType & { return this->data_[core::detail::toBase(edge)]; }
+  auto at(RectEdge edge) -> TYPE & { return this->data_[core::detail::toBase(edge)]; }
 };
 
 using rect4i_t = Rect<i32_t>;

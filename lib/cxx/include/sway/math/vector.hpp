@@ -9,38 +9,41 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType, std::size_t TElementCount>
+template <typename TYPE, std::size_t SIZE>
 class Vector {
-  static_assert(TElementCount != 0, "Vector cannot have size zero");
+  static_assert(SIZE != 0, "Vector cannot have size zero");
 
 public:
-  using Self_t = Vector<TValueType, TElementCount>;
-  using DataElementType_t = TValueType;
+  using Self_t = Vector<TYPE, SIZE>;
+  using DataElementType_t = TYPE;
 
   enum : u32_t { IDX_X = 0, IDX_Y, IDX_Z, IDX_W };
-  enum : std::size_t { DataElementCount_t = TElementCount, DataSize_t = sizeof(TValueType) * TElementCount };
+  enum : std::size_t { DataElementCount_t = SIZE, DataSize_t = sizeof(TYPE) * SIZE };
 
-  Vector() { data_.fill((TValueType)0); }
+#pragma region "Ctors/Dtor"
 
-  Vector(const std::array<TValueType, TElementCount> &arr) { set(arr); }
+  Vector() { data_.fill((TYPE)0); }
+
+  Vector(const std::array<TYPE, SIZE> &arr) { set(arr); }
 
   virtual ~Vector() = default;
 
-  void set(const std::array<TValueType, TElementCount> &arr) { data_ = arr; }
+#pragma endregion
+
+  void set(const std::array<TYPE, SIZE> &arr) { data_ = arr; }
 
   [[nodiscard]]
-  auto asArray() const -> std::array<TValueType, TElementCount> {
+  auto asArray() const -> std::array<TYPE, SIZE> {
     return data_;
   }
 
   [[nodiscard]]
-  auto asDataPtr() -> TValueType * {
+  auto asDataPtr() -> TYPE * {
     return data_.data();
   }
 
-  auto lerp(
-      const Vector<TValueType, TElementCount> &other, TValueType step) const -> Vector<TValueType, TElementCount> {
-    Vector<TValueType, TElementCount> result;
+  auto lerp(const Vector<TYPE, SIZE> &other, TYPE step) const -> Vector<TYPE, SIZE> {
+    Vector<TYPE, SIZE> result;
     for (auto i = 0; i != DataElementCount_t; ++i) {
       result[i] = util::lerp(data_[i], other[i], step);
     }
@@ -56,7 +59,7 @@ public:
    * @param[in] idx Позиция значения.
    * @sa operator[](std::size_t) const
    */
-  auto operator[](std::size_t idx) -> TValueType & {
+  auto operator[](std::size_t idx) -> TYPE & {
     assert(idx >= 0 && idx <= DataElementCount_t);
     return data_[idx];
   }
@@ -67,7 +70,7 @@ public:
    * @param[in] idx Позиция значения.
    * @sa operator[](std::size_t)
    */
-  auto operator[](std::size_t idx) const -> const TValueType {
+  auto operator[](std::size_t idx) const -> const TYPE {
     assert(idx >= 0 && idx <= DataElementCount_t);
     return data_[idx];
   }
@@ -80,10 +83,10 @@ public:
    * @brief Сравнивает два вектора на наличие равенства.
    *
    * @param[in] other Вектор с которым следует сравнить.
-   * @sa operator==(const Vector<TValueType, TElementCount> &) const,
-   *     operator!=(const Vector<TValueType, TElementCount> &) const
+   * @sa operator==(const Vector<TYPE, SIZE> &) const,
+   *     operator!=(const Vector<TYPE, SIZE> &) const
    */
-  auto equals(const Vector<TValueType, TElementCount> &other) const -> bool {
+  auto equals(const Vector<TYPE, SIZE> &other) const -> bool {
     for (auto i = 0; i < DataElementCount_t; ++i) {
       if (data_[i] != other[i]) {
         return false;
@@ -93,9 +96,9 @@ public:
     return true;
   }
 
-  auto operator==(const Vector<TValueType, TElementCount> &other) const -> bool { return equals(other); }
+  auto operator==(const Vector<TYPE, SIZE> &other) const -> bool { return equals(other); }
 
-  auto operator!=(const Vector<TValueType, TElementCount> &other) const -> bool { return !equals(other); }
+  auto operator!=(const Vector<TYPE, SIZE> &other) const -> bool { return !equals(other); }
 
 #pragma endregion
 
@@ -105,9 +108,9 @@ public:
    * @brief Делит указанный вектор на заданный вектор.
    *
    * @param[in] other Вектор на который следует разделит.
-   * @sa operator/(const Vector<TValueType, TElementCount> &) const
+   * @sa operator/(const Vector<TYPE, SIZE> &) const
    */
-  auto divide(const Vector<TValueType, TElementCount> &other) -> const Vector<TValueType, TElementCount> & {
+  auto divide(const Vector<TYPE, SIZE> &other) -> const Vector<TYPE, SIZE> & {
     for (auto i = 0; i < DataElementCount_t; ++i) {
       data_[i] /= other[i];
     }
@@ -115,17 +118,15 @@ public:
     return *this;
   }
 
-  auto operator/(const Vector<TValueType, TElementCount> &other) const -> const Vector<TValueType, TElementCount> {
-    return divide(other);
-  }
+  auto operator/(const Vector<TYPE, SIZE> &other) const -> const Vector<TYPE, SIZE> { return divide(other); }
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.
    *
    * @param[in] scalar Скаляр на который следует разделит.
-   * @sa operator/(TValueType) const
+   * @sa operator/(TYPE) const
    */
-  auto divide(TValueType scalar) -> const Vector<TValueType, TElementCount> & {
+  auto divide(TYPE scalar) -> const Vector<TYPE, SIZE> & {
     for (auto i = 0; i < DataElementCount_t; ++i) {
       data_[i] /= scalar;
     }
@@ -133,12 +134,12 @@ public:
     return *this;
   }
 
-  auto operator/(TValueType scalar) -> const Vector<TValueType, TElementCount> { return divide(scalar); }
+  auto operator/(TYPE scalar) -> const Vector<TYPE, SIZE> { return divide(scalar); }
 
 #pragma endregion
 
 protected:
-  std::array<TValueType, DataElementCount_t> data_;
+  std::array<TYPE, DataElementCount_t> data_;
 };
 
 NAMESPACE_END(math)

@@ -12,17 +12,19 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType>
+template <typename TYPE>
 class Vector4;
 
 /**
  * @brief Шаблонный класс представления матрицы.
  */
-template <typename TValueType>
-class Matrix4 : public Matrix<TValueType, 4, 4> {
+template <typename TYPE>
+class Matrix4 : public Matrix<TYPE, 4, 4> {
 public:
-  static auto transform(Matrix4<TValueType> lhs, const Vector4<TValueType> &rhs) -> Vector4<TValueType> {
-    TValueType x, y, z, w;
+#pragma region "Static methods"
+
+  static auto transform(Matrix4<TYPE> lhs, const Vector4<TYPE> &rhs) -> Vector4<TYPE> {
+    TYPE x, y, z, w;
     // clang-format off
     x = lhs.getValue(0, 0) * rhs.getX() +
         lhs.getValue(0, 1) * rhs.getY() +
@@ -45,8 +47,12 @@ public:
         lhs.getValue(3, 3) * rhs.getW();
     // clang-format on
 
-    return Vector4<TValueType>(x, y, z, w);
+    return Vector4<TYPE>(x, y, z, w);
   }
+
+#pragma endregion
+
+#pragma region "Ctors/Dtor"
 
   /**
    * @brief Конструктор класса.
@@ -54,17 +60,19 @@ public:
    */
   Matrix4() { makeIdentity(); }
 
-  Matrix4(const Matrix<TValueType, 4, 4> &mat)
-      : Matrix<TValueType, 4, 4>(mat) {}
+  Matrix4(const Matrix<TYPE, 4, 4> &mat)
+      : Matrix<TYPE, 4, 4>(mat) {}
+
+#pragma endregion
 
   /**
    * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
    *
    * @param[in] nbr Номер ряда.
    * @param[in] val Значения для установки.
-   * @sa setCol(u32_t, const Vector4<TValueType> &)
+   * @sa setCol(u32_t, const Vector4<TYPE> &)
    */
-  void setRow(u32_t nbr, const Vector4<TValueType> &val) {
+  void setRow(u32_t nbr, const Vector4<TYPE> &val) {
     this->setValue(nbr, 0, val.getX());
     this->setValue(nbr, 1, val.getY());
     this->setValue(nbr, 2, val.getZ());
@@ -78,8 +86,8 @@ public:
    * @return Значения элементов.
    * @sa getCol(u32_t) const
    */
-  auto getRow(u32_t nbr) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(
+  auto getRow(u32_t nbr) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(
         this->getValue(nbr, 0), this->getValue(nbr, 1), this->getValue(nbr, 2), this->getValue(nbr, 3));
   }
 
@@ -88,9 +96,9 @@ public:
    *
    * @param[in] nbr Номер колонки.
    * @param[in] val Значения для установки.
-   * @sa setRow(u32_t, const Vector4<TValueType> &)
+   * @sa setRow(u32_t, const Vector4<TYPE> &)
    */
-  void setCol(u32_t nbr, const Vector4<TValueType> &val) {
+  void setCol(u32_t nbr, const Vector4<TYPE> &val) {
     this->setValue(0, nbr, val.getX());
     this->setValue(1, nbr, val.getY());
     this->setValue(2, nbr, val.getZ());
@@ -104,26 +112,26 @@ public:
    * @return Значения элементов.
    * @sa getRow(u32_t) const
    */
-  auto getCol(u32_t nbr) const -> Vector4<TValueType> {
-    return Vector4<TValueType>(
+  auto getCol(u32_t nbr) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(
         this->getValue(0, nbr), this->getValue(1, nbr), this->getValue(2, nbr), this->getValue(3, nbr));
   }
 
   /**
    * @brief Приводит к единичной матрице.
    */
-  auto makeIdentity() -> Matrix4<TValueType> & {
-    this->setValue(0, 0, (TValueType)1);
-    this->setValue(1, 1, (TValueType)1);
-    this->setValue(2, 2, (TValueType)1);
-    this->setValue(3, 3, (TValueType)1);
+  auto makeIdentity() -> Matrix4<TYPE> & {
+    this->setValue(0, 0, (TYPE)1);
+    this->setValue(1, 1, (TYPE)1);
+    this->setValue(2, 2, (TYPE)1);
+    this->setValue(3, 3, (TYPE)1);
 
     return *this;
   }
 
-  auto inverse() const -> Matrix4<TValueType> {
-    Matrix4<TValueType> mat(*this);
-    Matrix4<TValueType> res;
+  auto inverse() const -> Matrix4<TYPE> {
+    Matrix4<TYPE> mat(*this);
+    Matrix4<TYPE> res;
 
     auto a00 = mat.getValue(0, 0);
     auto a01 = mat.getValue(0, 1);
@@ -195,15 +203,13 @@ public:
     return stream.str();
   }
 
-  auto operator*(const Matrix4<TValueType> &rhs) const -> const Matrix4<TValueType> {
-    Matrix4<TValueType> mat(*this);
+  auto operator*(const Matrix4<TYPE> &rhs) const -> const Matrix4<TYPE> {
+    Matrix4<TYPE> mat(*this);
     mat.template multiply<4>(rhs.asArray());
     return mat;
   }
 
-  friend auto operator<<(std::ostream &out, const Matrix4<TValueType> &mat) -> std::ostream & {
-    return out << mat.toStr();
-  }
+  friend auto operator<<(std::ostream &out, const Matrix4<TYPE> &mat) -> std::ostream & { return out << mat.toStr(); }
 };
 
 using mat4i_t = Matrix4<i32_t>;

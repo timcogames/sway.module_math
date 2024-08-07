@@ -20,6 +20,8 @@ struct ProjectionDescription {
 
 class Projection final {
 public:
+#pragma region "Ctors/Dtor"
+
   Projection() = default;
 
   /**
@@ -28,6 +30,8 @@ public:
    */
   Projection(const ProjectionDescription &desc)
       : desc_(desc) {}
+
+#pragma endregion
 
   void setRect(const rect4f_t &rect) { desc_.rect = rect; }
 

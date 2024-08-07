@@ -7,35 +7,37 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType>
+template <typename TYPE>
 class Rect;
 
 /**
  * @brief Шаблонный класс представления размера.
  */
-template <typename TValueType>
-class Size : public Vector<TValueType, 2> {
+template <typename TYPE>
+class Size : public Vector<TYPE, 2> {
 public:
   enum : u32_t { IDX_WDT = 0, IDX_HGT };
+
+#pragma region "Ctors/Dtor"
 
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми размерами.
    *
-   * @sa Size(TValueType),
-   *     Size(TValueType, TValueType)
+   * @sa Size(TYPE),
+   *     Size(TYPE, TYPE)
    */
   Size()
-      : Vector<TValueType, Size<TValueType>::DataElementCount_t>() {}
+      : Vector<TYPE, Size<TYPE>::DataElementCount_t>() {}
 
-  Size(const Vector<TValueType, Size<TValueType>::DataElementCount_t> &copy) {
-    for (auto i = 0; i != Size<TValueType>::DataElementCount_t; ++i) {
-      this->data_[i] = (TValueType)copy[i];
+  Size(const Vector<TYPE, Size<TYPE>::DataElementCount_t> &copy) {
+    for (auto i = 0; i != Size<TYPE>::DataElementCount_t; ++i) {
+      this->data_[i] = (TYPE)copy[i];
     }
   }
 
-  Size(const std::array<TValueType, Size<TValueType>::DataElementCount_t> &arr)
-      : Vector<TValueType, Size<TValueType>::DataElementCount_t>(arr) {}
+  Size(const std::array<TYPE, Size<TYPE>::DataElementCount_t> &arr)
+      : Vector<TYPE, Size<TYPE>::DataElementCount_t>(arr) {}
 
   /**
    * @brief Конструктор класса.
@@ -43,9 +45,9 @@ public:
    *
    * @param[in] scalar Значение для ширины и высоты.
    * @sa Size(),
-   *     Size(TValueType, TValueType)
+   *     Size(TYPE, TYPE)
    */
-  Size(TValueType scalar) { set(scalar, scalar); }
+  Size(TYPE scalar) { set(scalar, scalar); }
 
   /**
    * @brief Конструктор класса.
@@ -54,9 +56,13 @@ public:
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
    * @sa Size(),
-   *     Size(TValueType)
+   *     Size(TYPE)
    */
-  Size(TValueType w, TValueType h) { set(w, h); }
+  Size(TYPE w, TYPE h) { set(w, h); }
+
+  virtual ~Size() = default;
+
+#pragma endregion
 
   /**
    * @brief Устанавливает новые значения.
@@ -64,7 +70,7 @@ public:
    * @param[in] w Значение ширины.
    * @param[in] h Значение высоты.
    */
-  void set(TValueType w, TValueType h) {
+  void set(TYPE w, TYPE h) {
     this->data_[IDX_WDT] = w;
     this->data_[IDX_HGT] = h;
   }
@@ -73,16 +79,16 @@ public:
    * @brief Устанавливает значение ширины.
    *
    * @param[in] w Новое значение ширины.
-   * @sa setH(TValueType)
+   * @sa setH(TYPE)
    */
-  void setW(TValueType w) { this->data_[IDX_WDT] = w; }
+  void setW(TYPE w) { this->data_[IDX_WDT] = w; }
 
   /**
    * @brief Получает значение ширины.
    * @sa getH()
    */
   [[nodiscard]]
-  auto getW() const -> TValueType {
+  auto getW() const -> TYPE {
     return this->data_[IDX_WDT];
   }
 
@@ -90,9 +96,9 @@ public:
    * @brief Устанавливает значение высоты.
    *
    * @param[in] h Новое значение высоты.
-   * @sa setW(TValueType)
+   * @sa setW(TYPE)
    */
-  void setH(TValueType h) { this->data_[IDX_HGT] = h; }
+  void setH(TYPE h) { this->data_[IDX_HGT] = h; }
 
   /**
    * @brief Получает значение высоты.
@@ -100,25 +106,25 @@ public:
    * @sa getW()
    */
   [[nodiscard]]
-  auto getH() const -> TValueType {
+  auto getH() const -> TYPE {
     return this->data_[IDX_HGT];
   }
 
   [[nodiscard]]
-  auto area() const -> TValueType {
+  auto area() const -> TYPE {
     return getW() * getH();
   }
 
   /**
-   * @brief Преобразовывает в Rect<TValueType> класс.
+   * @brief Преобразовывает в Rect<TYPE> класс.
    */
   [[nodiscard]]
-  auto asRect() const -> Rect<TValueType> {
-    return Rect<TValueType>((TValueType)0, (TValueType)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
+  auto asRect() const -> Rect<TYPE> {
+    return Rect<TYPE>((TYPE)0, (TYPE)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
   }
 
-  auto operator*(const TValueType &rvalue) const -> Size<TValueType> {
-    return Size<TValueType>(this->data_[IDX_WDT] * rvalue, this->data_[IDX_HGT] * rvalue);
+  auto operator*(const TYPE &rvalue) const -> Size<TYPE> {
+    return Size<TYPE>(this->data_[IDX_WDT] * rvalue, this->data_[IDX_HGT] * rvalue);
   }
 };
 

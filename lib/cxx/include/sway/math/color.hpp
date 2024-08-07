@@ -7,25 +7,27 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType>
+template <typename TYPE>
 class Vector4;
 
 /**
  * @brief Шаблонный класс представления цвета.
  */
-template <typename TValueType>
+template <typename TYPE>
 class Color final {
 public:
   enum : u32_t { IDX_R = 0, IDX_G, IDX_B, IDX_A };
 
+#pragma region "Ctors/Dtor"
+
   /**
    * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
    *
-   * @sa Color(TValueType, TValueType, TValueType, TValueType)
+   * @sa Color(TYPE, TYPE, TYPE, TYPE)
    */
   Color() {
-    r_ = g_ = b_ = (TValueType)0;
-    a_ = (TValueType)1;
+    r_ = g_ = b_ = (TYPE)0;
+    a_ = (TYPE)1;
   }
 
   /**
@@ -37,7 +39,9 @@ public:
    * @param[in] a Значение альфа-канала.
    * @sa Color()
    */
-  Color(TValueType r, TValueType g, TValueType b, TValueType a = (TValueType)1) { set(r, g, b, a); }
+  Color(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) { set(r, g, b, a); }
+
+#pragma endregion
 
   /**
    * @brief Устанавливает новые значения.
@@ -47,7 +51,7 @@ public:
    * @param[in] b Значение канала синего цвета.
    * @param[in] a Значение альфа-канала.
    */
-  void set(TValueType r, TValueType g, TValueType b, TValueType a = (TValueType)1) {
+  void set(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) {
     r_ = r;
     g_ = g;
     b_ = b;
@@ -62,7 +66,7 @@ public:
    *     getA() const
    */
   [[nodiscard]]
-  auto getR() const -> TValueType {
+  auto getR() const -> TYPE {
     return r_;
   }
 
@@ -73,7 +77,7 @@ public:
    *     getA() const
    */
   [[nodiscard]]
-  auto getG() const -> TValueType {
+  auto getG() const -> TYPE {
     return g_;
   }
 
@@ -85,7 +89,7 @@ public:
    *     getA() const
    */
   [[nodiscard]]
-  auto getB() const -> TValueType {
+  auto getB() const -> TYPE {
     return b_;
   }
 
@@ -97,33 +101,32 @@ public:
    *     getB() const
    */
   [[nodiscard]]
-  auto getA() const -> TValueType {
+  auto getA() const -> TYPE {
     return a_;
   }
 
   /**
-   * @brief Преобразовывает в Vector4<TValueType> класс.
+   * @brief Преобразовывает в Vector4<TYPE> класс.
    */
   [[nodiscard]]
-  auto asVec4() const -> Vector4<TValueType> {
-    return Vector4<TValueType>(r_, g_, b_, a_);
+  auto asVec4() const -> Vector4<TYPE> {
+    return Vector4<TYPE>(r_, g_, b_, a_);
   }
 
-  auto add(const Color<TValueType> &vec) -> Color<TValueType> {
-    return Color<TValueType>(
-        this->r_ + vec.getR(), this->g_ + vec.getG(), this->b_ + vec.getB(), this->a_ + vec.getA());
+  auto add(const Color<TYPE> &vec) -> Color<TYPE> {
+    return Color<TYPE>(this->r_ + vec.getR(), this->g_ + vec.getG(), this->b_ + vec.getB(), this->a_ + vec.getA());
   }
 
-  auto operator+(const Color<TValueType> &vec) -> Color<TValueType> { return add(vec); }
+  auto operator+(const Color<TYPE> &vec) -> Color<TYPE> { return add(vec); }
 
-  auto multiply(TValueType scalar) const -> Color<TValueType> {
-    return Color<TValueType>(this->r_ * scalar, this->g_ * scalar, this->b_ * scalar, this->a_ * scalar);
+  auto multiply(TYPE scalar) const -> Color<TYPE> {
+    return Color<TYPE>(this->r_ * scalar, this->g_ * scalar, this->b_ * scalar, this->a_ * scalar);
   }
 
-  auto operator*(TValueType scalar) const -> Color<TValueType> { return multiply(scalar); }
+  auto operator*(TYPE scalar) const -> Color<TYPE> { return multiply(scalar); }
 
 private:
-  TValueType r_, g_, b_, a_;
+  TYPE r_, g_, b_, a_;
 };
 
 using col4i_t = Color<i32_t>;

@@ -13,24 +13,24 @@ NAMESPACE_BEGIN(math)
 
 class MatrixStack {
 public:
-  template <MatrixType Type>
+  template <MatrixType TYPE>
   auto getStack() -> std::stack<mat4f_t> & {
-    return std::get<core::detail::toBase(Type)>(matrices_);
+    return std::get<core::detail::toBase(TYPE)>(matrices_);
   }
 
-  template <MatrixType Type>
+  template <MatrixType TYPE>
   void push(const mat4f_t &mat) {
-    getStack<Type>().push(mat);
+    getStack<TYPE>().push(mat);
   }
 
-  template <MatrixType Type>
+  template <MatrixType TYPE>
   void pop() {
-    getStack<Type>().pop();
+    getStack<TYPE>().pop();
   }
 
-  template <MatrixType Type>
+  template <MatrixType TYPE>
   auto top() -> const mat4f_t & {
-    return getStack<Type>().top();
+    return getStack<TYPE>().top();
   }
 
 private:

@@ -39,24 +39,24 @@ inline auto powerOf2(int val) -> int {
   return result;
 }
 
-template <typename TValueType>
-inline auto lerp(TValueType from, TValueType to, TValueType step) -> TValueType {
+template <typename TYPE>
+inline auto lerp(TYPE from, TYPE to, TYPE step) -> TYPE {
   return from + step * (to - from);
 }
 
-template <typename TValueType>
-inline auto clamp(const TValueType &val, const TValueType &lower, const TValueType &upper) -> TValueType {
+template <typename TYPE>
+inline auto clamp(const TYPE &val, const TYPE &lower, const TYPE &upper) -> TYPE {
   return std::max(lower, std::min(val, upper));
 }
 
-template <typename TValueType>
-inline auto abs(const TValueType &val) -> TValueType {
-  if constexpr (std::is_integral_v<TValueType>) {
+template <typename TYPE>
+inline auto abs(const TYPE &val) -> TYPE {
+  if constexpr (std::is_integral_v<TYPE>) {
     return std::abs(val);
-  } else if constexpr (std::is_floating_point_v<TValueType>) {
+  } else if constexpr (std::is_floating_point_v<TYPE>) {
     return std::fabsf(val);
   } else /* double */ {
-    assert(sizeof(TValueType) == 8);
+    assert(sizeof(TYPE) == 8);
     return std::fabs(val);
   }
 }

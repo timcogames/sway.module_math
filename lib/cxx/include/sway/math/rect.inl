@@ -6,8 +6,8 @@
 
 NAMESPACE_BEGIN(std)
 
-template <typename TValueType>
-inline auto operator<<(ostream &str, const sway::math::Rect<TValueType> &rect) -> ostream & {
+template <typename TYPE>
+inline auto operator<<(ostream &str, const sway::math::Rect<TYPE> &rect) -> ostream & {
   // clang-format off
   return str << fixed << setprecision(3) << "{" 
              << "l:" << rect.getL() << ", " << "t:" << rect.getT() << ", "
@@ -16,8 +16,8 @@ inline auto operator<<(ostream &str, const sway::math::Rect<TValueType> &rect) -
   // clang-format on
 }
 
-template <typename TValueType>
-inline auto to_string(const sway::math::Rect<TValueType> &rect) -> string {
+template <typename TYPE>
+inline auto to_string(const sway::math::Rect<TYPE> &rect) -> string {
   stringstream stream;
   stream << rect;
   return stream.str();

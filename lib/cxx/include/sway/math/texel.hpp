@@ -12,17 +12,17 @@ NAMESPACE_BEGIN(math)
 
 struct Texel {
   // clang-format off
-  template <typename TReturnType>
-  static auto convFromTexCoords(const sizef_t &coords) -> TReturnType {
-    static_assert(std::is_base_of<sizef_t, TReturnType>::value ||
-                  std::is_base_of<vec2f_t, TReturnType>::value, "TReturnType must inherit from Vector2<TValueType>");
-    return TReturnType(1.0F / coords.getW(), 1.0F / coords.getH());
+  template <typename RETURN_TYPE>
+  static auto convFromTexCoords(const sizef_t &coords) -> RETURN_TYPE {
+    static_assert(std::is_base_of<sizef_t, RETURN_TYPE>::value ||
+                  std::is_base_of<vec2f_t, RETURN_TYPE>::value, "RETURN_TYPE must inherit from Vector2<TYPE>");
+    return RETURN_TYPE(1.0F / coords.getW(), 1.0F / coords.getH());
   }
   // clang-format on
 
-  template <typename TReturnType>
-  static auto convFromTexCoords(f32_t wdt, f32_t hgt) -> TReturnType {
-    return Texel::convFromTexCoords<TReturnType>(sizef_t(wdt, hgt));
+  template <typename RETURN_TYPE>
+  static auto convFromTexCoords(f32_t wdt, f32_t hgt) -> RETURN_TYPE {
+    return Texel::convFromTexCoords<RETURN_TYPE>(sizef_t(wdt, hgt));
   }
 };
 

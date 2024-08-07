@@ -10,17 +10,19 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления точки.
  */
-template <typename TValueType>
+template <typename TYPE>
 class Point {
 public:
+#pragma region "Ctors/Dtor"
+
   /**
    * @brief Конструктор класса.
    *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
-   * @sa Point(TValueType),
-   *     Point(TValueType, TValueType)
+   * @sa Point(TYPE),
+   *     Point(TYPE, TYPE)
    */
-  Point() { set((TValueType)0, (TValueType)0); }
+  Point() { set((TYPE)0, (TYPE)0); }
 
   /**
    * @brief Конструктор класса.
@@ -28,9 +30,9 @@ public:
    *
    * @param[in] scalar Значение для координат по оси X и Y.
    * @sa Point(),
-   *     Point(TValueType, TValueType)
+   *     Point(TYPE, TYPE)
    */
-  Point(TValueType scalar) { set(scalar, scalar); }
+  Point(TYPE scalar) { set(scalar, scalar); }
 
   /**
    * @brief Конструктор класса.
@@ -39,9 +41,11 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    * @sa Point(),
-   *     Point(TValueType)
+   *     Point(TYPE)
    */
-  Point(TValueType x, TValueType y) { set(x, y); }
+  Point(TYPE x, TYPE y) { set(x, y); }
+
+#pragma endregion
 
   /**
    * @brief Устанавливает новые значения.
@@ -49,7 +53,7 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
-  void set(TValueType x, TValueType y) {
+  void set(TYPE x, TYPE y) {
     x_ = x;
     y_ = y;
   }
@@ -60,7 +64,7 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @sa setY() const
    */
-  void setX(TValueType x) { x_ = x; }
+  void setX(TYPE x) { x_ = x; }
 
   /**
    * @brief Получает значение координаты по оси X.
@@ -68,7 +72,7 @@ public:
    * @sa getY() const
    */
   [[nodiscard]]
-  auto getX() const -> TValueType {
+  auto getX() const -> TYPE {
     return x_;
   }
 
@@ -78,7 +82,7 @@ public:
    * @param[in] y Значение координаты по оси Y.
    * @sa setX() const
    */
-  void setY(TValueType y) { y_ = y; }
+  void setY(TYPE y) { y_ = y; }
 
   /**
    * @brief Получает значение координаты по оси Y.
@@ -86,37 +90,37 @@ public:
    * @sa getX() const
    */
   [[nodiscard]]
-  auto getY() const -> TValueType {
+  auto getY() const -> TYPE {
     return y_;
   }
 
   [[nodiscard]]
-  auto asVec() const -> Vector2<TValueType> {
-    return Vector2<TValueType>(x_, y_);
+  auto asVec() const -> Vector2<TYPE> {
+    return Vector2<TYPE>(x_, y_);
   }
 
   /**
    * @brief Оператор равенства.
    */
-  template <typename TOther>
-  auto operator==(const Point<TOther> &compare) const -> bool {
+  template <typename OTHER>
+  auto operator==(const Point<OTHER> &compare) const -> bool {
     return x_ == compare.getX() && y_ == compare.getY();
   }
 
   /**
    * @brief Оператор неравенства.
    */
-  template <typename TOther>
-  auto operator!=(const Point<TOther> &compare) const -> bool {
+  template <typename OTHER>
+  auto operator!=(const Point<OTHER> &compare) const -> bool {
     return !operator==(compare);
   }
 
-  friend auto operator<<(std::ostream &out, const Point<TValueType> &pt2) -> std::ostream & {
+  friend auto operator<<(std::ostream &out, const Point<TYPE> &pt2) -> std::ostream & {
     return out << std::fixed << std::setprecision(3) << "{x:" << pt2.getX() << ", y:" << pt2.getY() << "}";
   }
 
 protected:
-  TValueType x_, y_;
+  TYPE x_, y_;
 };
 
 using point2i_t = Point<i32_t>;

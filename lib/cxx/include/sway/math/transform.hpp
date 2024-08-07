@@ -13,18 +13,17 @@ NAMESPACE_BEGIN(math)
 /**
  * @brief Шаблонный класс представления матрицы.
  */
-template <typename TValueType>
+template <typename TYPE>
 class Transform {
 public:
-  static auto translate(
-      Matrix4<TValueType> const &mat, TValueType x, TValueType y, TValueType z) -> Matrix4<TValueType> {
-    Matrix4<TValueType> result(mat);
+  static auto translate(Matrix4<TYPE> const &mat, TYPE x, TYPE y, TYPE z) -> Matrix4<TYPE> {
+    Matrix4<TYPE> result(mat);
     result.setCol(3, mat.getCol(0) * x + mat.getCol(1) * y + mat.getCol(2) * z + mat.getCol(3));
     return result;
   }
 
-  static auto scale(Matrix4<TValueType> const &mat, TValueType x, TValueType y, TValueType z) -> Matrix4<TValueType> {
-    Matrix4<TValueType> result(mat);
+  static auto scale(Matrix4<TYPE> const &mat, TYPE x, TYPE y, TYPE z) -> Matrix4<TYPE> {
+    Matrix4<TYPE> result(mat);
     result.setCol(0, mat.getCol(0) * x);
     result.setCol(1, mat.getCol(1) * y);
     result.setCol(2, mat.getCol(2) * z);

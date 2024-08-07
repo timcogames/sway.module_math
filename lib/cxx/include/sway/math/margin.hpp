@@ -7,41 +7,45 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType>
+template <typename TYPE>
 class Margin {
 public:
+#pragma region "Ctors/Dtor"
+
   Margin()
       : Margin(0, 0, 0, 0) {}
 
-  Margin(TValueType l, TValueType t, TValueType r, TValueType b) {
+  Margin(TYPE l, TYPE t, TYPE r, TYPE b) {
     data_[core::detail::toBase(RectEdge::IDX_L)] = l;
     data_[core::detail::toBase(RectEdge::IDX_T)] = t;
     data_[core::detail::toBase(RectEdge::IDX_R)] = r;
     data_[core::detail::toBase(RectEdge::IDX_B)] = b;
   }
 
-  Margin(TValueType val)
+  Margin(TYPE val)
       : Margin(val, val, val, val) {}
 
-  Margin(TValueType x, TValueType y)
+  Margin(TYPE x, TYPE y)
       : Margin(x, y, x, y) {}
 
-  auto at(RectEdge edge) const -> TValueType { return data_[core::detail::toBase(edge)]; }
+#pragma endregion
 
-  auto getL() const -> TValueType { return this->at(RectEdge::IDX_L); }
+  auto at(RectEdge edge) const -> TYPE { return data_[core::detail::toBase(edge)]; }
 
-  auto getT() const -> TValueType { return this->at(RectEdge::IDX_T); }
+  auto getL() const -> TYPE { return this->at(RectEdge::IDX_L); }
 
-  auto getR() const -> TValueType { return this->at(RectEdge::IDX_R); }
+  auto getT() const -> TYPE { return this->at(RectEdge::IDX_T); }
 
-  auto getB() const -> TValueType { return this->at(RectEdge::IDX_B); }
+  auto getR() const -> TYPE { return this->at(RectEdge::IDX_R); }
 
-  auto getLR() const -> TValueType { return this->getL() + this->getR(); }
+  auto getB() const -> TYPE { return this->at(RectEdge::IDX_B); }
 
-  auto getTB() const -> TValueType { return this->getT() + this->getB(); }
+  auto getLR() const -> TYPE { return this->getL() + this->getR(); }
+
+  auto getTB() const -> TYPE { return this->getT() + this->getB(); }
 
 private:
-  std::array<TValueType, 4> data_;
+  std::array<TYPE, 4> data_;
 };
 
 NAMESPACE_END(math)

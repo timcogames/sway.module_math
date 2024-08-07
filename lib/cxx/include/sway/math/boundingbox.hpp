@@ -7,12 +7,12 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-template <typename TValueType, std::size_t TSize>
+template <typename TYPE, std::size_t SIZE>
 struct BoundingBox {
-  math::Vector<TValueType, TSize> min;
-  math::Vector<TValueType, TSize> max;
+  math::Vector<TYPE, SIZE> min;
+  math::Vector<TYPE, SIZE> max;
 
-  BoundingBox(math::Vector<TValueType, TSize> min, math::Vector<TValueType, TSize> max) {
+  BoundingBox(math::Vector<TYPE, SIZE> min, math::Vector<TYPE, SIZE> max) {
     this->min = min;
     this->max = max;
   }
