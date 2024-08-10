@@ -1,3 +1,4 @@
+#include <sway/core.hpp>
 #include <sway/math.hpp>
 
 #include <gtest/gtest.h>
@@ -12,7 +13,7 @@ using namespace sway;
 
 TEST(Transform, translate) {
   math::mat4i_t matModelTransform;
-  matModelTransform = math::Transform<int>::translate(matModelTransform, 8, 2, 5);
+  matModelTransform = math::xform3i_t::translate(matModelTransform, 8, 2, 5);
 
   EXPECT_EQ(matModelTransform.getValue(0, 0), 1);
   EXPECT_EQ(matModelTransform.getValue(0, 1), 0);
@@ -34,10 +35,16 @@ TEST(Transform, translate) {
 
 TEST(Transform, scale) {
   math::mat4f_t matModelTransformSTD;
-  matModelTransformSTD = math::Transform<f32_t>::scale(matModelTransformSTD, 2, 2, 1);
+  matModelTransformSTD = math::xform3f_t::scale(matModelTransformSTD, 2, 2, 1);
 
   auto matModelTransformGLM = glm::mat4(1);
   matModelTransformGLM = glm::scale(matModelTransformGLM, glm::vec3(2, 2, 1));
 
   EXPECT_STREQ(matModelTransformSTD.toStr().c_str(), glm::to_string(matModelTransformGLM).c_str());
+}
+
+TEST(Transform, te) {
+  math::Transform<core::container::Node, f32_t> xform;
+  math::mat4f_t identity;
+  EXPECT_STREQ(xform.getModelMatrix().toStr().c_str(), identity.toStr().c_str());
 }

@@ -34,7 +34,7 @@ file(GLOB MODULE_MATH_TEST_SOURCES "${MODULE_MATH_ROOT_DIR}/lib/cxx/tests/*/*.sp
 #--------------------------------------------------------------------------------
 
 add_executable(${MODULE_MATH_TEST_TARGET} ${MODULE_MATH_TEST_SOURCES} "${GTEST_SRC_DIR}/gtest_main.cc")
-target_link_libraries(${MODULE_MATH_TEST_TARGET} pthread ${GLOB_GTEST_LIB_DIR}/libgtest.a)
+target_link_libraries(${MODULE_MATH_TEST_TARGET} module_core_obj pthread ${GLOB_GTEST_LIB_DIR}/libgtest.a)
 enable_cxx17(${MODULE_MATH_TEST_TARGET})
 
 add_test(NAME ${MODULE_MATH_TEST_TARGET} COMMAND ${MODULE_MATH_TEST_TARGET})

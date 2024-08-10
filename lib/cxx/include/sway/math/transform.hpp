@@ -5,17 +5,14 @@
 #include <sway/math/matrix4.hpp>
 #include <sway/math/vector4.hpp>
 
-#include <array>
-
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-/**
- * @brief Шаблонный класс представления матрицы.
- */
-template <typename TYPE>
-class Transform {
+template <class NODE, typename TYPE>
+class Transform : public NODE {
 public:
+#pragma region "Static methods"
+
   static auto translate(Matrix4<TYPE> const &mat, TYPE x, TYPE y, TYPE z) -> Matrix4<TYPE> {
     Matrix4<TYPE> result(mat);
     result.setCol(3, mat.getCol(0) * x + mat.getCol(1) * y + mat.getCol(2) * z + mat.getCol(3));
@@ -29,9 +26,47 @@ public:
     result.setCol(2, mat.getCol(2) * z);
     return result;
   }
+
+#pragma endregion
+
+#pragma region "Ctors/Dtor"
+
+  Transform();
+
+  virtual ~Transform() = default;
+
+#pragma endregion
+
+  auto getModelMatrix() -> Matrix4<TYPE>;
+
+  void setPosition(TYPE x, TYPE y, TYPE z);
+
+  void setPosition(const Vector3<TYPE> &pos);
+
+  auto getPosition() -> Vector3<TYPE>;
+
+  void setTranslate(TYPE x, TYPE y, TYPE z);
+
+  void setTranslate(const Vector3<TYPE> &pos);
+
+  void setScale(TYPE x, TYPE y, TYPE z);
+
+private:
+  [[nodiscard]]
+  auto getInternalMatrix_() const -> Matrix4<TYPE>;
+
+  Vector3<TYPE> position_;
+  Vector3<TYPE> scale_;
 };
+
+struct Dummy {};
+using xform3i_t = Transform<Dummy, i32_t>;
+using xform3f_t = Transform<Dummy, f32_t>;
+using xform3d_t = Transform<Dummy, f64_t>;
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
+
+#include <sway/math/transform.inl>
 
 #endif  // SWAY_MATH_TRANSFORM_HPP

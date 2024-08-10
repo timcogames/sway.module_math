@@ -19,6 +19,7 @@ set(MODULE_MATH_BIN_DIR "${MODULE_MATH_ROOT_DIR}/bin")
 
 include("${MODULE_MATH_CMAKE_DIR}/options.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/set_output_dir.cmake")
+include("${MODULE_MATH_CMAKE_DIR}/add_submodule.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/project_metadata.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/modules/create_object_library.cmake")
 include("${MODULE_MATH_CMAKE_DIR}/enable_cxx17.cmake")
@@ -38,6 +39,12 @@ option(MODULE_MATH_ENABLE_TESTS "Enable test builds" OFF)
 
 project_metadata("math" 0.5.2)
 project(${MODULE_MATH_PROJ_NAME} VERSION ${MODULE_MATH_VERSION} LANGUAGES CXX)
+
+#---------------------------------------------------------------------------------
+# Submodules
+#---------------------------------------------------------------------------------
+
+add_submodule("module_core" submodules/sway.module_core)
 
 #---------------------------------------------------------------------------------
 # Coverage
