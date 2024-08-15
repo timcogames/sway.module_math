@@ -13,19 +13,14 @@ class Area {
 public:
 #pragma region "Ctors/Dtor"
 
-  Area(AreaType type)
+  Area(AreaType type, TYPE val = (TYPE)0)
       : type_(type) {
-    edges_.fill((TYPE)0);
-  }
-
-  Area(AreaType type, TYPE val)
-      : type_(type) {
-    set(val, val, val, val);
+    set(val);
   }
 
   Area(AreaType type, TYPE hsize, TYPE vsize)
       : type_(type) {
-    set(hsize, vsize, hsize, vsize);
+    set(hsize, vsize);
   }
 
   Area(AreaType type, TYPE left, TYPE top, TYPE right, TYPE bottom)
@@ -34,6 +29,24 @@ public:
   }
 
 #pragma endregion
+
+  void set(TYPE val) {
+    // clang-format off
+    edges_[core::detail::toBase(RectEdge::IDX_L)] = 
+    edges_[core::detail::toBase(RectEdge::IDX_R)] =
+    edges_[core::detail::toBase(RectEdge::IDX_T)] = 
+    edges_[core::detail::toBase(RectEdge::IDX_B)] = val;
+    // clang-format on
+  }
+
+  void set(TYPE hsize, TYPE vsize) {
+    // clang-format off
+    edges_[core::detail::toBase(RectEdge::IDX_L)] = 
+    edges_[core::detail::toBase(RectEdge::IDX_R)] = hsize;
+    edges_[core::detail::toBase(RectEdge::IDX_T)] = 
+    edges_[core::detail::toBase(RectEdge::IDX_B)] = vsize;
+    // clang-format on
+  }
 
   void set(TYPE left, TYPE top, TYPE right, TYPE bottom) {
     edges_[core::detail::toBase(RectEdge::IDX_L)] = left;

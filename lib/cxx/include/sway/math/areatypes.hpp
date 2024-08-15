@@ -6,7 +6,14 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-enum class AreaType : u32_t { NONE = 0, MGN, PAD, BRD, CNT, Latest };
+enum class AreaType : u32_t {
+  NONE = 0,
+  MGN,  // Margin
+  PAD,  // Padding
+  BRD,  // Border
+  CNT,  // Content
+  Latest
+};
 
 #define NUM_OF_AREAS (core::detail::toBase(AreaType::Latest) - 1)
 
