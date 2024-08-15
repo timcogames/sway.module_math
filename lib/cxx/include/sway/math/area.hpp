@@ -60,7 +60,7 @@ public:
   auto at(RectEdge edge) -> TYPE & { return edges_[core::detail::toBase(edge)]; }
 
   [[nodiscard]]
-  auto getType() const -> AreaType {
+  auto type() const -> AreaType {
     return type_;
   }
 
