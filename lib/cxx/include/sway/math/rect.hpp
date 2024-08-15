@@ -2,7 +2,7 @@
 #define SWAY_MATH_RECT_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/margin.hpp>
+#include <sway/math/area.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
@@ -199,11 +199,11 @@ public:
            this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
   }
 
-  void reduce(Margin<TYPE> margin) {
-    this->at(RectEdge::IDX_L) += margin.getL();
-    this->at(RectEdge::IDX_T) += margin.getT();
-    this->at(RectEdge::IDX_R) -= margin.getR();
-    this->at(RectEdge::IDX_B) -= margin.getB();
+  void reduce(Area<TYPE> area) {
+    this->at(RectEdge::IDX_L) += area.getL();
+    this->at(RectEdge::IDX_T) += area.getT();
+    this->at(RectEdge::IDX_R) -= area.getR();
+    this->at(RectEdge::IDX_B) -= area.getB();
   }
 
   auto at(RectEdge edge) const -> const TYPE & { return this->data_[core::detail::toBase(edge)]; }
