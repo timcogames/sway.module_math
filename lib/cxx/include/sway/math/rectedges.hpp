@@ -8,7 +8,7 @@ NAMESPACE_BEGIN(math)
 
 enum class RectEdge : i32_t { NONE = GLOB_IDX_INVALID, IDX_L = GLOB_IDX_INITIAL, IDX_T, IDX_R, IDX_B, Latest };
 
-#define NUM_OF_EDGES (core::detail::toBase(RectEdge::Latest) - 1)
+#define NUM_OF_EDGES (core::detail::toBase(RectEdge::Latest))
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)

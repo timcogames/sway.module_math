@@ -6,9 +6,9 @@
 NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
-enum class MatrixType : u32_t { NONE = 0, VIEW, PROJ, TFRM, Latest };
+enum class MatrixType : i32_t { NONE = GLOB_IDX_INVALID, VIEW = GLOB_IDX_INITIAL, PROJ, TFRM, Latest };
 
-#define NUM_OF_MATRICES (core::detail::toBase(MatrixType::Latest) - 1)
+#define NUM_OF_MATRICES (core::detail::toBase(MatrixType::Latest))
 
 NAMESPACE_END(math)
 NAMESPACE_END(sway)
