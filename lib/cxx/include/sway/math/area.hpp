@@ -9,50 +9,35 @@ NAMESPACE_BEGIN(sway)
 NAMESPACE_BEGIN(math)
 
 template <typename TYPE>
+class Size;
+
+template <typename TYPE>
 class Area {
 public:
 #pragma region "Ctors/Dtor"
 
-  Area(AreaType type, TYPE val = (TYPE)0)
-      : type_(type) {
-    set(val);
-  }
-
-  Area(AreaType type, TYPE hsize, TYPE vsize)
-      : type_(type) {
-    set(hsize, vsize);
-  }
-
-  Area(AreaType type, TYPE left, TYPE top, TYPE right, TYPE bottom)
-      : type_(type) {
-    set(left, top, right, bottom);
+  Area(AreaType type, const Size<TYPE> &size = Size<TYPE>((TYPE)0, (TYPE)0))
+      : type_(type)
+      , size_(size) {
+    resetEdges();
   }
 
 #pragma endregion
 
-  void set(TYPE val) {
-    // clang-format off
-    edges_[core::detail::toBase(RectEdge::IDX_L)] = 
-    edges_[core::detail::toBase(RectEdge::IDX_R)] =
-    edges_[core::detail::toBase(RectEdge::IDX_T)] = 
-    edges_[core::detail::toBase(RectEdge::IDX_B)] = val;
-    // clang-format on
+  void setContent(const Size<TYPE> &size) { size_ = size; }
+
+  [[nodiscard]]
+  auto getContent() const -> Size<TYPE> {
+    return size_;
   }
 
-  void set(TYPE hsize, TYPE vsize) {
-    // clang-format off
-    edges_[core::detail::toBase(RectEdge::IDX_L)] = 
-    edges_[core::detail::toBase(RectEdge::IDX_R)] = hsize;
-    edges_[core::detail::toBase(RectEdge::IDX_T)] = 
-    edges_[core::detail::toBase(RectEdge::IDX_B)] = vsize;
-    // clang-format on
-  }
+  void resetEdges() { edges_.fill((TYPE)0); }
 
-  void set(TYPE left, TYPE top, TYPE right, TYPE bottom) {
-    edges_[core::detail::toBase(RectEdge::IDX_L)] = left;
-    edges_[core::detail::toBase(RectEdge::IDX_T)] = top;
-    edges_[core::detail::toBase(RectEdge::IDX_R)] = right;
-    edges_[core::detail::toBase(RectEdge::IDX_B)] = bottom;
+  void set(TYPE l, TYPE t, TYPE r, TYPE b) {
+    edges_[core::detail::toBase(RectEdge::IDX_L)] = l;
+    edges_[core::detail::toBase(RectEdge::IDX_T)] = t;
+    edges_[core::detail::toBase(RectEdge::IDX_R)] = r;
+    edges_[core::detail::toBase(RectEdge::IDX_B)] = b;
   }
 
   auto at(RectEdge edge) const -> const TYPE & { return edges_[core::detail::toBase(edge)]; }
@@ -96,6 +81,7 @@ public:
 
 private:
   AreaType type_;
+  Size<TYPE> size_;
   std::array<TYPE, NUM_OF_EDGES> edges_;
 };
 
