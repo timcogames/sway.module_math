@@ -2,7 +2,6 @@
 #define SWAY_MATH_RECT_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/area.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/rectedges.hpp>
 #include <sway/math/size.hpp>
@@ -79,7 +78,11 @@ public:
    */
   void set(TYPE x, TYPE y, TYPE xw, TYPE yh) { Vector4<TYPE>::set(x, y, xw, yh); }
 
-  void set(TYPE x, TYPE y, const Size<TYPE> &size) { this->set(x, y, x + size.getW(), y + size.getH()); }
+  void set(TYPE x, TYPE y, const Size<TYPE> &size) { set(x, y, x + size.getW(), y + size.getH()); }
+
+  auto at(RectEdge edge) const -> const TYPE & { return this->data_[core::detail::toBase(edge)]; }
+
+  auto at(RectEdge edge) -> TYPE & { return this->data_[core::detail::toBase(edge)]; }
 
   /**
    * @brief Устанавливает смещение прямоугольной области.
@@ -88,17 +91,24 @@ public:
    * @param[in] y Значение координаты по оси Y.
    */
   auto offset(TYPE x, TYPE y) -> Rect<TYPE> {
-    this->at(RectEdge::IDX_L) += x;
-    this->at(RectEdge::IDX_T) += y;
-    this->at(RectEdge::IDX_R) += x;
-    this->at(RectEdge::IDX_B) += y;
+    at(RectEdge::IDX_L) += x;
+    at(RectEdge::IDX_T) += y;
+    at(RectEdge::IDX_R) += x;
+    at(RectEdge::IDX_B) += y;
 
     return *this;
   }
 
   auto offset(Point<TYPE> pos) -> Rect<TYPE> {
-    this->offset(pos.getX(), pos.getY());
+    offset(pos.getX(), pos.getY());
     return *this;
+  }
+
+  void reduce(const Rect<TYPE> &other) {
+    at(RectEdge::IDX_L) += other.getL();
+    at(RectEdge::IDX_T) += other.getT();
+    at(RectEdge::IDX_R) -= other.getR();
+    at(RectEdge::IDX_B) -= other.getB();
   }
 
   /**
@@ -111,9 +121,9 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setL(TYPE x) { this->at(RectEdge::IDX_L) = x; }
+  void setL(TYPE x) { at(RectEdge::IDX_L) = x; }
 
-  auto getL() const -> TYPE { return this->at(RectEdge::IDX_L); }
+  auto getL() const -> TYPE { return at(RectEdge::IDX_L); }
 
   /**
    * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
@@ -125,17 +135,17 @@ public:
    *     setW() const,
    *     setH() const
    */
-  void setT(TYPE y) { this->at(RectEdge::IDX_T) = y; }
+  void setT(TYPE y) { at(RectEdge::IDX_T) = y; }
 
-  auto getT() const -> TYPE { return this->at(RectEdge::IDX_T); }
+  auto getT() const -> TYPE { return at(RectEdge::IDX_T); }
 
-  void setR(TYPE w) { this->at(RectEdge::IDX_R) = w; }
+  void setR(TYPE w) { at(RectEdge::IDX_R) = w; }
 
-  auto getR() const -> TYPE { return this->at(RectEdge::IDX_R); }
+  auto getR() const -> TYPE { return at(RectEdge::IDX_R); }
 
-  void setB(TYPE h) { this->at(RectEdge::IDX_B) = h; }
+  void setB(TYPE h) { at(RectEdge::IDX_B) = h; }
 
-  auto getB() const -> TYPE { return this->at(RectEdge::IDX_B); }
+  auto getB() const -> TYPE { return at(RectEdge::IDX_B); }
 
   /**
    * @brief Получает ширину прямоугольной области.
@@ -147,11 +157,11 @@ public:
    *     getH() const
    */
   auto getW() const -> TYPE {
-    if ((this->at(RectEdge::IDX_L) >= this->at(RectEdge::IDX_R))) {
+    if ((getL() >= getR())) {
       return 0;
     }
 
-    return util::abs(this->at(RectEdge::IDX_R) - this->at(RectEdge::IDX_L));
+    return util::abs(getR() - getL());
   }
 
   /**
@@ -164,11 +174,11 @@ public:
    *     getW() const
    */
   auto getH() const -> TYPE {
-    if (this->at(RectEdge::IDX_T) >= this->at(RectEdge::IDX_B)) {
+    if (getT() >= getB()) {
       return 0;
     }
 
-    return util::abs(this->at(RectEdge::IDX_B) - this->at(RectEdge::IDX_T));
+    return util::abs(getB() - getT());
   }
 
   [[nodiscard]]
@@ -188,27 +198,12 @@ public:
 
   [[nodiscard]]
   auto isValid() const -> bool {
-    // clang-format off
-    return ((this->at(RectEdge::IDX_L) < this->at(RectEdge::IDX_R)) && 
-            (this->at(RectEdge::IDX_T) < this->at(RectEdge::IDX_B))) ? true : false;
-    // clang-format on
+    return ((getL() < getR()) && (getT() < getB())) ? true : false;
   }
 
   auto contains(const Point<TYPE> &point) const -> bool {
-    return this->at(RectEdge::IDX_L) <= point.getX() && this->at(RectEdge::IDX_R) >= point.getX() &&
-           this->at(RectEdge::IDX_T) <= point.getY() && this->at(RectEdge::IDX_B) >= point.getY();
+    return getL() <= point.getX() && getR() >= point.getX() && getT() <= point.getY() && getB() >= point.getY();
   }
-
-  void reduce(Area<TYPE> area) {
-    this->at(RectEdge::IDX_L) += area.getL();
-    this->at(RectEdge::IDX_T) += area.getT();
-    this->at(RectEdge::IDX_R) -= area.getR();
-    this->at(RectEdge::IDX_B) -= area.getB();
-  }
-
-  auto at(RectEdge edge) const -> const TYPE & { return this->data_[core::detail::toBase(edge)]; }
-
-  auto at(RectEdge edge) -> TYPE & { return this->data_[core::detail::toBase(edge)]; }
 };
 
 using rect4i_t = Rect<i32_t>;

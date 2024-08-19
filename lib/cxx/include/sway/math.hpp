@@ -2,8 +2,6 @@
 #define SWAY_MATH_HPP
 
 #include <sway/math/alignments.hpp>
-#include <sway/math/area.hpp>
-#include <sway/math/areatypes.hpp>
 #include <sway/math/axises.hpp>
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
