@@ -123,6 +123,12 @@ public:
     return Rect<TYPE>((TYPE)0, (TYPE)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
   }
 
+  auto add(const Size<TYPE> &size) -> Size<TYPE> { return Size<TYPE>(getW() + size.getW(), getH() + size.getH()); }
+
+  auto operator+(const Size<TYPE> &size) -> Size<TYPE> { return add(size); }
+
+  auto operator+=(const Size<TYPE> &size) -> Size<TYPE> & { return *this = add(size); }
+
   auto operator*(const TYPE &rvalue) const -> Size<TYPE> {
     return Size<TYPE>(this->data_[IDX_WDT] * rvalue, this->data_[IDX_HGT] * rvalue);
   }

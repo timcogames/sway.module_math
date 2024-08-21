@@ -79,12 +79,12 @@ public:
    * @param[in] y Значение Y компонента.
    */
   void set(TYPE x, TYPE y) {
-    this->setX(x);
-    this->setY(y);
+    setX(x);
+    setY(y);
   }
 
   auto add(const Vector2<TYPE> &vec) -> Vector2<TYPE> {
-    return Vector2<TYPE>(this->getX() + vec.getX(), this->getY() + vec.getY());
+    return Vector2<TYPE>(getX() + vec.getX(), getY() + vec.getY());
   }
 
   auto operator+(const Vector2<TYPE> &vec) -> Vector2<TYPE> { return add(vec); }
@@ -93,7 +93,7 @@ public:
 
   [[nodiscard]]
   auto subtract(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
-    return Vector2<TYPE>(this->getX() - vec.getX(), this->getY() - vec.getY());
+    return Vector2<TYPE>(getX() - vec.getX(), getY() - vec.getY());
   }
 
   auto operator-(const Vector2<TYPE> &vec) -> Vector2<TYPE> { return subtract(vec); }
@@ -106,7 +106,7 @@ public:
   }
 
   auto multiply(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
-    return Vector2<TYPE>(this->getX() * vec.getX(), this->getY() * vec.getY());
+    return Vector2<TYPE>(getX() * vec.getX(), getY() * vec.getY());
   }
 
   auto operator*(const Vector2<TYPE> &vec) const -> Vector2<TYPE> { return multiply(vec); }
@@ -116,9 +116,7 @@ public:
     return *this;
   }
 
-  auto multiply(TYPE scalar) const -> Vector2<TYPE> {
-    return Vector2<TYPE>(this->getX() * scalar, this->getY() * scalar);
-  }
+  auto multiply(TYPE scalar) const -> Vector2<TYPE> { return Vector2<TYPE>(getX() * scalar, getY() * scalar); }
 
   auto operator*(TYPE scalar) const -> Vector2<TYPE> { return multiply(scalar); }
 
