@@ -6,8 +6,8 @@
 
 #include <cmath>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Шаблонный класс представления вектора из трех компонентов.
@@ -230,7 +230,7 @@ static const vec3d_t vec3d_unitX(1.0, 0.0, 0.0);
 static const vec3d_t vec3d_unitY(0.0, 1.0, 0.0);
 static const vec3d_t vec3d_unitZ(0.0, 0.0, 1.0);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_VECTOR3_HPP

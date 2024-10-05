@@ -9,8 +9,8 @@
 #include <array>
 #include <string>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 template <typename TYPE>
 class Vector4;
@@ -216,7 +216,7 @@ using mat4i_t = Matrix4<i32_t>;
 using mat4f_t = Matrix4<f32_t>;
 using mat4d_t = Matrix4<f64_t>;
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_MATRIX4_HPP

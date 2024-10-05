@@ -3,21 +3,42 @@
 
 #include <sway/core.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
-enum class Axis : u32_t {
-  NONE = 0,
-  RIGHT,  // Positive X axis
-  LEFT,  // Negative X axis
-  UP,  // Positive Y axis
-  DOWN,  // Negative Y axis
-  FORWARD,  // Positive Z axis
-  BACKWARD,  // Negative Z axis
-  Latest
-};
+/**
+ * @var Axis::Enum::RIGHT
+ * @brief Positive X axis
+ */
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+/**
+ * @var Axis::Enum::LEFT
+ * @brief Negative X axis
+ */
+
+/**
+ * @var Axis::Enum::UP
+ * @brief Positive Y axis
+ */
+
+/**
+ * @var Axis::Enum::DOWN
+ * @brief Negative Y axis
+ */
+
+/**
+ * @var Axis::Enum::FORWARD
+ * @brief Positive Z axis
+ */
+
+/**
+ * @var Axis::Enum::BACKWARD
+ * @brief Negative Z axis
+ */
+
+DECLARE_ENUM(Axis, RIGHT, LEFT, UP, DOWN, FORWARD, BACKWARD);
+
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_AXISES_HPP

@@ -1,5 +1,5 @@
-#ifndef SWAY_MATH_UTILS_HPP
-#define SWAY_MATH_UTILS_HPP
+#ifndef SWAY_MATH_UTIL_HPP
+#define SWAY_MATH_UTIL_HPP
 
 #include <sway/core.hpp>
 
@@ -7,9 +7,9 @@
 #include <assert.h>
 #include <random>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
-NAMESPACE_BEGIN(util)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
+NS_BEGIN(util)
 
 constexpr f32_t PI = 3.141592654F;
 constexpr f32_t HALF_PI = 1.570796327F;
@@ -61,8 +61,8 @@ inline auto abs(const TYPE &val) -> TYPE {
   }
 }
 
-NAMESPACE_END(util)
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace util
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
-#endif  // SWAY_MATH_UTILS_HPP
+#endif  // SWAY_MATH_UTIL_HPP

@@ -8,20 +8,19 @@
 #include <sway/math/size.hpp>
 #include <sway/math/vector4.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 template <typename TYPE>
 class Ray {
 public:
 #pragma region "Static methods"
 
-  static auto convFromScreenPoint(
-      math::Point<TYPE> point, const math::size2i_t &scr, const math::Matrix4<TYPE> &vpInv) -> Ray<TYPE> {
-    auto ndc = math::NDC::convFromScreen(point, scr);
+  static auto convFromScreenPoint(Point<TYPE> point, const size2i_t &scr, const Matrix4<TYPE> &vpInv) -> Ray<TYPE> {
+    auto ndc = NDC::convFromScreen(point, scr);
 
-    auto start = math::vec4f_t(ndc.getX(), ndc.getY(), 0.0F, 1.0F);
-    auto end = math::vec4f_t(ndc.getX(), ndc.getY(), 1.0F, 1.0F);
+    auto start = vec4f_t(ndc.getX(), ndc.getY(), 0.0F, 1.0F);
+    auto end = vec4f_t(ndc.getX(), ndc.getY(), 1.0F, 1.0F);
 
     return Ray<TYPE>(CoordinateSystemUtils::convScreenToWorldSpace(start, vpInv),
         CoordinateSystemUtils::convScreenToWorldSpace(end, vpInv));
@@ -51,7 +50,7 @@ private:
 using ray3f_t = Ray<f32_t>;
 using ray3d_t = Ray<f64_t>;
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_RAY_HPP

@@ -1,15 +1,14 @@
 #ifndef SWAY_MATH_PROJECTIONTYPES_HPP
 #define SWAY_MATH_PROJECTIONTYPES_HPP
 
-#include <sway/namespacemacros.hpp>
-#include <sway/types.hpp>
+#include <sway/core.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
-enum class ProjectionType : u32_t { UNKNOWN, ORTHO, PERSP };
+DECLARE_ENUM(ProjectionType, ORTHO, PERSP);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_PROJECTIONTYPES_HPP

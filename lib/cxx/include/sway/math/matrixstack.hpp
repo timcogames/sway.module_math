@@ -8,27 +8,27 @@
 #include <array>
 #include <stack>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 class MatrixStack {
 public:
-  template <MatrixType TYPE>
+  template <MatrixType::Enum TYPE>
   auto getStack() -> std::stack<mat4f_t> & {
     return std::get<core::detail::toBase(TYPE)>(matrices_);
   }
 
-  template <MatrixType TYPE>
+  template <MatrixType::Enum TYPE>
   void push(const mat4f_t &mat) {
     getStack<TYPE>().push(mat);
   }
 
-  template <MatrixType TYPE>
+  template <MatrixType::Enum TYPE>
   void pop() {
     getStack<TYPE>().pop();
   }
 
-  template <MatrixType TYPE>
+  template <MatrixType::Enum TYPE>
   auto top() -> const mat4f_t & {
     return getStack<TYPE>().top();
   }
@@ -37,7 +37,7 @@ private:
   std::array<std::stack<mat4f_t>, NUM_OF_MATRICES> matrices_;
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_MATRIXSTACK_HPP

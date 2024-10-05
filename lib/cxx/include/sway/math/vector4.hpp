@@ -6,8 +6,8 @@
 
 #include <iomanip>  // setprecision
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Шаблонный класс представления вектора из четырех компонентов.
@@ -225,7 +225,7 @@ static const vec4d_t vec4d_unitY(0.0, 1.0, 0.0, 0.0);
 static const vec4d_t vec4d_unitZ(0.0, 0.0, 1.0, 0.0);
 static const vec4d_t vec4d_unitW(0.0, 0.0, 0.0, 1.0);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_VECTOR4_HPP

@@ -5,8 +5,8 @@
 #include <sway/math/matrix4.hpp>
 #include <sway/math/vector4.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 template <class NODE, typename TYPE>
 class Transform : public NODE {
@@ -64,8 +64,8 @@ using xform3i_t = Transform<Dummy, i32_t>;
 using xform3f_t = Transform<Dummy, f32_t>;
 using xform3d_t = Transform<Dummy, f64_t>;
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #include <sway/math/transform.inl>
 

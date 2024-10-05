@@ -3,14 +3,14 @@
 
 #include <sway/core.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
-enum class MatrixType : i32_t { NONE = GLOB_IDX_INVALID, VIEW = GLOB_IDX_INITIAL, PROJ, TFRM, Latest };
+DECLARE_ENUM_IDX(MatrixType, VIEW = GLOB_IDX_INITIAL, PROJ, TFRM);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
-#define NUM_OF_MATRICES (sway::core::detail::toBase(sway::math::MatrixType::Latest))
+#define NUM_OF_MATRICES (sway::core::detail::toBase(sway::math::MatrixType::Enum::Latest))
 
 #endif  // SWAY_MATH_MATRIXTYPES_HPP

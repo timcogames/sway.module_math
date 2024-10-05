@@ -6,8 +6,8 @@
 
 #include <assert.h>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 template <typename TYPE, std::size_t SIZE>
 class Vector {
@@ -142,7 +142,7 @@ protected:
   std::array<TYPE, DataElementCount_t> data_;
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_VECTOR_HPP

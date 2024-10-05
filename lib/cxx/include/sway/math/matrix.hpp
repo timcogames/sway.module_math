@@ -6,8 +6,8 @@
 
 #include <array>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Шаблонный класс представления матрицы.
@@ -106,7 +106,7 @@ protected:
   std::array<TYPE, SIZE> data_;  // Элементы матрицы (Column-major ordering).
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_MATRIX_HPP

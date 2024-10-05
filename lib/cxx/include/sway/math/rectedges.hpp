@@ -3,14 +3,14 @@
 
 #include <sway/core.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
-enum class RectEdge : i32_t { NONE = GLOB_IDX_INVALID, IDX_L = GLOB_IDX_INITIAL, IDX_T, IDX_R, IDX_B, Latest };
+DECLARE_ENUM_IDX(RectEdge, IDX_L = GLOB_IDX_INITIAL, IDX_T, IDX_R, IDX_B);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
-#define NUM_OF_EDGES (sway::core::detail::toBase(sway::math::RectEdge::Latest))
+#define NUM_OF_EDGES (sway::core::detail::toBase(sway::math::RectEdge::Enum::Latest))
 
 #endif  // SWAY_MATH_RECTEDGES_HPP

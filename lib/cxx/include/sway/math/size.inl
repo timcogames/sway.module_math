@@ -4,7 +4,7 @@
 #include <sstream>  // std::stringstream
 #include <string>  // std::string
 
-NAMESPACE_BEGIN(std)
+NS_BEGIN(std)
 
 template <typename TYPE>
 inline auto operator<<(ostream &str, const sway::math::Size<TYPE> &size) -> ostream & {
@@ -18,4 +18,4 @@ inline auto to_string(const sway::math::Size<TYPE> &size) -> string {
   return stream.str();
 }
 
-NAMESPACE_END(std)
+NS_END()

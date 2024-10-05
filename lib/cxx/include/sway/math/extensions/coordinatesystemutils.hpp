@@ -9,8 +9,8 @@
 #include <sway/math/vector3.hpp>
 #include <sway/math/vector4.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 struct NDC {
   // [0..1] -> [-1,+1]
@@ -38,7 +38,7 @@ struct CoordinateSystemUtils {
   }
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_COORDINATESYSTEMUTILS_HPP

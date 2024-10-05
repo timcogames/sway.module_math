@@ -4,8 +4,8 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Шаблонный класс, представляющий двумерный вектор.
@@ -151,7 +151,7 @@ static const vec2d_t vec2d_unitX(1.0, 0.0);
 static const vec2d_t vec2d_unitY(0.0, 1.0);
 // NOLINTEND(readability-identifier-naming)
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_VECTOR2_HPP

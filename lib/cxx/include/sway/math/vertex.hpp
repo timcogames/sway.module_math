@@ -6,8 +6,8 @@
 #include <sway/math/vector2.hpp>
 #include <sway/math/vector3.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Базовая структура представления вершины.
@@ -150,7 +150,7 @@ struct VertexTexCoord : public VertexColor {
   }
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_VERTEX_HPP

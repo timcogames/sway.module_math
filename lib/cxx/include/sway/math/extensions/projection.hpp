@@ -7,8 +7,8 @@
 
 #include <math.h>  // tan
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 struct ProjectionDescription {
   rect4f_t rect;
@@ -85,7 +85,7 @@ private:
   mat4f_t mtx_;
 };
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_PROJECTION_HPP

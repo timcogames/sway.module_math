@@ -4,8 +4,8 @@
 #include <sway/core.hpp>
 #include <sway/math/vector2.hpp>
 
-NAMESPACE_BEGIN(sway)
-NAMESPACE_BEGIN(math)
+NS_BEGIN_SWAY()
+NS_BEGIN(math)
 
 /**
  * @brief Шаблонный класс представления точки.
@@ -136,7 +136,7 @@ static const point2f_t point2f_one(1.0F, 1.0F);
 static const point2d_t point2d_zero(0.0, 0.0);
 static const point2d_t point2d_one(1.0, 1.0);
 
-NAMESPACE_END(math)
-NAMESPACE_END(sway)
+NS_END()  // namespace math
+NS_END()  // namespace sway
 
 #endif  // SWAY_MATH_POINT_HPP
