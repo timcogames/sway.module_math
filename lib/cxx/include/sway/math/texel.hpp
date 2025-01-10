@@ -7,8 +7,7 @@
 
 #include <type_traits>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 struct Texel {
   // clang-format off
@@ -26,7 +25,6 @@ struct Texel {
   }
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_TEXEL_HPP

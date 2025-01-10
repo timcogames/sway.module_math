@@ -3,8 +3,7 @@
 
 #include <sway/core.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 enum class HorzAlign : s8_t { CENTER = ENUM_BITMASK(1), LEFT = ENUM_BITMASK(2), RIGHT = ENUM_BITMASK(3) };
 enum class VertAlign : s8_t { CENTER = ENUM_BITMASK(4), TOP = ENUM_BITMASK(5), BOTTOM = ENUM_BITMASK(6) };
@@ -30,7 +29,6 @@ enum class Alignment : s8_t {
   RIGHT_BOTTOM = ConvFromXAlign<HorzAlign::RIGHT>() | ConvFromXAlign<VertAlign::BOTTOM>()
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_ALIGNMENTS_HPP

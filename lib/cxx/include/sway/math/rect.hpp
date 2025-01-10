@@ -8,8 +8,7 @@
 #include <sway/math/utils.hpp>
 #include <sway/math/vector4.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE>
 class Size;
@@ -161,7 +160,7 @@ public:
       return 0;
     }
 
-    return util::abs(getR() - getL());
+    return /* utils */ math::abs(getR() - getL());
   }
 
   /**
@@ -178,7 +177,7 @@ public:
       return 0;
     }
 
-    return util::abs(getB() - getT());
+    return /* utils */ math::abs(getB() - getT());
   }
 
   [[nodiscard]] auto asPoint() const -> Point<TYPE> { return Point<TYPE>(getL(), getT()); }
@@ -198,8 +197,7 @@ using rect4i_t = Rect<i32_t>;
 using rect4f_t = Rect<f32_t>;
 using rect4d_t = Rect<f64_t>;
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #include <sway/math/rect.inl>
 

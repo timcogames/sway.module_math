@@ -1,8 +1,8 @@
-#ifndef SWAY_MATH_MATRIX4REPRESENTATION_HPP
-#define SWAY_MATH_MATRIX4REPRESENTATION_HPP
+#ifndef SWAY_MATH_MATRICES_MATRIX4REPRESENTATION_HPP
+#define SWAY_MATH_MATRICES_MATRIX4REPRESENTATION_HPP
 
 #include <sway/core/misc/string/representation.hpp>
-#include <sway/math/matrix4.hpp>
+#include <sway/math/matrices/matrix4.hpp>
 
 namespace sway::core {
 
@@ -23,4 +23,4 @@ struct Representation<math::Matrix4<f32_t>> {
 
 }  // namespace sway::core
 
-#endif  // SWAY_MATH_MATRIX4REPRESENTATION_HPP
+#endif  // SWAY_MATH_MATRICES_MATRIX4REPRESENTATION_HPP

@@ -3,12 +3,10 @@
 
 #include <sway/core.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 DECLARE_ENUM(ProjectionType, ORTHO, PERSP);
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_PROJECTIONTYPES_HPP

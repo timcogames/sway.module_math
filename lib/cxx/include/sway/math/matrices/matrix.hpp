@@ -1,16 +1,20 @@
-#ifndef SWAY_MATH_MATRIX_HPP
-#define SWAY_MATH_MATRIX_HPP
+#ifndef SWAY_MATH_MATRICES_MATRIX_HPP
+#define SWAY_MATH_MATRICES_MATRIX_HPP
 
 #include <sway/core.hpp>
 #include <sway/math/vector4.hpp>
 
 #include <array>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 /**
- * @brief Шаблонный класс представления матрицы.
+ * @ingroup matrices
+ * @{
+ */
+
+/**
+ * @brief \~english Template class representing a matrix. \~russian Шаблонный класс представления матрицы.
  */
 // clang-format off
 template <typename TYPE,
@@ -29,12 +33,15 @@ public:
 #pragma endregion
 
 #pragma region "Ctors/Dtor"
+  /** \~english @name Constructor & Destructor */ /** \~russian @name Конструктор и Деструктор */
+  /** @{ */
 
   Matrix() { this->makeZero(); }
 
   Matrix(const Matrix<TYPE, ROWS, COLS> &mat)
       : data_(mat.asArray()) {}
 
+  /** @} */
 #pragma endregion
 
   auto makeZero() -> Matrix<TYPE, ROWS, COLS> & {
@@ -47,8 +54,14 @@ public:
   auto asArray() const -> std::array<TYPE, SIZE> { return data_; }
 
   /**
-   * @brief Устанавливает новое значение элемента матрицы.
+   * \~english
+   * @brief Sets new value of matrix element.
+   * @param[in] row Row number.
+   * @param[in] col Column number.
+   * @param[in] val Matrix element value.
    *
+   * \~russian
+   * @brief Устанавливает новое значение элемента матрицы.
    * @param[in] row Номер ряда.
    * @param[in] col Номер колонки.
    * @param[in] val Значения элемента матрицы.
@@ -58,8 +71,14 @@ public:
   void setValue(u32_t elm, TYPE val) { data_[elm] = val; }
 
   /**
-   * @brief Получает значение элемента матрицы.
+   * \~english
+   * @brief Gets value of matrix element.
+   * @param[in] row Row number.
+   * @param[in] col Column number.
+   * @return Matrix element value.
    *
+   * \~russian
+   * @brief Получает значение элемента матрицы.
    * @param[in] row Номер ряда.
    * @param[in] col Номер колонки.
    * @return Значения элемента.
@@ -103,10 +122,12 @@ public:
   }
 
 protected:
-  std::array<TYPE, SIZE> data_;  // Элементы матрицы (Column-major ordering).
+  std::array<TYPE, SIZE> data_; /*!< \~english Matrix elements (Column-major ordering).
+    \~russian Элементы матрицы (Column-major ordering). */
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+/** @} */
 
-#endif  // SWAY_MATH_MATRIX_HPP
+}  // namespace sway::math
+
+#endif  // SWAY_MATH_MATRICES_MATRIX_HPP

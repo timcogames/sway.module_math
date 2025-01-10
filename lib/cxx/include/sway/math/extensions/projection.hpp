@@ -2,13 +2,12 @@
 #define SWAY_MATH_PROJECTION_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/matrix4.hpp>
+#include <sway/math/matrices/matrix4.hpp>
 #include <sway/math/rect.hpp>
 
 #include <math.h>  // tan
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 struct ProjectionDescription {
   rect4f_t rect;
@@ -79,7 +78,6 @@ private:
   mat4f_t mtx_;
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_PROJECTION_HPP

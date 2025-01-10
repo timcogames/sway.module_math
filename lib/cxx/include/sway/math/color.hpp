@@ -4,8 +4,7 @@
 #include <sway/core.hpp>
 #include <sway/math/vector4.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE>
 class Vector4;
@@ -124,7 +123,6 @@ using col4d_t = Color<f64_t>;
 #define COL4F_GREEN math::col4f_t(0.0F, 1.0F, 0.0F, 1.0F)
 #define COL4F_BLUE math::col4f_t(0.0F, 0.0F, 1.0F, 1.0F)
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_COLOR_HPP

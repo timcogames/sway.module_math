@@ -2,15 +2,14 @@
 #define SWAY_MATH_COORDINATESYSTEMUTILS_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/matrix4.hpp>
+#include <sway/math/matrices/matrix4.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/size.hpp>
 #include <sway/math/vector2.hpp>
 #include <sway/math/vector3.hpp>
 #include <sway/math/vector4.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 struct NDC {
   // [0..1] -> [-1,+1]
@@ -38,7 +37,6 @@ struct CoordinateSystemUtils {
   }
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_COORDINATESYSTEMUTILS_HPP

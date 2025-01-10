@@ -3,8 +3,7 @@
 
 #include <sway/core.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 /**
  * @var Axis::Enum::RIGHT
@@ -38,7 +37,6 @@ NS_BEGIN(math)
 
 DECLARE_ENUM(Axis, RIGHT, LEFT, UP, DOWN, FORWARD, BACKWARD);
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_AXISES_HPP

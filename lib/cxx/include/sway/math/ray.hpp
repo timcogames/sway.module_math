@@ -3,13 +3,12 @@
 
 #include <sway/core.hpp>
 #include <sway/math/extensions/coordinatesystemutils.hpp>
-#include <sway/math/matrix4.hpp>
+#include <sway/math/matrices/matrix4.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/size.hpp>
 #include <sway/math/vector4.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE>
 class Ray {
@@ -50,7 +49,6 @@ private:
 using ray3f_t = Ray<f32_t>;
 using ray3d_t = Ray<f64_t>;
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_RAY_HPP

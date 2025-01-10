@@ -4,8 +4,7 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 /**
  * @brief \~english Template class representing a 2D vector. Class that holds position in 2D coordinates, allows to
@@ -150,7 +149,6 @@ static const vec2d_t vec2d_unitX(1.0, 0.0);
 static const vec2d_t vec2d_unitY(0.0, 1.0);
 // NOLINTEND(readability-identifier-naming)
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_VECTOR2_HPP

@@ -2,11 +2,10 @@
 #define SWAY_MATH_TRANSFORM_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/matrix4.hpp>
+#include <sway/math/matrices/matrix4.hpp>
 #include <sway/math/vector4.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <class NODE, typename TYPE>
 class Transform : public NODE {
@@ -63,8 +62,7 @@ using xform3i_t = Transform<Dummy, i32_t>;
 using xform3f_t = Transform<Dummy, f32_t>;
 using xform3d_t = Transform<Dummy, f64_t>;
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #include <sway/math/transform.inl>
 

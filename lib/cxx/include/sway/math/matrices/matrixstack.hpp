@@ -1,15 +1,19 @@
-#ifndef SWAY_MATH_MATRIXSTACK_HPP
-#define SWAY_MATH_MATRIXSTACK_HPP
+#ifndef SWAY_MATH_MATRICES_MATRIXSTACK_HPP
+#define SWAY_MATH_MATRICES_MATRIXSTACK_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/matrix4.hpp>
-#include <sway/math/matrixtypes.hpp>
+#include <sway/math/matrices/matrix4.hpp>
+#include <sway/math/matrices/matrixtypes.hpp>
 
 #include <array>
 #include <stack>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
+
+/**
+ * @ingroup matrices
+ * @{
+ */
 
 class MatrixStack {
 public:
@@ -37,7 +41,8 @@ private:
   std::array<std::stack<mat4f_t>, NUM_OF_MATRICES> matrices_;
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+/** @} */
 
-#endif  // SWAY_MATH_MATRIXSTACK_HPP
+}  // namespace sway::math
+
+#endif  // SWAY_MATH_MATRICES_MATRIXSTACK_HPP

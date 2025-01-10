@@ -3,13 +3,11 @@
 
 #include <sway/core.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 DECLARE_ENUM_IDX(RectEdge, IDX_L = GLOB_IDX_INITIAL, IDX_T, IDX_R, IDX_B);
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #define NUM_OF_EDGES (sway::core::detail::toBase(sway::math::RectEdge::Enum::Latest))
 

@@ -6,11 +6,11 @@
 
 #include <iomanip>  // setprecision
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 /**
- * @brief Шаблонный класс представления вектора из четырех компонентов.
+ * @brief \~english Template class representing a vector of four components. \~russian Шаблонный класс представления
+ * вектора из четырех компонентов.
  */
 template <typename TYPE>
 class Vector4 : public Vector<TYPE, 4> {
@@ -212,7 +212,6 @@ static const vec4d_t vec4d_unitY(0.0, 1.0, 0.0, 0.0);
 static const vec4d_t vec4d_unitZ(0.0, 0.0, 1.0, 0.0);
 static const vec4d_t vec4d_unitW(0.0, 0.0, 0.0, 1.0);
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_VECTOR4_HPP

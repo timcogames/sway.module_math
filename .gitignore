@@ -1,2 +1,11 @@
-/build
-/bin
+# project output files
+build/*
+!build/.gitkeep
+
+bin/*
+!bin/.gitkeep
+
+#doxygen, moxygen
+docs/generated/html/*
+docs/generated/xml/*
+docs/doxygen.log

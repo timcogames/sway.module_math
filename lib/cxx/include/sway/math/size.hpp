@@ -4,8 +4,7 @@
 #include <sway/core.hpp>
 #include <sway/math/rect.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE>
 class Rect;
@@ -141,8 +140,7 @@ static const size2f_t size2f_one(1.0F, 1.0F);
 static const size2d_t size2d_zero(0.0, 0.0);
 static const size2d_t size2d_one(1.0, 1.0);
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #include <sway/math/size.inl>
 

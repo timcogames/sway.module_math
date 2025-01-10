@@ -7,9 +7,7 @@
 #include <assert.h>
 #include <random>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
-NS_BEGIN(util)
+namespace sway::math {
 
 constexpr f32_t PI = 3.141592654F;
 constexpr f32_t HALF_PI = 1.570796327F;
@@ -61,8 +59,6 @@ FORCE_INLINE auto abs(const TYPE &val) -> TYPE {
   }
 }
 
-NS_END()  // namespace util
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_UTIL_HPP

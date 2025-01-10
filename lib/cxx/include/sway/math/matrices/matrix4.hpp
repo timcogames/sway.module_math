@@ -1,8 +1,8 @@
-#ifndef SWAY_MATH_MATRIX4_HPP
-#define SWAY_MATH_MATRIX4_HPP
+#ifndef SWAY_MATH_MATRICES_MATRIX4_HPP
+#define SWAY_MATH_MATRICES_MATRIX4_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/matrix.hpp>
+#include <sway/math/matrices/matrix.hpp>
 // #include <sway/math/matrix4representation.hpp>
 #include <sway/math/vector3.hpp>
 #include <sway/math/vector4.hpp>
@@ -10,14 +10,18 @@
 #include <array>
 #include <string>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE>
 class Vector4;
 
 /**
- * @brief Шаблонный класс представления матрицы.
+ * @ingroup matrices
+ * @{
+ */
+
+/**
+ * @brief \~english Template class representing a 4x4 matrix. \~russian Шаблонный класс представления матрицы 4х4.
  */
 template <typename TYPE>
 class Matrix4 : public Matrix<TYPE, 4, 4> {
@@ -54,23 +58,33 @@ public:
 #pragma endregion
 
 #pragma region "Ctors/Dtor"
+  /** \~english @name Constructor & Destructor */ /** \~russian @name Конструктор и Деструктор */
+  /** @{ */
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса.
+   * @brief \~english Constructor class. Performs initialization of a new instance of the class. \~russian Конструктор
+   * класса. Выполняет инициализацию нового экземпляра класса.
    */
   Matrix4() { makeIdentity(); }
 
   Matrix4(const Matrix<TYPE, 4, 4> &mat)
       : Matrix<TYPE, 4, 4>(mat) {}
 
+  /** @} */
 #pragma endregion
 
   /**
-   * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
+   * \~english
+   * @brief Sets new values of matrix elements in specified row.
+   * @param[in] nbr Row number.
+   * @param[in] val Values for setting.
    *
+   * \~russian
+   * @brief Устанавливает новые значения элементов матрицы в указанном ряду.
    * @param[in] nbr Номер ряда.
    * @param[in] val Значения для установки.
+   *
+   * \~
    * @sa setCol(u32_t, const Vector4<TYPE> &)
    */
   void setRow(u32_t nbr, const Vector4<TYPE> &val) {
@@ -81,10 +95,17 @@ public:
   }
 
   /**
-   * @brief Получает значения элементов матрицы в указанном ряду.
+   * \~english
+   * @brief Gets values of matrix elements in specified row.
+   * @param[in] nbr Row number.
+   * @return Values of matrix elements.
    *
+   * \~russian
+   * @brief Получает значения элементов матрицы в указанном ряду.
    * @param[in] nbr Номер ряда.
    * @return Значения элементов.
+   *
+   * \~
    * @sa getCol(u32_t) const
    */
   auto getRow(u32_t nbr) const -> Vector4<TYPE> {
@@ -93,10 +114,17 @@ public:
   }
 
   /**
-   * @brief Устанавливает новые значения элементов матрицы в указанной колонке.
+   * \~english
+   * @brief Sets new values of matrix elements in specified column.
+   * @param[in] nbr Column number.
+   * @param[in] val Values for setting.
    *
+   * \~russian
+   * @brief Устанавливает новые значения элементов матрицы в указанной колонке.
    * @param[in] nbr Номер колонки.
    * @param[in] val Значения для установки.
+   *
+   * \~
    * @sa setRow(u32_t, const Vector4<TYPE> &)
    */
   void setCol(u32_t nbr, const Vector4<TYPE> &val) {
@@ -107,10 +135,17 @@ public:
   }
 
   /**
-   * @brief Получает значения элементов матрицы в указанной колонке.
+   * \~english
+   * @brief Gets values of matrix elements in specified column.
+   * @param[in] nbr Column number.
+   * @return Values of matrix elements.
    *
+   * \~russian
+   * @brief Получает значения элементов матрицы в указанной колонке.
    * @param[in] nbr Номер колонки.
    * @return Значения элементов.
+   *
+   * \~
    * @sa getRow(u32_t) const
    */
   auto getCol(u32_t nbr) const -> Vector4<TYPE> {
@@ -119,7 +154,7 @@ public:
   }
 
   /**
-   * @brief Приводит к единичной матрице.
+   * @brief \~english Makes identity matrix. \~russian Приводит к единичной матрице.
    */
   auto makeIdentity() -> Matrix4<TYPE> & {
     this->setValue(0, 0, (TYPE)1);
@@ -206,7 +241,8 @@ using mat4i_t = Matrix4<i32_t>;
 using mat4f_t = Matrix4<f32_t>;
 using mat4d_t = Matrix4<f64_t>;
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+/** @} */
 
-#endif  // SWAY_MATH_MATRIX4_HPP
+}  // namespace sway::math
+
+#endif  // SWAY_MATH_MATRICES_MATRIX4_HPP

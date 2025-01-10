@@ -4,8 +4,7 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE, std::size_t SIZE>
 struct BoundingBox {
@@ -24,7 +23,6 @@ using bbox3i_t = BoundingBox<i32_t, 3>;
 using bbox2f_t = BoundingBox<f32_t, 2>;
 using bbox3f_t = BoundingBox<f32_t, 3>;
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_BOUNDINGBOX_HPP

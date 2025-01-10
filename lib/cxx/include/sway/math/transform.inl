@@ -1,8 +1,7 @@
 #include <sway/core.hpp>
 #include <sway/math/transform.hpp>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename NODE, typename TYPE>
 Transform<NODE, TYPE>::Transform()
@@ -58,5 +57,4 @@ auto Transform<NODE, TYPE>::getInternalMatrix_() const -> Matrix4<TYPE> {
   return matCombined;
 }
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math

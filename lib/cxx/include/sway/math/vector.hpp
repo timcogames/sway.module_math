@@ -6,8 +6,7 @@
 
 #include <assert.h>
 
-NS_BEGIN_SWAY()
-NS_BEGIN(math)
+namespace sway::math {
 
 template <typename TYPE, std::size_t SIZE>
 class Vector {
@@ -39,7 +38,7 @@ public:
   auto lerp(const Vector<TYPE, SIZE> &other, TYPE step) const -> Vector<TYPE, SIZE> {
     Vector<TYPE, SIZE> result;
     for (auto i = 0; i != DataElementCount_t; ++i) {
-      result[i] = util::lerp(data_[i], other[i], step);
+      result[i] = /* utils */ math::lerp(data_[i], other[i], step);
     }
 
     return result;
@@ -48,9 +47,16 @@ public:
 #pragma region "Access operators"
 
   /**
-   * @brief Возвращает значение в заданной позиции.
+   * \~english
+   * @brief Returns value in specified position.
+   * @param[in] idx Position of value.
    *
+   *
+   * \~russian
+   * @brief Возвращает значение в заданной позиции.
    * @param[in] idx Позиция значения.
+   *
+   * \~
    * @sa operator[](std::size_t) const
    */
   auto operator[](std::size_t idx) -> TYPE & {
@@ -136,7 +142,6 @@ protected:
   std::array<TYPE, DataElementCount_t> data_;
 };
 
-NS_END()  // namespace math
-NS_END()  // namespace sway
+}  // namespace sway::math
 
 #endif  // SWAY_MATH_VECTOR_HPP
