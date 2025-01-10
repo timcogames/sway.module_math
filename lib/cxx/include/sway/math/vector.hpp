@@ -32,15 +32,9 @@ public:
 
   void set(const std::array<TYPE, SIZE> &arr) { data_ = arr; }
 
-  [[nodiscard]]
-  auto asArray() const -> std::array<TYPE, SIZE> {
-    return data_;
-  }
+  [[nodiscard]] auto asArray() const -> std::array<TYPE, SIZE> { return data_; }
 
-  [[nodiscard]]
-  auto asDataPtr() -> TYPE * {
-    return data_.data();
-  }
+  [[nodiscard]] auto asDataPtr() -> TYPE * { return data_.data(); }
 
   auto lerp(const Vector<TYPE, SIZE> &other, TYPE step) const -> Vector<TYPE, SIZE> {
     Vector<TYPE, SIZE> result;

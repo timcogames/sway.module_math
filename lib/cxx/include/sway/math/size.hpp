@@ -87,10 +87,7 @@ public:
    * @brief Получает значение ширины.
    * @sa getH()
    */
-  [[nodiscard]]
-  auto getW() const -> TYPE {
-    return this->data_[IDX_WDT];
-  }
+  [[nodiscard]] auto getW() const -> TYPE { return this->data_[IDX_WDT]; }
 
   /**
    * @brief Устанавливает значение высоты.
@@ -105,21 +102,14 @@ public:
    *
    * @sa getW()
    */
-  [[nodiscard]]
-  auto getH() const -> TYPE {
-    return this->data_[IDX_HGT];
-  }
+  [[nodiscard]] auto getH() const -> TYPE { return this->data_[IDX_HGT]; }
 
-  [[nodiscard]]
-  auto area() const -> TYPE {
-    return getW() * getH();
-  }
+  [[nodiscard]] auto area() const -> TYPE { return getW() * getH(); }
 
   /**
    * @brief Преобразовывает в Rect<TYPE> класс.
    */
-  [[nodiscard]]
-  auto asRect() const -> Rect<TYPE> {
+  [[nodiscard]] auto asRect() const -> Rect<TYPE> {
     return Rect<TYPE>((TYPE)0, (TYPE)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
   }
 

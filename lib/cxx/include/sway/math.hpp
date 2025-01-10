@@ -1,6 +1,14 @@
 #ifndef SWAY_MATH_HPP
 #define SWAY_MATH_HPP
 
+/**
+ * @namespace sway::math
+ * @brief \~english The math module provides a variety of mathematical tools, including vector arithmetic, matrix
+ * transformations, and geometric calculations to support graphics and physics simulations within the Sway framework.
+ * \~russian Модуль math предоставляет различные математические инструменты, включая арифметику векторов, преобразования
+ * матриц и геометрические вычисления для поддержки графики и физического моделирования в рамках фреймворка Sway.
+ */
+
 #include <sway/math/alignments.hpp>
 #include <sway/math/axises.hpp>
 #include <sway/math/boundingbox.hpp>
@@ -9,6 +17,7 @@
 #include <sway/math/extensions/projection.hpp>
 #include <sway/math/extensions/projectiontypes.hpp>
 #include <sway/math/matrix4.hpp>
+#include <sway/math/matrix4representation.hpp>
 #include <sway/math/matrixstack.hpp>
 #include <sway/math/matrixtypes.hpp>
 #include <sway/math/point.hpp>

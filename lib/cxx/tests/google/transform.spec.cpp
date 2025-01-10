@@ -40,11 +40,14 @@ TEST(Transform, scale) {
   auto matModelTransformGLM = glm::mat4(1);
   matModelTransformGLM = glm::scale(matModelTransformGLM, glm::vec3(2, 2, 1));
 
-  EXPECT_STREQ(matModelTransformSTD.toStr().c_str(), glm::to_string(matModelTransformGLM).c_str());
+  EXPECT_STREQ(core::Representation<math::Matrix4<f32_t>>::get(matModelTransformSTD).c_str(),
+      glm::to_string(matModelTransformGLM).c_str());
 }
 
 TEST(Transform, te) {
-  math::Transform<core::container::Node, f32_t> xform;
+  math::Transform<core::Node, f32_t> xform;
   math::mat4f_t identity;
-  EXPECT_STREQ(xform.getModelMatrix().toStr().c_str(), identity.toStr().c_str());
+
+  EXPECT_STREQ(core::Representation<math::Matrix4<f32_t>>::get(xform.getModelMatrix()).c_str(),
+      core::Representation<math::Matrix4<f32_t>>::get(identity).c_str());
 }

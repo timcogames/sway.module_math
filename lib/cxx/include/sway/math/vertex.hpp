@@ -47,10 +47,7 @@ struct VertexPosition {
   /**
    * @brief Возвращает позицию вершины.
    */
-  [[nodiscard]]
-  auto getPosition() const -> vec3f_t {
-    return Vector3<f32_t>(x, y, z);
-  }
+  [[nodiscard]] auto getPosition() const -> vec3f_t { return Vector3<f32_t>(x, y, z); }
 };
 
 /**
@@ -94,10 +91,7 @@ struct VertexColor : public VertexPosition {
   /**
    * @brief Возвращает цвет вершины.
    */
-  [[nodiscard]]
-  auto getColor() const -> col4f_t {
-    return Color<f32_t>(r, g, b, a);
-  }
+  [[nodiscard]] auto getColor() const -> col4f_t { return Color<f32_t>(r, g, b, a); }
 
   friend auto operator<<(std::ostream &out, const VertexColor &vtx) -> std::ostream & {
     return out << "{" << "pos:" << vtx.getPosition() << ", " << "col:" << vtx.getColor().asVec4() << "}";
@@ -144,10 +138,7 @@ struct VertexTexCoord : public VertexColor {
   /**
    * @brief Возвращает текстурные координаты.
    */
-  [[nodiscard]]
-  auto getTexCoord() const -> vec2f_t {
-    return Vector2<f32_t>(u, v);
-  }
+  [[nodiscard]] auto getTexCoord() const -> vec2f_t { return Vector2<f32_t>(u, v); }
 };
 
 NS_END()  // namespace math

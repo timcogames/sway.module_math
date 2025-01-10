@@ -15,7 +15,7 @@ class MatrixStack {
 public:
   template <MatrixType::Enum TYPE>
   auto getStack() -> std::stack<mat4f_t> & {
-    return std::get<core::detail::toBase(TYPE)>(matrices_);
+    return std::get<core::toBase(TYPE)>(matrices_);
   }
 
   template <MatrixType::Enum TYPE>

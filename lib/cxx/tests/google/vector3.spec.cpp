@@ -84,6 +84,6 @@ TEST(Vector3, dot) {
 
 TEST(Vector3, normalize) {
   auto res = math::vec3f_t::normalize(math::vec3f_t(1.0F, 2.0F, 3.0F));
-  auto frm = core::misc::format("[%f, %f, %f]", res.getX(), res.getY(), res.getZ());
+  auto frm = core::format("[%f, %f, %f]", res.getX(), res.getY(), res.getZ());
   EXPECT_TRUE(frm == std::string("[0.267261, 0.534522, 0.801784]"));
 }

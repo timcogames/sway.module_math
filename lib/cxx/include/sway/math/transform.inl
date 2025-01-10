@@ -12,7 +12,7 @@ Transform<NODE, TYPE>::Transform()
 template <typename NODE, typename TYPE>
 auto Transform<NODE, TYPE>::getModelMatrix() -> Matrix4<TYPE> {
   auto parent = this->getParentNode();
-  if (!parent || parent.value()->getNodeIdx().chainEqual({core::container::NODEIDX_NEGATIVE})) {
+  if (!parent || parent.value()->getNodeIndex().chainEqual({core::NODEIDX_NEGATIVE})) {
     return getInternalMatrix_();
   }
 

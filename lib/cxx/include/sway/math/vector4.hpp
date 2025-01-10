@@ -76,10 +76,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  [[nodiscard]]
-  auto getX() const -> TYPE {
-    return this->data_[Vector<TYPE, 4>::IDX_X];
-  }
+  [[nodiscard]] auto getX() const -> TYPE { return this->data_[Vector<TYPE, 4>::IDX_X]; }
 
   void setX(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_X] = val; }
 
@@ -90,10 +87,7 @@ public:
    *     getZ() const,
    *     getW() const
    */
-  [[nodiscard]]
-  auto getY() const -> TYPE {
-    return this->data_[Vector<TYPE, 4>::IDX_Y];
-  }
+  [[nodiscard]] auto getY() const -> TYPE { return this->data_[Vector<TYPE, 4>::IDX_Y]; }
 
   void setY(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_Y] = val; }
 
@@ -104,10 +98,7 @@ public:
    *     getY() const,
    *     getW() const
    */
-  [[nodiscard]]
-  auto getZ() const -> TYPE {
-    return this->data_[Vector<TYPE, 4>::IDX_Z];
-  }
+  [[nodiscard]] auto getZ() const -> TYPE { return this->data_[Vector<TYPE, 4>::IDX_Z]; }
 
   void setZ(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_Z] = val; }
 
@@ -118,10 +109,7 @@ public:
    *     getY() const,
    *     getZ() const
    */
-  [[nodiscard]]
-  auto getW() const -> TYPE {
-    return this->data_[Vector<TYPE, 4>::IDX_W];
-  }
+  [[nodiscard]] auto getW() const -> TYPE { return this->data_[Vector<TYPE, 4>::IDX_W]; }
 
   void setW(TYPE val) { this->data_[Vector<TYPE, 4>::IDX_W] = val; }
 
@@ -147,8 +135,7 @@ public:
 
   auto operator+(const Vector4<TYPE> &vec) -> Vector4<TYPE> { return add(vec); }
 
-  [[nodiscard]]
-  auto subtract(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
+  [[nodiscard]] auto subtract(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
     return Vector4<TYPE>(
         this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ(), this->getW() - vec.getW());
   }

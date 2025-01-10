@@ -41,10 +41,12 @@ public:
 #pragma endregion
 
 #pragma region "Ctors/Dtor"
+  /** \~english @name Constructor & Destructor */ /** \~russian @name Конструктор и Деструктор */
+  /** @{ */
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   * @brief \~english Constructor class. Initializes a new instance of the class with zero coordinates. \~russian
+   * Конструктор класса. Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
    * @sa Vector3(TYPE, TYPE, TYPE)
    */
@@ -52,18 +54,26 @@ public:
       : Vector<TYPE, 3>() {}
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with specified coordinates.
+   * @param[in] x Component X vector.
+   * @param[in] y Component Y vector.
+   * @param[in] z Component Z vector.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
    * @param[in] z Компонент Z вектора.
+   *
+   * \~
    * @sa Vector3()
    */
   Vector3(TYPE x, TYPE y, TYPE z) { set(x, y, z); }
 
   virtual ~Vector3() = default;
 
+  /** @} */
 #pragma endregion
 
   /**
@@ -72,10 +82,7 @@ public:
    * @sa getY() const,
    *     getZ() const
    */
-  [[nodiscard]]
-  auto getX() const -> TYPE {
-    return this->data_[Vector<TYPE, 3>::IDX_X];
-  }
+  [[nodiscard]] auto getX() const -> TYPE { return this->data_[Vector<TYPE, 3>::IDX_X]; }
 
   void setX(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_X] = val; }
 
@@ -85,10 +92,7 @@ public:
    * @sa getX() const,
    *     getZ() const
    */
-  [[nodiscard]]
-  auto getY() const -> TYPE {
-    return this->data_[Vector<TYPE, 3>::IDX_Y];
-  }
+  [[nodiscard]] auto getY() const -> TYPE { return this->data_[Vector<TYPE, 3>::IDX_Y]; }
 
   void setY(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_Y] = val; }
 
@@ -98,10 +102,7 @@ public:
    * @sa getX() const,
    *     getY() const
    */
-  [[nodiscard]]
-  auto getZ() const -> TYPE {
-    return this->data_[Vector<TYPE, 3>::IDX_Z];
-  }
+  [[nodiscard]] auto getZ() const -> TYPE { return this->data_[Vector<TYPE, 3>::IDX_Z]; }
 
   void setZ(TYPE val) { this->data_[Vector<TYPE, 3>::IDX_Z] = val; }
 
@@ -130,8 +131,7 @@ public:
 
   auto operator+=(const Vector3<TYPE> &vec) -> Vector3<TYPE> & { return *this = add(vec); }
 
-  [[nodiscard]]
-  auto subtract(const Vector3<TYPE> &vec) const -> Vector3<TYPE> {
+  [[nodiscard]] auto subtract(const Vector3<TYPE> &vec) const -> Vector3<TYPE> {
     return Vector3<TYPE>(this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ());
   }
 

@@ -52,8 +52,7 @@ public:
   void setScale(TYPE x, TYPE y, TYPE z);
 
 private:
-  [[nodiscard]]
-  auto getInternalMatrix_() const -> Matrix4<TYPE>;
+  [[nodiscard]] auto getInternalMatrix_() const -> Matrix4<TYPE>;
 
   Vector3<TYPE> position_;
   Vector3<TYPE> scale_;

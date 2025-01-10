@@ -65,10 +65,7 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]]
-  auto getR() const -> TYPE {
-    return r_;
-  }
+  [[nodiscard]] auto getR() const -> TYPE { return r_; }
 
   /**
    * @brief Получает значение канала зеленого цвета.
@@ -76,10 +73,7 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]]
-  auto getG() const -> TYPE {
-    return g_;
-  }
+  [[nodiscard]] auto getG() const -> TYPE { return g_; }
 
   /**
    * @brief Получает значение канала синего цвета.
@@ -88,10 +82,7 @@ public:
    *     getG() const,
    *     getA() const
    */
-  [[nodiscard]]
-  auto getB() const -> TYPE {
-    return b_;
-  }
+  [[nodiscard]] auto getB() const -> TYPE { return b_; }
 
   /**
    * @brief Получает значение альфа-канала.
@@ -100,18 +91,12 @@ public:
    *     getG() const,
    *     getB() const
    */
-  [[nodiscard]]
-  auto getA() const -> TYPE {
-    return a_;
-  }
+  [[nodiscard]] auto getA() const -> TYPE { return a_; }
 
   /**
    * @brief Преобразовывает в Vector4<TYPE> класс.
    */
-  [[nodiscard]]
-  auto asVec4() const -> Vector4<TYPE> {
-    return Vector4<TYPE>(r_, g_, b_, a_);
-  }
+  [[nodiscard]] auto asVec4() const -> Vector4<TYPE> { return Vector4<TYPE>(r_, g_, b_, a_); }
 
   auto add(const Color<TYPE> &vec) -> Color<TYPE> {
     return Color<TYPE>(this->r_ + vec.getR(), this->g_ + vec.getG(), this->b_ + vec.getB(), this->a_ + vec.getA());

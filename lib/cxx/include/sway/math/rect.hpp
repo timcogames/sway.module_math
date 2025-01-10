@@ -80,9 +80,9 @@ public:
 
   void set(TYPE x, TYPE y, const Size<TYPE> &size) { set(x, y, x + size.getW(), y + size.getH()); }
 
-  auto at(RectEdge::Enum edge) const -> const TYPE & { return this->data_[core::detail::toBase(edge)]; }
+  auto at(RectEdge::Enum edge) const -> const TYPE & { return this->data_[core::toBase(edge)]; }
 
-  auto at(RectEdge::Enum edge) -> TYPE & { return this->data_[core::detail::toBase(edge)]; }
+  auto at(RectEdge::Enum edge) -> TYPE & { return this->data_[core::toBase(edge)]; }
 
   /**
    * @brief Устанавливает смещение прямоугольной области.
@@ -181,25 +181,13 @@ public:
     return util::abs(getB() - getT());
   }
 
-  [[nodiscard]]
-  auto asPoint() const -> Point<TYPE> {
-    return Point<TYPE>(getL(), getT());
-  }
+  [[nodiscard]] auto asPoint() const -> Point<TYPE> { return Point<TYPE>(getL(), getT()); }
 
-  [[nodiscard]]
-  auto asSize() const -> Size<TYPE> {
-    return Size<TYPE>(getW(), getH());
-  }
+  [[nodiscard]] auto asSize() const -> Size<TYPE> { return Size<TYPE>(getW(), getH()); }
 
-  [[nodiscard]]
-  auto empty() const -> bool {
-    return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0));
-  }
+  [[nodiscard]] auto empty() const -> bool { return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0)); }
 
-  [[nodiscard]]
-  auto isValid() const -> bool {
-    return ((getL() < getR()) && (getT() < getB())) ? true : false;
-  }
+  [[nodiscard]] auto isValid() const -> bool { return ((getL() < getR()) && (getT() < getB())) ? true : false; }
 
   auto contains(const Point<TYPE> &point) const -> bool {
     return getL() <= point.getX() && getR() >= point.getX() && getT() <= point.getY() && getB() >= point.getY();

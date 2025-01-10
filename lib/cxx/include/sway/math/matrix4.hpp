@@ -3,6 +3,7 @@
 
 #include <sway/core.hpp>
 #include <sway/math/matrix.hpp>
+// #include <sway/math/matrix4representation.hpp>
 #include <sway/math/vector3.hpp>
 #include <sway/math/vector4.hpp>
 
@@ -190,26 +191,15 @@ public:
     return res;
   }
 
-  [[nodiscard]]
-  auto toStr() const -> std::string {
-    std::stringstream stream;
-    // clang-format off
-    stream << std::fixed << std::setprecision(6) 
-           << "mat4x4((" << this->getValue(0, 0) << ", " << this->getValue(1, 0) << ", " << this->getValue(2, 0) << ", " << this->getValue(3, 0) << "), "
-           <<        "(" << this->getValue(0, 1) << ", " << this->getValue(1, 1) << ", " << this->getValue(2, 1) << ", " << this->getValue(3, 1) << "), "
-           <<        "(" << this->getValue(0, 2) << ", " << this->getValue(1, 2) << ", " << this->getValue(2, 2) << ", " << this->getValue(3, 2) << "), "
-           <<        "(" << this->getValue(0, 3) << ", " << this->getValue(1, 3) << ", " << this->getValue(2, 3) << ", " << this->getValue(3, 3) << "))";
-    // clang-format on
-    return stream.str();
-  }
-
   auto operator*(const Matrix4<TYPE> &rhs) const -> const Matrix4<TYPE> {
     Matrix4<TYPE> mat(*this);
     mat.template multiply<4>(rhs.asArray());
     return mat;
   }
 
-  friend auto operator<<(std::ostream &out, const Matrix4<TYPE> &mat) -> std::ostream & { return out << mat.toStr(); }
+  // friend auto operator<<(std::ostream &out, const Matrix4<f32_t> &mat) -> std::ostream & {
+  //   return out << core::Representation<Matrix4<f32_t>>::get(mat);
+  // }
 };
 
 using mat4i_t = Matrix4<i32_t>;

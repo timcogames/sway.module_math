@@ -8,9 +8,9 @@ NS_BEGIN_SWAY()
 NS_BEGIN(math)
 
 /**
- * @brief Шаблонный класс, представляющий двумерный вектор.
- *        Класс, который хранит позицию в 2D-координатах,
- *        позволяет манипулировать ими, а также выполнять векторные операции.
+ * @brief \~english Template class representing a 2D vector. Class that holds position in 2D coordinates, allows to
+ * manipulate them and perform vector operations. \~russian Шаблонный класс, представляющий двумерный вектор. Класс,
+ * который хранит позицию в 2D-координатах, позволяет манипулировать ими, а также выполнять векторные операции.
  */
 template <typename TYPE>
 class Vector2 final : public Vector<TYPE, 2> {
@@ -26,8 +26,8 @@ public:
 #pragma region "Ctors/Dtor"
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   * @brief \~english Constructor class. Initializes a new instance of the class with zero coordinates. \~russian
+   * Конструктор класса. Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
    * @sa Vector2(TYPE, TYPE)
    */
@@ -35,11 +35,17 @@ public:
       : Vector<TYPE, 2>() {}
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with specified coordinates.
+   * @param[in] x Component X vector.
+   * @param[in] y Component Y vector.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] x Компонент X вектора.
    * @param[in] y Компонент Y вектора.
+   *
+   * \~
    * @sa Vector2()
    */
   Vector2(TYPE x, TYPE y) { set(x, y); }
@@ -53,10 +59,7 @@ public:
    *
    * @sa getY() const
    */
-  [[nodiscard]]
-  auto getX() const -> TYPE {
-    return this->data_[Vector<TYPE, 2>::IDX_X];
-  }
+  [[nodiscard]] auto getX() const -> TYPE { return this->data_[Vector<TYPE, 2>::IDX_X]; }
 
   void setX(TYPE val) { this->data_[Vector<TYPE, 2>::IDX_X] = val; }
 
@@ -65,10 +68,7 @@ public:
    *
    * @sa getX() const
    */
-  [[nodiscard]]
-  auto getY() const -> TYPE {
-    return this->data_[Vector<TYPE, 2>::IDX_Y];
-  }
+  [[nodiscard]] auto getY() const -> TYPE { return this->data_[Vector<TYPE, 2>::IDX_Y]; }
 
   void setY(TYPE val) { this->data_[Vector<TYPE, 2>::IDX_Y] = val; }
 
@@ -91,8 +91,7 @@ public:
 
   auto operator+=(const Vector2<TYPE> &vec) -> Vector2<TYPE> & { return *this = add(vec); }
 
-  [[nodiscard]]
-  auto subtract(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
+  [[nodiscard]] auto subtract(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
     return Vector2<TYPE>(getX() - vec.getX(), getY() - vec.getY());
   }
 
