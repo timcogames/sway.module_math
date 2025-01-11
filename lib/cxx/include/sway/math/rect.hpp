@@ -14,7 +14,8 @@ template <typename TYPE>
 class Size;
 
 /**
- * @brief Шаблонный класс представления прямоугольной области.
+ * @brief \~english Template class representing a rectangle. \~russian Шаблонный класс представления прямоугольной
+ * области.
  */
 template <typename TYPE>
 class Rect final : public Vector4<TYPE> {
@@ -22,8 +23,8 @@ public:
 #pragma region "Ctors/Dtor"
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   * @brief \~english Default constructor. Initializes a new instance of the class. \~russian Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
    * @sa Rect(const std::array<TYPE, 4> &),
    *     Rect(TYPE, TYPE, TYPE, TYPE)
@@ -33,10 +34,15 @@ public:
       : Vector4<TYPE>() {}
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with the specified coordinates.
+   * @param[in] data Data coordinates.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] data Данные координат.
+   *
+   * \~
    * @sa Rect(),
    *     Rect(TYPE, TYPE, TYPE, TYPE)
    *     Rect(TYPE, TYPE, const Size<TYPE> &)
@@ -45,13 +51,21 @@ public:
       : Vector4<TYPE>(data) {}
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with the specified coordinates.
+   * @param[in] x Value of the left coordinate on the X axis.
+   * @param[in] y Value of the bottom/upper (depends on the coordinate system) coordinate on the Y axis.
+   * @param[in] xw Value of the right coordinate on the X axis.
+   * @param[in] yh Value of the upper/bottom (depends on the coordinate system) coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Конструктор класса.vВыполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] x Значение левой координаты по оси X.
    * @param[in] y Значение нижней/верхней (зависит от системы координат) координаты по оси Y.
    * @param[in] xw Значение правой координаты по оси X.
    * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
+   *
+   * \~
    * @sa Rect(),
    *     Rect(const std::array<TYPE, 4> &),
    *     Rect(TYPE, TYPE, const Size<TYPE> &)
@@ -67,12 +81,21 @@ public:
 #pragma endregion
 
   /**
-   * @brief Устанавливает новые значения.
+   * \~english
+   * @brief Sets new values.
+   * @param[in] x Value of the left coordinate on the X axis.
+   * @param[in] y Value of the bottom/upper (depends on the coordinate system) coordinate on the Y axis.
+   * @param[in] xw Value of the right coordinate on the X axis.
+   * @param[in] yh Value of the upper/bottom (depends on the coordinate system) coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Устанавливает новые значения.
    * @param[in] x Значение левой координаты по оси X.
    * @param[in] y Значение нижней/верхней (зависит от системы кординат) координаты по оси Y.
    * @param[in] xw Значение правой координаты по оси X.
    * @param[in] yh Значение верхней/нижней (зависит от системы координат) координаты по оси Y.
+   *
+   * \~
    * @sa set(const std::array<TYPE, 4> &)
    */
   void set(TYPE x, TYPE y, TYPE xw, TYPE yh) { Vector4<TYPE>::set(x, y, xw, yh); }
@@ -84,8 +107,13 @@ public:
   auto at(RectEdge::Enum edge) -> TYPE & { return this->data_[core::toBase(edge)]; }
 
   /**
-   * @brief Устанавливает смещение прямоугольной области.
+   * \~english
+   * @brief Sets the offset of the rectangle.
+   * @param[in] x Value of the coordinate on the X axis.
+   * @param[in] y Value of the coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Устанавливает смещение прямоугольной области.
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
@@ -111,9 +139,15 @@ public:
   }
 
   /**
-   * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
+   * \~english
+   * @brief Sets new value of the position of the rectangle on the X axis.
+   * @param[in] x Value of the coordinate on the X axis.
    *
+   * \~russian
+   * @brief Устанавливает новое значение позиции прямоугольной области по оси X.
    * @param[in] x Значение координаты позиции по оси X.
+   *
+   * \~
    * @sa setT() const,
    *     setR() const,
    *     setB() const,
@@ -125,9 +159,15 @@ public:
   auto getL() const -> TYPE { return at(RectEdge::Enum::IDX_L); }
 
   /**
-   * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
+   * \~english
+   * @brief Sets new value of the position of the rectangle on the Y axis.
+   * @param[in] x Value of the coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Устанавливает новое значение позиции прямоугольной области по оси Y.
    * @param[in] x Значение координаты позиции по оси Y.
+   *
+   * \~
    * @sa setL() const,
    *     setR() const,
    *     setB() const,
@@ -147,7 +187,7 @@ public:
   auto getB() const -> TYPE { return at(RectEdge::Enum::IDX_B); }
 
   /**
-   * @brief Получает ширину прямоугольной области.
+   * @brief \~english Returns the width of the rectangle. \~russian Получает ширину прямоугольной области.
    *
    * @sa getL() const,
    *     getT() const,
@@ -164,7 +204,7 @@ public:
   }
 
   /**
-   * @brief Получает высоту прямоугольной области.
+   * @brief \~english Returns the height of the rectangle. \~russian Получает высоту прямоугольной области.
    *
    * @sa getL() const,
    *     getT() const,
