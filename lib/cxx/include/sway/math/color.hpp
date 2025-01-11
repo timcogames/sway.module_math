@@ -10,7 +10,7 @@ template <typename TYPE>
 class Vector4;
 
 /**
- * @brief Шаблонный класс представления цвета.
+ * @brief \~english Template class representing a color. \~russian Шаблонный класс представления цвета.
  */
 template <typename TYPE>
 class Color final {
@@ -20,7 +20,8 @@ public:
 #pragma region "Ctors/Dtor"
 
   /**
-   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
+   * @brief \~english Default constructor. Initializes a new instance of the class. \~russian Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса.
    *
    * @sa Color(TYPE, TYPE, TYPE, TYPE)
    */
@@ -30,12 +31,21 @@ public:
   }
 
   /**
-   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class.
+   * @param[in] r Value of the red color channel.
+   * @param[in] g Value of the green color channel.
+   * @param[in] b Value of the blue color channel.
+   * @param[in] a Value of the alpha channel.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса.
    * @param[in] r Значение канала красного цвета.
    * @param[in] g Значение канала зеленого цвета.
    * @param[in] b Значение канала синего цвета.
    * @param[in] a Значение альфа-канала.
+   *
+   * \~
    * @sa Color()
    */
   Color(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) { set(r, g, b, a); }
@@ -43,8 +53,15 @@ public:
 #pragma endregion
 
   /**
-   * @brief Устанавливает новые значения.
+   * \~english
+   * @brief Sets new values.
+   * @param[in] r Value of the red color channel.
+   * @param[in] g Value of the green color channel.
+   * @param[in] b Value of the blue color channel.
+   * @param[in] a Value of the alpha channel.
    *
+   * \~russian
+   * @brief Устанавливает новые значения.
    * @param[in] r Значение канала красного цвета.
    * @param[in] g Значение канала зеленого цвета.
    * @param[in] b Значение канала синего цвета.
@@ -58,7 +75,7 @@ public:
   }
 
   /**
-   * @brief Получает значение канала красного цвета.
+   * @brief \~english Returns the value of the red color channel. \~russian Получает значение канала красного цвета.
    *
    * @sa getG() const,
    *     getB() const,
@@ -67,7 +84,7 @@ public:
   [[nodiscard]] auto getR() const -> TYPE { return r_; }
 
   /**
-   * @brief Получает значение канала зеленого цвета.
+   * @brief \~english Returns the value of the green color channel. \~russian Получает значение канала зеленого цвета.
    * @sa getR() const,
    *     getB() const,
    *     getA() const
@@ -75,7 +92,7 @@ public:
   [[nodiscard]] auto getG() const -> TYPE { return g_; }
 
   /**
-   * @brief Получает значение канала синего цвета.
+   * @brief \~english Returns the value of the blue color channel. \~russian Получает значение канала синего цвета.
    *
    * @sa getR() const,
    *     getG() const,
@@ -84,7 +101,7 @@ public:
   [[nodiscard]] auto getB() const -> TYPE { return b_; }
 
   /**
-   * @brief Получает значение альфа-канала.
+   * @brief \~english Returns the value of the alpha channel. \~russian Получает значение альфа-канала.
    *
    * @sa getR() const,
    *     getG() const,
@@ -93,7 +110,7 @@ public:
   [[nodiscard]] auto getA() const -> TYPE { return a_; }
 
   /**
-   * @brief Преобразовывает в Vector4<TYPE> класс.
+   * @brief \~english Converts to Vector4<TYPE> class. \~russian Преобразовывает в Vector4<TYPE> класс.
    */
   [[nodiscard]] auto asVec4() const -> Vector4<TYPE> { return Vector4<TYPE>(r_, g_, b_, a_); }
 

@@ -7,7 +7,7 @@
 namespace sway::math {
 
 /**
- * @brief Шаблонный класс представления точки.
+ * @brief \~english Template class representing a point. \~russian Шаблонный класс представления точки.
  */
 template <typename TYPE>
 class Point {
@@ -15,8 +15,8 @@ public:
 #pragma region "Ctors/Dtor"
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
+   * @brief \~english Default constructor. Initializes a new instance of the class. \~russian Конструктор класса.
+   * Выполняет инициализацию нового экземпляра класса с нулевыми координатами.
    *
    * @sa Point(TYPE),
    *     Point(TYPE, TYPE)
@@ -24,21 +24,32 @@ public:
   Point() { set((TYPE)0, (TYPE)0); }
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with the specified coordinates.
+   * @param[in] scalar Value for coordinates on the X and Y axes.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] scalar Значение для координат по оси X и Y.
+   *
+   * \~
    * @sa Point(),
    *     Point(TYPE, TYPE)
    */
   Point(TYPE scalar) { set(scalar, scalar); }
 
   /**
-   * @brief Конструктор класса.
-   *        Выполняет инициализацию нового экземпляра класса с заданными координатами.
+   * \~english
+   * @brief Constructor class. Initializes a new instance of the class with the specified coordinates.
+   * @param[in] x Value of the coordinate on the X axis.
+   * @param[in] y Value of the coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Конструктор класса. Выполняет инициализацию нового экземпляра класса с заданными координатами.
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
+   *
+   * \~
    * @sa Point(),
    *     Point(TYPE)
    */
@@ -47,8 +58,13 @@ public:
 #pragma endregion
 
   /**
-   * @brief Устанавливает новые значения.
+   * \~english
+   * @brief Sets new values.
+   * @param[in] x Value of the coordinate on the X axis.
+   * @param[in] y Value of the coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Устанавливает новые значения.
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
@@ -58,30 +74,42 @@ public:
   }
 
   /**
-   * @brief Устанавливает новое значение координаты по оси X.
+   * \~english
+   * @brief Sets a new value of the coordinate on the X axis.
+   * @param[in] x Value of the coordinate on the X axis.
    *
+   * \~russian
+   * @brief Устанавливает новое значение координаты по оси X.
    * @param[in] x Значение координаты по оси X.
+   *
+   * \~
    * @sa setY() const
    */
   void setX(TYPE x) { x_ = x; }
 
   /**
-   * @brief Получает значение координаты по оси X.
+   * @brief \~english Gets the value of the coordinate on the X axis. \~russian Получает значение координаты по оси X.
    *
    * @sa getY() const
    */
   [[nodiscard]] auto getX() const -> TYPE { return x_; }
 
   /**
-   * @brief Устанавливает новое значение координаты по оси Y.
+   * \~english
+   * @brief Sets a new value of the coordinate on the Y axis.
+   * @param[in] y Value of the coordinate on the Y axis.
    *
+   * \~russian
+   * @brief Устанавливает новое значение координаты по оси Y.
    * @param[in] y Значение координаты по оси Y.
+   *
+   * \~
    * @sa setX() const
    */
   void setY(TYPE y) { y_ = y; }
 
   /**
-   * @brief Получает значение координаты по оси Y.
+   * @brief \~english Gets the value of the coordinate on the Y axis. \~russian Получает значение координаты по оси Y.
    *
    * @sa getX() const
    */
@@ -90,7 +118,8 @@ public:
   [[nodiscard]] auto asVec() const -> Vector2<TYPE> { return Vector2<TYPE>(x_, y_); }
 
   /**
-   * @brief Оператор равенства.
+   * @brief \~english Returns a value indicating whether this instance is equal to a specified object. \~russian
+   * Возвращает значение, указывающее, равен ли этот экземпляр указанному объекту.
    */
   template <typename OTHER>
   auto operator==(const Point<OTHER> &compare) const -> bool {
@@ -98,7 +127,8 @@ public:
   }
 
   /**
-   * @brief Оператор неравенства.
+   * @brief \~english Returns a value indicating whether this instance is not equal to a specified object. \~russian
+   * Возвращает значение, указывающее, не равен ли этот экземпляр указанному объекту.
    */
   template <typename OTHER>
   auto operator!=(const Point<OTHER> &compare) const -> bool {
