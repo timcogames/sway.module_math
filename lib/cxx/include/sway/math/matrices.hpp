@@ -2,6 +2,26 @@
 #define SWAY_MATH_MATRICES_HPP
 
 /**
+ * \~
+ * @page page_matrices Matrices
+ *
+ * @par Overview
+ * @parblock
+ * @section Detail-Section
+ * Paragraph text
+ * @endparblock
+ *
+ * @invariant
+ * @parblock
+ *  Given:
+ *  + item 1
+ *    + item 1.1
+ *    + item 1.2
+ *  + item 2
+ * @endparblock
+ */
+
+/**
  * @defgroup matrices Matrix classes
  * @ingroup LAC
  * @brief \~english Different matrix classes suitable for different purposes. \~russian Различные классы матриц,
