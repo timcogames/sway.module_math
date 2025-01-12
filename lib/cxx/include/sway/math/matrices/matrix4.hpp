@@ -57,8 +57,8 @@ public:
 
 #pragma endregion
 
-#pragma region "Ctors/Dtor"
-  /** \~english @name Constructor & Destructor */ /** \~russian @name Конструктор и Деструктор */
+#pragma region "Constructor(s) & Destructor"
+  /** \~english @name Constructor(s) & Destructor */ /** \~russian @name Конструктор(ы) и Деструктор */
   /** @{ */
 
   /**
