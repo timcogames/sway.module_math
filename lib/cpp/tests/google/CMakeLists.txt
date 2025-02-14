@@ -11,7 +11,7 @@ enable_testing()
 #--------------------------------------------------------------------------------
 
 set(GTEST_ROOT "${GLOB_GTEST_ROOT_DIR}")
-set(GTEST_INC_DIR "${GTEST_ROOT}/include")
+set(GTEST_INC_DIR "${GTEST_ROOT}/inc")
 set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
 
 #--------------------------------------------------------------------------------
@@ -20,14 +20,14 @@ set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
 
 include_directories("${GTEST_INC_DIR}")
 include_directories("${GLOB_THIRD_PARTY_DIR}/glm")
-include_directories("${MODULE_MATH_LIST_DIR}/lib/cxx/include")
+include_directories("${MODULE_MATH_LIST_DIR}/lib/cpp/inc")
 include_directories("${MODULE_MATH_LIST_DIR}/submodules/sway.module_core/lib/cxx/include")
 
 #--------------------------------------------------------------------------------
 # Find project test files
 #--------------------------------------------------------------------------------
 
-file(GLOB MODULE_MATH_TEST_SOURCES "${MODULE_MATH_ROOT_DIR}/lib/cxx/tests/*/*.spec.cpp")
+file(GLOB MODULE_MATH_TEST_SOURCES "${MODULE_MATH_ROOT_DIR}/lib/cpp/tests/*/*.spec.cpp")
 
 #--------------------------------------------------------------------------------
 # Build tests

@@ -4,8 +4,8 @@
 #include <sway/core.hpp>
 
 namespace sway::math {
-
 enum class HorzAlign : s8_t { CENTER = ENUM_BITMASK(1), LEFT = ENUM_BITMASK(2), RIGHT = ENUM_BITMASK(3) };
+
 enum class VertAlign : s8_t { CENTER = ENUM_BITMASK(4), TOP = ENUM_BITMASK(5), BOTTOM = ENUM_BITMASK(6) };
 
 template <auto VALUE>

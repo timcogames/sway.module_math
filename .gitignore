@@ -9,3 +9,7 @@ bin/*
 docs/generated/html/*
 docs/generated/xml/*
 docs/doxygen.log
+
+# osx noise
+.DS_Store
+profile

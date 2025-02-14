@@ -3,7 +3,7 @@
     {
       "name": "Mac",
       "includePath": [
-        "${workspaceFolder}/lib/cxx/include",
+        "${workspaceFolder}/lib/cpp/inc",
         "${workspaceFolder}/submodules/sway.module_core/lib/cxx/include",
         "/Users/apriori85/Documents/Third-party/glm"
       ]
