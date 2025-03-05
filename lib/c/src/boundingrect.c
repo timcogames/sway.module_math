@@ -3,66 +3,104 @@
 BOUNDING_RECT
 BOUNDING_RECT_make(s16 x, s16 y, u16 w, u16 h)
 {
-  return (BOUNDING_RECT){ .min_x = x, .min_y = y, .max_x = x + w, .max_y = y + h };
+  BOUNDING_RECT rect;
+  rect.min_x = x;
+  rect.min_y = y;
+  rect.w = w;
+  rect.h = h;
+  rect.enabled = TRUE;
+
+  BOUNDING_RECT_update_max(&rect);
+
+  return (rect);
 }
 
 BOUNDING_RECT
 BOUNDING_RECT_make_empty()
 {
-  return (BOUNDING_RECT){ .min_x = 0, .min_y = 0, .max_x = 0, .max_y = 0 };
+  BOUNDING_RECT rect;
+  rect.min_x = rect.min_y = 0;
+  rect.max_x = rect.max_y = 0;
+  rect.w = 0;
+  rect.h = 0;
+  rect.enabled = FALSE;
+
+  return rect;
 }
 
-bool
+u8
 BOUNDING_RECT_is_empty(BOUNDING_RECT rect)
 {
   return (rect.min_x >= rect.max_x || rect.min_y >= rect.max_y);
 }
 
 void
-BOUNDING_RECT_get_wdt(BOUNDING_RECT rect, s16* wdt)
+BOUNDING_RECT_update_max(BOUNDING_RECT_PTR rect)
 {
-  *wdt = abs(rect.max_x - rect.min_x);
+  rect->max_x = rect->min_x + rect->w;
+  rect->max_y = rect->min_y + rect->h;
 }
 
 void
-BOUNDING_RECT_get_hgt(BOUNDING_RECT rect, s16* hgt)
+BOUNDING_RECT_get_wdt(BOUNDING_RECT rect, u16* w)
 {
-  *hgt = abs(rect.max_y - rect.min_y);
+  *w = abs(rect.max_x - rect.min_x);
+}
+
+void
+BOUNDING_RECT_get_hgt(BOUNDING_RECT rect, u16* h)
+{
+  *h = abs(rect.max_y - rect.min_y);
+}
+
+void
+BOUNDING_RECT_update_dim(BOUNDING_RECT_PTR rect)
+{
+  BOUNDING_RECT_get_wdt(*rect, &rect->w);
+  BOUNDING_RECT_get_hgt(*rect, &rect->h);
+}
+
+void
+BOUNDING_RECT_get_area(BOUNDING_RECT rect, u16* area)
+{
+  *area = rect.w * rect.h;
 }
 
 void
 BOUNDING_RECT_get_center(BOUNDING_RECT rect, s16* center_x, s16* center_y)
 {
-  *center_x = rect.min_x + rect.max_x / 2;
-  *center_y = rect.min_y + rect.max_y / 2;
+  *center_x = rect.min_x + (rect.w >> 1);
+  *center_y = rect.min_y + (rect.h >> 1);
 }
 
 INTERSECTION
 BOUNDING_RECT_is_inside(BOUNDING_RECT a, BOUNDING_RECT b)
 {
-  if (a.max_x < b.min_x || a.min_x > b.max_x || a.max_y < b.min_y || a.min_y > b.max_y) {
-    return OUTSIDE;
-  } else if (a.min_x < b.min_x || a.max_x > b.max_x || a.min_y < b.min_y || a.max_y > b.max_y) {
-    return INTERSECTS;
-  } else {
-    return INSIDE;
+  if (a.max_x <= b.min_x || a.min_x >= b.max_x || a.max_y <= b.min_y || a.min_y >= b.max_y) {
+    return INTERSECTION_OUTSIDE;
   }
+
+  if (a.min_x < b.min_x || a.max_x > b.max_x || a.min_y < b.min_y || a.max_y > b.max_y) {
+    return INTERSECTION_INTERSECTS;
+  }
+
+  return INTERSECTION_INSIDE;
 }
 
 INTERSECTION
 BOUNDING_RECT_is_inside_fast(BOUNDING_RECT a, BOUNDING_RECT b)
 {
-  if (a.max_x < b.min_x || a.min_x > b.max_x || a.max_y < b.min_y || a.min_y > b.max_y) {
-    return OUTSIDE;
-  } else {
-    return INSIDE;
+  if (a.max_x <= b.min_x || a.min_x >= b.max_x || a.max_y <= b.min_y || a.min_y >= b.max_y) {
+    return INTERSECTION_OUTSIDE;
   }
+
+  return INTERSECTION_INSIDE;
 }
 
 u8
-BOUNDING_RECT_intersection(BOUNDING_RECT a, BOUNDING_RECT b, BOUNDING_RECT* result)
+BOUNDING_RECT_intersection(BOUNDING_RECT a, BOUNDING_RECT b, BOUNDING_RECT_PTR result)
 {
-  if (BOUNDING_RECT_is_inside(a, b) == OUTSIDE) {
+  if (BOUNDING_RECT_is_inside(a, b) == INTERSECTION_OUTSIDE) {
     *result = BOUNDING_RECT_make_empty();
     return FALSE;
   }
@@ -76,7 +114,7 @@ BOUNDING_RECT_intersection(BOUNDING_RECT a, BOUNDING_RECT b, BOUNDING_RECT* resu
 }
 
 void
-BOUNDING_RECT_shift(BOUNDING_RECT* rect, s16 offset_x, s16 offset_y)
+BOUNDING_RECT_shift(BOUNDING_RECT_PTR rect, s16 offset_x, s16 offset_y)
 {
   rect->min_x += offset_x;
   rect->min_y += offset_y;
