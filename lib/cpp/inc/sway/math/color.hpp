@@ -126,6 +126,10 @@ public:
 
   auto operator*(TYPE scalar) const -> Color<TYPE> { return multiply(scalar); }
 
+  auto operator==(const Color<TYPE> &other) const -> bool {
+    return r_ == other.getR() && g_ == other.getG() && b_ == other.getB() && a_ == other.getA();
+  }
+
 private:
   TYPE r_, g_, b_, a_;
 };
