@@ -772,7 +772,7 @@ WARN_LOGFILE           = ./doxygen.log
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = ./doxygen/pages/mainpage.dox \
-                         ../lib/cpp/inc \
+                         ../lib/cpp/include \
                          ../lib/cpp/src
 
 # This tag can be used to specify the character encoding of the source files

@@ -20,7 +20,7 @@ set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
 
 include_directories("${GTEST_INC_DIR}")
 include_directories("${GLOB_THIRD_PARTY_DIR}/glm")
-include_directories("${MODULE_MATH_LIST_DIR}/lib/cpp/inc")
+include_directories("${MODULE_MATH_LIST_DIR}/lib/cpp/include")
 include_directories("${MODULE_MATH_LIST_DIR}/submodules/sway.module_core/lib/cxx/include")
 
 #--------------------------------------------------------------------------------
