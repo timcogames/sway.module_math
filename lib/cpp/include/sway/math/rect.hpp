@@ -4,14 +4,13 @@
 #include <sway/core.hpp>
 #include <sway/math/point.hpp>
 #include <sway/math/rectedges.hpp>
-#include <sway/math/size.hpp>
 #include <sway/math/utils.hpp>
 #include <sway/math/vector4.hpp>
 
 namespace sway::math {
 
 template <typename TYPE>
-class Size;
+class Size; // forward-decl
 
 /**
  * @brief \~english Template class representing a rectangle. \~russian Шаблонный класс представления прямоугольной
@@ -73,8 +72,7 @@ public:
   Rect(TYPE x, TYPE y, TYPE xw, TYPE yh)
       : Vector4<TYPE>(x, y, xw, yh) {}
 
-  Rect(TYPE x, TYPE y, const Size<TYPE> &size)
-      : Vector4<TYPE>(x, y, x + size.getW(), y + size.getH()) {}
+  Rect(TYPE x, TYPE y, const Size<TYPE> &size);
 
   virtual ~Rect() = default;
 
@@ -117,7 +115,7 @@ public:
    * @param[in] x Значение координаты по оси X.
    * @param[in] y Значение координаты по оси Y.
    */
-  auto offset(TYPE x, TYPE y) -> Rect<TYPE> {
+  auto offset(TYPE x, TYPE y) -> Rect<TYPE>& {
     at(RectEdge::Enum::IDX_L) += x;
     at(RectEdge::Enum::IDX_T) += y;
     at(RectEdge::Enum::IDX_R) += x;
@@ -126,7 +124,7 @@ public:
     return *this;
   }
 
-  auto offset(Point<TYPE> pos) -> Rect<TYPE> {
+  auto offset(Point<TYPE> pos) -> Rect<TYPE>& {
     offset(pos.getX(), pos.getY());
     return *this;
   }
@@ -197,10 +195,10 @@ public:
    */
   auto getW() const -> TYPE {
     if ((getL() >= getR())) {
-      return 0;
+      return static_cast<TYPE>(0);
     }
 
-    return /* utils */ math::abs(getR() - getL());
+    return math::abs(getR() - getL());
   }
 
   /**
@@ -214,19 +212,21 @@ public:
    */
   auto getH() const -> TYPE {
     if (getT() >= getB()) {
-      return 0;
+      return static_cast<TYPE>(0);
     }
 
-    return /* utils */ math::abs(getB() - getT());
+    return math::abs(getB() - getT());
   }
 
   [[nodiscard]] auto asPoint() const -> Point<TYPE> { return Point<TYPE>(getL(), getT()); }
 
   [[nodiscard]] auto asSize() const -> Size<TYPE> { return Size<TYPE>(getW(), getH()); }
 
-  [[nodiscard]] auto empty() const -> bool { return ((getW() <= (TYPE)0) || (getH() <= (TYPE)0)); }
+  [[nodiscard]] auto empty() const -> bool {
+    return ((getW() <= static_cast<TYPE>(0)) || (getH() <= static_cast<TYPE>(0)));
+  }
 
-  [[nodiscard]] auto isValid() const -> bool { return ((getL() < getR()) && (getT() < getB())) ? true : false; }
+  [[nodiscard]] auto isValid() const -> bool { return (getL() < getR()) && (getT() < getB()); }
 
   auto contains(const Point<TYPE> &point) const -> bool {
     return getL() <= point.getX() && getR() >= point.getX() && getT() <= point.getY() && getB() >= point.getY();

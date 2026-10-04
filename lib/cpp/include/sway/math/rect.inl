@@ -1,19 +1,34 @@
-#include <sway/math/rect.hpp>
+#include <sway/math/size.hpp>
 
-#include <iostream>  // std::ostream
+#include <iomanip>
+#include <ostream>
 #include <sstream>  // std::stringstream
-#include <string>  // std::string
+#include <string> 
+
+namespace sway::math {
+
+template <typename TYPE>
+Rect<TYPE>::Rect(TYPE x, TYPE y, const Size<TYPE> &size)
+    : Vector4<TYPE>(x, y, x + size.getW(), y + size.getH()) {}
+
+}  // namespace sway::math
 
 NS_BEGIN(std)
 
 template <typename TYPE>
 FORCE_INLINE auto operator<<(ostream &str, const sway::math::Rect<TYPE> &rect) -> ostream & {
-  // clang-format off
-  return str << fixed << setprecision(3) << "{" 
-             << "l:" << rect.getL() << ", " << "t:" << rect.getT() << ", "
-             << "r:" << rect.getR() << ", " << "b:" << rect.getB() << ", " 
-             << "size:" << rect.asSize() << "}";
-  // clang-format on
+  const auto flags = str.flags();
+  const auto precision = str.precision();
+
+  str << fixed << setprecision(3) 
+    << "{l:" << rect.getL() << ", t:" << rect.getT() 
+    << ", r:" << rect.getR() << ", b:" << rect.getB() 
+    << ", size:" << rect.asSize() << "}";
+
+  str.flags(flags);
+  str.precision(precision);
+
+  return str;
 }
 
 template <typename TYPE>

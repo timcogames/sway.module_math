@@ -4,6 +4,10 @@
 #include <sway/core.hpp>
 #include <sway/math/vector.hpp>
 
+#include <cmath>
+#include <iomanip>
+#include <ostream>
+
 namespace sway::math {
 
 /**
@@ -18,6 +22,18 @@ public:
 
   static auto from(std::array<TYPE, 2> data) {
     return Vector2<TYPE>(data[Vector<TYPE, 2>::IDX_X], data[Vector<TYPE, 2>::IDX_Y]);
+  }
+
+  static auto dot(const Vector2<TYPE> &lhs, const Vector2<TYPE> &rhs) -> TYPE {
+    return lhs.getX() * rhs.getX() + lhs.getY() * rhs.getY();
+  }
+
+  static auto normalize(const Vector2<TYPE> &vec) -> Vector2<TYPE> {
+    const TYPE len = vec.getLength();
+    if (len > static_cast<TYPE>(0)) {
+      return vec.multiply(static_cast<TYPE>(1) / len);
+    }
+    return Vector2<TYPE>();
   }
 
 #pragma endregion
@@ -82,19 +98,21 @@ public:
     setY(y);
   }
 
-  auto add(const Vector2<TYPE> &vec) -> Vector2<TYPE> {
+  [[nodiscard]] auto getLengthSquared() const -> TYPE { return getX() * getX() + getY() * getY(); }
+  
+  [[nodiscard]] auto getLength() const -> TYPE { return static_cast<TYPE>(std::sqrt(getLengthSquared())); }
+
+  [[nodiscard]] auto add(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
     return Vector2<TYPE>(getX() + vec.getX(), getY() + vec.getY());
   }
 
-  auto operator+(const Vector2<TYPE> &vec) -> Vector2<TYPE> { return add(vec); }
+  auto operator+(const Vector2<TYPE> &vec) const -> Vector2<TYPE> { return add(vec); }
 
   auto operator+=(const Vector2<TYPE> &vec) -> Vector2<TYPE> & { return *this = add(vec); }
 
   [[nodiscard]] auto subtract(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
     return Vector2<TYPE>(getX() - vec.getX(), getY() - vec.getY());
   }
-
-  auto operator-(const Vector2<TYPE> &vec) -> Vector2<TYPE> { return subtract(vec); }
 
   auto operator-(const Vector2<TYPE> &vec) const -> Vector2<TYPE> { return subtract(vec); }
 
@@ -123,10 +141,41 @@ public:
     return *this;
   }
 
+  [[nodiscard]] auto divide(const Vector2<TYPE> &vec) const -> Vector2<TYPE> {
+    return Vector2<TYPE>(getX() / vec.getX(), getY() / vec.getY());
+  }
+
+  auto operator/(const Vector2<TYPE> &vec) const -> Vector2<TYPE> { return divide(vec); }
+
+  auto operator/=(const Vector2<TYPE> &vec) -> Vector2<TYPE> & {
+    *this = *this / vec;
+    return *this;
+  }
+
+  [[nodiscard]] auto divide(TYPE scalar) const -> Vector2<TYPE> {
+    return Vector2<TYPE>(getX() / scalar, getY() / scalar);
+  }
+
+  auto operator/(TYPE scalar) const -> Vector2<TYPE> { return divide(scalar); }
+
   friend auto operator<<(std::ostream &out, const Vector2<TYPE> &vec) -> std::ostream & {
-    return out << std::fixed << std::setprecision(3) << "{" << "x:" << vec.getX() << ", " << "y:" << vec.getY() << "}";
+    const auto flags = out.flags();
+    const auto precision = out.precision();
+
+    out << std::fixed << std::setprecision(3)
+        << "{x:" << vec.getX() << ", y:" << vec.getY() << "}";
+
+    out.flags(flags);
+    out.precision(precision);
+
+    return out;
   }
 };
+
+template <typename TYPE>
+inline auto operator*(TYPE scalar, const Vector2<TYPE> &vec) -> Vector2<TYPE> {
+  return vec * scalar;
+}
 
 using vec2i_t = Vector2<i32_t>;
 using vec2f_t = Vector2<f32_t>;

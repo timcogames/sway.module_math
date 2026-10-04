@@ -11,7 +11,7 @@ enable_testing()
 #--------------------------------------------------------------------------------
 
 set(GTEST_ROOT "${GLOB_GTEST_ROOT_DIR}")
-set(GTEST_INC_DIR "${GTEST_ROOT}/inc")
+set(GTEST_INC_DIR "${GTEST_ROOT}/include")
 set(GTEST_SRC_DIR "${GTEST_ROOT}/src")
 
 #--------------------------------------------------------------------------------

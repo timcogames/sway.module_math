@@ -38,8 +38,8 @@ TEST(Vector3, divide) {
   }
   {
     math::vec3i_t vec(4, 6, 8);
-    vec.divide(2);
-    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+    auto result = vec.divide(2);
+    EXPECT_TRUE(result.equals(math::vec3i_t(2, 3, 4)));
   }
   {
     math::vec3i_t vec(4, 6, 8);
@@ -48,8 +48,8 @@ TEST(Vector3, divide) {
   }
   {
     math::vec3i_t vec(4, 6, 8);
-    vec.divide(math::vec3i_t(2, 2, 2));
-    EXPECT_TRUE(vec.equals(math::vec3i_t(2, 3, 4)));
+    auto result = vec.divide(math::vec3i_t(2, 2, 2));
+    EXPECT_TRUE(result.equals(math::vec3i_t(2, 3, 4)));
   }
 }
 

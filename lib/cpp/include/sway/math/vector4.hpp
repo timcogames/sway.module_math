@@ -5,6 +5,7 @@
 #include <sway/math/vector.hpp>
 
 #include <iomanip>  // setprecision
+#include <ostream>
 
 namespace sway::math {
 
@@ -20,9 +21,9 @@ public:
   static auto from(std::array<TYPE, 3> data, TYPE w) {
     // clang-format off
     return Vector4<TYPE>(
-      data[Vector<TYPE, 3>::IDX_X], 
-      data[Vector<TYPE, 3>::IDX_Y], 
-      data[Vector<TYPE, 3>::IDX_Z], 
+      data[Vector<TYPE, 4>::IDX_X], 
+      data[Vector<TYPE, 4>::IDX_Y], 
+      data[Vector<TYPE, 4>::IDX_Z], 
       w);
     // clang-format on
   }
@@ -36,6 +37,10 @@ public:
       data[Vector<TYPE, 4>::IDX_W]);
     // clang-format on
   }
+
+    static auto dot(const Vector4<TYPE> &lhs, const Vector4<TYPE> &rhs) -> TYPE {
+      return (lhs.getX() * rhs.getX()) + (lhs.getY() * rhs.getY()) + (lhs.getZ() * rhs.getZ()) + (lhs.getW() * rhs.getW());
+    }
 
 #pragma endregion
 
@@ -122,25 +127,36 @@ public:
    * @param[in] w Значение W компонента.
    */
   void set(TYPE x, TYPE y, TYPE z, TYPE w) {
-    this->setX(x);
-    this->setY(y);
-    this->setZ(z);
-    this->setW(w);
+    setX(x);
+    setY(y);
+    setZ(z);
+    setW(w);
   }
 
-  auto add(const Vector4<TYPE> &vec) -> Vector4<TYPE> {
+  [[nodiscard]] auto getLengthSquared() const -> TYPE {
+    return getX() * getX() + getY() * getY() + getZ() * getZ() + getW() * getW();
+  }
+
+  [[nodiscard]] auto getLength() const -> TYPE {
+    return static_cast<TYPE>(std::sqrt(getLengthSquared()));
+  }
+
+  [[nodiscard]] auto add(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
     return Vector4<TYPE>(
-        this->getX() + vec.getX(), this->getY() + vec.getY(), this->getZ() + vec.getZ(), this->getW() + vec.getW());
+        getX() + vec.getX(), getY() + vec.getY(), getZ() + vec.getZ(), getW() + vec.getW());
   }
 
-  auto operator+(const Vector4<TYPE> &vec) -> Vector4<TYPE> { return add(vec); }
+  auto operator+(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return add(vec); }
+
+  auto operator+=(const Vector4<TYPE> &vec) -> Vector4<TYPE> & {
+    *this = add(vec);
+    return *this;
+  }
 
   [[nodiscard]] auto subtract(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
     return Vector4<TYPE>(
-        this->getX() - vec.getX(), this->getY() - vec.getY(), this->getZ() - vec.getZ(), this->getW() - vec.getW());
+        getX() - vec.getX(), getY() - vec.getY(), getZ() - vec.getZ(), getW() - vec.getW());
   }
-
-  auto operator-(const Vector4<TYPE> &vec) -> Vector4<TYPE> { return subtract(vec); }
 
   auto operator-(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return subtract(vec); }
 
@@ -151,41 +167,65 @@ public:
 
   auto multiply(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
     return Vector4<TYPE>(
-        this->getX() * vec.getX(), this->getY() * vec.getY(), this->getZ() * vec.getZ(), this->getW() * vec.getW());
+        getX() * vec.getX(), getY() * vec.getY(), getZ() * vec.getZ(), getW() * vec.getW());
   }
 
   auto operator*(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return multiply(vec); }
 
+  auto operator*=(const Vector4<TYPE> &vec) -> Vector4<TYPE> & {
+    *this = multiply(vec);
+    return *this;
+  }
+
   auto multiply(TYPE scalar) const -> Vector4<TYPE> {
-    return Vector4<TYPE>(this->getX() * scalar, this->getY() * scalar, this->getZ() * scalar, this->getW() * scalar);
+    return Vector4<TYPE>(getX() * scalar, getY() * scalar, getZ() * scalar, getW() * scalar);
   }
 
   auto operator*(TYPE scalar) const -> Vector4<TYPE> { return multiply(scalar); }
 
-  auto operator*=(TYPE scalar) -> Vector4<TYPE> {
+  auto operator*=(TYPE scalar) -> Vector4<TYPE> & {
     *this = multiply(scalar);
     return *this;
   }
 
-  auto divide(TYPE scalar) -> Vector4<TYPE> {
-    return Vector4<TYPE>(this->getX() / scalar, this->getY() / scalar, this->getZ() / scalar, this->getW() / scalar);
+  [[nodiscard]] auto divide(TYPE scalar) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(getX() / scalar, getY() / scalar, getZ() / scalar, getW() / scalar);
   }
 
-  auto operator/(TYPE scalar) -> Vector4<TYPE> { return divide(scalar); }
+  auto operator/(TYPE scalar) const -> Vector4<TYPE> { return divide(scalar); }
 
   auto operator/=(TYPE scalar) -> Vector4<TYPE> & {
     *this = divide(scalar);
     return *this;
   }
 
+  [[nodiscard]] auto divide(const Vector4<TYPE> &vec) const -> Vector4<TYPE> {
+    return Vector4<TYPE>(
+        getX() / vec.getX(), getY() / vec.getY(), getZ() / vec.getZ(), getW() / vec.getW());
+  }
+
+  auto operator/(const Vector4<TYPE> &vec) const -> Vector4<TYPE> { return divide(vec); }
+
+  auto operator/=(const Vector4<TYPE> &vec) -> Vector4<TYPE> & { *this = *this / vec; return *this; }
+
   friend auto operator<<(std::ostream &out, const Vector4<TYPE> &vec) -> std::ostream & {
-    return out << std::fixed << std::setprecision(3) << "{"
-               << "x:" << vec.getX() << ", "
-               << "y:" << vec.getY() << ", "
-               << "z:" << vec.getZ() << ", "
-               << "w:" << vec.getW() << "}";
+    const auto flags = out.flags();
+    const auto precision = out.precision();
+
+    out << std::fixed << std::setprecision(3)
+        << "{x:" << vec.getX() << ", y:" << vec.getY() << ", z:" << vec.getZ() << ", w:" << vec.getW() << "}";
+
+    out.flags(flags);
+    out.precision(precision);
+
+    return out;
   }
 };
+
+template <typename TYPE>
+inline auto operator*(TYPE scalar, const Vector4<TYPE> &vec) -> Vector4<TYPE> {
+  return vec * scalar;
+}
 
 using vec4i_t = Vector4<i32_t>;
 using vec4f_t = Vector4<f32_t>;

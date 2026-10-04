@@ -2,12 +2,12 @@
 #define SWAY_MATH_SIZE_HPP
 
 #include <sway/core.hpp>
-#include <sway/math/rect.hpp>
+#include <sway/math/vector.hpp>
 
 namespace sway::math {
 
 template <typename TYPE>
-class Rect;
+class Rect; // forward-decl
 
 /**
  * @brief Шаблонный класс представления размера.
@@ -108,9 +108,7 @@ public:
   /**
    * @brief Преобразовывает в Rect<TYPE> класс.
    */
-  [[nodiscard]] auto asRect() const -> Rect<TYPE> {
-    return Rect<TYPE>((TYPE)0, (TYPE)0, this->data_[IDX_WDT], this->data_[IDX_HGT]);
-  }
+  [[nodiscard]] auto asRect() const -> Rect<TYPE>;
 
   auto add(const Size<TYPE> &size) -> Size<TYPE> { return Size<TYPE>(getW() + size.getW(), getH() + size.getH()); }
 

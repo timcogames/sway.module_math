@@ -60,7 +60,7 @@ public:
    * @sa operator[](std::size_t) const
    */
   auto operator[](std::size_t idx) -> TYPE & {
-    assert(idx >= 0 && idx <= DataElementCount_t);
+    assert(idx < DataElementCount_t);
     return data_[idx];
   }
 
@@ -70,8 +70,8 @@ public:
    * @param[in] idx Позиция значения.
    * @sa operator[](std::size_t)
    */
-  auto operator[](std::size_t idx) const -> const TYPE {
-    assert(idx >= 0 && idx <= DataElementCount_t);
+  auto operator[](std::size_t idx) const -> const TYPE & {
+    assert(idx < DataElementCount_t);
     return data_[idx];
   }
 
@@ -107,34 +107,38 @@ public:
   /**
    * @brief Делит указанный вектор на заданный вектор.
    *
-   * @param[in] other Вектор на который следует разделит.
+   * @param[in] other Вектор, на который следует разделит.
    * @sa operator/(const Vector<TYPE, SIZE> &) const
    */
-  auto divide(const Vector<TYPE, SIZE> &other) -> const Vector<TYPE, SIZE> & {
+  [[nodiscard]] auto divide(const Vector<TYPE, SIZE> &other) const -> Vector<TYPE, SIZE> {
+    Vector<TYPE, SIZE> result;
     for (auto i = 0; i < DataElementCount_t; ++i) {
-      data_[i] /= other[i];
+      result[i] = data_[i] / other[i];
     }
 
-    return *this;
+    return result;
   }
 
-  auto operator/(const Vector<TYPE, SIZE> &other) const -> const Vector<TYPE, SIZE> { return divide(other); }
+  auto operator/(const Vector<TYPE, SIZE> &other) const -> Vector<TYPE, SIZE> {
+    return divide(other);
+  }
 
   /**
    * @brief Делит указанный вектор на заданный скаляр.
    *
-   * @param[in] scalar Скаляр на который следует разделит.
+   * @param[in] scalar Скаляр, на который следует разделит.
    * @sa operator/(TYPE) const
    */
-  auto divide(TYPE scalar) -> const Vector<TYPE, SIZE> & {
+  [[nodiscard]] auto divide(TYPE scalar) const -> Vector<TYPE, SIZE> {
+    Vector<TYPE, SIZE> result;
     for (auto i = 0; i < DataElementCount_t; ++i) {
-      data_[i] /= scalar;
+      result[i] = data_[i] / scalar;
     }
 
-    return *this;
+    return result;
   }
 
-  auto operator/(TYPE scalar) -> const Vector<TYPE, SIZE> { return divide(scalar); }
+  auto operator/(TYPE scalar) const -> Vector<TYPE, SIZE> { return divide(scalar); }
 
 #pragma endregion
 
