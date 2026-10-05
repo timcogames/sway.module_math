@@ -25,10 +25,8 @@ public:
    *
    * @sa Color(TYPE, TYPE, TYPE, TYPE)
    */
-  Color() {
-    r_ = g_ = b_ = (TYPE)0;
-    a_ = (TYPE)1;
-  }
+  constexpr Color() noexcept
+    : r_{TYPE{0}}, g_{TYPE{0}}, b_{TYPE{0}}, a_{TYPE{1}} {}
 
   /**
    * \~english
@@ -48,7 +46,8 @@ public:
    * \~
    * @sa Color()
    */
-  Color(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) { set(r, g, b, a); }
+  constexpr Color(TYPE r, TYPE g, TYPE b, TYPE a = TYPE{1}) noexcept
+    : r_{r}, g_{g}, b_{b}, a_{a} {}
 
 #pragma endregion
 
@@ -67,7 +66,7 @@ public:
    * @param[in] b Значение канала синего цвета.
    * @param[in] a Значение альфа-канала.
    */
-  void set(TYPE r, TYPE g, TYPE b, TYPE a = (TYPE)1) {
+  constexpr void set(TYPE r, TYPE g, TYPE b, TYPE a = TYPE{1}) noexcept {
     r_ = r;
     g_ = g;
     b_ = b;
@@ -81,7 +80,7 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]] auto getR() const -> TYPE { return r_; }
+  [[nodiscard]] constexpr auto getR() const noexcept -> TYPE { return r_; }
 
   /**
    * @brief \~english Returns the value of the green color channel. \~russian Получает значение канала зеленого цвета.
@@ -89,7 +88,7 @@ public:
    *     getB() const,
    *     getA() const
    */
-  [[nodiscard]] auto getG() const -> TYPE { return g_; }
+  [[nodiscard]] constexpr auto getG() const noexcept -> TYPE { return g_; }
 
   /**
    * @brief \~english Returns the value of the blue color channel. \~russian Получает значение канала синего цвета.
@@ -98,7 +97,7 @@ public:
    *     getG() const,
    *     getA() const
    */
-  [[nodiscard]] auto getB() const -> TYPE { return b_; }
+  [[nodiscard]] constexpr auto getB() const noexcept -> TYPE { return b_; }
 
   /**
    * @brief \~english Returns the value of the alpha channel. \~russian Получает значение альфа-канала.
@@ -107,18 +106,18 @@ public:
    *     getG() const,
    *     getB() const
    */
-  [[nodiscard]] auto getA() const -> TYPE { return a_; }
+  [[nodiscard]] constexpr auto getA() const noexcept -> TYPE { return a_; }
 
   /**
    * @brief \~english Converts to Vector4<TYPE> class. \~russian Преобразовывает в Vector4<TYPE> класс.
    */
   [[nodiscard]] auto asVec4() const -> Vector4<TYPE> { return Vector4<TYPE>(r_, g_, b_, a_); }
 
-  auto add(const Color<TYPE> &vec) -> Color<TYPE> {
+  auto add(const Color<TYPE> &vec) const -> Color<TYPE> {
     return Color<TYPE>(this->r_ + vec.getR(), this->g_ + vec.getG(), this->b_ + vec.getB(), this->a_ + vec.getA());
   }
 
-  auto operator+(const Color<TYPE> &vec) -> Color<TYPE> { return add(vec); }
+  auto operator+(const Color<TYPE> &vec) const -> Color<TYPE> { return add(vec); }
 
   auto multiply(TYPE scalar) const -> Color<TYPE> {
     return Color<TYPE>(this->r_ * scalar, this->g_ * scalar, this->b_ * scalar, this->a_ * scalar);
@@ -130,6 +129,10 @@ public:
     return r_ == other.getR() && g_ == other.getG() && b_ == other.getB() && a_ == other.getA();
   }
 
+  friend auto operator<<(std::ostream &out, const Color<TYPE> &col) -> std::ostream & {
+    return out << "{r:" << col.r_ << ", g:" << col.g_ << ", b:" << col.b_ << ", a:" << col.a_ << "}";
+  }
+
 private:
   TYPE r_, g_, b_, a_;
 };
@@ -138,11 +141,11 @@ using col4i_t = Color<i32_t>;
 using col4f_t = Color<f32_t>;
 using col4d_t = Color<f64_t>;
 
-#define COL4F_WHITE math::col4f_t(1.0F, 1.0F, 1.0F, 1.0F)
-#define COL4F_BLACK math::col4f_t(0.0F, 0.0F, 0.0F, 1.0F)
-#define COL4F_RED math::col4f_t(1.0F, 0.0F, 0.0F, 1.0F)
-#define COL4F_GREEN math::col4f_t(0.0F, 1.0F, 0.0F, 1.0F)
-#define COL4F_BLUE math::col4f_t(0.0F, 0.0F, 1.0F, 1.0F)
+inline constexpr col4f_t COL4F_WHITE {1.0F, 1.0F, 1.0F, 1.0F};
+inline constexpr col4f_t COL4F_BLACK {0.0F, 0.0F, 0.0F, 1.0F};
+inline constexpr col4f_t COL4F_RED   {1.0F, 0.0F, 0.0F, 1.0F};
+inline constexpr col4f_t COL4F_GREEN {0.0F, 1.0F, 0.0F, 1.0F};
+inline constexpr col4f_t COL4F_BLUE  {0.0F, 0.0F, 1.0F, 1.0F};
 
 }  // namespace sway::math
 
