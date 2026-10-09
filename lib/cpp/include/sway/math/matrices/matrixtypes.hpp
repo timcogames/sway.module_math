@@ -10,12 +10,19 @@ namespace sway::math {
  * @{
  */
 
-DECLARE_ENUM_IDX(MatrixType, VIEW = GLOB_IDX_INITIAL, PROJ, TFRM);
+// clang-format off
+#define MATRIX_TYPE_LIST(ITEM) \
+  ITEM(VIEW, 0) \
+  ITEM(PROJ, 1) \
+  ITEM(TFRM, 2)
+// clang-format on
+
+DECLARE_ENUM_IDX(MatrixType, MATRIX_TYPE_LIST)
 
 /** @} */
 
 }  // namespace sway::math
 
-#define NUM_OF_MATRICES (sway::core::toBase(sway::math::MatrixType::Enum::Latest))
+#define NUM_OF_MATRICES (sway::math::MatrixType::EnumInfo::getCountWithoutNone())
 
 #endif  // SWAY_MATH_MATRICES_MATRIXTYPES_HPP

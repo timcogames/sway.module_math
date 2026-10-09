@@ -35,7 +35,17 @@ namespace sway::math {
  * @brief Negative Z axis
  */
 
-DECLARE_ENUM(Axis, RIGHT, LEFT, UP, DOWN, FORWARD, BACKWARD);
+// clang-format off
+#define AXIS_LIST(ITEM) \
+  ITEM(RIGHT, 1) \
+  ITEM(LEFT, 2) \
+  ITEM(UP, 3) \
+  ITEM(DOWN, 4) \
+  ITEM(FORWARD, 5) \
+  ITEM(BACKWARD, 6)
+// clang-format on
+
+DECLARE_ENUM_U32(Axis, AXIS_LIST)
 
 }  // namespace sway::math
 

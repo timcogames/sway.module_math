@@ -5,7 +5,12 @@
 
 namespace sway::math {
 
-DECLARE_ENUM(ProjectionType, ORTHO, PERSP);
+#define PROJECTION_TYPE_LIST(ITEM) \
+  ITEM(ORTHO, 1) \
+  ITEM(PERSP, 2)
+// clang-format on
+
+DECLARE_ENUM_U32(ProjectionType, PROJECTION_TYPE_LIST)
 
 }  // namespace sway::math
 
