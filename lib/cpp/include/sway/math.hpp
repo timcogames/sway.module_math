@@ -27,6 +27,8 @@
 #include <sway/math/axises.hpp>
 #include <sway/math/boundingbox.hpp>
 #include <sway/math/color.hpp>
+#include <sway/math/colorhash.hpp>
+#include <sway/math/colorequal.hpp>
 #include <sway/math/extensions/coordinatesystemutils.hpp>
 #include <sway/math/extensions/projection.hpp>
 #include <sway/math/extensions/projectiontypes.hpp>
